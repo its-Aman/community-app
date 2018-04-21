@@ -1,0 +1,48 @@
+<ion-header>
+
+  <!-- <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar> -->
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+    <ion-row text-center style="margin-bottom: 100px;">
+      <ion-col col-12 class="logo-parent">
+        <div class="logo image"></div>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="loginForm">
+      <ion-row>
+        <ion-col col-12>
+          <ion-input placeholder="Mobile no." formControlName="mobile" type="number"></ion-input>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('required') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minLength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxLength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
+        </ion-col>
+        <ion-col col-12>
+          <ion-input placeholder="OTP" formControlName="otp" type="number"></ion-input>
+          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('required') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">OTP is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('minLength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('maxLength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Max 4 digit is Required</p>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row>
+      <ion-col col-12>
+        <!-- <div class="round-button button"> -->
+          <button ion-button round block (click)="login()">Enter</button>
+        <!-- </div> -->
+      </ion-col>
+      <ion-col col-12 text-right>
+        <div class="resend" (click)="resendOTP()">
+          Re-send OTP
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

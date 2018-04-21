@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>List of Event</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+
+    <ion-row class="event-row" (click)="openEvent(i)" *ngFor="let event of eventDummydata; let i=index;">
+      <ion-col col-4>
+        <div class="event-image image"></div>
+      </ion-col>
+      <ion-col col-8 text-left>
+        <div class="heading"> {{event?.name}} </div>
+        <div class="padding">From : 
+          <span class="time">{{event?.from}}</span>
+        </div>
+        <div class="padding">To : 
+          <span class="time">{{event?.to}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

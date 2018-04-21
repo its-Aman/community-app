@@ -1,0 +1,83 @@
+page-promotion-discount {
+    .grid-promo{
+        background-color: #F3F3F5;
+
+        .row-promo{
+            .col{
+                padding: 5px 0;
+            }
+            .category{
+                background-color: white;
+                height: 5rem;
+                border: 1px solid lightgray;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                border-radius: 3px;
+            }
+        }
+        .row-coupon{
+            border: 1px solid lightgray;
+            margin: 10px 0;
+            background: white;
+            border-radius: 3px;            
+
+            .col-address{
+                padding: 10px;
+
+                div{
+                    margin: 5px;
+                    font-size: 16px !important;
+
+                    b{
+                        font-size: 18px;
+                    }
+                }
+            }
+            .col-time{
+                padding: 10px;
+
+                div{
+                    margin: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                        b{
+                            font-size: 18px;
+                        }
+                }
+                .usage{
+                    font-size: 18px;
+                    position: absolute;
+                    bottom: 10px;
+                }
+            }
+            .border-bottom{
+                border-bottom: 1px solid lightgray;
+                padding: 10px 15px; 
+                b{
+                    font-size: 20px;
+                }
+            }
+            .border-right{
+                border-right: 1px solid lightgray;
+            }
+            .header{
+                font-size: 20px;
+                color: #02A1E2;
+            }
+            .col-address{
+                div{
+                    font-size: 18px;
+                    b{
+                        font-size: 16px;
+                    }
+                }
+            }
+            .date{
+                color: #B8332A;
+            }
+        }
+    }
+}

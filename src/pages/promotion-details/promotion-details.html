@@ -1,0 +1,95 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Promotion Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 class="col-coupon-code">
+        <div class="coupon-code image">
+          YOUR COUPON CODE
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="details image">
+      <ion-row class="row-name">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-person" md="md-person"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="name">Discount Rate :</div>
+        </ion-col>
+        <ion-col col-6 text-right text-nowrap>
+          <div class="amount">$10</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-company">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-stats" md="md-stats"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="company">Discount Provider Name :</div>
+        </ion-col>
+        <ion-col col-6 text-right text-nowrap>
+          <div> XYZ LTD.</div>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="row-email">
+        <ion-col col-1 text-center>
+          <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+        </ion-col>
+        <ion-col col-11 text-left>
+          <div class="email">Period :</div>
+        </ion-col>
+        <ion-col col-6 offset-1>
+          <div>
+            <span>From:</span>
+            <span>02-01-2018
+              <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
+            </span>
+          </div>
+        </ion-col>
+        <ion-col col-5>
+          <div>
+            <span>To:</span>
+            <span>03-02-2018
+              <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
+            </span>
+          </div>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="row-address">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+        </ion-col>
+        <ion-col col-11 text-left>
+          <div class="address">Address :</div>
+        </ion-col>
+        <ion-col col-11 offset-1>
+          <div>
+            Jaipur-302006, Rajasthan, India C:+91-141-2229900
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </div>
+    <ion-row>
+      <ion-col col-12>
+        <div #map id="map" class="map"></div>
+      </ion-col>
+      <ion-col col-12>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

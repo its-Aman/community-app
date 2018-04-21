@@ -1,0 +1,95 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Vendor Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 class="col-profileImage">
+        <div class="profileImage image"></div>
+        <div class="icon" (click)="changeProfilePicture()">
+          <ion-icon ios="ios-create" md="ios-create"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-name">
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-person" md="md-person"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="name">Name of Vendor :</div>
+      </ion-col>
+      <ion-col col-6 text-right text-nowrap>
+        <div>Ajay Sharma</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-company">
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-stats" md="md-stats"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="company">Company Name :</div>
+      </ion-col>
+      <ion-col col-6 text-right text-nowrap>
+        <div> XYZ LTD.</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-mobile">
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="mobile">Mobile No. :</div>
+      </ion-col>
+      <ion-col col-6 text-right>
+        <div>123456789</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-email">
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-mail" md="md-mail"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="email">Email :</div>
+      </ion-col>
+      <ion-col col-6 text-right text-nowrap>
+        <div>google@gmail.com</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-address">
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="address">Address :</div>
+      </ion-col>
+      <ion-col col-6 text-right>
+        <div>
+          Jaipur-302006, Rajasthan, India C:+91-141-2229900
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-email">
+      <ion-col col-1 text-center>
+        <ion-icon ios="logo-usd" md="logo-usd"></ion-icon>
+      </ion-col>
+      <ion-col col-5 text-left>
+        <div class="email">Price :</div>
+      </ion-col>
+      <ion-col col-6 text-right>
+        <div class="amount">$78</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

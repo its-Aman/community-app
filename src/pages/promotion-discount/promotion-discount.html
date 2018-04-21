@@ -1,0 +1,95 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Promotion and Discount</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid class="grid-promo">
+    <ion-row class="row-promo">
+      <ion-col col-12>
+        <div class="category">Category 1</div>
+      </ion-col>
+      <ion-col col-12>
+        <div class="category">Category 2</div>
+      </ion-col>
+      <ion-col col-12>
+        <div class="category">Category 3</div>
+      </ion-col>
+      <ion-col col-12>
+        <div class="category">Category 4</div>
+      </ion-col>
+      <ion-col col-12>
+        <div class="category">Category 5</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-coupon" (click)="openDetails()">
+      <ion-col col-6 class="border-bottom border-right">
+        <div class="header">Coupon Code</div>
+      </ion-col>
+      <ion-col col-6 class="border-bottom" text-right>
+        <div>
+          <span class="header">Discount</span>
+          <b>%</b>
+        </div>
+      </ion-col>
+      <ion-col col-6 class="col-address" text-left>
+        <div>
+          <b>Name Of Provider Address : </b>
+        </div>
+        <div>Lorem ipsum dolor sit amet</div>
+      </ion-col>
+      <ion-col col-6 class="col-time" text-right>
+        <div text-left>
+          <b>From:</b>
+          <span class="date">02-01-2018</span>
+        </div>
+        <div text-left>
+          <b>To:</b>
+          <span class="date">02-01-2018</span>
+        </div>
+        <div class="usage">
+          No. of Usage: 07
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-coupon">
+      <ion-col col-6 class="border-bottom border-right">
+        <div class="header">Coupon Code</div>
+      </ion-col>
+      <ion-col col-6 class="border-bottom" text-right>
+        <div>
+          <span class="header">Discount</span>
+          <b>%</b>
+        </div>
+      </ion-col>
+      <ion-col col-6 class="col-address" text-left>
+        <div>
+          <b>Name Of Provider Address : </b>
+        </div>
+        <div>Lorem ipsum dolor sit amet</div>
+      </ion-col>
+      <ion-col col-6 class="col-time" text-right>
+        <div text-left>
+          <b>From:</b>
+          <span class="date">02-01-2018</span>
+        </div>
+        <div text-left>
+          <b>To:</b>
+          <span class="date">02-01-2018</span>
+        </div>
+        <div class="usage">
+          No. of Usage: 07
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

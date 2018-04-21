@@ -1,0 +1,68 @@
+page-vendor-profile {
+    .scroll-content{
+        background-image: url('../assets/icon/splash-bg.png');
+    }
+    .col-profileImage{
+        position: relative;
+        display: flex;
+        margin-bottom: 35px;
+
+        .profileImage{
+            background-image: url('../assets/icon/thumnail-image.png');
+            height: 150px;
+            width: 150px;
+            margin: auto;
+            border-radius: 100px;
+        }
+        .icon{
+            color: #A0E3FE;
+            position: absolute;
+            bottom: 5px;
+            left: 60%;
+            font-size: 30px;
+        }
+    }
+    .row-name{
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid lightgray;
+    }
+    .row-company{
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid lightgray;
+    }
+    .row-mobile{
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid lightgray;
+    }
+    .row-email{
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid lightgray;
+    }
+    .row-address{
+        font-size: 16px;
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid lightgray;
+    }
+    .amount{
+        color:#48FF18;
+    }
+    .row{
+        color: white;
+
+        ion-col[col-1]{
+            ion-icon{
+                color: #0E7FB7;;
+            }
+        }
+    }
+
+}

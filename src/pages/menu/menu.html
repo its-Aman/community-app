@@ -1,0 +1,52 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-grid class="menu-header-grid" text-left>
+      <ion-row class="menu-header-row">
+        <ion-col col-12 class="menu-header-col">
+          <div class="profile image"></div>
+          <h2>Issac French</h2>
+          <h4>Edit profile</h4>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-header>
+
+  <ion-content class="menu">
+    <ion-list text-center>
+
+      <ion-item class="item">
+        <ion-icon name="home" item-start></ion-icon>
+        <button menuClose ion-item (click)="vendorList()"> Vendor List </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="cash" item-start></ion-icon>
+        <button menuClose ion-item (click)="promotionDiscount()"> Promotion & Discount </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
+        <button menuClose ion-item (click)="aboutUs()"> About us </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="notifications" item-start></ion-icon>
+        <button menuClose ion-item (click)="contactUs()"> Contact us </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="settings" item-start></ion-icon>
+        <button menuClose ion-item (click)="setting()"> Setting </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="lock" item-start></ion-icon>
+        <button menuClose ion-item (click)="privacyPolicy()"> Privacy Policy </button>
+      </ion-item>
+      <ion-item class="item">
+        <ion-icon name="log-in" item-start></ion-icon>
+        <button menuClose ion-item (click)="logout()"> Logout </button>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootMenuPage" #content swipeBackEnabled="false"></ion-nav>

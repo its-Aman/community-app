@@ -1,0 +1,61 @@
+page-promotion-details {
+    .grid{
+        padding: 0;
+    }
+    .calender{
+        color: #02A1E2;
+    }
+    .map{
+        height: 200px;
+        width: 100%
+    }
+    .col-coupon-code{
+        display: flex;
+        height: 200px;
+
+        .coupon-code{
+            width: 300px;
+            height: 100px;
+            padding: 42px 0 0 20px;
+            text-align: center;
+            font-size: 25px;
+            margin: auto;
+            background-image: url('../assets/icon/coupon-icon.png');
+        }
+    }
+
+    .details{
+        background-image: url('../assets/icon/splash-bg.png');
+        height: 100%;
+        width: 100%;
+        color: white;
+
+        .row-address{
+            font-size: 16px;
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+        .row-company{
+            font-size: 16px;
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+        .row-email{
+            font-size: 16px;
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+        .row-name{
+            font-size: 16px;
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+        .amount{
+            color:#48FF18;
+        }
+    }
+}
