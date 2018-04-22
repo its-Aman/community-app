@@ -25,6 +25,5 @@ export class ProfilePage {
 
   edit() {
     this.global.log('edit clicked');
-    this.navCtrl.push('VendorProfilePage', { data: null })
   }
 }

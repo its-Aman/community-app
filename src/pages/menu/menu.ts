@@ -25,6 +25,7 @@ export class MenuPage {
 
   vendorList() {
     this.global.log('vendorList');
+    this.navCtrl.push('VendorProfilePage', { data: null });    
   }
 
   promotionDiscount() {
@@ -34,10 +35,12 @@ export class MenuPage {
 
   aboutUs() {
     this.global.log('aboutUs');
+    this.navCtrl.push('AboutPage', { data: null });
   }
-
+  
   contactUs() {
     this.global.log('contactUs');
+    this.navCtrl.push('ContactUsPage', { data: null });
   }
 
   setting() {

@@ -1,18 +1,59 @@
-<!--
-  Generated template for the CommunityAppNamePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>community-app-name</ion-title>
+    <ion-title>Community App Name</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+  <ion-grid class="grid-search">
+    <ion-row class="row-search">
+      <ion-col col-6>
+        <!-- <div class="profession">Plumber</div> -->
+        <ion-input placeholder="Search" clearInput [(ngModel)]="search"></ion-input>
+      </ion-col>
+      <ion-col col-6>
+        <div class="search">Search By</div>
+        <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-col col-12 class="col-person">
+        <ion-list class="list-person">
+          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+            <h2>
+              <b>A</b>
+            </h2>
+            <p>Aman (Service)</p>
+            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
+            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
+            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
+          </ion-item>
+
+          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+            <h2>
+              <b>R</b>
+            </h2>
+            <p>Rakesh (Service)</p>
+            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
+            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
+            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
+          </ion-item>
+
+          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+            <h2>
+              <b>P</b>
+            </h2>
+            <p>Poonam (HR)</p>
+            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
+            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
+            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

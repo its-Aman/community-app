@@ -25,9 +25,15 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
 
-    this.loginForm.controls['mobile'].valueChanges.subscribe(res=>{
+    this.loginForm.controls['mobile'].valueChanges.subscribe(res => {
       if (res && res.length > 10) {
         this.loginForm.controls['mobile'].setValue(this.loginForm.controls['mobile'].value.slice(0, 10));
+      }
+    });
+
+    this.loginForm.controls['otp'].valueChanges.subscribe(res => {
+      if (res && res.length > 4) {
+        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 4));
       }
     });
   }
@@ -48,7 +54,7 @@ export class LoginPage {
 
     if (this.loginForm.valid) {
       this.global.log('form is valid');
-      this.navCtrl.setRoot('MenuPage', {data: null});
+      this.navCtrl.setRoot('MenuPage', { data: null });
     } else {
       this.isFormInvalid = true;
     }

@@ -1,0 +1,48 @@
+page-community-app {
+    .grid-profession{
+        .row-profession{
+            .col{
+                padding: 5px 0;
+            }
+            .profession{
+                background-color: white;
+                height: 5rem;
+                border: 1px solid lightgray;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                border-radius: 3px;
+            }
+        }
+        .background-color{
+            background-color: #FAFAFA;
+            padding: 10px;
+        }
+        .details{
+            .row-header{
+                height: 50px;
+                background-color: #02A1E2;
+                color: white;
+                font-size: 18px;
+                padding: 0 10px;
+            }
+            ion-row{
+                font-size: 16px;
+                align-items: center;
+                padding: 5px 15px;
+                background-color: white;
+                border-bottom: 1px solid lightgray;
+    
+                ion-col{
+                    padding: 0;
+                }
+            }
+            .total-row{
+                font-weight: 600;
+                background-color: #F0F0F0;
+    
+            }
+        }
+    }
+}

@@ -5,6 +5,13 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.blur{
+    -webkit-filter: blur(1.5px);
+    -moz-filter: blur(1.5px);
+    -o-filter: blur(1.5px);
+    -ms-filter: blur(1.5px);
+    filter: blur(1.5px);
+}
 .error{
     color: #f53d3d;
     margin: 5px 10px;

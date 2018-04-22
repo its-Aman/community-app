@@ -1,18 +1,78 @@
-<!--
-  Generated template for the ContactUsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>contact-us</ion-title>
+    <ion-title>Contact Us</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+  <ion-grid class="grid-image">
+    <ion-row>
+      <ion-col col-12 class="images">
+        <div class="backgroundImage image blur"></div>
+        <div class="profileImage image"></div>
+        <div class="get-in">GET IN TOUCH</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-grid class="grid-details">
+    <ion-row class="row-address">
+      <ion-col col-12 class="heading" text-left>
+        Address
+      </ion-col>
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+      </ion-col>
+      <ion-col col-11>
+        645 Howe Street. Vancouver, British Columbia, CANADA V6C 2Y9.
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-phone">
+      <ion-col col-12 class="heading" text-left>
+        Phone Number
+      </ion-col>
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
+      </ion-col>
+      <ion-col col-11>
+        +1-604-687-1122.
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-email">
+      <ion-col col-12 class="heading" text-left>
+        Email
+      </ion-col>
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-mail" md="md-mail"></ion-icon>
+      </ion-col>
+      <ion-col col-11>
+        google@gmail.com
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-website">
+      <ion-col col-12 class="heading" text-left>
+        Website
+      </ion-col>
+      <ion-col col-1 text-center>
+        <ion-icon ios="md-globe" md="md-globe"></ion-icon>
+      </ion-col>
+      <ion-col col-11>
+        www.rajasthancommunity.com
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <div #map id="map" class="map"></div>
+      </ion-col>
+      <ion-col col-12>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

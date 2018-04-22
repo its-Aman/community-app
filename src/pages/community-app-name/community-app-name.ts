@@ -1,12 +1,6 @@
+import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CommunityAppNamePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +9,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CommunityAppNamePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public global: GlobalProvider
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityAppNamePage');
+  }
+
+  personDetails() {
+    this.global.log(`in personDetails's method`);
+  }
+
+  makeCall() {
+    this.global.log(`in makeCall's method`);
+  }
+
+  makeMail() {
+    this.global.log(`in makeMail's method`);
+  }
+
+  makeChat() {
+    this.global.log(`in makeChat's method`);
   }
 
 }

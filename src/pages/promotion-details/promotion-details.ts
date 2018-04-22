@@ -28,6 +28,18 @@ export class PromotionDetailsPage {
     this.getCoordinates();
   }
 
+  getCoordinates() {
+    this.geolocation.getCurrentPosition().then(res => {
+      this.global.log('geolocation res', res);
+      this.loadMap(res.coords);
+    }).catch(err => {
+      this.global.log('some error in geolocation', err);
+      if (err.code == 1) {
+        this.global.showToast(err.message);
+      }
+    });
+  }
+
   loadMap(coords: any) {
     let mapOptions = {
       center: { lat: coords.latitude, lng: coords.longitude },
@@ -42,18 +54,6 @@ export class PromotionDetailsPage {
     setTimeout(() => {
       this.addMarker();
     }, 1000);
-  }
-
-  getCoordinates() {
-    this.geolocation.getCurrentPosition().then(res => {
-      this.global.log('geolocation res', res);
-      this.loadMap(res.coords);
-    }).catch(err => {
-      this.global.log('some error in geolocation', err);
-      if (err.code == 1) {
-        this.global.showToast(err.message);
-      }
-    });
   }
 
   addMarker() {
@@ -71,6 +71,6 @@ export class PromotionDetailsPage {
     let infoWindow = new google.maps.InfoWindow({ content: content });
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
-    })
+    });
   }
 }

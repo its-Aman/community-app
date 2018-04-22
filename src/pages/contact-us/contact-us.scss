@@ -1,3 +1,59 @@
 page-contact-us {
+    .grid-image{
+        padding: 0; 
+    }
+    .images{
+        position: relative;
+        padding: 0;
+        .backgroundImage{
+            background-image: url('../assets/icon/splash-bg.png');
+            width: 100%;
+            height: 187px;
+        }
+        .profileImage{
+            background-image: url('../assets/icon/logo.png');
+            width: 100px;
+            height: 100px;
+            border-radius: 64px;
+            position: absolute;
+            top: calc(50% - 65px);
+            left: calc(50% - 50px);
+        }
+        .get-in{
+            position: absolute;
+            bottom: 15%;
+            left: calc(50% - 65px);
+            color: white;
+            font-size: 20px;
+        }
+    }
+    .grid-details{
+        padding: 15px; 
 
+        ion-row{
+            border-bottom: 1px solid lightgray;
+            padding: 10px 0;
+
+            ion-col[col-11]{
+                font-size: 16px;
+            }
+            ion-col[col-1]{
+                display: flex;
+                margin: auto;
+            }
+            .heading{
+                font-size: 18px;
+                padding: 0 5px;
+            }
+            ion-col{
+                ion-icon{
+                    color: #02A1E2;
+                }
+            }
+        }
+        .map{
+            height: 250px;
+            width: 100%
+        }
+    }
 }

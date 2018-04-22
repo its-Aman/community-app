@@ -20,14 +20,14 @@
         <ion-col col-12>
           <ion-input placeholder="Mobile no." formControlName="mobile" type="number"></ion-input>
           <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('required') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minLength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxLength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
         </ion-col>
         <ion-col col-12>
           <ion-input placeholder="OTP" formControlName="otp" type="number"></ion-input>
           <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('required') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">OTP is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('minLength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('maxLength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Max 4 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('minlength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('maxlength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Max 4 digit is Required</p>
         </ion-col>
       </ion-row>
     </form>
