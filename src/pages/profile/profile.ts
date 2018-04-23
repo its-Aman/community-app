@@ -25,5 +25,10 @@ export class ProfilePage {
 
   edit() {
     this.global.log('edit clicked');
+    let foo = this.navParams.get('data');
+    
+    if (foo && foo.fromLogin) {
+      this.navCtrl.setRoot('MenuPage', { data: null });
+    }
   }
 }

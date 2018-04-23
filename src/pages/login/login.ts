@@ -46,7 +46,7 @@ export class LoginPage {
   }
 
   resendOTP() {
-    this.global.log('forgot password');
+    this.global.log('Resend OTP');
   }
 
   login() {
@@ -54,7 +54,8 @@ export class LoginPage {
 
     if (this.loginForm.valid) {
       this.global.log('form is valid');
-      this.navCtrl.setRoot('MenuPage', { data: null });
+      // this.navCtrl.setRoot('MenuPage', { data: null });
+      this.navCtrl.push('ProfilePage', { data: { fromLogin: true } });
     } else {
       this.isFormInvalid = true;
     }

@@ -1,11 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, Loading, App, Events } from 'ionic-angular';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Injectable()
 export class GlobalProvider {
 
   loader: Loading;
+  base_path: string;
 
   constructor(
     public http: HttpClient,
@@ -15,6 +23,7 @@ export class GlobalProvider {
     public events: Events
   ) {
     console.log('Hello GlobalProvider Provider');
+    this.base_path = '';
   }
 
   log(message?: any, ...optionalParams: any[]): void {
@@ -30,25 +39,35 @@ export class GlobalProvider {
   }
 
   hideLoader() {
-    try {
-      this.loader.dismiss().catch(res => {
-        console.log("exception in loader hide");
-        setTimeout(v => { this.hideLoader(); }, 100)
-      });
+    if (this.loader) {
+      try {
+        this.loader.dismiss()
+          .then(res => {
+            this.loader = null;
+          })
+          .catch(res => {
+            console.log("exception in loader hide");
+            setTimeout(v => { this.hideLoader(); }, 100)
+          });
+      }
+      catch (e) { }
     }
-    catch (e) { }
   }
 
-  showToast(msg, duration?) {
-    let finalDuration = 3000;
-    if (duration)
-      finalDuration = duration;
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: finalDuration,
-      position: 'top',
-      showCloseButton: true
-    });
-    toast.present();
+  showToast(message: string, duration: number = 2000, position: string = 'top') {
+    this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position,
+      showCloseButton: true,
+    }).present();
+  }
+
+  getRequest(url: string) {
+    return this.http.get<any>(url)
+  }
+
+  postRequest(url: string, data: any) {
+    return this.http.post<any>(url, data, httpOptions)
   }
 }

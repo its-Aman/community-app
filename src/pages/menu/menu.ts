@@ -25,7 +25,7 @@ export class MenuPage {
 
   vendorList() {
     this.global.log('vendorList');
-    this.navCtrl.push('VendorProfilePage', { data: null });    
+    this.navCtrl.push('CommunityAppPage', { data: null })
   }
 
   promotionDiscount() {
@@ -37,15 +37,15 @@ export class MenuPage {
     this.global.log('aboutUs');
     this.navCtrl.push('AboutPage', { data: null });
   }
-  
+
   contactUs() {
     this.global.log('contactUs');
     this.navCtrl.push('ContactUsPage', { data: null });
   }
 
-  setting() {
-    this.global.log('setting');
-  }
+  // setting() {
+  //   this.global.log('setting');
+  // }
 
   privacyPolicy() {
     this.global.log('privacyPolicy');
@@ -53,5 +53,6 @@ export class MenuPage {
 
   logout() {
     this.global.log('logout');
+    this.navCtrl.setRoot('LoginPage', { data: null });
   }
 }

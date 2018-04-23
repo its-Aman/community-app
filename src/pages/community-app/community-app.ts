@@ -15,4 +15,7 @@ export class CommunityAppPage {
     console.log('ionViewDidLoad CommunityAppPage');
   }
 
+  openDetails(){
+    this.navCtrl.push('VendorProfilePage', { data: null });    
+  }
 }

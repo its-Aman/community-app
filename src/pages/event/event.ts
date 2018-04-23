@@ -41,7 +41,6 @@ export class EventPage {
 
   openEvent(i: number) {
     this.global.log('in openEvent() with data ', this.eventDummydata[i]);
-    // this.navCtrl.push('EventRegistrationPage', { data: this.eventDummydata[i] });
-    this.navCtrl.push('EditEventPage', { data: this.eventDummydata[i] });
+    this.navCtrl.push('CommunityNamePage', { data: this.eventDummydata[i] });
   }
 }

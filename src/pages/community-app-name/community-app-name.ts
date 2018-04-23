@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -12,7 +12,8 @@ export class CommunityAppNamePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public event: Events
   ) {
   }
 
@@ -26,14 +27,20 @@ export class CommunityAppNamePage {
 
   makeCall() {
     this.global.log(`in makeCall's method`);
+    document.location.href = 'tel:+91123456789';
   }
 
   makeMail() {
     this.global.log(`in makeMail's method`);
+    document.location.href = `mailto:user@example.com?subject=You're%20Awesome&body=Already%20told%20you`;
   }
 
   makeChat() {
     this.global.log(`in makeChat's method`);
+    this.openChatPage();
   }
 
+  openChatPage() {
+    this.event.publish('select-page', 'chat');
+  }
 }

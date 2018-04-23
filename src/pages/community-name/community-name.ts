@@ -81,4 +81,27 @@ export class CommunityNamePage {
       infoWindow.open(this.map, marker);
     });
   }
+
+  edit() {
+    this.global.log('in edit()');
+    this.navCtrl.push('EditEventPage', {
+      data: {
+        name: 'Event Name',
+        from: '02-01-2018',
+        to: '03-02-2018',
+      }
+    });
+  }
+
+  registration() {
+    this.global.log('in registration()');
+    this.navCtrl.push('EventRegistrationPage', {
+      data: {
+        name: 'Event Name',
+        from: '02-01-2018',
+        to: '03-02-2018',
+      }
+    });
+  }
+
 }
