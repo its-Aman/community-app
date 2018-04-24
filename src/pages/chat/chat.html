@@ -4,12 +4,60 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>chat</ion-title>
+    <ion-title text-capitalize>Member Name</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding #content>
+  <ion-grid class="chat-grid">
+    <div *ngFor="let chat of dummyChat; let i = index;" class="div-message-container">
 
+      <ion-row *ngIf="chat?.isMe" class="row-chat-isMe">
+        <ion-col col-9 class="col-message-isMe">
+          <div class="pointer-right"></div>
+          <div class="div-message div-message-isMe">{{chat?.message}}</div>
+        </ion-col>
+        <ion-col col-3 class="col-image-isMe">
+          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chat?.userImage + ')'"></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!chat?.isMe" class="row-chat-isMe">
+        <ion-col col-3 class="col-image-isMe">
+          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chat?.userImage + ')'"></div>
+        </ion-col>
+        <ion-col col-9 class="col-message-isMe">
+          <div class="pointer-left"></div>
+          <div class="div-message div-message-isMe-not">{{chat?.message}}</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-chat-time">
+        <ion-col col-12 text-left class="col-time" *ngIf="chat?.isMe">
+          <div class="div-time">{{chat?.time | date:'shortTime'}}</div>
+        </ion-col>
+
+        <ion-col col-12 text-right class="col-time" *ngIf="!chat?.isMe">
+          <div class="div-time">{{chat?.time | date:'shortTime'}}</div>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-grid class="grid-input" no-padding>
+    <ion-row class="row-inputBox">
+      <ion-col col-10 class="col-inputBox">
+        <ion-input (keyup.enter)="send()" placeholder="Type a message..." type="text" class="inputBox" [(ngModel)]="inputText"></ion-input>
+        <!-- <ion-textarea autocomplete='on' autocorrect='on' (keyup.enter)="send()" placeholder="Type a message..." type="text" class="inputBox" [(ngModel)]="inputText"></ion-textarea> -->        
+      </ion-col>
+      <ion-col col-2 class="col-send" (click)="send()">
+        <ion-icon ios="md-send" md="md-send"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
