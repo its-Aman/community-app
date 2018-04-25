@@ -141,9 +141,15 @@ page-edit-event {
             margin: auto;
         }
     }
-    .status{
-        color: #A1A1A1;
-        font-size: 16px;
+    .col-status{
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+
+        .status{
+            color: #A1A1A1;
+            font-size: 16px;
+        }
     }
 
     .cancel-button{
