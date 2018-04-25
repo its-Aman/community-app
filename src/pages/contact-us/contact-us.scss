@@ -22,9 +22,10 @@ page-contact-us {
         .get-in{
             position: absolute;
             bottom: 15%;
-            left: calc(50% - 65px);
             color: white;
-            font-size: 20px;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
         }
     }
     .grid-details{
@@ -35,14 +36,14 @@ page-contact-us {
             padding: 10px 0;
 
             ion-col[col-11]{
-                font-size: 16px;
+                // font-size: 16px;
             }
             ion-col[col-1]{
                 display: flex;
                 margin: auto;
             }
             .heading{
-                font-size: 18px;
+                // font-size: 18px;
                 padding: 0 5px;
             }
             ion-col{

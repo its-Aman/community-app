@@ -11,7 +11,12 @@ export class ThemeProvider {
 
   loadDefaultTheme() {
     this.defaultTheme = {
-
+      fontSize14: '14px',
+      fontSize16: '16px',
+      fontSize18: '18px',
+      fontSize20: '20px',
+      colorRed: 'red',
+      colorGreen: '#48FF18',
     }
   }
 }

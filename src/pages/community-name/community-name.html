@@ -10,18 +10,22 @@
 <ion-content no-padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-12>
+      <ion-col col-12 class="col-backgroundImage">
         <div class="backgroundImage image"></div>
       </ion-col>
     </ion-row>
 
-    <ion-row class="row-filter">
-      <ion-col class="col-filter" text-center>
+    <ion-row class="row-filter" text-center>
+      <!-- <ion-col class="col-filter" text-center>
         <div class="filter" (click)="edit()">Edit</div>
         <div class="filter" (click)="registration()">Registration</div>
         <div class="filter">Performance</div>
-        <!-- <div class="filter">Voluntary</div> -->
-      </ion-col>
+        <div class="filter">Voluntary</div>
+      </ion-col> -->
+
+      <ion-col class="col-filter" col-4 (click)="edit()">Edit</ion-col>
+      <ion-col class="col-filter" col-4 (click)="registration()">Registration</ion-col>
+      <ion-col  class="col-filter" col-4>Performance</ion-col>
     </ion-row>
 
     <div class="details">

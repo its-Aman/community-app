@@ -1,44 +1,44 @@
 page-login {
-.logo{
-    background-image: url('../assets/icon/logo.png');
-    height: 150px;
-    width: 150px;
-}
-.logo-parent{
-    display: flex;
-    justify-content: center;
-}
-ion-input, ion-textarea{
-    border-radius: 64px;
-    background: white;
-    width: 90%;
-    margin: 0 auto;
-    height: 5.5rem;
-    padding: 0;
-}
-.text-input-md{
-    margin: 20px 30px;
-    font-size: 16px;
-}
-.scroll-content{
-    background-image: url('../assets/icon/singin-bg.png');
-    height: 100%;
-    width: auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.button-md{
-    background-color: #3844CA;
-    margin: 0 auto !important;
-    height: 5.5rem;
-    width: 90%;
-}
-.resend{
-    color: white;
-    width: 90%;
-}
-.error {
-    margin: 5px 48px;
-}
+    .logo{
+        background-image: url('../assets/icon/logo.png');
+        height: 150px;
+        width: 150px;
+    }
+    .logo-parent{
+        display: flex;
+        justify-content: center;
+    }
+    ion-input, ion-textarea{
+        border-radius: 64px;
+        background: white;
+        width: 90%;
+        margin: 0 auto;
+        height: 5.5rem;
+        padding: 0;
+    }
+    .text-input-md{
+        margin: 20px 30px;
+        // font-size: 16px;
+    }
+    .scroll-content{
+        background-image: url('../assets/icon/singin-bg.png');
+        height: 100%;
+        width: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .button-md{
+        background-color: #3844CA;
+        margin: 0 auto !important;
+        height: 5.5rem;
+        width: 90%;
+    }
+    .resend{
+        color: white;
+        width: 90%;
+    }
+    .error {
+        margin: 5px 48px;
+    }
 }
