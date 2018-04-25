@@ -85,4 +85,5 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Community App needs your location to show relevant data to you." />
     </plugin>
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
 </widget>

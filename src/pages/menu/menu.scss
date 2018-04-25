@@ -10,23 +10,28 @@ page-menu {
     }
     .menu-header-col{
         padding: 20px 0 0 15px;
-            h4{
+            h2{
+            }
+            p{
                 color: #595AA3;
                 margin: 0 0 5px 0;
             }
     }
     ion-menu{
         .scroll-content{
-            margin-top:225px !important;
+            margin-top:205px !important;
         }
     }
     .menu{
         .item{
+            min-height: 3rem;
+            ion-icon{
+                margin-top: 5px;
+                margin-bottom: 5px;
+                color: #696E74;
+            }
             .label-md {
                 margin: 5px 8px 5px 0;
-            }
-            ion-icon{
-                color: #696E74;
             }
             .item-md{
                 padding-left: 0px;

@@ -34,8 +34,9 @@ import { ThemeProvider } from '../providers/theme/theme';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalProvider,
-    Geolocation,
     ThemeProvider,
+    Geolocation,
+    StatusBar
   ]
 })
 export class AppModule {}
