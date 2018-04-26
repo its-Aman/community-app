@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PromotionDiscountPage {
 
+  cat: boolean[] = [false, false, false, false, false];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -17,11 +18,15 @@ export class PromotionDiscountPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PromotionDiscountPage');
+    console.log('ionViewDidLoad PromotionDiscountPage', this.cat);
   }
 
   openDetails() {
     this.global.log('openDetails()');
     this.navCtrl.push('PromotionDetailsPage', { data: null });
+  }
+
+  openCat(i: number) {
+    this.cat[i] = !this.cat[i];
   }
 }

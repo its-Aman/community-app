@@ -29,7 +29,19 @@
     color: white;
     // padding: 0 50px;
 }
+super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon{
+    height: 50px;
+// }
+// super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
+    padding: 0;
+    padding-top: 5px;
+}
+super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button ion-icon{
+    font-size: 20px;
+}
+super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon ion-icon{
+    margin-bottom: 5px;
+}
 super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
-    padding: 0 !important;
-    padding-top: 8px !important;
+    font-size: 12px;
 }

@@ -42,24 +42,29 @@ page-profile {
         margin: 10px 0;
         padding: 5px;
     }
-    .row-email{
+    .row-common{
         // font-size: 16px;
         margin: 10px 0;
         padding: 5px;
+        [col-1]{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+        [col-5]{
+            display: flex;
+            align-items: center;
+        }
     }
-    .row-address{
-        // font-size: 16px;
-        margin: 10px 0;
-        padding: 5px;
+    .submitButton{
+        background-color: #02A1E2
     }
-    .row-mode{
-        // font-size: 16px;
-        margin: 10px 0;
-        padding: 5px;
+    .mode-of-comm{
+        .item-md{
+            padding-left: 0px;
+        }
     }
-    .row-service{
-        // font-size: 16px;
-        margin: 10px 0;
-        padding: 5px;
+    .select-form{
+        max-width: 100%;
     }
 }

@@ -8,6 +8,8 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
   templateUrl: 'community-app-name.html',
 })
 export class CommunityAppNamePage {
+  search: any;
+  searchType: any = 'P';
 
   constructor(
     public navCtrl: NavController,

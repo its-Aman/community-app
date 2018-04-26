@@ -4,27 +4,42 @@ page-community-app-name {
             ion-col[col-6]{
                 ion-input{
                     background-color: white;
-                    height: 5rem;
+                    height: 4.5rem;
                     border: 1px solid lightgray;
                     // font-size: 20px;
                     display: flex;
                     align-items: center;
                     padding: 5px 10px;
                     border-radius: 3px;
-                    }
+                }
             }
             .col{
                 margin: 5px 0;
             }
             .search{
                 background-color: white;
-                height: 5rem;
+                height: 3.5rem;
                 border: 1px solid lightgray;
                 // font-size: 20px;
                 display: flex;
                 align-items: center;
-                padding: 5px 10px;
+                padding: 10px;
                 border-radius: 3px;
+
+                .select-form{
+                    max-width: 100%;
+                    padding: 0;
+                    width: 100%;
+                    
+                }
+                .select-md .select-icon{
+                    width: 16px;
+                }
+                .item-inner{
+                    .input-wrapper{
+                        align-items: flex-start;
+                    }
+                }
             }
         }
         .col-person{

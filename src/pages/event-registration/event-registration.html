@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Event Rregistration</ion-title>
+    <ion-title>Event Registration</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -34,23 +34,29 @@
     <hr>
 
     <div class="background-color">
+      <form [formGroup]="userForm">
 
-      <ion-row>
-        <ion-col col-12 class="person-detail">
-          <div class="person-detail-color">Name: </div>
-          <div class="person-detail-data" text-nowrap> Aman Kumar</div>
-        </ion-col>
+        <ion-row>
+          <ion-col col-12 class="person-detail">
+            <div class="person-detail-color">Name: </div>
+            <!-- <div class="person-detail-data" text-nowrap> Aman Kumar</div> -->
+            <ion-input placeholder="Mobile no." formControlName="name" type="text"></ion-input>
 
-        <ion-col col-12 class="person-detail">
-          <div class="person-detail-color">Mobile No. : </div>
-          <div class="person-detail-data"> 123456789</div>
-        </ion-col>
+          </ion-col>
 
-        <ion-col col-12 class="person-detail">
-          <div class="person-detail-color">No. Of Members: </div>
-          <div class="person-detail-data"> 16</div>
-        </ion-col>
-      </ion-row>
+          <ion-col col-12 class="person-detail">
+            <div class="person-detail-color">Mobile No. : </div>
+            <!-- <div class="person-detail-data"> 123456789</div> -->
+            <ion-input placeholder="Mobile no." formControlName="mobile" type="number"></ion-input>
+          </ion-col>
+
+          <ion-col col-12 class="person-detail">
+            <div class="person-detail-color">No. Of Members: </div>
+            <div class="person-detail-data"> 16</div>
+            <!-- <ion-input placeholder="Mobile no." formControlName="noOfMEmbers" type="number"></ion-input> -->
+          </ion-col>
+        </ion-row>
+      </form>
 
       <div class="details">
         <ion-row class="row-header">
@@ -87,8 +93,8 @@
       <ion-row class="row-radio">
         <ion-col col-12>
           <ion-item>
-            <ion-label>Detail</ion-label>
-            <ion-select [(ngModel)]="eventPerson" multiple="true" interface="action-sheet">
+            <ion-label *ngIf="!eventPerson">Detail</ion-label>
+            <ion-select [(ngModel)]="eventPerson">
               <ion-option value="V">VOLUNTEER</ion-option>
               <ion-option value="P">PERFORMANCE</ion-option>
             </ion-select>
@@ -96,7 +102,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngIf="eventPerson">
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">Performance Name: </div>
           <div class="event-detail-data">Bhangra Dance</div>

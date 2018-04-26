@@ -18,7 +18,15 @@
         <ion-input placeholder="Search" clearInput [(ngModel)]="search"></ion-input>
       </ion-col>
       <ion-col col-6>
-        <div class="search">Search By</div>
+        <!-- <div class="search">Search By</div> -->
+        <ion-item class="search">
+          <ion-label *ngIf="!searchType">Search By</ion-label>
+          <ion-select class="select-form" [(ngModel)]="searchType">
+            <ion-option value="P">By Profession</ion-option>
+            <ion-option value="A">By Alphabetical</ion-option>
+            <ion-option value="C">By City</ion-option>
+          </ion-select>
+        </ion-item>
         <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->
       </ion-col>
     </ion-row>

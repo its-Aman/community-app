@@ -7,7 +7,8 @@
     <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="edit()">
-        <ion-icon ios="ios-create" md="ios-create"></ion-icon>
+        <!-- <img src="../assets/icon/" alt="" class="create"> -->
+        <ion-icon ios="md-create" md="md-create"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -26,73 +27,100 @@
   </ion-grid>
 
   <ion-grid>
-    <ion-row class="row-mobile">
-      <ion-col col-1 text-center>
-        <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
-      </ion-col>
-      <ion-col col-5 text-left>
-        <div class="mobile">Mobile No. :</div>
-      </ion-col>
-      <ion-col col-6 text-right>
-        <div>123456789</div>
-      </ion-col>
-    </ion-row>
+    <form [formGroup]="profileForm">
 
-    <ion-row class="row-email">
-      <ion-col col-1 text-center>
-        <ion-icon ios="md-mail" md="md-mail"></ion-icon>
-      </ion-col>
-      <ion-col col-5 text-left>
-        <div class="email">Email :</div>
-      </ion-col>
-      <ion-col col-6 text-right text-nowrap>
-        <div>google@gmail.com</div>
-      </ion-col>
-    </ion-row>
+      <ion-row class="row-mobile">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="mobile">Mobile No. :</div>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <div>123456789</div>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="row-address">
-      <ion-col col-1 text-center>
-        <ion-icon ios="md-lock" md="md-lock"></ion-icon>
-      </ion-col>
-      <ion-col col-5 text-left>
-        <div class="address">Address :</div>
-      </ion-col>
-      <ion-col col-6 text-right>
-        <div>
-          Jaipur-302006, Rajasthan, India C:+91-141-2229900
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row class="row-common">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-mail" md="md-mail"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="email">Email :</div>
+        </ion-col>
+        <ion-col col-6 text-right text-nowrap>
+          <ion-input [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email"></ion-input>
+          <p class="error" text-left>
+            <span *ngIf="profileForm?.controls['email']?.hasError('required') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Email is Required.</span>
+            <span *ngIf="profileForm?.controls['email']?.hasError('email') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Not a valid email.</span>
+          </p>
+          <!-- <div>google@gmail.com</div> -->
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="row-mode-of-communication">
-      <ion-col col-12>
-        <h4>
-          <b>Mode of Communication</b>
-        </h4>
-      </ion-col>
-      <ion-col col-12>
-        <ion-item>
-          <ion-label>Mode of Communication</ion-label>
-          <ion-select [(ngModel)]="modeOfCommunication" multiple="true" interface="action-sheet">
-            <ion-option value="E">Email</ion-option>
-            <ion-option value="P">Phone</ion-option>
-            <ion-option value="C">Chat</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row class="row-common">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="address">Address :</div>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <ion-input [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"></ion-input>
+          <p class="error" text-left *ngIf="profileForm?.controls['address']?.hasError('required') && (profileForm?.controls['address']?.dirty || isFormInvalid)">Address is Required</p>
+          <!-- <div>
+            Jaipur-302006, Rajasthan, India C:+91-141-2229900
+          </div> -->
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="row-service">
-      <ion-col col-1 text-center>
-        <ion-icon ios="md-settings" md="md-settings"></ion-icon>
-      </ion-col>
-      <ion-col col-5 text-left>
-        <div class="email">Professional Service :</div>
-      </ion-col>
-      <ion-col col-6 text-right text-nowrap>
-        <div>Plumber</div>
-      </ion-col>
-    </ion-row>
+      <ion-row class="row-common">
+        <ion-col col-12>
+          <h4>
+            <b>Mode of Communication</b>
+          </h4>
+        </ion-col>
+        <ion-col col-12 class="mode-of-comm">
+          <ion-item>
+            <!-- <ion-label>Mode of Communication</ion-label> -->
+            <ion-select class="select-form" [disabled]="isDisabled" formControlName="modeOfCommunication" multiple="true">
+              <ion-option value="E">Email</ion-option>
+              <ion-option value="P">Phone</ion-option>
+              <ion-option value="C">Chat</ion-option>
+            </ion-select>
+          </ion-item>
+          <p class="error" text-left *ngIf="profileForm?.controls['modeOfCommunication']?.hasError('required') && (profileForm?.controls['modeOfCommunication']?.dirty || isFormInvalid)">Mode Of communication is Required</p>
+        </ion-col>
+      </ion-row>
 
+      <ion-row class="row-common">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-settings" md="md-settings"></ion-icon>
+        </ion-col>
+        <ion-col col-5 text-left>
+          <div class="email">Professional Service:</div>
+        </ion-col>
+        <ion-col col-6 text-right text-nowrap>
+          <!-- <div>Plumber</div> -->
+          <ion-item>
+            <ion-select class="select-form" [disabled]="isDisabled" formControlName="professionalService">
+              <ion-option value="P">Plumber</ion-option>
+              <ion-option value="D">Driver</ion-option>
+              <ion-option value="M">Mechanic</ion-option>
+            </ion-select>
+          </ion-item>
+          <p class="error" text-left *ngIf="profileForm?.controls['professionalService']?.hasError('required') && (profileForm?.controls['professionalService']?.dirty || isFormInvalid)">Professional Service is Required</p>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button [disabled]="isDisabled" (click)="submit()" class="submitButton" full>
+            Submit
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
 </ion-content>

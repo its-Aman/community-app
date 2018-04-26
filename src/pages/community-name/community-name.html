@@ -23,9 +23,9 @@
         <div class="filter">Voluntary</div>
       </ion-col> -->
 
-      <ion-col class="col-filter" col-4 (click)="edit()">Edit</ion-col>
-      <ion-col class="col-filter" col-4 (click)="registration()">Registration</ion-col>
-      <ion-col  class="col-filter" col-4>Performance</ion-col>
+      <div class="col-filter" (click)="edit()">Edit</div>
+      <div class="col-filter" (click)="registration()">Registration</div>
+      <div class="col-filter">Performance</div>
     </ion-row>
 
     <div class="details">
@@ -80,7 +80,7 @@
 
       <ion-row class="row-parking">
         <ion-col col-9 class="div-parking">
-          <div class="parking">Travel & Parking information: </div>
+          <div class="parking">Travel Information: </div>
         </ion-col>
         <ion-col col-3>
           <div class="parking-status">PAID</div>

@@ -10,15 +10,16 @@ page-community-name {
         height: 150px;
         width: 100%;
     }
-    .col-filter{
-        display: flex;
+    .row-filter{
         background-color: #02A1E2;
         color: white;
-        justify-content: center;
+        display: flex;
+        justify-content: space-around;
+        height: 30px;
+    }
+    .col-filter{
         align-items: center;
-        // overflow-x: scroll;
-        // white-space: nowrap;
-        // -webkit-box-shadow: inset white;
+        margin: auto;
 
         .filter{
             font-size: 18px;
@@ -109,8 +110,8 @@ page-community-name {
         }
     }
         .parking-status{
-            background-color: red;
-            color: white;
+            // background-color: red;
+            // color: white;
             height: 35px;
             display: flex;
             align-items: center;

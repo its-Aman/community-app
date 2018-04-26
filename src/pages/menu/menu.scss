@@ -1,15 +1,15 @@
 page-menu {
     .profile{
         background-image: url('../assets/icon/sidebar-profile-photo.png');
-        height: 100px;
-        width: 100px;
+        height: 75px;
+        width: 75px;
     }
     .menu-header-grid{
         background: #2D3192;
         color: white;
     }
     .menu-header-col{
-        padding: 20px 0 0 15px;
+        padding: 10px 0 0 15px;
             h2{
             }
             p{
@@ -19,10 +19,12 @@ page-menu {
     }
     ion-menu{
         .scroll-content{
-            margin-top:205px !important;
+            margin-top: 165px !important;
         }
     }
     .menu{
+        margin-top: 10px;
+
         .item{
             min-height: 3rem;
             ion-icon{
