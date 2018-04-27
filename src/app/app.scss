@@ -45,3 +45,17 @@ super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons sup
 super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
     font-size: 12px;
 }
+super-tabs-container{
+    height: 100% !important;
+}
+.select-md .select-icon{
+    position: absolute;
+    right: 5px;
+}
+
+
+//common css
+
+.bdr-btm{
+    border-bottom: 1px solid lightgray;
+}

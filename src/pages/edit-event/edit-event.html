@@ -15,7 +15,7 @@
       </ion-col>
       <ion-col col-7 text-left>
         <div class="heading" text-nowrap>{{event?.name}}</div>
-        <div class="description">{{event?.description}}</div>
+        <!-- <div class="description">{{event?.description}}</div> -->
         <div class="padding">From :
           <div>
             <span class="time">{{event?.from}}</span>
@@ -29,16 +29,19 @@
           </div>
         </div>
       </ion-col>
+      <ion-col col-12>
+        <div class="description">{{event?.description}}</div>
+      </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col col-4 class="col-status">
+      <ion-col col-7 class="col-status">
         <div class="status">Payment Status</div>
       </ion-col>
-      <ion-col col-2 class="status-image">
+      <ion-col col-1 class="status-image">
         <div class="failImage image"></div>
       </ion-col>
-      <ion-col col-6 class="cancel-button">
+      <ion-col col-4 class="cancel-button">
         <button ion-button full (click)="cancel()">Cancel Event</button>
       </ion-col>
 
@@ -65,8 +68,13 @@
 
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">No. Of Members: </div>
-            <div class="person-detail-data"> 16</div>
-            <!-- <ion-input placeholder="Mobile no." formControlName="noOfMEmbers" type="number"></ion-input> -->
+            <!-- <div class="person-detail-data"> 16</div> -->
+            <ion-item>
+              <ion-range formControlName="noOfMembers"></ion-range>
+            </ion-item>
+            <div class="person-detail-data">
+              {{userForm?.controls["noOfMembers"].value}}
+            </div>
           </ion-col>
         </ion-row>
       </form>
@@ -78,22 +86,16 @@
           <ion-col col-6 text-center>TICKET AMOUNT</ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col col-4>Ajay</ion-col>
-          <ion-col col-2>30</ion-col>
-          <ion-col col-6 text-center>3000/-</ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col col-4>Ajay</ion-col>
-          <ion-col col-2>56</ion-col>
-          <ion-col col-6 text-center>2000/-</ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col col-4>Leela</ion-col>
-          <ion-col col-2>45</ion-col>
-          <ion-col col-6 text-center>2000/-</ion-col>
+        <ion-row *ngFor="let person of persons; let i = index;">
+          <ion-col col-4 class="bdr-btm">
+            <ion-input [(ngModel)]='person.name' type="text" placeholder="Type Name"></ion-input>
+          </ion-col>
+          <ion-col col-2 class="bdr-btm">
+            <ion-input [(ngModel)]='person.age' type="number" placeholder="Type Number"></ion-input>
+          </ion-col>
+          <ion-col col-6 text-center class="bdr-btm amount">
+            <ion-input [disabled]='true' [(ngModel)]='person.amount' type="text"></ion-input>
+          </ion-col>
         </ion-row>
 
         <ion-row class="total-row">
@@ -118,17 +120,27 @@
       <ion-row *ngIf="eventPerson">
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">Performance Name: </div>
-          <div class="event-detail-data">Bhangra Dance</div>
+          <div class="event-detail-data">
+            <ion-input [(ngModel)]='person.performanceName' type="text"></ion-input>
+          </div>
         </ion-col>
 
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">No. of Participants: </div>
-          <div class="event-detail-data">09</div>
+          <ion-item>
+            <ion-range [(ngModel)]="person.noOfParticipants"></ion-range>
+            <!-- <ion-label range-right>{{person?.noOfParticipants}}</ion-label> -->
+          </ion-item>
+          <div class="event-detail-data">
+            {{person?.noOfParticipants}}
+          </div>
         </ion-col>
 
-        <ion-col col-12 class="event-detail">
+        <ion-col col-12 class="event-detail" #col>
           <div class="event-detail-color">Special Need: </div>
-          <div class="event-detail-data">Extra</div>
+          <div class="event-detail-data">
+            <ion-textarea rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text"></ion-textarea>
+          </div>
         </ion-col>
       </ion-row>
 

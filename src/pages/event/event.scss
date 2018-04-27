@@ -1,7 +1,7 @@
 page-event {
     .event-image{
         background-image: url('../assets/icon/thumnail-image.png');
-        height: 100px;
+        height: 80px;
         width: 100px;
     }
     .heading{
@@ -14,7 +14,6 @@ page-event {
     }
     .event-row{
         border: 1px solid lightgray;
-        padding: 10px 0;
         margin: 5px 0;
         border-radius: 2px;
     }
@@ -24,5 +23,6 @@ page-event {
     }
     .col-event-detail{
         padding-left: 15px;
+        align-self: center;
     }
 }

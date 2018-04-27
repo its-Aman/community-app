@@ -49,6 +49,7 @@ export class MenuPage {
 
   privacyPolicy() {
     this.global.log('privacyPolicy');
+    this.navCtrl.push('PrivacyPolicyPage', { data: null });
   }
 
   logout() {

@@ -27,6 +27,12 @@ page-event-registration {
         }
     }
     .event-detail{
+        .item-range ion-range{
+            width: 90%;
+            padding-top: 0;
+            padding: 0;
+        }
+
         background-color: white;
         border: 1px solid lightgray;
         display: flex;
@@ -103,7 +109,7 @@ page-event-registration {
             height: 120px;
             width: 120px;
             margin: auto;
-            border: 5px solid lightgray;
+            // border: 5px solid lightgray;
         }
         .heading{
             font-size: 18px;
@@ -130,5 +136,21 @@ page-event-registration {
         .calender{
             color: #02A1E2;
         }
+    }
+    .amount{
+        .text-input-md{
+            text-align: center !important;
+        }
+    }
+    .bdr-btm{
+        .text-input-md{
+            text-align: left;
+        }
+    }
+    .text-input-md{
+        text-align: right;
+    }
+    .range-md .range-slider{
+        height: 30px;
     }
 }

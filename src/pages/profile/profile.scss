@@ -1,4 +1,12 @@
 page-profile {
+
+    .align-center{
+        align-self: center;
+    }
+    img.create{
+        height: 20px;
+        margin: 5px;
+    }
     .row{
         ion-icon{
             color: #02A1E2;
@@ -66,5 +74,11 @@ page-profile {
     }
     .select-form{
         max-width: 100%;
+    }
+    .text-input-md{
+        text-align: right;
+    }
+    ion-input, ion-textarea{
+        // border-bottom: 1px solid lightgray;
     }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController, LoadingController, Loading, App, Events } from 'ionic-angular';
+import { ToastController, LoadingController, Loading, App, Events, Platform } from 'ionic-angular';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,7 +20,8 @@ export class GlobalProvider {
     public loadingController: LoadingController,
     public toastCtrl: ToastController,
     private app: App,
-    public events: Events
+    public events: Events,
+    public platform: Platform,
   ) {
     console.log('Hello GlobalProvider Provider');
     this.base_path = '';

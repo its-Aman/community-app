@@ -27,6 +27,12 @@ page-edit-event {
         }
     }
     .event-detail{
+        .item-range ion-range{
+            width: 90%;
+            padding-top: 0;
+            padding: 0;
+        }
+
         background-color: white;
         border: 1px solid lightgray;
         display: flex;
@@ -102,7 +108,7 @@ page-edit-event {
             background-image: url('../assets/icon/thumnail-image.png');
             height: 120px;
             width: 120px;
-            border: 5px solid lightgray;
+            // border: 5px solid lightgray;
             margin: auto;
         }
         .heading{
@@ -158,5 +164,21 @@ page-edit-event {
         .button-md{
             background-color: #A1A1A1;
         }
+    }
+    .amount{
+        .text-input-md{
+            text-align: center !important;
+        }
+    }
+    .bdr-btm{
+        .text-input-md{
+            text-align: left;
+        }
+    }
+    .text-input-md{
+        text-align: right;
+    }
+    .range-md .range-slider{
+        height: 30px;
     }
 }

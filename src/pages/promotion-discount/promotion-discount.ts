@@ -25,8 +25,13 @@ export class PromotionDiscountPage {
     this.global.log('openDetails()');
     this.navCtrl.push('PromotionDetailsPage', { data: null });
   }
-
-  openCat(i: number) {
-    this.cat[i] = !this.cat[i];
+  openCat(_i: number) {
+    this.cat.forEach((people, i) => {
+      if (i == _i) {
+        this.cat[i] = !this.cat[i];
+      } else {
+        this.cat[i] = false;
+      }
+    });
   }
 }

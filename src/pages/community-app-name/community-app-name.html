@@ -13,11 +13,7 @@
 <ion-content no-padding>
   <ion-grid class="grid-search">
     <ion-row class="row-search">
-      <ion-col col-6>
-        <!-- <div class="profession">Plumber</div> -->
-        <ion-input placeholder="Search" clearInput [(ngModel)]="search"></ion-input>
-      </ion-col>
-      <ion-col col-6>
+      <ion-col col-12>
         <!-- <div class="search">Search By</div> -->
         <ion-item class="search">
           <ion-label *ngIf="!searchType">Search By</ion-label>
@@ -28,6 +24,10 @@
           </ion-select>
         </ion-item>
         <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->
+      </ion-col>
+      <ion-col col-12>
+        <!-- <div class="profession">Plumber</div> -->
+        <ion-input class="bdr-btm" placeholder="Search" clearInput [(ngModel)]="search"></ion-input>
       </ion-col>
     </ion-row>
 

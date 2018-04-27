@@ -11,9 +11,15 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class EventRegistrationPage {
 
   event: any;
-  eventPerson: string[];
+  eventPerson: string = 'V';
   userForm: FormGroup;
   isFormInvalid: boolean = false;
+  persons: any[];
+  person: any = {
+    performanceName: 'Bhangra Dance',
+    noOfParticipants: '09',
+    specialNeed: 'Extra'
+  }
 
   constructor(
     public navCtrl: NavController,
@@ -22,11 +28,17 @@ export class EventRegistrationPage {
     public global: GlobalProvider
   ) {
     this.initForm();
+    this.persons = [
+      { name: 'Ajay', age: 30, amount: '3000/-' },
+      { name: 'Ajay', age: 30, amount: '3000/-' },
+      { name: 'Ajay', age: 30, amount: '3000/-' },
+      { name: 'Ajay', age: 30, amount: '3000/-' },
+    ]
   }
 
   ionViewDidLoad() {
     this.event = this.navParams.get('data');
-    this.event['description'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+    this.event['description'] = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit`;
     console.log('ionViewDidLoad EventRegistrationPage', this.event);
   }
 
@@ -34,7 +46,7 @@ export class EventRegistrationPage {
     this.userForm = this.fb.group({
       name: ['Aman Kumar', [Validators.required]],
       mobile: ['123456789', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      noOfMEmbers: [16, [Validators.required]]
+      noOfMembers: [16, [Validators.required]]
     });
   }
 
@@ -48,5 +60,35 @@ export class EventRegistrationPage {
 
   openCalendar() {
     this.global.log(`openCalendar's method`);
+  }
+
+  change(ip, col) {
+    this.global.log('this.ip is ', ip, col);
+    if (ip) {
+
+      let element = ip._elementRef.nativeElement;
+
+      let textarea: HTMLElement = element.getElementsByTagName('textarea')[0];
+
+      // set default style for textarea
+      textarea.style.minHeight = '0';
+      textarea.style.height = '0';
+
+      // limit size to 96 pixels (6 lines of text)
+      let scroll_height = textarea.scrollHeight;
+      if (scroll_height > 80) {
+        scroll_height = 80;
+      }
+
+      // apply new style
+      if (scroll_height > 49) {
+        col.style.height = scroll_height + 20 + 'px';
+      } else {
+        col.style.height = '50px';
+      }
+      element.style.height = scroll_height + 20 + "px";
+      textarea.style.minHeight = scroll_height + "px";
+      textarea.style.height = scroll_height + "px";
+    }
   }
 }

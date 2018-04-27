@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ export class ProfilePage {
   profileForm: FormGroup;
   isDisabled: boolean = true;
   isFormInvalid: boolean = false;
+  @ViewChild('ip') ip: any;
 
   constructor(
     public navCtrl: NavController,
@@ -36,7 +37,8 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
-    this.isDisabled = !this.profileForm.valid;
+    // this.isDisabled = !this.profileForm.valid;
+    this.change();
   }
 
   edit() {
@@ -59,4 +61,26 @@ export class ProfilePage {
       }
     }
   }
+
+  change() {
+    this.global.log('this.ip is ', this.ip);
+    let element = this.ip._elementRef.nativeElement;
+
+    let textarea: HTMLElement = element.getElementsByTagName('textarea')[0];
+
+    // set default style for textarea
+    textarea.style.minHeight = '0';
+    textarea.style.height = '0';
+
+    // limit size to 96 pixels (6 lines of text)
+    let scroll_height = textarea.scrollHeight;
+    if (scroll_height > 96)
+      scroll_height = 96;
+
+    // apply new style
+    element.style.height = scroll_height + "px";
+    textarea.style.minHeight = scroll_height + "px";
+    textarea.style.height = scroll_height + "px";
+  }
+
 }
