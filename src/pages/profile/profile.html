@@ -33,10 +33,10 @@
         <ion-col col-1 text-center>
           <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
         </ion-col>
-        <ion-col col-3 text-left class="align-center">
+        <ion-col col-10 text-left class="align-center">
           <div class="mobile">Mobile No. :</div>
         </ion-col>
-        <ion-col col-8 text-right>
+        <ion-col col-12 text-right>
           <div>123456789</div>
         </ion-col>
       </ion-row>
@@ -45,10 +45,10 @@
         <ion-col col-1 text-center>
           <ion-icon ios="md-mail" md="md-mail"></ion-icon>
         </ion-col>
-        <ion-col col-3 text-left class="align-center">
+        <ion-col col-10 text-left class="align-center">
           <div class="email">Email :</div>
         </ion-col>
-        <ion-col col-8 text-right text-nowrap class="bdr-btm">
+        <ion-col col-12 text-right text-nowrap class="bdr-btm">
           <ion-input [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email"></ion-input>
           <p class="error" text-left>
             <span *ngIf="profileForm?.controls['email']?.hasError('required') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Email is Required.</span>
@@ -62,10 +62,10 @@
         <ion-col col-1 text-center>
           <ion-icon ios="md-lock" md="md-lock"></ion-icon>
         </ion-col>
-        <ion-col col-3 text-left class="align-center">
+        <ion-col col-10 text-left class="align-center">
           <div class="address">Address :</div>
         </ion-col>
-        <ion-col col-8 text-right class="bdr-btm">
+        <ion-col col-12 text-right class="bdr-btm">
           <ion-textarea rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"></ion-textarea>
           <p class="error" text-left *ngIf="profileForm?.controls['address']?.hasError('required') && (profileForm?.controls['address']?.dirty || isFormInvalid)">Address is Required</p>
           <!-- <div>
@@ -97,10 +97,10 @@
         <ion-col col-1 text-center>
           <ion-icon ios="md-settings" md="md-settings"></ion-icon>
         </ion-col>
-        <ion-col col-3 text-left class="align-center">
+        <ion-col col-10 text-left class="align-center">
           <div class="email">Profession :</div>
         </ion-col>
-        <ion-col col-8 text-right text-nowrap>
+        <ion-col col-12 text-right text-nowrap>
           <!-- <div>Plumber</div> -->
           <ion-item>
             <ion-select class="select-form" [disabled]="isDisabled" formControlName="professionalService">

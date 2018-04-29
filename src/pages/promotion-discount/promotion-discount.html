@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Promotion and Discount</ion-title>
+    <ion-title>Promotion and <br *ngIf="global?.platform?.width() < 360"> Discount</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +16,7 @@
 
       <ion-row class="row-promo" (click)="openCat(i)">
         <ion-col col-12>
-          <div class="category">Category {{i+1}}</div>
+          <div class="category" [class.active]="b">Category {{i+1}}</div>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="b" class="row-coupon" (click)="openDetails()">

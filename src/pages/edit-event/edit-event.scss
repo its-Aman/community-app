@@ -27,6 +27,10 @@ page-edit-event {
         }
     }
     .event-detail{
+        .item-md.item-block .item-inner{
+            padding-right: 0px;
+            border-bottom: none;
+        }
         .item-range ion-range{
             width: 90%;
             padding-top: 0;
@@ -47,6 +51,10 @@ page-edit-event {
         }
         .event-detail-data{
             font-weight: 300;
+
+            .text-input{
+                border-bottom: 1px solid lightgray;
+            }
         } 
     }
     .submit{
@@ -102,12 +110,12 @@ page-edit-event {
         align-self: center;
     }
     .event{
-        margin: 20px 0;
+        margin: 0 0 20px 0;
 
         .event-image{
             background-image: url('../assets/icon/thumnail-image.png');
-            height: 120px;
-            width: 120px;
+            height: 80px;
+            width: 80px;
             // border: 5px solid lightgray;
             margin: auto;
         }
@@ -163,16 +171,19 @@ page-edit-event {
     .cancel-button{
         .button-md{
             background-color: #A1A1A1;
+            font-size: 12px;
         }
     }
     .amount{
         .text-input-md{
             text-align: center !important;
+            border-bottom: none !important;
         }
     }
     .bdr-btm{
         .text-input-md{
             text-align: left;
+            border-bottom: 1px solid lightgray;
         }
     }
     .text-input-md{
@@ -180,5 +191,16 @@ page-edit-event {
     }
     .range-md .range-slider{
         height: 30px;
+    }
+    .performance{
+        max-width: 100%;
+    }
+    .select-text{
+        overflow: visible;
+        text-overflow: unset;
+        white-space: normal;
+    }
+    ion-select{
+        max-width: 100%;
     }
 }

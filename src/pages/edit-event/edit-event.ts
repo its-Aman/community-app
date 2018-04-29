@@ -16,7 +16,7 @@ export class EditEventPage {
   isFormInvalid: boolean = false;
   persons: any[];
   person: any = {
-    performanceName: 'Bhangra Dance',
+    performanceName: 'bd',
     noOfParticipants: '09',
     specialNeed: 'Extra',
   }
@@ -50,12 +50,19 @@ export class EditEventPage {
     });
   }
 
+  numberValue(range) {
+    this.global.log('range is', range);
+    if (range) {
+      this.userForm.controls['noOfMembers'].setValue(range);
+    }
+  }
+
   eventPersonChange(ev: any) {
     this.global.log(`eventPersonChange's event is ${ev}`);
   }
 
   submit() {
-    this.global.log(`submit's method`);
+    this.global.log(`submit's method`, this.person);
   }
 
   openCalendar() {

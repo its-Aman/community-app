@@ -1,6 +1,11 @@
 page-community-app {
     .grid-profession{
         .row-profession{
+            .active{
+                background-color: #02A1E2 !important;
+                color: white !important;
+                border: none !important;
+            }
             .col{
                 padding: 5px 0;
             }

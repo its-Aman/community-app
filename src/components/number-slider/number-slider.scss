@@ -1,0 +1,19 @@
+number-slider {
+    .container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid lightgray;
+    }
+    .button{
+        padding: 5px;
+        align-items: center;
+        width: 35px;
+        font-size: 16px;
+    }
+    .text{
+        width: 100px;
+        align-items: center;
+        text-align: center;
+    }
+}

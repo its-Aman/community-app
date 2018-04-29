@@ -3,6 +3,11 @@ page-promotion-discount {
         background-color: #F3F3F5;
 
         .row-promo{
+            .active{
+                background-color: #02A1E2 !important;
+                color: white !important;
+                border: none !important;
+            }
             .col{
                 padding: 5px 0;
             }

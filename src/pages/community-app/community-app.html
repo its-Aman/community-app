@@ -10,8 +10,8 @@
 <ion-content no-padding>
   <ion-grid class="grid-profession">
     <ion-row class="row-profession" *ngFor="let people of peoples; let i = index">
-      <ion-col col-12 (click)="openPeopleDetails(i)">
-        <div class="profession">{{people?.name}}</div>
+      <ion-col col-12 (click)="openPeopleDetails(i)" [class.active]="people?.show">
+        <div class="profession" [class.active]="people?.show">{{people?.name}}</div>
       </ion-col>
       <!-- </ion-row> -->
 

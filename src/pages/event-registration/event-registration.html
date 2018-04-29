@@ -56,12 +56,13 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
-            <ion-item>
-              <ion-range formControlName="noOfMembers"></ion-range>
-            </ion-item>
-            <div class="person-detail-data">
-              {{userForm?.controls["noOfMembers"].value}}
-            </div>
+            <number-slider [seed]="userForm?.controls['noOfMembers'].value" (getValue)="numberValue($event)"></number-slider>
+            <!-- <ion-item>
+                <ion-range formControlName="noOfMembers"></ion-range>
+              </ion-item>
+              <div class="person-detail-data">
+                {{userForm?.controls["noOfMembers"].value}}
+              </div> -->
           </ion-col>
         </ion-row>
       </form>
@@ -107,20 +108,27 @@
       <ion-row *ngIf="eventPerson">
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">Performance Name: </div>
-          <div class="event-detail-data">
-            <ion-input [(ngModel)]='person.performanceName' type="text"></ion-input>
-          </div>
+          <!-- <div class="event-detail-data"> -->
+          <!-- <ion-input [(ngModel)]='person.performanceName' type="text"></ion-input> -->
+          <ion-item>
+            <ion-select [(ngModel)]="person.performanceName" class="performance">
+              <ion-option value="bd">Bhangra Dance</ion-option>
+              <ion-option value="pd">Punjabi Dance</ion-option>
+            </ion-select>
+          </ion-item>
+          <!-- </div> -->
         </ion-col>
 
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">No. of Participants: </div>
-          <ion-item>
-            <ion-range [(ngModel)]="person.noOfParticipants"></ion-range>
-            <!-- <ion-label range-right>{{person?.noOfParticipants}}</ion-label> -->
-          </ion-item>
-          <div class="event-detail-data">
-            {{person?.noOfParticipants}}
-          </div>
+          <number-slider [seed]="person.noOfParticipants" (getValue)="person.noOfParticipants = $event"></number-slider>
+          <!-- <ion-item>
+                <ion-range [(ngModel)]="person.noOfParticipants"></ion-range>
+                <ion-label range-right>{{person?.noOfParticipants}}</ion-label>
+              </ion-item> -->
+          <!-- <div class="event-detail-data">
+                {{person?.noOfParticipants}}
+              </div> -->
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>

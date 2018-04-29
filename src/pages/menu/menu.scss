@@ -24,7 +24,9 @@ page-menu {
     }
     .menu{
         margin-top: 10px;
-
+        .first{
+            margin-top: 20px;
+        }
         .item{
             min-height: 3rem;
             ion-icon{
