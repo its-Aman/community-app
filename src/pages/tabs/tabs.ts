@@ -14,7 +14,7 @@ export class TabsPage {
   // page1: string = 'HomePage';
   page1: string = 'CommunityAppNamePage';
   page2: string = 'EventPage';
-  page3: string = 'ChatPage';
+  page3: string = 'ChatListPage';
   page4: string = 'ProfilePage';
 
   constructor(

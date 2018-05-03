@@ -1,0 +1,13 @@
+page-chat-list {
+    .list-header-md{
+        border-top: none;
+        border-bottom: 1px solid #dedede;
+    }
+    .item-md ion-avatar ion-img, .item-md ion-avatar img{
+        width: 60px;
+        height: 60px;
+    }
+    .list-header{
+        color: #02A1E2;
+    }
+}
