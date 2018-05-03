@@ -1,3 +1,4 @@
+import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -10,7 +11,11 @@ export class ChatListPage {
 
   personList: any[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public global: GlobalProvider,
+  ) {
     this.fillList();
   }
 
@@ -67,5 +72,9 @@ export class ChatListPage {
 
   openChatDetails(person, i) {
     this.navCtrl.push('ChatPage', { data: null });
+  }
+
+  edit() {
+    this.global.log(`in edit()`);
   }
 }
