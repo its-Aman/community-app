@@ -37,7 +37,7 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
-    // this.isDisabled = !this.profileForm.valid;
+    this.isDisabled = false;
     this.change();
   }
 

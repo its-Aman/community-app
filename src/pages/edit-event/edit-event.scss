@@ -11,7 +11,7 @@ page-edit-event {
     }
     .person-detail{
         background-color: white;
-        border: 1px solid lightgray;
+        // border: 1px solid lightgray;
         display: flex;
         justify-content: space-between;
         margin: 10px 0;
@@ -27,6 +27,17 @@ page-edit-event {
         }
     }
     .event-detail{
+        number-slider{
+            width: 100%;
+        }
+
+        .item-dance{
+            padding-left: 0;
+
+            .select-md{
+                padding: 13px 8px 13px 0px;
+            }
+        }
         .item-md.item-block .item-inner{
             padding-right: 0px;
             border-bottom: none;
@@ -38,7 +49,7 @@ page-edit-event {
         }
 
         background-color: white;
-        border: 1px solid lightgray;
+        // border: 1px solid lightgray;
         display: flex;
         justify-content: space-between;
         padding: 5px 10px;
@@ -49,8 +60,14 @@ page-edit-event {
         .event-detail-color{
             color: #777777;
         }
+        .extra{
+            .text-input-md {
+                text-align: left;
+            }
+        }
         .event-detail-data{
             font-weight: 300;
+            width: 100%;
 
             .text-input{
                 border-bottom: 1px solid lightgray;
@@ -75,7 +92,7 @@ page-edit-event {
             padding: 0 10px;
         }
         ion-row{
-            height: 50px;
+            height: 40px;
             align-items: center;
             padding: 0px 15px;
             background-color: white;
@@ -183,7 +200,7 @@ page-edit-event {
     .bdr-btm{
         .text-input-md{
             text-align: left;
-            border-bottom: 1px solid lightgray;
+            // border-bottom: 1px solid lightgray;
         }
     }
     .text-input-md{

@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
@@ -12,6 +12,7 @@ declare var google;
 })
 export class CommunityNamePage {
 
+  personData: any;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
@@ -20,6 +21,7 @@ export class CommunityNamePage {
     public navParams: NavParams,
     public global: GlobalProvider,
     private geolocation: Geolocation,
+    private modal: ModalController
   ) {
   }
 
@@ -104,4 +106,16 @@ export class CommunityNamePage {
     });
   }
 
+  performance() {
+    let performance = this.modal.create('PerformanceModalPage', { data: this.personData }, { cssClass: 'performance' });
+
+    performance.present();
+
+    performance.onDidDismiss(data => {
+      this.global.log(`modal data`, data);
+      if (data) {
+        this.personData = data;
+      }
+    });
+  }
 }

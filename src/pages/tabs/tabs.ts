@@ -32,9 +32,16 @@ export class TabsPage {
 
   listenForTabsChange() {
     this.event.subscribe('select-page', (page) => {
-      this.global.log('in listenForTabsChange()', page);
+      this.global.log("in listenForTabsChange()'s select-page", page);
       if (page == 'chat') {
         this.superTabs.slideTo(2);
+      }
+    });
+
+    this.event.subscribe('select-edit-profile', (page) => {
+      this.global.log("in listenForTabsChange()'s select-edit-profile", page);
+      if (page == 'profile') {
+        this.superTabs.slideTo(3);
       }
     });
   }

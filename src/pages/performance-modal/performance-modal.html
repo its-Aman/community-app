@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon ios="md-close" md="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Edit Performance</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="submit()">
+        <ion-icon ios="md-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 class="event-detail">
+        <div class="event-detail-color">Performance Name: </div>
+        <ion-item>
+          <ion-select [(ngModel)]="person.performanceName" class="performance">
+            <ion-option value="bd">Bhangra Dance</ion-option>
+            <ion-option value="pd">Punjabi Dance</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 class="event-detail">
+        <div class="event-detail-color">No. of Participants: </div>
+        <number-slider [seed]="person.noOfParticipants" (getValue)="person.noOfParticipants = $event"></number-slider>
+      </ion-col>
+
+      <ion-col col-12 class="event-detail" #col>
+        <div class="event-detail-color">Special Need: </div>
+        <div class="event-detail-data">
+          <ion-textarea rows="1" #ip (click)="change(ip, col)" (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text"></ion-textarea>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

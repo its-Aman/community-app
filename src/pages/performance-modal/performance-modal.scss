@@ -1,0 +1,36 @@
+page-performance-modal {
+    .event-detail{
+        .item-md.item-block .item-inner{
+            padding-right: 0px;
+            border-bottom: none;
+        }
+        .item-range ion-range{
+            width: 90%;
+            padding-top: 0;
+            padding: 0;
+        }
+
+        background-color: white;
+        border: 1px solid lightgray;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        margin: 5px 0;
+        height: 50px;
+        align-items: center;
+
+        .event-detail-color{
+            color: #777777;
+        }
+        .event-detail-data{
+            font-weight: 300;
+
+            .text-input{
+                border-bottom: 1px solid lightgray;
+            }
+        } 
+    }
+    .performance{
+        max-width: 100%;
+    }
+}

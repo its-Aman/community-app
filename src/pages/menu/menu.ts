@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, App, Events, Menu } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 
 @IonicPage()
@@ -10,12 +10,13 @@ import { GlobalProvider } from '../../providers/global/global';
 export class MenuPage {
 
   rootMenuPage: string = 'TabsPage';
-
+  @ViewChild(Menu) menu: Menu;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
     public app: App,
+    private events: Events
   ) {
   }
 
@@ -43,9 +44,9 @@ export class MenuPage {
     this.navCtrl.push('ContactUsPage', { data: null });
   }
 
-  // setting() {
-  //   this.global.log('setting');
-  // }
+  setting() {
+    this.global.log('setting');
+  }
 
   privacyPolicy() {
     this.global.log('privacyPolicy');
@@ -55,5 +56,12 @@ export class MenuPage {
   logout() {
     this.global.log('logout');
     this.navCtrl.setRoot('LoginPage', { data: null });
+  }
+
+  editProfile() {
+    this.global.log('editProfile');
+    this.menu.close().then(res => {
+      this.events.publish('select-edit-profile', 'profile');
+    });
   }
 }

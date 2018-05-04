@@ -53,6 +53,16 @@ page-menu {
     .list-second{
         margin-top: 100px;
     }
-    
+    .qrImage{
+        background-image: url('../assets/icon/qr-code.jpg');
+        height: 80px;
+        width: 80px;
+        display: flex;
+        margin: 20px auto 10px auto;
     }
+    .text-qr{
+        color: red;
+        font-size: 12px;
+    }
+}
     

@@ -5,7 +5,7 @@
         <ion-col col-12 class="menu-header-col">
           <div class="profile image"></div>
           <h4>Issac French</h4>
-          <p>Edit profile</p>
+          <p (click)="editProfile()">Edit profile</p>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -20,7 +20,8 @@
       </ion-item>
       <ion-item class="item">
         <ion-icon name="cash" item-start></ion-icon>
-        <button menuClose ion-item (click)="promotionDiscount()"> Promotion & <br *ngIf="global?.platform?.width() < 360"> Discount </button>
+        <button menuClose ion-item (click)="promotionDiscount()"> Promotion &
+          <br *ngIf="global?.platform?.width() < 360"> Discount </button>
       </ion-item>
       <ion-item class="item">
         <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
@@ -30,10 +31,10 @@
         <ion-icon name="notifications" item-start></ion-icon>
         <button menuClose ion-item (click)="contactUs()"> Contact Us </button>
       </ion-item>
-      <!-- <ion-item class="item">
+      <ion-item class="item">
         <ion-icon name="settings" item-start></ion-icon>
-        <button menuClose ion-item (click)="setting()"> Setting </button>
-      </ion-item> -->
+        <button menuClose ion-item (click)="setting()"> Change Pin </button>
+      </ion-item>
       <ion-item class="item">
         <ion-icon name="lock" item-start></ion-icon>
         <button menuClose ion-item (click)="privacyPolicy()"> Privacy Policy </button>
@@ -42,8 +43,16 @@
         <ion-icon name="log-in" item-start></ion-icon>
         <button menuClose ion-item (click)="logout()"> Logout </button>
       </ion-item>
-
     </ion-list>
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col no-padding col-12 text-center>
+          <div class="qrImage image"></div>
+          <div class="text-qr">Tap to Verify Event Entry</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-content>
 
 </ion-menu>
