@@ -51,7 +51,7 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">Mobile No. : </div>
             <!-- <div class="person-detail-data"> 123456789</div> -->
-            <ion-input placeholder="Mobile no." formControlName="mobile" type="number"></ion-input>
+            <ion-input placeholder="Mobile no." formControlName="mobile" type="tel"></ion-input>
           </ion-col>
 
           <ion-col col-12 class="person-detail">
@@ -80,7 +80,7 @@
             <ion-input [(ngModel)]='person.name' type="text" placeholder="Type Name"></ion-input>
           </ion-col>
           <ion-col col-2 class="bdr-btm">
-            <ion-input [(ngModel)]='person.age' type="number" placeholder="Type Number"></ion-input>
+            <ion-input [(ngModel)]='person.age' type="tel" placeholder="Type Number"></ion-input>
           </ion-col>
           <ion-col col-6 text-center class="bdr-btm amount">
             <ion-input [disabled]='true' [(ngModel)]='person.amount' type="text"></ion-input>
