@@ -110,6 +110,12 @@ page-edit-event {
     .row-radio{
         margin: 10px 0;
 
+        .col-text{
+            div{
+                padding-left: 15px;
+                color: #777777;
+            }
+        }
         .item-md{
             background-color: #FAFAFA;
             padding-left: 0px;
@@ -197,6 +203,15 @@ page-edit-event {
             border-bottom: none !important;
         }
     }
+    .close{
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            height: 35px;
+        }
+    }
     .bdr-btm{
         .text-input-md{
             text-align: left;
@@ -219,5 +234,30 @@ page-edit-event {
     }
     ion-select{
         max-width: 100%;
+    }
+    .item-md{
+        padding-left: 0;
+    }
+    .item-md.item-block .item-inner{
+        padding-right: 0;
+    }
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;        
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;
+    }
+    .table{
+        .text-input-md{
+            margin: 0px 8px;
+        }
+        .item-block{
+            min-height: 3.4rem;
+        }
+        .item-md.item-block .item-inner{
+            border-bottom: none;
+        }
     }
 }

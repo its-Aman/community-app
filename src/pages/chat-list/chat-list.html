@@ -5,12 +5,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Chats</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-only (click)="edit()">
         <img src="assets/icon/blue-edit-icon.png" class="create">
-        <!-- <ion-icon ios="md-create" md="md-create"></ion-icon> -->
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -21,9 +20,9 @@
     <ion-row>
       <ion-col col-12 no-padding>
         <ion-list>
-          <ion-list-header class="list-header">
+          <!-- <ion-list-header class="list-header">
             Broadcast List
-          </ion-list-header>
+          </ion-list-header> -->
           <ion-item *ngFor="let person of personList; let i = index;" (click)="openChatDetails(person, i)">
             <ion-avatar item-start>
               <img [src]="person?.image" class="create">

@@ -49,7 +49,9 @@
           <div class="email">Email :</div>
         </ion-col>
         <ion-col col-12 text-right text-nowrap class="bdr-btm">
-          <ion-input [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email"></ion-input>
+          <ion-item>
+            <ion-input [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email" (focusout)="removePadding()"></ion-input>
+          </ion-item>
           <p class="error" text-left>
             <span *ngIf="profileForm?.controls['email']?.hasError('required') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Email is Required.</span>
             <span *ngIf="profileForm?.controls['email']?.hasError('email') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Not a valid email.</span>
@@ -66,7 +68,9 @@
           <div class="address">Address :</div>
         </ion-col>
         <ion-col col-12 text-right class="bdr-btm">
-          <ion-textarea rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"></ion-textarea>
+          <ion-item>
+            <ion-textarea rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address" (focusout)="removePadding()"></ion-textarea>
+          </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['address']?.hasError('required') && (profileForm?.controls['address']?.dirty || isFormInvalid)">Address is Required</p>
           <!-- <div>
             Jaipur-302006, Rajasthan, India C:+91-141-2229900
@@ -76,9 +80,7 @@
 
       <ion-row class="row-common">
         <ion-col col-12>
-          <h4>
-            <b>Mode of Communication</b>
-          </h4>
+          <div class="mode-comm">Mode of Communication</div>
         </ion-col>
         <ion-col col-12 class="mode-of-comm">
           <ion-item>

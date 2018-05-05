@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 @IonicPage()
@@ -16,12 +17,14 @@ export class ProfilePage {
   isDisabled: boolean = true;
   isFormInvalid: boolean = false;
   @ViewChild('ip') ip: any;
+  @ViewChild(Content) content: Content;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
     public fb: FormBuilder,
+    public keyboard: Keyboard,
   ) {
     this.initForm();
   }
@@ -39,6 +42,14 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
     this.isDisabled = false;
     this.change();
+
+    this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
   }
 
   edit() {
@@ -83,4 +94,13 @@ export class ProfilePage {
     textarea.style.height = scroll_height + "px";
   }
 
+  removePadding() {
+    this.global.log(`in removePadding`);
+
+    let contentNative: HTMLElement = this.content.getNativeElement();
+    let foo: any = contentNative.getElementsByClassName('scroll-content');
+
+    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    foo[0].style.paddingBottom = '0px';
+  }
 }

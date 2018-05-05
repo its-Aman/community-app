@@ -8,7 +8,7 @@ page-login {
         padding-left: 12%;
     }
     .row-logo{
-        margin-bottom: 80px;
+        margin-bottom: 50px;
         margin-top: 20px;
     }
     .logo{
@@ -49,8 +49,27 @@ page-login {
     .resend{
         color: white;
         width: 90%;
+        font-size: 10px;
     }
     .error {
         margin: 5px 48px;
+    }
+    .item-md{
+        padding-left: 0;
+        border-radius: 64px;
+        width: 90%;
+        margin: auto;
+        min-height: 4rem;
+    }
+    .item-md.item-block .item-inner{
+        padding-right: 0;
+    }
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;        
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;
     }
 }

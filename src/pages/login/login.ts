@@ -1,7 +1,8 @@
 import { GlobalProvider } from './../../providers/global/global';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @IonicPage()
 @Component({
@@ -13,14 +14,18 @@ export class LoginPage {
   resending: any = { time: 50, value: false };
   signInData: any;
   loginForm: FormGroup;
+  signUpForm: FormGroup;
   isFormInvalid: boolean = false;
   signInOtp: string;
+
+  @ViewChild(Content) content: Content;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: FormBuilder,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public keyboard: Keyboard,
   ) {
     this.initForm();
     this.signInData = this.navParams.get('signInData');
@@ -36,17 +41,52 @@ export class LoginPage {
     });
 
     this.loginForm.controls['otp'].valueChanges.subscribe(res => {
-      if (res && res.length > 6) {
-        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 6));
+      if (res && res.length > 4) {
+        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 4));
       }
     });
+
+    this.signUpForm.controls['mobile'].valueChanges.subscribe(res => {
+      if (res && res.length > 11) {
+        this.signUpForm.controls['mobile'].setValue(this.signUpForm.controls['mobile'].value.slice(0, 11));
+      }
+    });
+
+    this.signUpForm.controls['pin'].valueChanges.subscribe(res => {
+      if (res && res.length > 6) {
+        this.signUpForm.controls['pin'].setValue(this.signUpForm.controls['pin'].value.slice(0, 6));
+      }
+    });
+
+    this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
+  }
+
+  removePadding() {
+    this.global.log(`in removePadding`);
+
+    let contentNative: HTMLElement = this.content.getNativeElement();
+    let foo: any = contentNative.getElementsByClassName('scroll-content');
+
+    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    foo[0].style.paddingBottom = '0px';
   }
 
   initForm() {
     this.loginForm = this.fb.group({
       mobile: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      otp: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
+      otp: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
     });
+
+    this.signUpForm = this.fb.group({
+      mobile: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      pin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
+    })
   }
 
   resendOTP() {
@@ -70,14 +110,15 @@ export class LoginPage {
     this.global.log('Logging in', this.loginForm);
 
     if (this.signInData) {
-      this.global.log(`in Signin, with otp value`, this.signInOtp);
-      if (this.signInOtp) {
+      if (this.signUpForm.valid) {
+        this.global.log('form is valid');
         this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+      } else {
+        this.isFormInvalid = true;
       }
     } else {
       if (this.loginForm.valid) {
         this.global.log('form is valid');
-        // this.navCtrl.setRoot('MenuPage', { data: null });
         this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
       } else {
         this.isFormInvalid = true;
@@ -88,13 +129,9 @@ export class LoginPage {
   signIn() {
     this.global.log(`In signin`);
     if (!this.signInData) {
-      this.navCtrl.push('LoginPage', { signInData: true })
-    }
-  }
-
-  otpValidator() {
-    if (this.signInOtp && this.signInOtp.length > 6) {
-      this.signInOtp = this.signInOtp.slice(0, 6);
+      this.navCtrl.setRoot('LoginPage', { signInData: true });
+    } else {
+      this.navCtrl.setRoot('LoginPage', { signInData: false });
     }
   }
 }

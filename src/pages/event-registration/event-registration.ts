@@ -1,7 +1,8 @@
 import { GlobalProvider } from './../../providers/global/global';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @IonicPage()
 @Component({
@@ -20,12 +21,15 @@ export class EventRegistrationPage {
     noOfParticipants: '09',
     specialNeed: 'Extra'
   }
+  @ViewChild(Content) content: Content;
+  @ViewChild('extra') extra: TextInput;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: FormBuilder,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public keyboard: Keyboard,
   ) {
     this.initForm();
     this.persons = [
@@ -40,6 +44,14 @@ export class EventRegistrationPage {
     this.event = this.navParams.get('data');
     this.event['description'] = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit`;
     console.log('ionViewDidLoad EventRegistrationPage', this.event);
+
+    this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
   }
 
   initForm() {
@@ -96,6 +108,40 @@ export class EventRegistrationPage {
       element.style.height = scroll_height + 20 + "px";
       textarea.style.minHeight = scroll_height + "px";
       textarea.style.height = scroll_height + "px";
+    }
+  }
+
+  removePadding() {
+    this.global.log(`in removePadding`);
+
+    let contentNative: HTMLElement = this.content.getNativeElement();
+    let foo: any = contentNative.getElementsByClassName('scroll-content');
+
+    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    foo[0].style.paddingBottom = '0px';
+  }
+
+  // focusExtra(extra: TextInput) {
+  //   this.global.log(`extra is`, extra, extra._elementRef.nativeElement.offsetTop);
+  //   setTimeout(() => {
+  //     this.content.scrollToBottom().then(r => this.global.log(`done scrolling`));
+  //   }, 2000);
+  // }
+
+  // getOffset(el) {
+  //   let _x = 0;
+  //   let _y = 0;
+  //   while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+  //     _x += el.offsetLeft - el.scrollLeft;
+  //     _y += el.offsetTop - el.scrollTop;
+  //     el = el.offsetParent;
+  //   }
+  //   return { top: _y, left: _x };
+  // }
+
+  removeItem(i: number) {
+    if (this.persons.length > 0) {
+      this.persons.splice(i, 1);
     }
   }
 }

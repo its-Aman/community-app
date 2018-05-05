@@ -27,7 +27,9 @@
       </ion-col>
       <ion-col col-12>
         <!-- <div class="profession">Plumber</div> -->
-        <ion-input class="bdr-btm" placeholder="Search" clearInput [(ngModel)]="search"></ion-input>
+        <ion-item>
+          <ion-input class="bdr-btm" placeholder="Search" clearInput [(ngModel)]="search" (focusout)="removePadding()"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
 

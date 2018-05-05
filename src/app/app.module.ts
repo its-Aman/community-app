@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { MyApp } from './app.component';
 
@@ -32,11 +33,12 @@ import { ThemeProvider } from '../providers/theme/theme';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     GlobalProvider,
     ThemeProvider,
     Geolocation,
-    StatusBar
+    StatusBar,
+    Keyboard
   ]
 })
-export class AppModule {}
+export class AppModule { }

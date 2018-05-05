@@ -57,14 +57,18 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">Name: </div>
             <!-- <div class="person-detail-data" text-nowrap> Aman Kumar</div> -->
-            <ion-input placeholder="Mobile no." formControlName="name" type="text"></ion-input>
+            <ion-item>
+              <ion-input placeholder="Mobile no." formControlName="name" type="text" (focusout)="removePadding()"></ion-input>
+            </ion-item>
 
           </ion-col>
 
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">Mobile No. : </div>
             <!-- <div class="person-detail-data"> 123456789</div> -->
-            <ion-input placeholder="Mobile no." formControlName="mobile" type="tel"></ion-input>
+            <ion-item>
+              <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()"></ion-input>
+            </ion-item>
           </ion-col>
 
           <ion-col col-12 class="person-detail">
@@ -88,15 +92,26 @@
           <ion-col col-6 text-center>TICKET AMOUNT</ion-col>
         </ion-row>
 
-        <ion-row *ngFor="let person of persons; let i = index;">
+        <ion-row *ngFor="let person of persons; let i = index;" class="table">
           <ion-col col-4 class="bdr-btm">
-            <ion-input [(ngModel)]='person.name' type="text" placeholder="Type Name"></ion-input>
+            <ion-item>
+              <ion-input [(ngModel)]='person.name' type="text" placeholder="Type Name" (focusout)="removePadding()"></ion-input>
+            </ion-item>
           </ion-col>
           <ion-col col-2 class="bdr-btm">
-            <ion-input [(ngModel)]='person.age' type="tel" placeholder="Type Number"></ion-input>
+            <ion-item>
+              <ion-input [(ngModel)]='person.age' type="tel" placeholder="Type Number" (focusout)="removePadding()"></ion-input>
+            </ion-item>
           </ion-col>
-          <ion-col col-6 text-center class="bdr-btm amount">
-            <ion-input [disabled]='true' [(ngModel)]='person.amount' type="text"></ion-input>
+          <ion-col col-5 text-center class="bdr-btm amount">
+            <ion-item>
+              <ion-input [disabled]='true' [(ngModel)]='person.amount' type="text" (focusout)="removePadding()"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-1 text-center class="close bdr-btm" (click)="removeItem(i)">
+            <div>
+              <ion-icon ios="md-close" md="md-close"></ion-icon>
+            </div>
           </ion-col>
         </ion-row>
 
@@ -108,10 +123,13 @@
       </div>
 
       <ion-row class="row-radio">
+        <ion-col col-12 class="col-text">
+          <div>Are You Interested in ?</div>
+        </ion-col>
         <ion-col col-12>
           <ion-item>
             <ion-label *ngIf="!eventPerson">Detail</ion-label>
-            <ion-select [(ngModel)]="eventPerson">
+            <ion-select [(ngModel)]="eventPerson" multiple='true'>
               <ion-option value="V">VOLUNTEER</ion-option>
               <ion-option value="P">PERFORMANCE</ion-option>
             </ion-select>
@@ -123,7 +141,7 @@
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color">Performance Name: </div>
           <!-- <div class="event-detail-data"> -->
-          <!-- <ion-input [(ngModel)]='person.performanceName' type="text"></ion-input> -->
+          <!-- <ion-input [(ngModel)]='person.performanceName' type="text" (focusout)="removePadding()"></ion-input> -->
         </ion-col>
         <ion-col col-12 class="event-detail">
           <ion-item class="item-dance">
@@ -154,11 +172,12 @@
         </ion-col>
         <ion-col col-12 class="event-detail">
           <div class="event-detail-data extra">
-            <ion-textarea rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text"></ion-textarea>
+            <ion-item>
+              <ion-textarea #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text" (focusout)="removePadding()"></ion-textarea>
+            </ion-item>
           </div>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col col-12 class="submit">
           <button ion-button full (click)="submit()">SUBMIT</button>
@@ -167,3 +186,13 @@
     </div>
   </ion-grid>
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 class="submit">
+        <button ion-button full (click)="submit()">SUBMIT</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer> -->
