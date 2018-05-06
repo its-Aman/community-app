@@ -65,6 +65,14 @@ export class LoginPage {
       }, err => {
         this.removePadding();
       });
+
+    this.keyboard.onKeyboardShow().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
   }
 
   removePadding() {

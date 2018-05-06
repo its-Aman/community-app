@@ -1,5 +1,16 @@
 page-performance-modal {
     .event-detail{
+        number-slider{
+            width: 100%;
+        }
+
+        .item-dance{
+            padding-left: 0;
+
+            .select-md{
+                padding: 13px 8px 13px 0px;
+            }
+        }
         .item-md.item-block .item-inner{
             padding-right: 0px;
             border-bottom: none;
@@ -11,7 +22,7 @@ page-performance-modal {
         }
 
         background-color: white;
-        border: 1px solid lightgray;
+        // border: 1px solid lightgray;
         display: flex;
         justify-content: space-between;
         padding: 8px 10px;
@@ -22,8 +33,14 @@ page-performance-modal {
         .event-detail-color{
             color: #777777;
         }
+        .extra{
+            .text-input-md {
+                text-align: left;
+            }
+        }
         .event-detail-data{
             font-weight: 300;
+            width: 100%;
 
             .text-input{
                 border-bottom: 1px solid lightgray;
@@ -40,5 +57,19 @@ page-performance-modal {
     }
     .row-detail{
         background-color: #fafafa;
+    }
+    .item-md{
+        padding-left: 0;
+    }
+    .item-md.item-block .item-inner{
+        padding-right: 0;
+    }
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;        
+    }
+    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+        border-bottom-color: white;
+        box-shadow: none;
     }
 }

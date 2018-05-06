@@ -31,6 +31,7 @@ export class ProfilePage {
 
   initForm() {
     this.profileForm = this.fb.group({
+      name: ['Prateek', [Validators.required]],
       email: ['google@gmail.com', [Validators.required, Validators.email]],
       address: ['Jaipur-302006, Rajasthan, India C:+91-141-2229900', [Validators.required]],
       modeOfCommunication: ['E', [Validators.required]],
@@ -44,6 +45,14 @@ export class ProfilePage {
     this.change();
 
     this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
+
+    this.keyboard.onKeyboardShow().subscribe(
       res => {
         this.global.log(`in onKeyboardHide`, res);
         this.removePadding();
@@ -87,6 +96,8 @@ export class ProfilePage {
     let scroll_height = textarea.scrollHeight;
     if (scroll_height > 96)
       scroll_height = 96;
+    else
+      scroll_height = 50;
 
     // apply new style
     element.style.height = scroll_height + "px";

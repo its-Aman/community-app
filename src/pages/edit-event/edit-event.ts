@@ -1,5 +1,5 @@
 import { GlobalProvider } from './../../providers/global/global';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -46,6 +46,14 @@ export class EditEventPage {
     console.log('ionViewDidLoad EditEventPage', this.event);
 
     this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
+
+    this.keyboard.onKeyboardShow().subscribe(
       res => {
         this.global.log(`in onKeyboardHide`, res);
         this.removePadding();

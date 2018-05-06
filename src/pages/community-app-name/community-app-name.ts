@@ -24,8 +24,16 @@ export class CommunityAppNamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityAppNamePage');
-    
+
     this.keyboard.onKeyboardHide().subscribe(
+      res => {
+        this.global.log(`in onKeyboardHide`, res);
+        this.removePadding();
+      }, err => {
+        this.removePadding();
+      });
+
+    this.keyboard.onKeyboardShow().subscribe(
       res => {
         this.global.log(`in onKeyboardHide`, res);
         this.removePadding();
@@ -42,7 +50,7 @@ export class CommunityAppNamePage {
     this.global.log(`in makeCall's method`);
     document.location.href = 'tel:+91123456789';
   }
-
+  
   makeMail() {
     this.global.log(`in makeMail's method`);
     document.location.href = `mailto:user@example.com?subject=You're%20Awesome&body=Already%20told%20you`;

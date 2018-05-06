@@ -19,26 +19,33 @@
 
 <ion-content no-padding>
   <ion-grid class="grid-detail">
-    <ion-row class="row-detail">
+    <ion-row>
       <ion-col col-12 class="event-detail">
         <div class="event-detail-color">Performance Name: </div>
-        <ion-item>
+      </ion-col>
+      <ion-col col-12 class="event-detail">
+        <ion-item class="item-dance">
           <ion-select [(ngModel)]="person.performanceName" class="performance">
             <ion-option value="bd">Bhangra Dance</ion-option>
             <ion-option value="pd">Punjabi Dance</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
-
       <ion-col col-12 class="event-detail">
         <div class="event-detail-color">No. of Participants: </div>
+      </ion-col>
+      <ion-col col-12 class="event-detail">
         <number-slider [seed]="person.noOfParticipants" (getValue)="person.noOfParticipants = $event"></number-slider>
       </ion-col>
 
       <ion-col col-12 class="event-detail" #col>
         <div class="event-detail-color">Special Need: </div>
-        <div class="event-detail-data">
-          <ion-textarea rows="1" #ip (click)="change(ip, col)" (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text"></ion-textarea>
+      </ion-col>
+      <ion-col col-12 class="event-detail">
+        <div class="event-detail-data extra">
+          <ion-item>
+            <ion-textarea #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text" (focusout)="removePadding()"></ion-textarea>
+          </ion-item>
         </div>
       </ion-col>
     </ion-row>

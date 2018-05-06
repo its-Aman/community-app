@@ -94,7 +94,9 @@ page-profile {
     ion-input, ion-textarea{
         // border-bottom: 1px solid lightgray;
     }
-
+    .address-textarea{
+        height: 50px;
+    }
     .item-md{
         padding-left: 0;
     }
