@@ -15,15 +15,15 @@
 
     <ion-row class="event-row" (click)="openEvent(i)" *ngFor="let event of eventDummydata; let i=index;">
       <ion-col col-4>
-        <div class="event-image image"></div>
+        <div class="event-image image" [style.backgroundImage]="event?.event_image"></div>
       </ion-col>
       <ion-col col-8 text-left class="col-event-detail">
-        <div class="heading"> {{event?.name}} </div>
-        <div class="padding">From : 
-          <span class="time">{{event?.from}}</span>
+        <div class="heading"> {{event?.event_name}} </div>
+        <div class="padding">From :
+          <span class="time">{{event?.from_date}}</span>
         </div>
         <div class="padding">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-          <span class="time">{{event?.to}}</span>
+          <span class="time">{{event?.to_date}}</span>
         </div>
       </ion-col>
     </ion-row>

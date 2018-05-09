@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, Loading, App, Events, Platform } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
+    'content-type': 'application/json',
   })
 };
 
@@ -14,6 +14,7 @@ export class GlobalProvider {
 
   loader: Loading;
   base_path: string;
+  image_base_path: string;
 
   constructor(
     public http: HttpClient,
@@ -22,9 +23,15 @@ export class GlobalProvider {
     private app: App,
     public events: Events,
     public platform: Platform,
+    private sanitizer: DomSanitizer,
   ) {
     console.log('Hello GlobalProvider Provider');
-    this.base_path = '';
+    this.base_path = 'http://winstech.in/community/web_panel/app/';
+    this.image_base_path = 'http://winstech.in/community/uploads/event/';
+  }
+
+  sanatizeImage(image: string): any {
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${this.image_base_path + image})`);
   }
 
   log(message?: any, ...optionalParams: any[]): void {
@@ -65,10 +72,10 @@ export class GlobalProvider {
   }
 
   getRequest(url: string) {
-    return this.http.get<any>(url)
+    return this.http.get<any>(url);
   }
 
   postRequest(url: string, data: any) {
-    return this.http.post<any>(url, data, httpOptions)
+    return this.http.post<any>(url, data, httpOptions);
   }
 }

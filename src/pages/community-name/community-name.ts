@@ -1,7 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -13,6 +12,7 @@ declare var google;
 export class CommunityNamePage {
 
   personData: any;
+  eventData: any;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
@@ -20,14 +20,41 @@ export class CommunityNamePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
-    private geolocation: Geolocation,
-    private modal: ModalController
+    private modal: ModalController,
   ) {
+  }
+  
+  ionViewDidEnter(){
+    this.getEventDetail();
+    console.log('ionViewDidEnter CommunityNamePage');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommunityNamePage');
-    this.getCoordinates();
+  }
+
+  getEventDetail() {
+    let data = {
+      event_id: this.navParams.get('data').id,
+      login_user_id: JSON.parse(localStorage.getItem('user')).id
+    }
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/EventDetail', data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`geteventdetail res`, res);
+          if (res.success == 'true') {
+            this.eventData = res;
+            if (this.eventData.event.geo_lat) {
+              this.loadMap({ latitude: this.eventData.event.geo_lat, longitude: this.eventData.event.geo_long })
+            }
+            this.eventData.event.event_image = this.global.sanatizeImage(this.eventData.event.event_image);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`geteventdetail err`, err);
+        });
   }
 
   openPlace() {
@@ -36,18 +63,6 @@ export class CommunityNamePage {
 
   openCalendar() {
     this.global.log('in openCalendar');
-  }
-
-  getCoordinates() {
-    this.geolocation.getCurrentPosition().then(res => {
-      this.global.log('geolocation res', res);
-      this.loadMap(res.coords);
-    }).catch(err => {
-      this.global.log('some error in geolocation', err);
-      if (err.code == 1) {
-        this.global.showToast(err.message);
-      }
-    });
   }
 
   loadMap(coords: any) {
@@ -87,30 +102,20 @@ export class CommunityNamePage {
   edit() {
     this.global.log('in edit()');
     this.navCtrl.push('EditEventPage', {
-      data: {
-        name: 'Event Name',
-        from: '02-01-2018',
-        to: '03-02-2018',
-      }
+      data: this.eventData
     });
   }
 
   registration() {
     this.global.log('in registration()');
     this.navCtrl.push('EventRegistrationPage', {
-      data: {
-        name: 'Event Name',
-        from: '02-01-2018',
-        to: '03-02-2018',
-      }
+      data: this.eventData
     });
   }
 
   performance() {
     let performance = this.modal.create('PerformanceModalPage', { data: this.personData }, { cssClass: 'performance' });
-
     performance.present();
-
     performance.onDidDismiss(data => {
       this.global.log(`modal data`, data);
       if (data) {

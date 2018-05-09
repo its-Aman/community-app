@@ -25,8 +25,8 @@
             <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
           </ion-item>
           <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('required') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 11 digit is Required</p>
-          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 11 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
+          <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
         </ion-col>
         <ion-col col-12>
           <ion-item>
@@ -49,8 +49,8 @@
             <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
           </ion-item>
           <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('required') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
-          <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('minlength') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Min 11 digit is Required</p>
-          <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('maxlength') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Max 11 digit is Required</p>
+          <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('minlength') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
+          <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('maxlength') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
         </ion-col>
         <ion-col col-12>
           <ion-item>

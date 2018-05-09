@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 class="col-backgroundImage">
-        <div class="backgroundImage image"></div>
+        <div class="backgroundImage image" [style.backgroundImage]="eventData?.event?.event_image"></div>
       </ion-col>
     </ion-row>
 
@@ -23,20 +23,20 @@
         <div class="filter">Voluntary</div>
       </ion-col> -->
 
-      <div class="col-filter" (click)="edit()">Edit</div>
-      <div class="col-filter" (click)="registration()">Registration</div>
+      <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">Edit</div>
+      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">Registration</div>
       <div class="col-filter" (click)="performance()">Performance</div>
     </ion-row>
 
     <div class="details">
       <ion-row>
         <ion-col col-9>
-          <div class="heading">Event Name</div>
-          <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+          <div class="heading" text-capitalize>{{eventData?.event?.event_name}}</div>
+          <div class="description">{{eventData?.event?.description}}</div>
         </ion-col>
         <ion-col col-3 text-center class="col-price">
           <div class="star image"></div>
-          <div class="price">$60</div>
+          <div class="price">${{eventData?.event?.price_type}}</div>
         </ion-col>
       </ion-row>
 
@@ -46,7 +46,7 @@
             From :
           </ion-col>
           <ion-col col-8>
-            <span class="time">02-01-2018</span>
+            <span class="time">{{eventData?.event?.from_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </ion-col>
           <br>
@@ -54,7 +54,7 @@
             To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
           </ion-col>
           <ion-col col-8 text-center>
-            <span class="time2">03-02-2018</span>
+            <span class="time2">{{eventData?.event?.to_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </ion-col>
         </ion-col>
@@ -63,7 +63,7 @@
           <div class="div-chair">
             <span class="chair image"></span>Left
           </div>
-          <div class="left-count">6</div>
+          <div class="left-count">{{eventData?.event?.max_attendees}}</div>
         </ion-col>
       </ion-row>
 
@@ -72,7 +72,9 @@
         <ion-col col-12>
           <div class="div-venue">
             <span>Venue: </span>
-            Rajasthan
+            <span text-capitalize>
+              {{eventData?.event?.address}}
+            </span>
             <ion-icon class="calender" name="md-map" (click)="openPlace()"></ion-icon>
           </div>
         </ion-col>
@@ -83,11 +85,11 @@
           <div class="parking">Travel Information: </div>
         </ion-col>
         <ion-col col-3>
-          <div class="parking-status">PAID</div>
+          <div class="parking-status" text-uppercase>{{eventData?.event?.travel_info}}</div>
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngIf="eventData?.event?.geo_lat">
         <ion-col col-12>
           <div class="location">Location</div>
         </ion-col>

@@ -11,15 +11,17 @@ import { Keyboard } from '@ionic-native/keyboard';
 })
 export class EventRegistrationPage {
 
+  total: number = 0;
   event: any;
-  eventPerson: string = 'V';
+  eventPerson: string = '1';
   userForm: FormGroup;
   isFormInvalid: boolean = false;
-  persons: any[];
+  persons: any[] = [{ name: null, age: null, amount: null }];
+  performanceList: any[] = [];
   person: any = {
-    performanceName: 'bd',
-    noOfParticipants: '09',
-    specialNeed: 'Extra'
+    performanceName: '',
+    noOfParticipants: '',
+    specialNeed: '',
   }
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
@@ -31,19 +33,19 @@ export class EventRegistrationPage {
     public global: GlobalProvider,
     public keyboard: Keyboard,
   ) {
+    this.event = this.navParams.get('data');
     this.initForm();
-    this.persons = [
-      { name: 'Ajay', age: 30, amount: '3000/-' },
-      { name: 'Ajay', age: 30, amount: '3000/-' },
-      { name: 'Ajay', age: 30, amount: '3000/-' },
-      { name: 'Ajay', age: 30, amount: '3000/-' },
-    ]
+    this.getPerformanceList();
   }
 
   ionViewDidLoad() {
-    this.event = this.navParams.get('data');
-    this.event['description'] = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit`;
     console.log('ionViewDidLoad EventRegistrationPage', this.event);
+
+    this.userForm.controls['mobile'].valueChanges.subscribe(res => {
+      if (res && res.length > 10) {
+        this.userForm.controls['mobile'].setValue(this.userForm.controls['mobile'].value.slice(0, 10));
+      }
+    });
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
@@ -64,16 +66,22 @@ export class EventRegistrationPage {
 
   initForm() {
     this.userForm = this.fb.group({
-      name: ['Aman Kumar', [Validators.required]],
-      mobile: ['123456789', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      noOfMembers: [16, [Validators.required]]
+      name: [null, [Validators.required]],
+      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      noOfMembers: [1, [Validators.required]]
     });
   }
 
-  numberValue(range) {
+  numberValue(range, isIncreased: boolean) {
     this.global.log('range is', range);
     if (range) {
       this.userForm.controls['noOfMembers'].setValue(range);
+      if (isIncreased) {
+        this.persons.push({ name: null, age: null, amount: null });
+      } else if (this.persons.length > 0) {
+        this.persons.pop();
+      }
+      this.calcTotal();
     }
   }
 
@@ -82,7 +90,38 @@ export class EventRegistrationPage {
   }
 
   submit() {
-    this.global.log(`submit's method`, this.person);
+    this.global.log(`submit's method`, this.person, this.userForm);
+
+    if (this.userForm.valid) {
+      if (this.persons.length > 0) {
+        if (this.person.noOfParticipants > 0) {
+          let data = {
+            event_id: this.event.event.id,
+            login_user_id: JSON.parse(localStorage.getItem('user')).id,
+            name: this.userForm.controls['name'].value,
+            mobile_no: this.userForm.controls['mobile'].value,
+            no_of_members: this.userForm.controls['noOfMembers'].value,
+            event_performance_id: this.person.performanceName,
+            entry_for: this.eventPerson,
+            no_of_participants: this.person.noOfParticipants,
+            special_needs: this.person.specialNeed,
+            members: this.persons,
+            // event_entry_id: this.event.event_entry_id,
+          }
+
+          this.global.log(`data to be posting is `, data);
+          this.registerEvent(data);
+
+        } else {
+          this.global.showToast(`Number of participants can't be zero`);
+        }
+      } else {
+        this.global.showToast('Please enter the members details');
+      }
+    } else {
+      this.global.showToast('Please enter the values');
+      this.isFormInvalid = true;
+    }
   }
 
   openCalendar() {
@@ -129,27 +168,86 @@ export class EventRegistrationPage {
     foo[0].style.paddingBottom = '0px';
   }
 
-  // focusExtra(extra: TextInput) {
-  //   this.global.log(`extra is`, extra, extra._elementRef.nativeElement.offsetTop);
-  //   setTimeout(() => {
-  //     this.content.scrollToBottom().then(r => this.global.log(`done scrolling`));
-  //   }, 2000);
-  // }
-
-  // getOffset(el) {
-  //   let _x = 0;
-  //   let _y = 0;
-  //   while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-  //     _x += el.offsetLeft - el.scrollLeft;
-  //     _y += el.offsetTop - el.scrollTop;
-  //     el = el.offsetParent;
-  //   }
-  //   return { top: _y, left: _x };
-  // }
-
   removeItem(i: number) {
     if (this.persons.length > 0) {
       this.persons.splice(i, 1);
+    }
+  }
+
+  checkAge(i, ev) {
+    this.global.log(ev.target.value);
+    if (ev.target.value && ev.target.value.length >= 2) {
+      this.global.log(`checkAge`, ev.target.value);
+      this.getAmountAccToAge(+ev.target.value, i);
+    }
+  }
+
+  registerEvent(data: any) {
+    this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/EventRegistration`, data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`response of register event`, res);
+          if (res.success == 'true') {
+            this.global.showToast(`${res.message}`);
+            this.navCtrl.pop();
+          } else {
+            this.global.showToast(`${res.error}`);
+            if (res.error == "User Already Registered with this event.") {
+              this.navCtrl.pop();
+            }
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`error of register event`, err);
+        });
+  }
+
+  getPerformanceList() {
+    this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/PerformanceList`, { event_id: this.event.event.id })
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`response of getPerformanceList`, res);
+          if (res.success == 'true' && res.performance.length > 0) {
+            this.performanceList.push(...res.performance);
+            this.person.performanceName = res.performance[0].id;
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`error of getPerformanceList`, err);
+        });
+  }
+
+  getAmountAccToAge(age: number, i) {
+    // this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/GetAgeAmount`, { event_id: this.event.event.id, age: age })
+      .subscribe(
+        res => {
+          // this.global.hideLoader();
+          this.global.log(`response of getAmountAccToAge`, res);
+          if (res.success == 'true') {
+            this.persons[i].amount = +res.amount;
+            this.calcTotal();
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          // this.global.hideLoader();
+          this.global.log(`error of getAmountAccToAge`, err);
+        });
+  }
+
+  calcTotal() {
+    this.total = 0;
+    if (this.persons.length > 0) {
+      this.persons.forEach(data => {
+        this.total += +data.amount;
+      });
     }
   }
 }

@@ -11,9 +11,10 @@ export class NumberSliderComponent {
 
   @Input('seed') number: number = 0;
   @Input('max') max: number = 100;
-  @Input('min') min: number = -100;
+  @Input('min') min: number = 1;
 
-  @Output('getValue') getValue: EventEmitter<number> = new EventEmitter<number>();
+  @Output('increased') increased: EventEmitter<number> = new EventEmitter<number>();
+  @Output('decreased') decreased: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(public global: GlobalProvider) {
     console.log('Hello NumberSliderComponent Component');
@@ -23,9 +24,9 @@ export class NumberSliderComponent {
     this.global.log('in decrease()', this.number);
     if (this.number > this.min) {
       this.number--;
-      this.emitValue();
+      this.emitValueDecreased();
     } else {
-      this.number = 0;
+      this.number = this.min;
     }
   }
 
@@ -33,13 +34,18 @@ export class NumberSliderComponent {
     this.global.log('in increase()', this.number);
     if (this.number < this.max) {
       this.number++;
-      this.emitValue();
+      this.emitValueIncreased();
     } else {
-      this.number = 0;
+      this.number = this.max;
     }
   }
 
-  emitValue() {
-    this.getValue.emit(this.number);
+  emitValueIncreased() {
+    this.increased.emit(this.number);
   }
+
+  emitValueDecreased() {
+    this.decreased.emit(this.number);
+  }
+
 }

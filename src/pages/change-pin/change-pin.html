@@ -1,0 +1,50 @@
+<ion-header>
+
+  <!-- <ion-navbar>
+    <ion-title>change-pin</ion-title>
+  </ion-navbar> -->
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-grid>
+    <ion-row text-center class="row-logo">
+      <ion-col col-12 class="logo-parent">
+        <div class="logo image"></div>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="changePinForm">
+      <ion-row>
+        <ion-col no-padding text-center class="sign-up-text">
+          <div>Change Password</div>
+        </ion-col>
+        <ion-col col-12>
+          <ion-item>
+            <!-- <ion-label stacked>Current Pin</ion-label> -->
+            <ion-input placeholder="Old PIN" formControlName="oldPin" type="tel" (focusout)="removePadding()" (keyup.enter)="changePassword()"></ion-input>
+          </ion-item>
+          <p class="error" *ngIf="changePinForm.controls['oldPin']?.hasError('required') && (changePinForm.controls['oldPin']?.dirty || isFormInvalid)">Old PIN is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['oldPin']?.hasError('minlength') && (changePinForm.controls['oldPin']?.dirty || isFormInvalid)">Min 6 digit is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['oldPin']?.hasError('maxlength') && (changePinForm.controls['oldPin']?.dirty || isFormInvalid)">Max 6 digit is Required</p>
+        </ion-col>
+        <ion-col col-12>
+          <ion-item>
+            <!-- <ion-label stacked>New Pin</ion-label> -->
+            <ion-input placeholder="New PIN" formControlName="newPin" type="tel" (focusout)="removePadding()" (keyup.enter)="changePassword()"></ion-input>
+          </ion-item>
+          <p class="error" *ngIf="changePinForm.controls['newPin']?.hasError('required') && (changePinForm.controls['newPin']?.dirty || isFormInvalid)">New PIN is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['newPin']?.hasError('minlength') && (changePinForm.controls['newPin']?.dirty || isFormInvalid)">Min 6 digit is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['newPin']?.hasError('maxlength') && (changePinForm.controls['newPin']?.dirty || isFormInvalid)">Max 6 digit is Required</p>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button round block (click)="changePassword()">Change Password</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -46,6 +46,7 @@ export class MenuPage {
 
   setting() {
     this.global.log('setting');
+    this.navCtrl.setRoot('ChangePinPage');
   }
 
   privacyPolicy() {
