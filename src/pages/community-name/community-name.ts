@@ -23,8 +23,8 @@ export class CommunityNamePage {
     private modal: ModalController,
   ) {
   }
-  
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.getEventDetail();
     console.log('ionViewDidEnter CommunityNamePage');
   }
@@ -47,7 +47,9 @@ export class CommunityNamePage {
           if (res.success == 'true') {
             this.eventData = res;
             if (this.eventData.event.geo_lat) {
-              this.loadMap({ latitude: this.eventData.event.geo_lat, longitude: this.eventData.event.geo_long })
+              setTimeout(() => {
+                this.loadMap({ latitude: parseFloat(this.eventData.event.geo_lat), longitude: parseFloat(this.eventData.event.geo_long) })
+              }, 1000);
             }
             this.eventData.event.event_image = this.global.sanatizeImage(this.eventData.event.event_image);
           }

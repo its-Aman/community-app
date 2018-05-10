@@ -13,14 +13,14 @@ export class EditEventPage {
 
   total: number;
   event: any;
-  eventPerson: string = '1';
+  eventPerson: string[] = [];
   userForm: FormGroup;
   isFormInvalid: boolean = false;
   persons: any[] = [{ name: null, age: null, amount: null }];
   performanceList: any[] = [];
   person: any = {
     performanceName: '',
-    noOfParticipants: '',
+    noOfParticipants: '0',
     specialNeed: '',
   };
   previousPageData: any;
@@ -90,8 +90,22 @@ export class EditEventPage {
     this.global.log(`eventPersonChange's event is ${ev}`);
   }
 
+  calculateEventPerson() {
+    let _ret: number = 0;
+    if (this.eventPerson.length == 0) {
+      _ret = 0;
+    } else if (this.eventPerson.length == 2) {
+      _ret = 1;
+    } else if (this.eventPerson.length == 1) {
+      _ret = +this.eventPerson[0];
+    }
+
+    this.global.log(`in calculateEventPerson and returning`, _ret);
+    return _ret;
+  }
+
   submit() {
-    this.global.log(`submit's method`, this.person, this.userForm);
+    this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
     if (this.userForm.valid) {
       if (this.persons.length > 0) {
@@ -102,7 +116,7 @@ export class EditEventPage {
             name: this.userForm.controls['name'].value,
             mobile_no: this.userForm.controls['mobile'].value,
             no_of_members: this.userForm.controls['noOfMembers'].value,
-            entry_for: this.eventPerson,
+            entry_for: this.calculateEventPerson(),
             event_performance_id: this.person.performanceName,
             no_of_participants: this.person.noOfParticipants,
             special_needs: this.person.specialNeed,

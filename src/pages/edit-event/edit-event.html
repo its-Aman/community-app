@@ -64,7 +64,7 @@
           <p class="error" *ngIf="userForm?.controls['name']?.hasError('required') && (userForm?.controls['name']?.dirty || isFormInvalid)">Name is Required</p>
 
           <ion-col col-12 class="person-detail">
-            <div class="person-detail-color">Mobile No. : </div>
+            <div class="person-detail-color" style="width: 110px;">Mobile No. : </div>
             <!-- <div class="person-detail-data"> 123456789</div> -->
             <ion-item>
               <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()"></ion-input>
@@ -77,7 +77,8 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
-            <number-slider [seed]="userForm?.controls['noOfMembers'].value"  (decreased)="numberValue($event, false)" (increased)="numberValue($event, true)"></number-slider>
+            <number-slider class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
+              (increased)="numberValue($event, true)"></number-slider>
             <!-- <ion-item>
               <ion-range formControlName="noOfMembers"></ion-range>
             </ion-item>
@@ -132,9 +133,9 @@
         <ion-col col-12>
           <ion-item>
             <ion-label *ngIf="!eventPerson">Detail</ion-label>
-            <ion-select [(ngModel)]="eventPerson">
-              <ion-option value="0">NONE</ion-option>
-              <ion-option value="1">BOTH</ion-option>
+            <ion-select [(ngModel)]="eventPerson" multiple='true'>
+              <!-- <ion-option value="0">NONE</ion-option> -->
+              <!-- <ion-option value="1">BOTH</ion-option> -->
               <ion-option value="2">VOLUNTEER</ion-option>
               <ion-option value="3">PERFORMANCE</ion-option>
             </ion-select>
@@ -163,7 +164,7 @@
           <div class="event-detail-color">No. of Participants: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
-          <number-slider [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
+          <number-slider class="num-sli" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>
@@ -176,6 +177,7 @@
             </ion-item>
           </div>
         </ion-col>
+        <!-- <p class="error" *ngIf="person?.specialNeed && person?.specialNeed?.length <= 0 || isFormInvalid)">Special need is Required</p> -->
       </ion-row>
       <ion-row>
         <ion-col col-12 class="submit">

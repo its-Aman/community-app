@@ -14,7 +14,7 @@ export class ChangePinPage {
   changePinForm: FormGroup;
   isFormInvalid: boolean = false;
   otpResponseValue: any = JSON.parse(localStorage.getItem('otp-res-value'));
-
+  fromLogin: string;
   @ViewChild(Content) content: Content;
   constructor(
     public navCtrl: NavController,
@@ -24,6 +24,7 @@ export class ChangePinPage {
     public keyboard: Keyboard,
   ) {
     this.initForm();
+    this.fromLogin = this.navParams.get('fromLogin');
   }
 
   initForm() {
@@ -34,6 +35,8 @@ export class ChangePinPage {
   }
 
   ionViewDidLoad() {
+
+    console.log('ionViewDidLoad ChangePinPage', this.fromLogin);
 
     this.changePinForm.controls['oldPin'].valueChanges.subscribe(res => {
       if (res && res.length > 6) {
@@ -47,7 +50,6 @@ export class ChangePinPage {
       }
     });
 
-    console.log('ionViewDidLoad ChangePinPage');
     this.keyboard.onKeyboardHide().subscribe(
       res => {
         this.global.log(`in onKeyboardHide`, res);
@@ -67,9 +69,17 @@ export class ChangePinPage {
 
   changePassword() {
     if (this.changePinForm.valid) {
-      this.global.log('form is valid');
-      // this.navCtrl.setRoot('LoginPage', { signInData: true });
-      this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value })
+      if (this.fromLogin) {
+        if (this.changePinForm.controls['oldPin'].value == this.changePinForm.controls['newPin'].value) {
+          this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value });
+        } else {
+          this.global.showToast(`PIN does not match`);
+        }
+      } else {
+        this.global.log('form is valid');
+        // this.navCtrl.setRoot('LoginPage', { signInData: true });
+        this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value })
+      }
     } else {
       this.isFormInvalid = true;
     }

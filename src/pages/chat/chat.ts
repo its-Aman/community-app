@@ -9,21 +9,25 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 })
 export class ChatPage {
 
+  page: number = 1;
+  chatData: any[];
   @ViewChild('content') content: Content;
 
   dummyChat: any[];
   inputText: string;
-
+  chatListData: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider
   ) {
     this.fillDummyChat();
+    this.chatListData = this.navParams.get('data');
+    this.getChatData();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+    console.log('ionViewDidLoad ChatPage', this.chatListData);
 
     this.scrollToBottom(250);
   }
@@ -83,5 +87,28 @@ export class ChatPage {
     setTimeout(() => {
       this.content.scrollToBottom();
     }, timeout);
+  }
+
+  getChatData() {
+    this.global.showLoader();
+    let data = {
+      to_user_id: this.chatListData.id,
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      page: this.page
+    }
+    this.global.postRequest(`${this.global.base_path}Login/Conversation`, data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`getChatData's response is`, res);
+
+          if (res.success == 'true') {
+            this.chatData = res.conversation;
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`getChatData's error is`, err);
+        }
+      )
   }
 }

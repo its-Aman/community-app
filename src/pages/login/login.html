@@ -22,12 +22,13 @@
         </ion-col>
         <ion-col col-12>
           <ion-item>
-            <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
+            <ion-input placeholder="Mobile No" formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
           </ion-item>
           <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('required') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
           <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('minlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
           <p class="error" *ngIf="loginForm?.controls['mobile']?.hasError('maxlength') && (loginForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
         </ion-col>
+
         <ion-col col-12>
           <ion-item>
             <ion-input placeholder="OTP" formControlName="otp" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
@@ -35,6 +36,13 @@
           <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('required') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">OTP is Required</p>
           <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('minlength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
           <p class="error" *ngIf="loginForm?.controls['otp']?.hasError('maxlength') && (loginForm?.controls['otp']?.dirty || isFormInvalid)">Max 4 digit is Required</p>
+        </ion-col>
+
+        <ion-col col-10 offset-1 text-center>
+          <div class="statement">By Continuing you are agree to our
+            <span class="terms" (click)="termsAndCondition()">Terms & Condition</span> and
+            <span class="terms" (click)="privacyPolicy()">Privacy Policy</span>
+          </div>
         </ion-col>
       </ion-row>
     </form>
@@ -46,7 +54,7 @@
         </ion-col>
         <ion-col col-12>
           <ion-item>
-            <ion-input placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
+            <ion-input placeholder="Mobile No" formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="login()"></ion-input>
           </ion-item>
           <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('required') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
           <p class="error" *ngIf="signUpForm?.controls['mobile']?.hasError('minlength') && (signUpForm?.controls['mobile']?.dirty || isFormInvalid)">Min 10 digit is Required</p>
@@ -74,7 +82,7 @@
       </ion-col>
       <ion-col col-6 text-right *ngIf="!signInData">
         <div class="resend" (click)="resendOTP()">
-          {{resending?.value ? resending?.time + ' seconds remaining' :'Re-send OTP'}}
+          {{resending?.value ? resending?.time + ' seconds remaining' : resendText}}
         </div>
       </ion-col>
     </ion-row>

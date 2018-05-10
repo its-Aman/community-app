@@ -9,6 +9,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatListPage {
 
+  noData: boolean;
+  chatList: any;
   personList: any[];
 
   constructor(
@@ -17,6 +19,7 @@ export class ChatListPage {
     public global: GlobalProvider,
   ) {
     this.fillList();
+    this.getChatListData();
   }
 
   ionViewDidLoad() {
@@ -71,10 +74,31 @@ export class ChatListPage {
   }
 
   openChatDetails(person, i) {
-    this.navCtrl.push('ChatPage', { data: null });
+    this.navCtrl.push('ChatPage', { data: this.chatList[i] });
   }
 
   edit() {
     this.global.log(`in edit()`);
+  }
+
+  getChatListData() {
+    this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/Chatlist`, { login_user_id: JSON.parse(localStorage.getItem('user')).id })
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`getChatListData's response is`, res);
+
+          if (res.success == 'true') {
+            this.noData = false;
+            this.chatList = res.chatlist;
+          } else {
+            this.noData = true;
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`getChatListData's error is`, err);
+        }
+      )
   }
 }

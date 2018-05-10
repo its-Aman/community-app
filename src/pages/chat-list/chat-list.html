@@ -18,11 +18,8 @@
 <ion-content no-padding>
   <ion-grid no-padding>
     <ion-row>
-      <ion-col col-12 no-padding>
+      <ion-col col-12 no-padding *ngIf="!noData">
         <ion-list>
-          <!-- <ion-list-header class="list-header">
-            Broadcast List
-          </ion-list-header> -->
           <ion-item *ngFor="let person of personList; let i = index;" (click)="openChatDetails(person, i)">
             <ion-avatar item-start>
               <img [src]="person?.image" class="create">
@@ -32,6 +29,9 @@
             <ion-note item-end>{{person?.time | date:'shortTime'}}</ion-note>
           </ion-item>
         </ion-list>
+      </ion-col>
+      <ion-col col-12 no-padding *ngIf="noData" text-center>
+        <div class="no-data">No Chat Found</div>
       </ion-col>
     </ion-row>
   </ion-grid>

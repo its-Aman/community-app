@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Community Name</ion-title>
+    <ion-title text-capitalize>{{eventData?.event?.event_name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -70,21 +70,18 @@
 
       <ion-row>
         <ion-col col-12>
-          <div class="div-venue">
-            <span>Venue: </span>
-            <span text-capitalize>
-              {{eventData?.event?.address}}
-            </span>
-            <ion-icon class="calender" name="md-map" (click)="openPlace()"></ion-icon>
+          <div text-capitalize>
+            Venue: {{eventData?.event?.address}}
+            <ion-icon style="font-size: 16px;" class="calender" name="md-map" (click)="openPlace()"></ion-icon>
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row class="row-parking">
-        <ion-col col-9 class="div-parking">
+        <ion-col col-4 class="div-parking">
           <div class="parking">Travel Information: </div>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-8>
           <div class="parking-status" text-uppercase>{{eventData?.event?.travel_info}}</div>
         </ion-col>
       </ion-row>
