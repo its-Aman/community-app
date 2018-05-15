@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 
 @IonicPage()
@@ -25,6 +26,7 @@ export class ProfilePage {
     public global: GlobalProvider,
     public fb: FormBuilder,
     public keyboard: Keyboard,
+    public theme: ThemeProvider,    
   ) {
     this.initForm();
   }

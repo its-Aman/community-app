@@ -1,6 +1,7 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class PerformanceModalPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public theme: ThemeProvider,
   ) {
     if (this.navParams.get('data')) {
       this.person = this.navParams.get('data');

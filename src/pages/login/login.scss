@@ -1,11 +1,12 @@
 page-login {
   .statement {
     color: white;
-    font-size: 12px;
+    font-size: 10px;
+
     .terms {
-      //   color: #3844CA;
+        color: #3844CA;
     }
-  }
+  } 
   .sign-up-text {
     color: white;
     margin: 15px;
@@ -19,7 +20,7 @@ page-login {
     margin-top: 60px;
   }
   .logo {
-    background-image: url('../assets/icon/logo.png');
+    // background-image: url('../assets/icon/logo.png');
     height: 150px;
     width: 150px;
   }

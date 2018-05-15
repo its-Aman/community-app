@@ -18,12 +18,12 @@
         <div class="event-image image" [style.backgroundImage]="event?.event_image"></div>
       </ion-col>
       <ion-col col-8 text-left class="col-event-detail">
-        <div class="heading"> {{event?.event_name}} </div>
-        <div class="padding">From :
-          <span class="time">{{event?.from_date}}</span>
+        <div class="heading" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.special_data_font_size"> {{event?.event_name}} </div>
+        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">From :
+          <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{event?.from_date}}</span>
         </div>
-        <div class="padding">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-          <span class="time">{{event?.to_date}}</span>
+        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+          <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{event?.to_date}}</span>
         </div>
       </ion-col>
     </ion-row>

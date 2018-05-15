@@ -31,39 +31,40 @@
     <div class="details">
       <ion-row>
         <ion-col col-9>
-          <div class="heading" text-capitalize>{{eventData?.event?.event_name}}</div>
-          <div class="description">{{eventData?.event?.description}}</div>
+          <div class="heading" text-capitalize [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.special_data_font_size">{{eventData?.event?.event_name}}</div>
+          <div class="description" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.description}}</div>
         </ion-col>
         <ion-col col-3 text-center class="col-price">
           <div class="star image"></div>
-          <div class="price">${{eventData?.event?.price_type}}</div>
+          <div class="price" [style.font-size]="theme?.defaultTheme?.data_font_size">${{eventData?.event?.price_type}}</div>
         </ion-col>
       </ion-row>
 
       <ion-row class="row-timing">
         <ion-col col-9>
           <ion-col col-4>
-            From :
+            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">From</span> :
           </ion-col>
           <ion-col col-8>
-            <span class="time">{{eventData?.event?.from_date}}</span>
+            <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.from_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </ion-col>
           <br>
           <ion-col col-4>
-            To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">To</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
           </ion-col>
           <ion-col col-8 text-center>
-            <span class="time2">{{eventData?.event?.to_date}}</span>
+            <span class="time2" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.to_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </ion-col>
         </ion-col>
 
         <ion-col col-3 text-center class="col-chair">
           <div class="div-chair">
-            <span class="chair image"></span>Left
+            <span class="chair image"></span>
+            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Left</span>
           </div>
-          <div class="left-count">{{eventData?.event?.max_attendees}}</div>
+          <div class="left-count" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.max_attendees}}</div>
         </ion-col>
       </ion-row>
 
@@ -71,7 +72,7 @@
       <ion-row>
         <ion-col col-12>
           <div text-capitalize>
-            Venue: {{eventData?.event?.address}}
+            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Venue</span>: {{eventData?.event?.address}}
             <ion-icon style="font-size: 16px;" class="calender" name="md-map" (click)="openPlace()"></ion-icon>
           </div>
         </ion-col>
@@ -79,16 +80,16 @@
 
       <ion-row class="row-parking">
         <ion-col col-4 class="div-parking">
-          <div class="parking">Travel Information: </div>
+          <div class="parking"><span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Travel Information</span>: </div>
         </ion-col>
         <ion-col col-8>
-          <div class="parking-status" text-uppercase>{{eventData?.event?.travel_info}}</div>
+          <div class="parking-status" text-uppercase [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.travel_info}}</div>
         </ion-col>
       </ion-row>
 
       <ion-row *ngIf="eventData?.event?.geo_lat">
         <ion-col col-12>
-          <div class="location">Location</div>
+          <div class="location"><span class="calender">Location</span></div>
         </ion-col>
         <ion-col col-12 class="div-map">
           <div #map id="map" class="map"></div>

@@ -16,11 +16,11 @@
       <ion-col col-12>
         <!-- <div class="search">Search By</div> -->
         <ion-item class="search">
-          <ion-label *ngIf="!searchType">Search By</ion-label>
+          <ion-label *ngIf="!searchType" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Search By</ion-label>
           <ion-select class="select-form" [(ngModel)]="searchType">
-            <ion-option value="P">By Profession</ion-option>
-            <ion-option value="A">By Alphabetical</ion-option>
-            <ion-option value="C">By City</ion-option>
+            <ion-option value="P" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">By Profession</ion-option>
+            <ion-option value="A" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">By Alphabetical</ion-option>
+            <ion-option value="C" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">By City</ion-option>
           </ion-select>
         </ion-item>
         <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->
@@ -38,9 +38,9 @@
         <ion-list class="list-person">
           <ion-item text-uppercase class="item-person" (click)="personDetails()">
             <h4>
-              <b>A</b>
+              <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">A</b>
             </h4>
-            <p>Aman (Service)</p>
+            <p [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Aman (Service)</p>
             <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
             <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
             <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
@@ -48,9 +48,9 @@
 
           <ion-item text-uppercase class="item-person" (click)="personDetails()">
             <h4>
-              <b>R</b>
+              <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">R</b>
             </h4>
-            <p>Rakesh (Service)</p>
+            <p [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Rakesh (Service)</p>
             <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
             <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
             <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
@@ -58,9 +58,9 @@
 
           <ion-item text-uppercase class="item-person" (click)="personDetails()">
             <h4>
-              <b>P</b>
+              <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">P</b>
             </h4>
-            <p>Poonam (HR)</p>
+            <p [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Poonam (HR)</p>
             <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
             <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
             <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>

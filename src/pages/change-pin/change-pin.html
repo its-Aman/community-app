@@ -40,6 +40,17 @@
           <p class="error" *ngIf="changePinForm.controls['newPin']?.hasError('minlength') && (changePinForm.controls['newPin']?.dirty || isFormInvalid)">Min 6 digit is Required</p>
           <p class="error" *ngIf="changePinForm.controls['newPin']?.hasError('maxlength') && (changePinForm.controls['newPin']?.dirty || isFormInvalid)">Max 6 digit is Required</p>
         </ion-col>
+
+        <ion-col col-12 *ngIf="!fromLogin">
+          <ion-item>
+            <ion-input placeholder="Re-Enter New PIN" formControlName="conformPin" type="tel" (focusout)="removePadding()" (keyup.enter)="changePassword()"></ion-input>
+          </ion-item>
+          <p class="error" *ngIf="changePinForm.controls['conformPin']?.hasError('required') && (changePinForm.controls['conformPin']?.dirty || isFormInvalid)">PIN is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['conformPin']?.hasError('minlength') && (changePinForm.controls['conformPin']?.dirty || isFormInvalid)">Min 6 digit is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['conformPin']?.hasError('maxlength') && (changePinForm.controls['conformPin']?.dirty || isFormInvalid)">Max 6 digit is Required</p>
+          <p class="error" *ngIf="changePinForm.controls['conformPin']?.value != changePinForm.controls['newPin']?.value">Password not match</p>
+        </ion-col>
+
       </ion-row>
     </form>
 

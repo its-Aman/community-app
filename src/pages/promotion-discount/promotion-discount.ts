@@ -1,6 +1,7 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,8 @@ export class PromotionDiscountPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public theme: ThemeProvider,    
   ) {
   }
 

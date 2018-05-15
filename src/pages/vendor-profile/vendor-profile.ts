@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,8 @@ export class VendorProfilePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public global: GlobalProvider
+    public global: GlobalProvider,
+    public theme: ThemeProvider,    
   ) {
   }
 

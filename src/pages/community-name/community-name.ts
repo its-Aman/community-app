@@ -1,6 +1,7 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 declare var google;
 
@@ -21,12 +22,45 @@ export class CommunityNamePage {
     public navParams: NavParams,
     public global: GlobalProvider,
     private modal: ModalController,
+    public theme: ThemeProvider,    
   ) {
   }
 
   ionViewDidEnter() {
     this.getEventDetail();
     console.log('ionViewDidEnter CommunityNamePage');
+
+    // this.eventData = {
+    //   "event": {
+    //     "id": "1",
+    //     "event_type": "1",
+    //     "event_name": "Event Name",
+    //     "from_date": "2018-04-24",
+    //     "to_date": "2018-04-25",
+    //     "description": "Description",
+    //     "max_attendees": "20",
+    //     "event_image": "1685380469.png",
+    //     "entry_for": "2",
+    //     "price_type": "0",
+    //     "standard_price": "100.00",
+    //     "travel_info": "paid",
+    //     "geo_lat": "",
+    //     "geo_long": "",
+    //     "address": "Address",
+    //     "city_id": "5910",
+    //     "state_id": "42",
+    //     "country_id": "1",
+    //     "pincode": "963852",
+    //     "status_id": "2",
+    //     "entry_date": "0000-00-00"
+    //   },
+    //   "event_entry_id": "35",
+    //   "totalseats": "20",
+    //   "totalregistration": "13",
+    //   "availableseats": 7,
+    //   "message": "Successfully Done",
+    //   "success": "true"
+    // }
   }
 
   ionViewDidLoad() {
@@ -46,6 +80,7 @@ export class CommunityNamePage {
           this.global.log(`geteventdetail res`, res);
           if (res.success == 'true') {
             this.eventData = res;
+
             if (this.eventData.event.geo_lat) {
               setTimeout(() => {
                 this.loadMap({ latitude: parseFloat(this.eventData.event.geo_lat), longitude: parseFloat(this.eventData.event.geo_long) })

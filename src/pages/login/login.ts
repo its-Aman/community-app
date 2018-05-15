@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class LoginPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
+    public theme: ThemeProvider
   ) {
     this.initForm();
     this.signInData = this.navParams.get('signInData');

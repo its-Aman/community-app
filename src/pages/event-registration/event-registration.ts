@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,10 @@ export class EventRegistrationPage {
     noOfParticipants: '0',
     specialNeed: '',
   }
+
+  volunteer = true;
+  performance = true;
+
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
 
@@ -32,6 +37,7 @@ export class EventRegistrationPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
+    public theme: ThemeProvider,    
   ) {
     this.event = this.navParams.get('data');
     this.initForm();
@@ -91,6 +97,14 @@ export class EventRegistrationPage {
 
   calculateEventPerson() {
     let _ret: number = 0;
+    if (this.volunteer && this.performance) {
+      _ret = 1;
+    } else if (this.volunteer) {
+      _ret = 2;
+    } if (this.performance) {
+      _ret = 3;
+    }
+/*
     if (this.eventPerson.length == 0) {
       _ret = 0;
     } else if (this.eventPerson.length == 2) {
@@ -98,7 +112,7 @@ export class EventRegistrationPage {
     } else if (this.eventPerson.length == 1) {
       _ret = +this.eventPerson[0];
     }
-
+*/
     this.global.log(`in calculateEventPerson and returning`, _ret);
     return _ret;
   }

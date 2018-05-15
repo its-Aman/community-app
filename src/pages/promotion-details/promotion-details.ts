@@ -2,6 +2,7 @@ import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 declare var google;
 
@@ -20,6 +21,7 @@ export class PromotionDetailsPage {
     public navParams: NavParams,
     public global: GlobalProvider,
     private geolocation: Geolocation,
+    public theme: ThemeProvider,    
   ) {
   }
 

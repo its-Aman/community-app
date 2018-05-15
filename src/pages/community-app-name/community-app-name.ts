@@ -2,6 +2,7 @@ import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,7 @@ export class CommunityAppNamePage {
     public global: GlobalProvider,
     public event: Events,
     public keyboard: Keyboard,
+    public theme: ThemeProvider,    
   ) {
   }
 

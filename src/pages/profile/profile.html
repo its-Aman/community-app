@@ -34,10 +34,10 @@
           <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="mobile">Mobile No. :</div>
+          <div class="mobile" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Mobile No. :</div>
         </ion-col>
         <ion-col col-12 text-right>
-          <div>123456789</div>
+          <div [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">123456789</div>
         </ion-col>
       </ion-row>
 
@@ -46,11 +46,11 @@
           <ion-icon ios="md-create" md="md-create"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="email">Name :</div>
+          <div class="email" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Name :</div>
         </ion-col>
         <ion-col col-12 text-right text-nowrap class="bdr-btm">
           <ion-item>
-            <ion-input [disabled]="isDisabled" formControlName="name" type="text" placeholder="Type Name" (focusout)="removePadding()"></ion-input>
+            <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" [disabled]="isDisabled" formControlName="name" type="text" placeholder="Type Name" (focusout)="removePadding()"></ion-input>
           </ion-item>
           <p class="error" text-left>
             <span *ngIf="profileForm?.controls['name']?.hasError('required') && (profileForm?.controls['name']?.dirty || isFormInvalid)">Name is Required.</span>
@@ -63,11 +63,11 @@
           <ion-icon ios="md-mail" md="md-mail"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="email">Email :</div>
+          <div class="email" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Email :</div>
         </ion-col>
         <ion-col col-12 text-right text-nowrap class="bdr-btm">
           <ion-item>
-            <ion-input [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email" (focusout)="removePadding()"></ion-input>
+            <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email" (focusout)="removePadding()"></ion-input>
           </ion-item>
           <p class="error" text-left>
             <span *ngIf="profileForm?.controls['email']?.hasError('required') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Email is Required.</span>
@@ -81,11 +81,11 @@
           <ion-icon ios="md-lock" md="md-lock"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="address">Address :</div>
+          <div class="address" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Address :</div>
         </ion-col>
         <ion-col col-12 text-right class="bdr-btm">
           <ion-item>
-            <ion-textarea class="address-textarea" rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"
+            <ion-textarea [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" class="address-textarea" rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"
               (focusout)="removePadding()"></ion-textarea>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['address']?.hasError('required') && (profileForm?.controls['address']?.dirty || isFormInvalid)">Address is Required</p>
@@ -94,15 +94,15 @@
 
       <ion-row class="row-common">
         <ion-col col-12>
-          <div class="mode-comm">Mode of Communication</div>
+          <div class="mode-comm" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Mode of Communication</div>
         </ion-col>
         <ion-col col-12 class="mode-of-comm">
           <ion-item>
             <!-- <ion-label>Mode of Communication</ion-label> -->
             <ion-select class="select-form" [disabled]="isDisabled" formControlName="modeOfCommunication" multiple="true">
-              <ion-option value="E">Email</ion-option>
-              <ion-option value="P">Phone</ion-option>
-              <ion-option value="C">Chat</ion-option>
+              <ion-option value="E" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Email</ion-option>
+              <ion-option value="P" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Phone</ion-option>
+              <ion-option value="C" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Chat</ion-option>
             </ion-select>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['modeOfCommunication']?.hasError('required') && (profileForm?.controls['modeOfCommunication']?.dirty || isFormInvalid)">Mode Of communication is Required</p>
@@ -114,15 +114,15 @@
           <ion-icon ios="md-settings" md="md-settings"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="email">Profession :</div>
+          <div class="email" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Profession :</div>
         </ion-col>
         <ion-col col-12 text-right text-nowrap>
           <!-- <div>Plumber</div> -->
           <ion-item>
             <ion-select class="select-form" [disabled]="isDisabled" formControlName="professionalService">
-              <ion-option value="P">Plumber</ion-option>
-              <ion-option value="D">Driver</ion-option>
-              <ion-option value="M">Mechanic</ion-option>
+              <ion-option value="P" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Plumber</ion-option>
+              <ion-option value="D" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Driver</ion-option>
+              <ion-option value="M" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Mechanic</ion-option>
             </ion-select>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['professionalService']?.hasError('required') && (profileForm?.controls['professionalService']?.dirty || isFormInvalid)">Professional Service is Required</p>

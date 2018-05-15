@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChatListPage {
 
   noData: boolean;
-  chatList: any;
+  chatList: any[];
   personList: any[];
 
   constructor(
@@ -18,7 +18,7 @@ export class ChatListPage {
     public navParams: NavParams,
     public global: GlobalProvider,
   ) {
-    this.fillList();
+    // this.fillList();
     this.getChatListData();
   }
 
@@ -90,8 +90,15 @@ export class ChatListPage {
           this.global.log(`getChatListData's response is`, res);
 
           if (res.success == 'true') {
-            this.noData = false;
             this.chatList = res.chatlist;
+            if (this.chatList.length > 0) {
+              this.noData = false;
+              this.chatList.forEach(element => {
+                element.image = this.global.sanatizeImage(`http://winstech.in/community/uploads/user/${element.image}`);
+              });
+            } else {
+              this.noData = true;
+            }
           } else {
             this.noData = true;
           }

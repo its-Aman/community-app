@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'content-type': 'application/json',
+    'Content-Type': 'application/json; charset=UTF-8',
   })
 };
 

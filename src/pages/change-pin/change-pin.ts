@@ -16,6 +16,7 @@ export class ChangePinPage {
   otpResponseValue: any = JSON.parse(localStorage.getItem('otp-res-value'));
   fromLogin: string;
   @ViewChild(Content) content: Content;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,10 +29,19 @@ export class ChangePinPage {
   }
 
   initForm() {
-    this.changePinForm = this.fb.group({
-      oldPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-      newPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
-    });
+    if (this.fromLogin) {
+      this.changePinForm = this.fb.group({
+        oldPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+        newPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
+      });
+    } else {
+      this.changePinForm = this.fb.group({
+        oldPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+        newPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+        conformPin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
+      });
+
+    }
   }
 
   ionViewDidLoad() {
@@ -47,6 +57,12 @@ export class ChangePinPage {
     this.changePinForm.controls['newPin'].valueChanges.subscribe(res => {
       if (res && res.length > 6) {
         this.changePinForm.controls['newPin'].setValue(this.changePinForm.controls['newPin'].value.slice(0, 6));
+      }
+    });
+
+    this.changePinForm.controls['conformPin'].valueChanges.subscribe(res => {
+      if (res && res.length > 6) {
+        this.changePinForm.controls['conformPin'].setValue(this.changePinForm.controls['conformPin'].value.slice(0, 6));
       }
     });
 
@@ -76,9 +92,13 @@ export class ChangePinPage {
           this.global.showToast(`PIN does not match`);
         }
       } else {
-        this.global.log('form is valid');
-        // this.navCtrl.setRoot('LoginPage', { signInData: true });
-        this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value })
+        if (this.changePinForm.controls['conformPin'].value == this.changePinForm.controls['newPin'].value) {
+          this.global.log('form is valid');
+          // this.navCtrl.setRoot('LoginPage', { signInData: true });
+          this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value })
+        } else {
+          this.global.showToast(`PIN does not match`);
+        }
       }
     } else {
       this.isFormInvalid = true;

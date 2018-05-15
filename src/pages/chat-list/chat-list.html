@@ -20,13 +20,13 @@
     <ion-row>
       <ion-col col-12 no-padding *ngIf="!noData">
         <ion-list>
-          <ion-item *ngFor="let person of personList; let i = index;" (click)="openChatDetails(person, i)">
+          <ion-item *ngFor="let chat of chatList; let i = index;" (click)="openChatDetails(chat, i)">
             <ion-avatar item-start>
-              <img [src]="person?.image" class="create">
+              <img [src]="chat?.image" class="create">
             </ion-avatar>
-            <h2>{{person?.name}}</h2>
-            <p>{{person?.message}}</p>
-            <ion-note item-end>{{person?.time | date:'shortTime'}}</ion-note>
+            <h2>{{chat?.name}}</h2>
+            <p>{{chat?.message}}</p>
+            <ion-note item-end>{{chat?.time | date:'shortTime'}}</ion-note>
           </ion-item>
         </ion-list>
       </ion-col>

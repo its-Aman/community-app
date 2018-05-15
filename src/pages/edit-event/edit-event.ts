@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -33,6 +34,7 @@ export class EditEventPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
+    public theme: ThemeProvider,    
   ) {
     this.previousPageData = this.navParams.get('data');
     this.initForm();

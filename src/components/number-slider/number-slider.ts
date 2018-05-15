@@ -1,5 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @Component({
   selector: 'number-slider',
@@ -16,7 +17,10 @@ export class NumberSliderComponent {
   @Output('increased') increased: EventEmitter<number> = new EventEmitter<number>();
   @Output('decreased') decreased: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(public global: GlobalProvider) {
+  constructor(
+    public global: GlobalProvider,
+    public theme: ThemeProvider
+  ) {
     console.log('Hello NumberSliderComponent Component');
   }
 

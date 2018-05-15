@@ -1,5 +1,5 @@
 <div class="container">
   <div class="button" (click)="decrease()">-</div>
-  <div class="text"> {{number}} </div>
+  <div class="text" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size"> {{number}} </div>
   <div class="button" (click)="increase()">+</div>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,11 @@ export class CommunityAppPage {
 
   peoples: any[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public theme: ThemeProvider,    
+  ) {
     this.peoples = [
       { name: 'Plumber', show: false },
       { name: 'Electrician', show: false },
