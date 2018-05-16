@@ -25,7 +25,7 @@
 
       <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">Edit</div>
       <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">Registration</div>
-      <div class="col-filter" (click)="performance()">Performance</div>
+      <div class="col-filter" (click)="performance()" *ngIf="eventData?.event?.entry_for == 2">Performance</div>
     </ion-row>
 
     <div class="details">

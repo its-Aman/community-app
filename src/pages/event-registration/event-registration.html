@@ -51,7 +51,7 @@
           <p class="error" *ngIf="userForm?.controls['name']?.hasError('required') && (userForm?.controls['name']?.dirty || isFormInvalid)">Name is Required</p>
 
           <ion-col col-12 class="person-detail">
-              <div class="person-detail-color" style="width: 110px;" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Mobile No. : </div>
+              <div class="person-detail-color" style="min-width: 110px; width: 110px;" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Mobile No. : </div>
               <!-- <div class="person-detail-data"> 123456789</div> -->
             <ion-item>
                 <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()"></ion-input>
@@ -112,7 +112,7 @@
 
       </div>
 
-      <ion-row class="row-radio">
+      <ion-row class="row-radio" *ngIf="previousPageData?.event?.entry_for == 3">
         <ion-col col-12 class="col-text">
             <div [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Are You Interested in ?</div>
           </ion-col>

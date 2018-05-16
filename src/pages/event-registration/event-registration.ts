@@ -12,6 +12,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class EventRegistrationPage {
 
+  previousPageData: any;
   total: number = 0;
   event: any;
   eventPerson: string[] = [];
@@ -40,6 +41,8 @@ export class EventRegistrationPage {
     public theme: ThemeProvider,    
   ) {
     this.event = this.navParams.get('data');
+    this.previousPageData = this.navParams.get('data');
+
     this.initForm();
     this.getPerformanceList();
   }

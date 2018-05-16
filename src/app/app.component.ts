@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../providers/global/global';
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, NavController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ThemeProvider } from '../providers/theme/theme';
@@ -11,15 +11,19 @@ import { ThemeProvider } from '../providers/theme/theme';
 export class MyApp {
   rootPage: any;
 
+  @ViewChild('myNav') nav: NavController;
+
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public global: GlobalProvider,
-    public theme: ThemeProvider
+    public theme: ThemeProvider,
+    public events: Events,
   ) {
     this.setRootPage();
-    // this.getTheme();
+    this.getTheme();
+    // this.addDtyleToIndexHTML();
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -34,6 +38,10 @@ export class MyApp {
     if (localStorage.getItem('user')) {
       this.rootPage = 'MenuPage';
     } else {
+      this.global.log(`in setting page`);
+      setTimeout(() => {
+        this.events.publish('set-login', true);
+      }, 500);
       this.rootPage = 'LoginPage';
     }
   }
@@ -68,6 +76,10 @@ export class MyApp {
       this.theme.defaultTheme.spalsh_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.spalsh_image}`);
     }
 
+    if (this.theme.defaultTheme.profile_image) {
+      this.theme.defaultTheme.profile_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.profile_image}`);
+    }
+
   }
 
   addDtyleToIndexHTML() {
@@ -80,7 +92,13 @@ export class MyApp {
     .toolbar-md-toolbarBackgroundColor .toolbar-background-md{
       background:  ${this.theme.defaultTheme.theme_colour} !important;
       border-color: ${this.theme.defaultTheme.theme_colour} !important;
-  }
+    }
+    page-login .scroll-content {
+     background-image: url('${this.theme.defaultTheme.login_image}') !important;
+    }
+    page-profile .images .backgroundImage{
+      background-image: url('${this.theme.defaultTheme.profile_image}') !important;
+    }
     `;
 
     let head: any = document.head || document.getElementsByTagName('head')[0], style: any = document.createElement('style');

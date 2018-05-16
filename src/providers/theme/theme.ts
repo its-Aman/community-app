@@ -19,7 +19,7 @@ export class ThemeProvider {
       "theme_colour": "#02A1E2",
       "spalsh_image": this.sanatizeImage("http://winstech.in/community/uploads/flash/1301382217.png"),
       "login_image": this.sanatizeImage("http://winstech.in/community/uploads/login/942347058.png"),
-      "profile_image": "",
+      "profile_image": this.sanatizeImage("http://winstech.in/community/uploads/login/942347058.png"),
       "heading_font_colour": "#777777",
       "data_font_colour": "#6f6f6f",
       "special_data_font_colour": "#02A1E2",

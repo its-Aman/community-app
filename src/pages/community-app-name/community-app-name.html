@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Community App Name</ion-title>
+    <ion-title>{{theme?.defaultTheme?.community_name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -36,7 +36,7 @@
     <ion-row>
       <ion-col col-12 class="col-person">
         <ion-list class="list-person">
-          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
             <h4>
               <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">A</b>
             </h4>
@@ -46,7 +46,7 @@
             <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
           </ion-item>
 
-          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
             <h4>
               <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">R</b>
             </h4>
@@ -56,7 +56,7 @@
             <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
           </ion-item>
 
-          <ion-item text-uppercase class="item-person" (click)="personDetails()">
+          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
             <h4>
               <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">P</b>
             </h4>

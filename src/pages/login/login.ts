@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Events } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ThemeProvider } from '../../providers/theme/theme';
@@ -30,10 +30,16 @@ export class LoginPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
-    public theme: ThemeProvider
+    public theme: ThemeProvider,
+    public events: Events,
   ) {
     this.initForm();
     this.signInData = this.navParams.get('signInData');
+    this.global.log(this.signInData);
+    this.events.subscribe('set-login', d => {
+      this.global.log(`d is`, d)
+      this.signInData = d;
+    });
   }
 
   ionViewDidLoad() {
@@ -242,10 +248,12 @@ export class LoginPage {
 
   termsAndCondition() {
     this.global.log(`in termsAndCondition`);
+    this.navCtrl.push('TermsAndConditionPage');
   }
 
   privacyPolicy() {
     this.global.log(`in privacyPolicy`);
+    this.navCtrl.push('PrivacyPolicyPage');
   }
 
 }
