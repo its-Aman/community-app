@@ -72,7 +72,8 @@
       <ion-row>
         <ion-col col-12>
           <div text-capitalize>
-            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Venue</span>: {{eventData?.event?.address}}
+            <span class="calender" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Venue</span>: 
+            <span [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{eventData?.event?.address}}</span>
             <ion-icon style="font-size: 16px;" class="calender" name="md-map" (click)="openPlace()"></ion-icon>
           </div>
         </ion-col>

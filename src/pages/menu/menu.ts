@@ -56,7 +56,7 @@ export class MenuPage {
 
   logout() {
     this.global.log('logout');
-    this.navCtrl.setRoot('LoginPage', { data: null });
+    this.navCtrl.setRoot('LoginPage', { signInData: true });
   }
 
   editProfile() {

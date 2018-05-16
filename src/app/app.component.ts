@@ -22,7 +22,7 @@ export class MyApp {
     public events: Events,
   ) {
     this.setRootPage();
-    this.getTheme();
+    // this.getTheme();
     // this.addDtyleToIndexHTML();
 
     platform.ready().then(() => {
