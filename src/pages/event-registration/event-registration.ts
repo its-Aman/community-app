@@ -12,6 +12,9 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class EventRegistrationPage {
 
+  i: number;
+  users: any[];
+  searchedUser: any[];
   previousPageData: any;
   total: number = 0;
   event: any;
@@ -38,13 +41,64 @@ export class EventRegistrationPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
-    public theme: ThemeProvider,    
+    public theme: ThemeProvider,
   ) {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
 
     this.initForm();
     this.getPerformanceList();
+    
+  //   this.searchedUser = [
+  //     {
+  //         "id": "33",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "32",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "31",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "30",
+  //         "name": "Deepshikha Soni"
+  //     },
+  //     {
+  //         "id": "29",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "28",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "27",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "26",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "25",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "24",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "23",
+  //         "name": ""
+  //     },
+  //     {
+  //         "id": "2",
+  //         "name": "fname"
+  //     }
+  // ]
   }
 
   ionViewDidLoad() {
@@ -107,15 +161,15 @@ export class EventRegistrationPage {
     } if (this.performance) {
       _ret = 3;
     }
-/*
-    if (this.eventPerson.length == 0) {
-      _ret = 0;
-    } else if (this.eventPerson.length == 2) {
-      _ret = 1;
-    } else if (this.eventPerson.length == 1) {
-      _ret = +this.eventPerson[0];
-    }
-*/
+    /*
+        if (this.eventPerson.length == 0) {
+          _ret = 0;
+        } else if (this.eventPerson.length == 2) {
+          _ret = 1;
+        } else if (this.eventPerson.length == 1) {
+          _ret = +this.eventPerson[0];
+        }
+    */
     this.global.log(`in calculateEventPerson and returning`, _ret);
     return _ret;
   }
@@ -245,6 +299,8 @@ export class EventRegistrationPage {
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList.push(...res.performance);
             this.person.performanceName = res.performance[0].id;
+            this.searchUser();
+
           } else {
             this.global.showToast(`${res.error}`);
           }
@@ -280,5 +336,42 @@ export class EventRegistrationPage {
         this.total += +data.amount;
       });
     }
+  }
+
+  searchUser() {
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/ListofUsers', {})
+      .subscribe(res => {
+        this.global.hideLoader();
+        if (res.success == 'true') {
+          this.searchedUser = res.users;
+        }
+      }, err => {
+        this.global.hideLoader();
+        this.global.log('some error in searchUser api', err);
+      });
+  }
+
+  searchingUser(name: string, i: number) {
+    this.global.log('in searching user');
+    this.i = i;
+
+    if (name.length > 0) {
+      this.users = [];      
+      this.searchedUser.forEach((user: any) => {
+        if (user.name && user.name.includes(name)) {
+          this.users.push(user);
+        }
+      });
+    } else {
+      this.users = [];
+    }
+
+  }
+
+  itemSelected(item) {
+    this.persons[this.i].name = item.name;
+    this.i = null;
+    this.users = [];
   }
 }

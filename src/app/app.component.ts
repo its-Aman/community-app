@@ -22,7 +22,7 @@ export class MyApp {
     public events: Events,
   ) {
     this.setRootPage();
-    // this.getTheme();
+    this.getTheme();
     // this.addDtyleToIndexHTML();
 
     platform.ready().then(() => {
@@ -65,19 +65,23 @@ export class MyApp {
 
   fixImages() {
     if (this.theme.defaultTheme.logo_name) {
-      this.theme.defaultTheme.logo_name = this.theme.sanatizeImage(`http://winstech.in/community/uploads/cummunitylogo/${this.theme.defaultTheme.logo_name}`);
+      // this.theme.defaultTheme.logo_name = this.theme.sanatizeImage(`http://winstech.in/community/uploads/cummunitylogo/${this.theme.defaultTheme.logo_name}`);
+      this.theme.defaultTheme.logo_name = `http://winstech.in/community/uploads/cummunitylogo/${this.theme.defaultTheme.logo_name}`;
     }
 
     if (this.theme.defaultTheme.login_image) {
-      this.theme.defaultTheme.login_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/login/${this.theme.defaultTheme.login_image}`);
+      // this.theme.defaultTheme.login_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/login/${this.theme.defaultTheme.login_image}`);
+      this.theme.defaultTheme.login_image = `http://winstech.in/community/uploads/login/${this.theme.defaultTheme.login_image}`;
     }
 
     if (this.theme.defaultTheme.spalsh_image) {
-      this.theme.defaultTheme.spalsh_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.spalsh_image}`);
+      // this.theme.defaultTheme.spalsh_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.spalsh_image}`);
+      this.theme.defaultTheme.spalsh_image = `http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.spalsh_image}`;
     }
 
     if (this.theme.defaultTheme.profile_image) {
-      this.theme.defaultTheme.profile_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.profile_image}`);
+      // this.theme.defaultTheme.profile_image = this.theme.sanatizeImage(`http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.profile_image}`);
+      this.theme.defaultTheme.profile_image = `http://winstech.in/community/uploads/flash/${this.theme.defaultTheme.profile_image}`;
     }
 
   }

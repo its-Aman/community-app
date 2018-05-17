@@ -5,9 +5,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json',
+    'AuthKey': '171195abc123171195abc123171195',
   })
 };
+// 'Access-Control-Allow-Origin':'*',
+// 'Access-Control-Allow-Methods':'POST',
+// 'Accept':'application/json',
 
 @Injectable()
 export class GlobalProvider {
@@ -72,7 +76,7 @@ export class GlobalProvider {
   }
 
   getRequest(url: string) {
-    return this.http.get<any>(url);
+    return this.http.get<any>(url, httpOptions);
   }
 
   postRequest(url: string, data: any) {

@@ -83,7 +83,7 @@ page-community-name {
     }
 
     ion-row {
-      border-bottom: 1px solid gray;
+      border-bottom: 1px solid lightgray;
     }
   }
   .div-venue {
@@ -96,7 +96,7 @@ page-community-name {
   }
   .row-parking {
     border-bottom: 1px solid lightgray;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
     .div-parking {
       display: flex;
       align-items: center;
