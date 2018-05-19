@@ -1,61 +1,72 @@
-
 //Global calsses
-.image{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.blur{
-    -webkit-filter: blur(1.5px);
-    -moz-filter: blur(1.5px);
-    -o-filter: blur(1.5px);
-    -ms-filter: blur(1.5px);
-    filter: blur(1.5px);
+
+.blur {
+  -webkit-filter: blur(1.5px);
+  -moz-filter: blur(1.5px);
+  -o-filter: blur(1.5px);
+  -ms-filter: blur(1.5px);
+  filter: blur(1.5px);
 }
-.error{
-    color: #f53d3d;
-    margin: 5px 10px;
-    font-size: 10px;
+
+.error {
+  color: #f53d3d;
+  margin: 5px 10px;
+  font-size: 10px;
+}
+
+.no-data {
+  margin: 50px auto;
 }
 
 .toolbar-background-md {
-    border-color: #02A1E2;
-    background: #02A1E2;
-}
-.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
-    color: white;
-}
-.toolbar-title-md{
-    color: white;
-    // padding: 0 50px;
-}
-super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon{
-    height: 60px;
-// }
-// super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
-    padding: 0;
-    padding-top: 5px;
-}
-super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button ion-icon{
-    font-size: 20px;
-}
-super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon ion-icon{
-    margin-bottom: 5px;
-}
-super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
-    font-size: 12px;
-}
-super-tabs-container{
-    height: 100% !important;
-}
-.select-md .select-icon{
-    position: absolute;
-    right: 5px;
+  border-color: #02A1E2;
+  background: #02A1E2;
 }
 
+.bar-button-default-md,
+.bar-button-clear-md-default,
+.bar-button-md-default {
+  color: white;
+}
+
+.toolbar-title-md {
+  color: white; // padding: 0 50px;
+}
+
+super-tabs-toolbar>ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon {
+  height: 60px; // }
+  // super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button{
+  padding: 0;
+  padding-top: 5px;
+}
+
+super-tabs-toolbar>ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button ion-icon {
+  font-size: 20px;
+}
+
+super-tabs-toolbar>ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button.title-and-icon ion-icon {
+  margin-bottom: 5px;
+}
+
+super-tabs-toolbar>ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button {
+  font-size: 12px;
+}
+
+super-tabs-container {
+  height: 100% !important;
+}
+
+.select-md .select-icon {
+  position: absolute;
+  right: 5px;
+}
 
 //common css
-
-.bdr-btm{
-    border-bottom: 1px solid lightgray;
+.bdr-btm {
+  border-bottom: 1px solid lightgray;
 }

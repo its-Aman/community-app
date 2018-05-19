@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 })
 export class ChatPage {
 
+  noData: boolean;
   page: number = 1;
   chatData: any[];
   @ViewChild('content') content: Content;
@@ -21,7 +22,7 @@ export class ChatPage {
     public navParams: NavParams,
     public global: GlobalProvider
   ) {
-    this.fillDummyChat();
+    // this.fillDummyChat();
     this.chatListData = this.navParams.get('data');
     this.getChatData();
   }
@@ -73,10 +74,10 @@ export class ChatPage {
     this.inputText = this.inputText.trim();
     if (this.inputText.length > 0) {
       this.dummyChat.push({
-        isMe: true,
-        userImage: 'assets/icon/sidebar-profile-photo.png',
+        from_user_id: JSON.parse(localStorage.getItem('user')).id,
+        image: 'assets/icon/sidebar-profile-photo.png',
         message: this.inputText,
-        time: new Date()
+        entry_date_time: new Date()
       });
       this.inputText = '';
       this.scrollToBottom();
@@ -92,7 +93,7 @@ export class ChatPage {
   getChatData() {
     this.global.showLoader();
     let data = {
-      to_user_id: this.chatListData.id,
+      to_user_id: this.chatListData.other_user_id,
       login_user_id: JSON.parse(localStorage.getItem('user')).id,
       page: this.page
     }
@@ -104,8 +105,12 @@ export class ChatPage {
 
           if (res.success == 'true') {
             this.chatData = res.conversation;
+            this.noData = false;
+          } else {
+            this.noData = true;
           }
         }, err => {
+          this.noData = true;
           this.global.hideLoader();
           this.global.log(`getChatData's error is`, err);
         }

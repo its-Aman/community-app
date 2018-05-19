@@ -21,30 +21,30 @@
   <ion-grid class="grid-detail">
     <ion-row>
       <ion-col col-12 class="event-detail">
-        <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Performance Name: </div>
+        <div class="event-detail-color" [ngStyle]="theme?.heading()">Performance Name: </div>
       </ion-col>
       <ion-col col-12 class="event-detail">
         <ion-item class="item-dance">
           <ion-select [(ngModel)]="person.performanceName" class="performance">
-            <ion-option value="bd" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Bhangra Dance</ion-option>
-            <ion-option value="pd" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Punjabi Dance</ion-option>
+            <ion-option [value]="performance?.id" *ngFor="let performance of performanceList; let i = index">{{performance?.value}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
       <ion-col col-12 class="event-detail">
-        <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">No. of Participants: </div>
+        <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
       </ion-col>
       <ion-col col-12 class="event-detail">
         <number-slider [seed]="person.noOfParticipants" (getValue)="person.noOfParticipants = $event"></number-slider>
       </ion-col>
 
       <ion-col col-12 class="event-detail" #col>
-        <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Special Need: </div>
+        <div class="event-detail-color" [ngStyle]="theme?.heading()">Special Need: </div>
       </ion-col>
       <ion-col col-12 class="event-detail">
         <div class="event-detail-data extra">
           <ion-item>
-            <ion-textarea [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text" (focusout)="removePadding()"></ion-textarea>
+            <ion-textarea [ngStyle]="theme?.data()" #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text"
+              (focusout)="removePadding()"></ion-textarea>
           </ion-item>
         </div>
       </ion-col>

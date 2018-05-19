@@ -10,10 +10,11 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class PerformanceModalPage {
 
+  performanceList: any[];
   person: any = {
-    performanceName: 'bd',
-    noOfParticipants: '09',
-    specialNeed: 'Extra',
+    performanceName: '',
+    noOfParticipants: '',
+    specialNeed: '',
   }
 
   constructor(
@@ -27,11 +28,12 @@ export class PerformanceModalPage {
       this.person = this.navParams.get('data');
     } else {
       this.person = {
-        performanceName: 'bd',
+        performanceName: '',
         noOfParticipants: '09',
         specialNeed: 'Extra',
       }
     }
+    this.getPerformanceList();
   }
 
   ionViewDidLoad() {
@@ -73,6 +75,49 @@ export class PerformanceModalPage {
   }
 
   submit() {
-    this.viewCtrl.dismiss(this.person);
+    this.savePerformance();
+  }
+
+  savePerformance() {
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/SavePerformance', {
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      event_id: this.navParams.get('id'),
+      performance_id: this.person.performanceName,
+      special_needs: this.person.specialNeed,
+      no_of_participants: this.person.noOfParticipants
+    }).subscribe(
+      res => {
+        this.global.hideLoader();
+        this.global.log(`savePerformance's data`, res);
+        if (res.success == 'true') {
+          this.viewCtrl.dismiss(this.person);
+        } else {
+          this.global.showToast(`${res.error}`);
+        }
+      }, err => {
+        this.global.hideLoader();
+        this.global.log(`savePerformance's data`, err);
+        this.global.showToast(`some error in submitting data`);
+      })
+  }
+
+  getPerformanceList() {
+    this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/PerformanceList`, { event_id: this.navParams.get('id') })
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`response of getPerformanceList`, res);
+          if (res.success == 'true' && res.performance.length > 0) {
+            this.performanceList = res.performance;
+            this.person.performanceName = this.performanceList[0].id;
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`error of getPerformanceList`, err);
+        });
   }
 }

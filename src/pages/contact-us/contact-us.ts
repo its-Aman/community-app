@@ -2,6 +2,8 @@ import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ThemeProvider } from '../../providers/theme/theme';
+import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser';
 
 declare var google;
 
@@ -12,6 +14,9 @@ declare var google;
 })
 export class ContactUsPage {
 
+  contactData: any;
+  noData: boolean;
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
@@ -20,12 +25,50 @@ export class ContactUsPage {
     public navParams: NavParams,
     public global: GlobalProvider,
     private geolocation: Geolocation,
+    private theme: ThemeProvider,
+    private iab: InAppBrowser
   ) {
+    this.getData();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactUsPage');
     this.getCoordinates();
+  }
+
+  getData() {
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/ContactUs', {})
+      .subscribe(res => {
+        this.global.log(`contact data is `, res);
+        if (res.success == 'true') {
+          this.noData = false;
+          this.contactData = res;
+        } else {
+          this.noData = true;
+          this.global.showToast(`No data found`);
+        }
+      }, err => {
+        this.noData = true;
+        this.global.log(`some error in contact us data`, err);
+      });
+  }
+
+  openPhone() {
+    this.global.log(`in openPhone`);
+    document.location.href = `tel:${this.contactData.phone_no}`;
+  }
+
+  openMail() {
+    this.global.log(`in openMail`);
+    document.location.href = `mailto:${this.contactData.email}?subject=You're%20Awesome&body=Already%20told%20you`;
+  }
+
+  openBrowser() {
+    this.global.log(`in openBrowser`, this.contactData.website);
+    let _iab: InAppBrowserObject = this.iab.create(this.contactData.website, '_system');
+
+    _iab.show();
   }
 
   getCoordinates() {

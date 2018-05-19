@@ -8,22 +8,22 @@
 
 
 <ion-content no-padding #content>
-  <ion-grid class="chat-grid">
-    <div *ngFor="let chat of dummyChat; let i = index;" class="div-message-container">
+  <ion-grid class="chat-grid" *ngIf="!noData">
+    <div *ngFor="let chat of chatData; let i = index;" class="div-message-container">
 
-      <ion-row *ngIf="chat?.isMe" class="row-chat-isMe">
+      <ion-row *ngIf="chat?.from_user_id != chatListData?.other_user_id" class="row-chat-isMe">
         <ion-col col-9 class="col-message-isMe">
           <div class="pointer-right"></div>
           <div class="div-message div-message-isMe">{{chat?.message}}</div>
         </ion-col>
         <ion-col col-3 class="col-image-isMe">
-          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chat?.userImage + ')'"></div>
+          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chatListData?.image + ')'"></div>
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="!chat?.isMe" class="row-chat-isMe">
+      <ion-row *ngIf="chat?.from_user_id == chatListData?.other_user_id" class="row-chat-isMe">
         <ion-col col-3 class="col-image-isMe">
-          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chat?.userImage + ')'"></div>
+          <div class="div-image-isMe image" [style.backgroundImage]="'url(' + chatListData?.image + ')'"></div>
         </ion-col>
         <ion-col col-9 class="col-message-isMe">
           <div class="pointer-left"></div>
@@ -32,20 +32,26 @@
       </ion-row>
 
       <ion-row class="row-chat-time">
-        <ion-col col-12 text-left class="col-time" *ngIf="chat?.isMe">
-          <div class="div-time">{{chat?.time | date:'shortTime'}}</div>
+        <ion-col col-12 text-left class="col-time" *ngIf="chat?.from_user_id != chatListData?.other_user_id">
+          <div class="div-time">{{chat?.entry_date_time | date:'shortTime'}}</div>
         </ion-col>
 
-        <ion-col col-12 text-right class="col-time" *ngIf="!chat?.isMe">
-          <div class="div-time">{{chat?.time | date:'shortTime'}}</div>
+        <ion-col col-12 text-right class="col-time" *ngIf="chat?.from_user_id == chatListData?.other_user_id">
+          <div class="div-time">{{chat?.entry_date_time | date:'shortTime'}}</div>
         </ion-col>
       </ion-row>
 
     </div>
   </ion-grid>
+
+  <ion-grid *ngIf="noData">
+    <div class="no-data">
+      No Data Found
+    </div>
+  </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="!noData">
   <ion-grid class="grid-input" no-padding>
     <ion-row class="row-inputBox">
       <ion-col col-10 class="col-inputBox">

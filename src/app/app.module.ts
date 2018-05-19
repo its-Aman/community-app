@@ -1,17 +1,22 @@
-import { GlobalProvider } from './../providers/global/global';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { MyApp } from './app.component';
 
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { HttpClientModule } from '@angular/common/http';
 import { ThemeProvider } from '../providers/theme/theme';
+import { GlobalProvider } from './../providers/global/global';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,7 @@ import { ThemeProvider } from '../providers/theme/theme';
   imports: [
     HttpClientModule,
     BrowserModule,
+    CommonModule,
     IonicModule.forRoot(MyApp, {
       iconMode: 'md',
       mode: 'md'
@@ -38,7 +44,8 @@ import { ThemeProvider } from '../providers/theme/theme';
     ThemeProvider,
     Geolocation,
     StatusBar,
-    Keyboard
+    Keyboard,
+    InAppBrowser,
   ]
 })
 export class AppModule { }

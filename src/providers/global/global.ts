@@ -71,7 +71,7 @@ export class GlobalProvider {
       message: message,
       duration: duration,
       position: position,
-      showCloseButton: true,
+      showCloseButton: false,
     }).present();
   }
 

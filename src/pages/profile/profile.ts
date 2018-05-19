@@ -13,6 +13,8 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class ProfilePage {
 
+  noData: boolean;
+  userProfile: any = {};
   modeOfCommunication: string[];
   profileForm: FormGroup;
   isDisabled: boolean = true;
@@ -26,19 +28,22 @@ export class ProfilePage {
     public global: GlobalProvider,
     public fb: FormBuilder,
     public keyboard: Keyboard,
-    public theme: ThemeProvider,    
+    public theme: ThemeProvider,
   ) {
     this.initForm();
+    this.getProfileData();
   }
 
   initForm() {
     this.profileForm = this.fb.group({
-      name: ['Prateek', [Validators.required]],
-      email: ['google@gmail.com', [Validators.required, Validators.email]],
-      address: ['Jaipur-302006, Rajasthan, India C:+91-141-2229900', [Validators.required]],
-      modeOfCommunication: ['E', [Validators.required]],
-      professionalService: ['P', [Validators.required]],
+      name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
+      email: [' ', [Validators.required, Validators.email]],
+      address: [' ', [Validators.required]],
+      modeOfCommunication: [['1'], [Validators.required]],
+      professionalService: ['1', [Validators.required]],
     });
+
+    this.userProfile["mobile_no"] = JSON.parse(localStorage.getItem('user')).mobileno;
   }
 
   ionViewDidLoad() {
@@ -70,18 +75,45 @@ export class ProfilePage {
 
   submit() {
     this.global.log('submit clicked', this.profileForm);
-    let foo = this.navParams.get('data');
 
-    if (foo && foo.fromLogin) {
-      if (this.profileForm.valid) {
-        this.isFormInvalid = false;
-        this.global.log('form is valid');
-        this.navCtrl.setRoot('MenuPage', { data: null });
-      } else {
-        this.global.log('form is invalid');
-        this.isFormInvalid = true;
-      }
+    if (this.profileForm.valid) {
+      this.isFormInvalid = false;
+      this.global.log('form is valid');
+      this.updateProfileData();
+    } else {
+      this.global.log('form is invalid');
+      this.isFormInvalid = true;
     }
+  }
+
+  getProfileData() {
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/Profile', { login_user_id: JSON.parse(localStorage.getItem('user')).id })
+      .subscribe(
+        res => {
+          this.global.log(`getProfileData's user data is `, res)
+          this.global.hideLoader();
+          if (res.success == 'true') {
+            this.noData = false;
+            this.userProfile = res.userprofile;
+            this.setFormData();
+          } else {
+            this.noData = true;
+            this.global.log(`${res.error}`);
+          }
+        }, err => {
+          this.noData = true;
+          this.global.hideLoader();
+          this.global.log(`some error in getting user data`);
+        });
+  }
+
+  setFormData() {
+    this.profileForm.controls['name'].setValue(this.userProfile.name);
+    this.profileForm.controls['email'].setValue(this.userProfile.email);
+    this.profileForm.controls['address'].setValue(this.userProfile.address);
+    this.profileForm.controls['modeOfCommunication'].setValue(this.userProfile.mode_of_communication);
+    this.profileForm.controls['professionalService'].setValue(this.userProfile.professional_service_id);
   }
 
   change() {
@@ -115,5 +147,49 @@ export class ProfilePage {
 
     this.global.log(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
+  }
+
+  updateProfileData() {
+    let foo = this.navParams.get('data');
+
+    let data = this.getUpdatedProfile();
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/EditProfile', data)
+      .subscribe(res => {
+        this.global.hideLoader();
+        if (res.success == 'true') {
+          this.userProfile = res.user;
+          this.setFormData();
+          this.global.showToast(`Successfully updated the profile`);
+          if (foo && foo.fromLogin) {
+            this.navCtrl.setRoot('MenuPage', { data: null });
+          }
+        } else {
+          this.global.showToast(`${res.error}`);
+        }
+      }, err => {
+        this.global.hideLoader();
+        this.global.showToast(`Some error in updating profile`);
+      });
+
+  }
+
+  getUpdatedProfile() {
+    let data = {
+      Login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      name: this.profileForm.controls['name'].value,
+      email: this.profileForm.controls['email'].value,
+      address: this.profileForm.controls['address'].value,
+      mode_of_communication: this.profileForm.controls['modeOfCommunication'].value,
+      city: "1",
+      state: "1",
+      country: "1",
+      pincode: "301001",
+      professional_service_id: this.profileForm.controls['professionalService'].value
+    }
+
+    this.global.log(`data to be updated in profile api is`, data);
+
+    return data;
   }
 }

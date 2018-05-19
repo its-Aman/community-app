@@ -11,22 +11,28 @@
 
 
 <ion-content no-padding>
-  <ion-grid>
+  <ion-grid *ngIf="!noData">
 
     <ion-row class="event-row" (click)="openEvent(i)" *ngFor="let event of eventDummydata; let i=index;">
       <ion-col col-4>
         <div class="event-image image" [style.backgroundImage]="event?.event_image"></div>
       </ion-col>
       <ion-col col-8 text-left class="col-event-detail">
-        <div class="heading" [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.special_data_font_size"> {{event?.event_name}} </div>
-        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">From :
-          <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{event?.from_date}}</span>
+        <div class="heading" [ngStyle]="theme?.special()">
+          {{event?.event_name}} </div>
+        <div class="padding" [ngStyle]="theme?.heading()">From :
+          <span class="time" [ngStyle]="theme?.data()">{{event?.from_date}}</span>
         </div>
-        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-          <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{event?.to_date}}</span>
+        <div class="padding" [ngStyle]="theme?.heading()">To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+          <span class="time" [ngStyle]="theme?.data()">{{event?.to_date}}</span>
         </div>
       </ion-col>
     </ion-row>
 
+  </ion-grid>
+  <ion-grid *ngIf="noData">
+    <div class="no-data">
+      No Data Found
+    </div>
   </ion-grid>
 </ion-content>

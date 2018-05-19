@@ -151,7 +151,7 @@ export class CommunityNamePage {
   }
 
   performance() {
-    let performance = this.modal.create('PerformanceModalPage', { data: this.personData }, { cssClass: 'performance' });
+    let performance = this.modal.create('PerformanceModalPage', { data: this.personData, id: this.eventData.event.id}, { cssClass: 'performance' });
     performance.present();
     performance.onDidDismiss(data => {
       this.global.log(`modal data`, data);

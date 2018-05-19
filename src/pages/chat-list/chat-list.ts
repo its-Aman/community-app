@@ -94,7 +94,8 @@ export class ChatListPage {
             if (this.chatList.length > 0) {
               this.noData = false;
               this.chatList.forEach(element => {
-                element.image = this.global.sanatizeImage(`http://winstech.in/community/uploads/user/${element.image}`);
+                // element.image = this.global.sanatizeImage(`http://winstech.in/community/uploads/user/${element.image}`);
+                element.image = `http://winstech.in/community/uploads/user/${element.image}`;
               });
             } else {
               this.noData = true;

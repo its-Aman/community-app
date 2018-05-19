@@ -1,7 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 import { ThemeProvider } from '../../providers/theme/theme';
 
 declare var google;
@@ -13,6 +12,9 @@ declare var google;
 })
 export class PromotionDetailsPage {
 
+  noData: boolean;
+  couponDetail: any;
+  previousPageData: any;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
@@ -20,26 +22,38 @@ export class PromotionDetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
-    private geolocation: Geolocation,
-    public theme: ThemeProvider,    
+    public theme: ThemeProvider,
   ) {
+    this.previousPageData = this.navParams.get('data');
+    this.getCouponDetail();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PromotionDetailsPage');
-    this.getCoordinates();
   }
 
-  getCoordinates() {
-    this.geolocation.getCurrentPosition().then(res => {
-      this.global.log('geolocation res', res);
-      this.loadMap(res.coords);
-    }).catch(err => {
-      this.global.log('some error in geolocation', err);
-      if (err.code == 1) {
-        this.global.showToast(err.message);
-      }
-    });
+  getCouponDetail() {
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/PromtionDetails', { promtion_id: this.previousPageData.id })
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          if (res.success == 'true') {
+            this.noData = false;
+            this.couponDetail = res.Promotiondetail;
+            if (this.couponDetail.geo_lat && this.couponDetail.geo_long) {
+              this.loadMap({ latitude: this.couponDetail.geo_lat, longitude: this.couponDetail.geo_long });
+            }
+          } else {
+            this.global.showToast(`${res.error}`);
+            this.noData = true;
+          }
+        }, err => {
+          this.noData = true;
+          this.global.hideLoader();
+
+        });
+
   }
 
   loadMap(coords: any) {

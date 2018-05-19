@@ -4,22 +4,23 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Promotion and <br *ngIf="global?.platform?.width() < 400"> Discount</ion-title>
+    <ion-title>Promotion and
+      <br *ngIf="global?.platform?.width() < 400"> Discount</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-grid class="grid-promo">
-    <div *ngFor='let b of cat; let i=index'>
+  <ion-grid class="grid-promo" *ngIf="!noData">
+    <div *ngFor='let promotionAndDiscount of promotionAndDiscountData?.NEW; let i=index'>
 
       <ion-row class="row-promo" (click)="openCat(i)">
         <ion-col col-12>
-          <div class="category" [class.active]="b">Category {{i+1}}</div>
+          <div class="category" [class.active]="cat[i]">NEW</div>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="b" class="row-coupon" (click)="openDetails()">
+      <ion-row *ngIf="cat[i]" class="row-coupon" (click)="openDetails(i)">
         <ion-col col-6 class="border-bottom border-right">
           <div class="header">Coupon Code</div>
         </ion-col>
@@ -30,44 +31,31 @@
         </ion-col>
         <ion-col col-6 class="col-address" text-left>
           <div>
-            <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Address : </b>
+            <b [ngStyle]="theme?.heading()">Address : </b>
           </div>
-          <div [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">Lorem ipsum dolor sit amet</div>
+          <div [ngStyle]="theme?.data()">{{adpromotionAndDiscount?.adress}}</div>
         </ion-col>
         <ion-col col-6 class="col-time" text-right>
           <div text-left>
-            <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">From:</b>
-            <span class="date" [style.font-size]="theme?.defaultTheme?.data_font_size">02-01-2018</span>
+            <b [ngStyle]="theme?.heading()">From:</b>
+            <span class="date" [style.font-size]="theme?.data_font_size">{{promotionAndDiscount?.from_date}}</span>
           </div>
           <div text-left>
-            <b [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">To:</b>
-            <span class="date" [style.font-size]="theme?.defaultTheme?.data_font_size">02-01-2018</span>
+            <b [ngStyle]="theme?.heading()">To:</b>
+            <span class="date" [style.font-size]="theme?.data_font_size">{{promotionAndDiscount?.to_date}}</span>
           </div>
-          <div class="usage" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">
-            No. of Usage: <span [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">07</span>
+          <div class="usage" [ngStyle]="theme?.heading()">
+            No. of Usage:
+            <span [ngStyle]="theme?.data()">{{promotionAndDiscount?.no_of_usages}}</span>
           </div>
         </ion-col>
       </ion-row>
     </div>
-    <!-- <ion-row class="row-promo" (click)="openCat(2)">
-        <ion-col col-12>
-          <div class="category">Category 2</div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="row-promo" (click)="openCat(3)">
-        <ion-col col-12>
-          <div class="category">Category 3</div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="row-promo" (click)="openCat(4)">
-        <ion-col col-12>
-          <div class="category">Category 4</div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="row-promo" (click)="openCat(5)">
-      <ion-col col-12>
-        <div class="category">Category 5</div>
-      </ion-col>
-    </ion-row> -->
+  </ion-grid>
+
+  <ion-grid *ngIf="noData">
+    <div class="no-data">
+      No Data Found
+    </div>
   </ion-grid>
 </ion-content>

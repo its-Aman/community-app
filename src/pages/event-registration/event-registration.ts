@@ -12,7 +12,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class EventRegistrationPage {
 
-  i: number;
+  _index: number;
   users: any[];
   searchedUser: any[];
   previousPageData: any;
@@ -29,8 +29,8 @@ export class EventRegistrationPage {
     specialNeed: '',
   }
 
-  volunteer = true;
-  performance = true;
+  volunteer = false;
+  performance = false;
 
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
@@ -46,59 +46,66 @@ export class EventRegistrationPage {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
 
+    this.global.log(`previousPageData in event-reg is`, this.previousPageData);
+
     this.initForm();
-    this.getPerformanceList();
-    
-  //   this.searchedUser = [
-  //     {
-  //         "id": "33",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "32",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "31",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "30",
-  //         "name": "Deepshikha Soni"
-  //     },
-  //     {
-  //         "id": "29",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "28",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "27",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "26",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "25",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "24",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "23",
-  //         "name": ""
-  //     },
-  //     {
-  //         "id": "2",
-  //         "name": "fname"
-  //     }
-  // ]
+    if (+this.previousPageData.event.entry_for == 1 || +this.previousPageData.event.entry_for == 3) {
+      this.getPerformanceList();
+    } else {
+      this.searchUser();
+    }
+
+    // this.searchedUser = [
+    //   {
+    //     "id": "33",
+    //     "name": "Aman"
+    //   },
+    //   {
+    //     "id": "32",
+    //     "name": "Ravi"
+    //   },
+    //   {
+    //     "id": "31",
+    //     "name": "Pooja"
+    //   },
+    //   {
+    //     "id": "30",
+    //     "name": "Deepshikha Soni"
+    //   },
+    //   {
+    //     "id": "29",
+    //     "name": "Pankaj"
+    //   },
+    //   {
+    //     "id": "28",
+    //     "name": "Salman"
+    //   },
+    //   {
+    //     "id": "27",
+    //     "name": "Rishab"
+    //   },
+    //   {
+    //     "id": "26",
+    //     "name": "Satish"
+    //   },
+    //   {
+    //     "id": "25",
+    //     "name": "Martin"
+    //   },
+    //   {
+    //     "id": "24",
+    //     "name": "Prasan"
+    //   },
+    //   {
+    //     "id": "23",
+    //     "name": "Badyal"
+    //   },
+    //   {
+    //     "id": "2",
+    //     "name": "fname"
+    //   }
+    // ]
+
   }
 
   ionViewDidLoad() {
@@ -129,8 +136,8 @@ export class EventRegistrationPage {
 
   initForm() {
     this.userForm = this.fb.group({
-      name: [null, [Validators.required]],
-      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
+      mobile: [JSON.parse(localStorage.getItem('user')).mobileno, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       noOfMembers: [1, [Validators.required]]
     });
   }
@@ -171,42 +178,53 @@ export class EventRegistrationPage {
         }
     */
     this.global.log(`in calculateEventPerson and returning`, _ret);
-    return _ret;
+    return _ret + '';
   }
 
   submit() {
     this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
-    if (this.userForm.valid) {
-      if (this.persons.length > 0) {
-        if (this.person.noOfParticipants > 0) {
-          let data = {
-            event_id: this.event.event.id,
-            login_user_id: JSON.parse(localStorage.getItem('user')).id,
-            name: this.userForm.controls['name'].value,
-            mobile_no: this.userForm.controls['mobile'].value,
-            no_of_members: this.userForm.controls['noOfMembers'].value,
-            event_performance_id: this.person.performanceName,
-            entry_for: this.calculateEventPerson(),
-            no_of_participants: this.person.noOfParticipants,
-            special_needs: this.person.specialNeed,
-            members: this.persons,
-            // event_entry_id: this.event.event_entry_id,
-          }
-
-          this.global.log(`data to be posting is `, data);
-          this.registerEvent(data);
-
-        } else {
-          this.global.showToast(`Number of participants can't be zero`);
-        }
-      } else {
-        this.global.showToast('Please enter the members details');
-      }
-    } else {
-      this.global.showToast('Please enter the values');
-      this.isFormInvalid = true;
+    // if (this.userForm.valid) {
+    // if (this.persons.length > 0 && this.validatePersons()) {
+    //   if ( +this.previousPageData.event.entry_for != 0 && this.person.noOfParticipants > 0) {
+    let data = {
+      event_id: this.event.event.id,
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      name: this.userForm.controls['name'].value,
+      mobile_no: this.userForm.controls['mobile'].value,
+      no_of_members: this.userForm.controls['noOfMembers'].value,
+      entry_for: this.calculateEventPerson(),
+      event_performance_id: this.performance ? this.person.performanceName : null,
+      no_of_participants: this.performance ? this.person.noOfParticipants : null,
+      special_needs: this.performance ? this.person.specialNeed : null,
+      members: this.persons,
+      // event_entry_id: this.event.event_entry_id,
     }
+
+    this.global.log(`data to be posting is `, data);
+    this.registerEvent(data);
+
+    //     } else if (this.performance) {
+    //       this.global.showToast(`Number of participants can't be zero`);
+    //     }
+    //   } else {
+    //     this.global.showToast('Please enter the members details');
+    //   }
+    // } else {
+    //   this.global.showToast('Please enter the values');
+    //   this.isFormInvalid = true;
+    // }
+  }
+
+  validatePersons() {
+    this.persons.forEach(p => {
+      this.global.log(`validata person`, p);
+      if (!p.name || !p.age || !p.amount) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
 
   openCalendar() {
@@ -294,15 +312,14 @@ export class EventRegistrationPage {
     this.global.postRequest(`${this.global.base_path}Login/PerformanceList`, { event_id: this.event.event.id })
       .subscribe(
         res => {
-          this.global.hideLoader();
+          // this.global.hideLoader();
           this.global.log(`response of getPerformanceList`, res);
+          this.searchUser();
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList.push(...res.performance);
             this.person.performanceName = res.performance[0].id;
-            this.searchUser();
-
           } else {
-            this.global.showToast(`${res.error}`);
+            this.global.log(`${res.error}`);
           }
         }, err => {
           this.global.hideLoader();
@@ -318,7 +335,7 @@ export class EventRegistrationPage {
           // this.global.hideLoader();
           this.global.log(`response of getAmountAccToAge`, res);
           if (res.success == 'true') {
-            this.persons[i].amount = +res.amount;
+            this.persons[i].amount = res.amount;
             this.calcTotal();
           } else {
             this.global.showToast(`${res.error}`);
@@ -339,7 +356,7 @@ export class EventRegistrationPage {
   }
 
   searchUser() {
-    this.global.showLoader();
+    // this.global.showLoader();
     this.global.postRequest(this.global.base_path + 'Login/ListofUsers', {})
       .subscribe(res => {
         this.global.hideLoader();
@@ -354,12 +371,12 @@ export class EventRegistrationPage {
 
   searchingUser(name: string, i: number) {
     this.global.log('in searching user');
-    this.i = i;
+    this._index = i;
 
     if (name.length > 0) {
-      this.users = [];      
+      this.users = [];
       this.searchedUser.forEach((user: any) => {
-        if (user.name && user.name.includes(name)) {
+        if (user.name && user.name.toLowerCase().includes(name.toLowerCase())) {
           this.users.push(user);
         }
       });
@@ -370,8 +387,9 @@ export class EventRegistrationPage {
   }
 
   itemSelected(item) {
-    this.persons[this.i].name = item.name;
-    this.i = null;
+    this.global.log(`in itemSelect`, item);
+    this.persons[this._index].name = item.name;
+    this._index = null;
     this.users = [];
   }
 }

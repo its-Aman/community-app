@@ -23,9 +23,9 @@ export class ThemeProvider {
       "heading_font_colour": "#777777",
       "data_font_colour": "#6f6f6f",
       "special_data_font_colour": "#02A1E2",
-      "data_font_size": "12px",
-      "heading_font_size": "12px",
-      "special_data_font_size": "14px",
+      "data_font_size": "12",
+      "heading_font_size": "12",
+      "special_data_font_size": "14",
       "community_name": "dg",
       "logo_name": this.sanatizeImage("http://winstech.in/community/uploads/cummunitylogo/804204779.png"),
       "address": "gj",
@@ -46,4 +46,35 @@ export class ThemeProvider {
   sanatizeImage(image: string): any {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
+
+  heading() {
+    let data = {
+      'font-size': this.defaultTheme.heading_font_size + 'px !important',
+      'color': this.defaultTheme.heading_font_colour,
+      // 'border': '1px solid red'
+    }
+    // console.log(`data to be returned form heading is `, data);
+    return data;
+  }
+
+  data() {
+    let data = {
+      'font-size': this.defaultTheme.data_font_size + 'px !important',
+      'color': this.defaultTheme.data_font_colour,
+      // 'border': '1px solid green'
+    }
+    // console.log(`data to be returned form data is `, data);
+    return data;
+  }
+
+  special() {
+    let data = {
+      'font-size': this.defaultTheme.special_data_font_size + 'px !important',
+      'color': this.defaultTheme.special_data_font_colour,
+      // 'border': '1px solid blue'
+    }
+    // console.log(`data to be returned form special is `, data);
+    return data;
+  }
+
 }

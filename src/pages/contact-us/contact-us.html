@@ -8,62 +8,65 @@
 
 
 <ion-content no-padding>
-  <ion-grid class="grid-image">
+  <ion-grid class="grid-image" *ngIf="!noData">
     <ion-row>
       <ion-col col-12 class="images">
         <div class="backgroundImage image blur"></div>
-        <div class="profileImage image"></div>
+        <div [style.backgroundImage]="'url(http://winstech.in/community/uploads/cummunitylogo/' + contactData?.logo_name + ')'" class="profileImage image"></div>
         <div class="get-in">GET IN TOUCH</div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-grid class="grid-details">
+  <ion-grid class="grid-details" *ngIf="!noData">
     <ion-row class="row-address">
-      <ion-col col-12 class="heading" text-left>
+      <ion-col col-12 class="heading" text-left [ngStyle]="theme?.heading()">
         Address
       </ion-col>
       <ion-col col-1 text-center>
         <ion-icon ios="md-lock" md="md-lock"></ion-icon>
       </ion-col>
-      <ion-col col-11>
-        645 Howe Street. Vancouver, British Columbia, CANADA V6C 2Y9.
+      <ion-col col-11 [ngStyle]="theme?.data()">
+        <!-- 645 Howe Street. Vancouver, British Columbia, CANADA V6C 2Y9. -->
+        {{contactData?.address}}
       </ion-col>
     </ion-row>
 
     <ion-row class="row-phone">
-      <ion-col col-12 class="heading" text-left>
+      <ion-col col-12 class="heading" text-left [ngStyle]="theme?.heading()">
         Phone Number
       </ion-col>
-      <ion-col col-1 text-center>
+      <ion-col col-1 text-center (click)=openPhone()>
         <ion-icon ios="md-phone-portrait" md="md-phone-portrait"></ion-icon>
       </ion-col>
-      <ion-col col-11>
-        +1-604-687-1122.
+      <ion-col col-11 [ngStyle]="theme?.data()" (click)=openPhone()>
+        <!-- +1-604-687-1122. -->
+        {{contactData?.phone_no}}
       </ion-col>
     </ion-row>
 
     <ion-row class="row-email">
-      <ion-col col-12 class="heading" text-left>
+      <ion-col col-12 class="heading" text-left [ngStyle]="theme?.heading()">
         Email
       </ion-col>
-      <ion-col col-1 text-center>
+      <ion-col col-1 text-center (click)="openMail()">
         <ion-icon ios="md-mail" md="md-mail"></ion-icon>
       </ion-col>
-      <ion-col col-11>
-        google@gmail.com
+      <ion-col col-11 [ngStyle]="theme?.data()" (click)="openMail()">
+        <!-- google@gmail.com -->
+        {{contactData?.email}}
       </ion-col>
     </ion-row>
 
     <ion-row class="row-website">
-      <ion-col col-12 class="heading" text-left>
+      <ion-col col-12 class="heading" text-left [ngStyle]="theme?.heading()">
         Website
       </ion-col>
-      <ion-col col-1 text-center>
+      <ion-col col-1 text-center (click)="openBrowser()">
         <ion-icon ios="md-globe" md="md-globe"></ion-icon>
       </ion-col>
-      <ion-col col-11>
-        www.rajasthancommunity.com
+      <ion-col col-11 [ngStyle]="theme?.data()" (click)="openBrowser()">
+        {{contactData?.website}}
       </ion-col>
     </ion-row>
 
@@ -74,5 +77,11 @@
       <ion-col col-12>
       </ion-col>
     </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="noData">
+    <div class="no-data">
+      No Data Found.
+    </div>
   </ion-grid>
 </ion-content>

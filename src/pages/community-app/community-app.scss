@@ -1,54 +1,49 @@
 page-community-app {
-    .grid-profession{
-        .row-profession{
-            .active{
-                background-color: #02A1E2 !important;
-                color: white !important;
-                border: none !important;
-            }
-            .col{
-                padding: 5px 0;
-            }
-            .profession{
-                background-color: white;
-                // height: 5rem;
-                border: 1px solid lightgray;
-                // font-size: 20px;
-                display: flex;
-                align-items: center;
-                padding: 5px 10px;
-                border-radius: 3px;
-            }
-        }
-        .background-color{
-            background-color: #FAFAFA;
-            padding: 10px;
-            width: 100%;
-        }
-        .details{
-            .row-header{
-                height: 40px;
-                background-color: #02A1E2;
-                color: white;
-                // font-size: 18px;
-                padding: 0 10px;
-            }
-            ion-row{
-                // font-size: 16px;
-                align-items: center;
-                padding: 10px 15px;
-                background-color: white;
-                border-bottom: 1px solid lightgray;
-    
-                ion-col{
-                    padding: 0;
-                }
-            }
-            .total-row{
-                font-weight: 600;
-                background-color: #F0F0F0;
-    
-            }
-        }
+  .grid-profession {
+    .row-profession {
+      .active {
+        background-color: #02A1E2 !important;
+        color: white !important;
+        border: none !important;
+      }
+      .col {
+        padding: 5px 0;
+      }
+      .profession {
+        background-color: white; // height: 5rem;
+        border: 1px solid lightgray; // font-size: 20px;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 3px;
+      }
     }
+    .background-color {
+      background-color: #FAFAFA;
+      padding: 10px;
+      width: 100%;
+    }
+    .details {
+      .row-header {
+        height: 40px;
+        background-color: #02A1E2;
+        color: white; // font-size: 18px;
+        padding: 0 10px;
+      }
+      ion-row {
+        // font-size: 16px;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: white;
+        border-bottom: 1px solid lightgray;
+        ion-col {
+          padding: 0;
+        }
+      }
+      .total-row {
+        font-weight: 600;
+        background-color: #F0F0F0;
+      }
+    }
+  }
 }

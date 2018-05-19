@@ -14,30 +14,30 @@
         <div class="event-image image"></div>
       </ion-col>
       <ion-col col-7 text-left>
-        <div class="heading" text-nowrap [style.color]="theme?.defaultTheme?.special_data_font_colour" [style.font-size]="theme?.defaultTheme?.special_data_font_size">{{previousPageData?.event?.event_name}}</div>
+        <div class="heading" text-nowrap  [ngStyle]="theme?.special()">{{previousPageData?.event?.event_name}}</div>
         <!-- <div class="description">{{event?.evententrydetail?.description}}</div> -->
-        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">From :
+        <div class="padding" [ngStyle]="theme?.heading()">From :
           <div>
-            <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{previousPageData?.event?.from_date}}</span>
+            <span class="time" [ngStyle]="theme?.data()">{{previousPageData?.event?.from_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </div>
         </div>
-        <div class="padding" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">
+        <div class="padding" [ngStyle]="theme?.heading()">
           To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
           <div>
-            <span class="time" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{previousPageData?.event?.to_date}}</span>
+            <span class="time" [ngStyle]="theme?.data()">{{previousPageData?.event?.to_date}}</span>
             <ion-icon class="calender" name="md-calendar" (click)="openCalendar()"></ion-icon>
           </div>
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">{{previousPageData?.event?.description}}</div>
+        <div class="description" [ngStyle]="theme?.data()">{{previousPageData?.event?.description}}</div>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col col-6 class="col-status">
-        <div class="status" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Payment Status</div>
+        <div class="status" [ngStyle]="theme?.heading()">Payment Status</div>
       </ion-col>
       <ion-col col-1 class="status-image">
         <div class="failImage image"></div>
@@ -55,19 +55,19 @@
 
         <ion-row>
           <ion-col col-12 class="person-detail">
-            <div class="person-detail-color"  [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Name: </div>
+            <div class="person-detail-color"  [ngStyle]="theme?.heading()">Name: </div>
             <!-- <div class="person-detail-data" text-nowrap> Aman Kumar</div> -->
             <ion-item>
-              <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" placeholder="Name" formControlName="name" type="text" (focusout)="removePadding()"></ion-input>
+              <ion-input [disabled]="true" [ngStyle]="theme?.data()" placeholder="Name" formControlName="name" type="text" (focusout)="removePadding()"></ion-input>
             </ion-item>
           </ion-col>
           <p class="error" *ngIf="userForm?.controls['name']?.hasError('required') && (userForm?.controls['name']?.dirty || isFormInvalid)">Name is Required</p>
 
           <ion-col col-12 class="person-detail">
-            <div class="person-detail-color" style="width: 110px;" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Mobile No. : </div>
+            <div class="person-detail-color" style="width: 110px;" [ngStyle]="theme?.heading()">Mobile No. : </div>
             <!-- <div class="person-detail-data"> 123456789</div> -->
             <ion-item>
-              <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()"></ion-input>
+              <ion-input [disabled]="true" [ngStyle]="theme?.data()" placeholder="Mobile no." formControlName="mobile" type="tel" (focusout)="removePadding()"></ion-input>
             </ion-item>
           </ion-col>
           <p class="error" *ngIf="userForm?.controls['mobile']?.hasError('required') && (userForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
@@ -75,7 +75,7 @@
           <p class="error" *ngIf="userForm?.controls['mobile']?.hasError('maxlength') && (userForm?.controls['mobile']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
 
           <ion-col col-12 class="person-detail">
-            <div class="person-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">No. Of Members: </div>
+            <div class="person-detail-color" [ngStyle]="theme?.heading()">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
             <number-slider class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
               (increased)="numberValue($event, true)"></number-slider>
@@ -96,20 +96,29 @@
           <ion-col col-6 text-center>TICKET AMOUNT</ion-col>
         </ion-row>
 
+        <ion-row style="height: auto" *ngIf="users && users?.length > 0">
+            <ion-col col-12>
+              <div>
+                <div *ngFor="let item of users" (click)="itemSelected(item)" style="margin: 5px;">
+                  {{ item?.name }}
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
         <ion-row *ngFor="let person of persons; let i = index;" class="table bdr-btm">
           <ion-col col-4>
             <ion-item>
-              <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" [(ngModel)]='person.name' type="text" placeholder="Name" (focusout)="removePadding()"></ion-input>
+              <ion-input (keyup)="searchingUser(person.name, i)" [ngStyle]="theme?.data()" [(ngModel)]='person.name' type="text" placeholder="Name" (focusout)="removePadding()"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col col-2>
             <ion-item>
-              <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" [(ngModel)]='person.age' type="tel" placeholder="Age" (focusout)="removePadding()" (keyup)="checkAge(i)"></ion-input>
+              <ion-input [ngStyle]="theme?.data()" [(ngModel)]='person.age' type="tel" placeholder="Age" (focusout)="removePadding()" (keyup)="checkAge(i)"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col col-5 text-center class="amount">
             <ion-item>
-              <ion-input [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" [disabled]='true' [(ngModel)]='person.amount' placeholder="Amount" type="text" (focusout)="removePadding()"></ion-input>
+              <ion-input [ngStyle]="theme?.data()" [disabled]='true' [(ngModel)]='person.amount' placeholder="Amount" type="text" (focusout)="removePadding()"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col col-1 text-center class="close" (click)="removeItem(i)">
@@ -126,33 +135,43 @@
 
       </div>
 
-      <ion-row class="row-radio">
+      <ion-row class="row-radio" *ngIf="+event?.evententrydetail?.entry_for != 0">
         <ion-col col-12 class="col-text">
-          <div [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Are You Interested in ?</div>
+          <div [ngStyle]="theme?.heading()">Are You Interested in ?</div>
         </ion-col>
-        <ion-col col-12>
+        <!-- <ion-col col-12>
           <ion-item>
-            <ion-label *ngIf="!eventPerson" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Detail</ion-label>
+            <ion-label *ngIf="!eventPerson" [ngStyle]="theme?.heading()">Detail</ion-label>
             <ion-select [(ngModel)]="eventPerson" multiple='true'>
-              <!-- <ion-option value="0">NONE</ion-option> -->
-              <!-- <ion-option value="1">BOTH</ion-option> -->
-              <ion-option value="2" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">VOLUNTEER</ion-option>
-              <ion-option value="3" [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size">PERFORMANCE</ion-option>
+              <ion-option value="2" [ngStyle]="theme?.data()">VOLUNTEER</ion-option>
+              <ion-option value="3" [ngStyle]="theme?.data()">PERFORMANCE</ion-option>
             </ion-select>
           </ion-item>
-        </ion-col>
+        </ion-col> -->
+        <ion-col *ngIf="+event?.evententrydetail?.entry_for == 2 || +event?.evententrydetail?.entry_for == 1">
+            <ion-item>
+              <ion-label [ngStyle]="theme?.data()">VOLUNTEER</ion-label>
+              <ion-checkbox [(ngModel)]="volunteer" style="margin: 8px;"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          <ion-col *ngIf="+event?.evententrydetail?.entry_for == 3 || +event?.evententrydetail?.entry_for == 1">
+            <ion-item>
+              <ion-label [ngStyle]="theme?.data()">PERFORMANCE</ion-label>
+              <ion-checkbox [(ngModel)]="performance" style="margin: 8px;"></ion-checkbox>
+            </ion-item>
+          </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="eventPerson">
+      <ion-row *ngIf="performance && event?.evententrydetail?.entry_for != 0">
         <ion-col col-12 class="event-detail">
-          <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Performance Name: </div>
+          <div class="event-detail-color" [ngStyle]="theme?.heading()">Performance Name: </div>
           <!-- <div class="event-detail-data"> -->
           <!-- <ion-input [(ngModel)]='person.performanceName' type="text" (focusout)="removePadding()"></ion-input> -->
         </ion-col>
         <ion-col col-12 class="event-detail">
           <ion-item class="item-dance">
             <ion-select [(ngModel)]="person.performanceName" class="performance">
-              <ion-option [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" *ngFor="let performance of performanceList" [value]="performance?.id">{{performance?.value}}</ion-option>
+              <ion-option [ngStyle]="theme?.data()" *ngFor="let performance of performanceList" [value]="performance?.id">{{performance?.value}}</ion-option>
               <!-- <ion-option value="bd">Bhangra Dance</ion-option>
                 <ion-option value="pd">Punjabi Dance</ion-option> -->
             </ion-select>
@@ -161,19 +180,19 @@
         </ion-col>
 
         <ion-col col-12 class="event-detail">
-          <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">No. of Participants: </div>
+          <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
           <number-slider class="num-sli" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>
-          <div class="event-detail-color" [style.color]="theme?.defaultTheme?.heading_font_colour" [style.font-size]="theme?.defaultTheme?.heading_font_size">Special Need: </div>
+          <div class="event-detail-color" [ngStyle]="theme?.heading()">Special Need: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
           <div class="event-detail-data extra">
             <ion-item>
-              <ion-textarea [style.color]="theme?.defaultTheme?.data_font_colour" [style.font-size]="theme?.defaultTheme?.data_font_size" #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text" (focusout)="removePadding()"></ion-textarea>
+              <ion-textarea [ngStyle]="theme?.data()" #extra rows="1" #ip (input)="change(ip, col)" [(ngModel)]='person.specialNeed' type="text" (focusout)="removePadding()"></ion-textarea>
             </ion-item>
           </div>
         </ion-col>

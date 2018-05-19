@@ -12,9 +12,13 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class EditEventPage {
 
+  users: any[];
+  _index: number;
+  searchedUser: any;
   total: number;
   event: any;
-  eventPerson: string[] = [];
+  performance: boolean = false;
+  volunteer: boolean = false;
   userForm: FormGroup;
   isFormInvalid: boolean = false;
   persons: any[] = [{ name: null, age: null, amount: null }];
@@ -34,11 +38,16 @@ export class EditEventPage {
     public fb: FormBuilder,
     public global: GlobalProvider,
     public keyboard: Keyboard,
-    public theme: ThemeProvider,    
+    public theme: ThemeProvider,
   ) {
     this.previousPageData = this.navParams.get('data');
     this.initForm();
-    this.getPerformanceList();
+    if (+this.previousPageData.event.entry_for == 1 || +this.previousPageData.event.entry_for == 3) {
+      this.getPerformanceList();
+    } else {
+      this.getEditEventDetail(true);
+    }
+    this.searchUser();
   }
 
   ionViewDidLoad() {
@@ -69,8 +78,8 @@ export class EditEventPage {
 
   initForm() {
     this.userForm = this.fb.group({
-      name: [null, [Validators.required]],
-      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
+      mobile: [JSON.parse(localStorage.getItem('user')).mobileno, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       noOfMembers: [1, [Validators.required]]
     });
   }
@@ -94,50 +103,59 @@ export class EditEventPage {
 
   calculateEventPerson() {
     let _ret: number = 0;
-    if (this.eventPerson.length == 0) {
-      _ret = 0;
-    } else if (this.eventPerson.length == 2) {
+
+    if (this.volunteer && this.performance) {
       _ret = 1;
-    } else if (this.eventPerson.length == 1) {
-      _ret = +this.eventPerson[0];
+    } else if (this.volunteer) {
+      _ret = 2;
+    } if (this.performance) {
+      _ret = 3;
     }
 
+    // if (this.performance.length == 0) {
+    //   _ret = 0;
+    // } else if (this.performance.length == 2) {
+    //   _ret = 1;
+    // } else if (this.performance.length == 1) {
+    //   _ret = +this.performance[0];
+    // }
+
     this.global.log(`in calculateEventPerson and returning`, _ret);
-    return _ret;
+    return _ret + '';
   }
 
   submit() {
     this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
-    if (this.userForm.valid) {
-      if (this.persons.length > 0) {
-        if (this.person.noOfParticipants > 0) {
-          let data = {
-            event_id: this.previousPageData.event.id,
-            login_user_id: JSON.parse(localStorage.getItem('user')).id,
-            name: this.userForm.controls['name'].value,
-            mobile_no: this.userForm.controls['mobile'].value,
-            no_of_members: this.userForm.controls['noOfMembers'].value,
-            entry_for: this.calculateEventPerson(),
-            event_performance_id: this.person.performanceName,
-            no_of_participants: this.person.noOfParticipants,
-            special_needs: this.person.specialNeed,
-            members: this.persons,
-          }
-
-          this.global.log(`data to be posting is `, data);
-          this.editEvent(data);
-
-        } else {
-          this.global.showToast(`Number of participants can't be zero`);
-        }
-      } else {
-        this.global.showToast('Please enter the members details');
-      }
-    } else {
-      this.global.showToast('Please enter the values');
-      this.isFormInvalid = true;
+    // if (this.userForm.valid) {
+    //   if (this.persons.length > 0) {
+    //     if (this.person.noOfParticipants > 0) {
+    let data = {
+      event_id: this.previousPageData.event.id,
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      name: this.userForm.controls['name'].value,
+      mobile_no: this.userForm.controls['mobile'].value,
+      no_of_members: this.userForm.controls['noOfMembers'].value + '',
+      entry_for: this.calculateEventPerson(),
+      event_performance_id: this.performance ? this.person.performanceName : null,
+      no_of_participants: this.performance ? this.person.noOfParticipants : null,
+      special_needs: this.performance ? this.person.specialNeed : null,
+      members: this.persons,
     }
+
+    this.global.log(`data to be posting is `, data);
+    this.editEvent(data);
+
+    //     } else {
+    //       this.global.showToast(`Number of participants can't be zero`);
+    //     }
+    //   } else {
+    //     this.global.showToast('Please enter the members details');
+    //   }
+    // } else {
+    //   this.global.showToast('Please enter the values');
+    //   this.isFormInvalid = true;
+    // }
   }
 
 
@@ -230,13 +248,13 @@ export class EditEventPage {
       .subscribe(
         res => {
           // this.global.hideLoader();
+          this.getEditEventDetail(false);
           this.global.log(`response of getPerformanceList`, res);
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList.push(...res.performance);
             this.person.performanceName = res.performance[0].id;
-            this.getEditEventDetail();
           } else {
-            this.global.showToast(`${res.error}`);
+            this.global.log(`${res.error}`);
           }
         }, err => {
           this.global.hideLoader();
@@ -252,7 +270,7 @@ export class EditEventPage {
           // this.global.hideLoader();
           this.global.log(`response of getAmountAccToAge`, res);
           if (res.success == 'true') {
-            this.persons[i].amount = +res.amount;
+            this.persons[i].amount = res.amount;
             this.calcTotal();
           } else {
             this.global.showToast(`${res.error}`);
@@ -263,8 +281,10 @@ export class EditEventPage {
         });
   }
 
-  getEditEventDetail() {
-    // this.global.showLoader();
+  getEditEventDetail(showLoader: boolean) {
+    if (showLoader) {
+      this.global.showLoader();
+    }
     this.global.postRequest(`${this.global.base_path}Login/GetEditEventDetail`, { event_id: this.previousPageData.event.id, login_user_id: JSON.parse(localStorage.getItem('user')).id })
       .subscribe(
         res => {
@@ -287,11 +307,28 @@ export class EditEventPage {
     this.userForm.controls['name'].setValue(data.name);
     this.userForm.controls['mobile'].setValue(data.mobile_no);
     this.userForm.controls['noOfMembers'].setValue(data.no_of_members.length > data.members.length ? data.members.length : data.members.length);
-    this.eventPerson = data.entry_for >= 4 ? data.entry_for - 1 : data.entry_for;
+
+    if (data.entry_for == 1) {
+      this.volunteer = true;
+      this.performance = true;
+    } else if (data.entry_for == 2) {
+      this.volunteer = true;
+      this.performance = false;
+    } else if (data.entry_for == 3) {
+      this.volunteer = false;
+      this.performance = true;
+    } else if (data.entry_for == 0) {
+      this.volunteer = false;
+      this.performance = false;
+    }
+
     this.person.performanceName = data.event_performance_id;
     this.person.noOfParticipants = data.no_of_participants;
     this.person.specialNeed = data.special_needs;
-    this.persons = data.members;
+    this.persons = [];
+    data.members.forEach(member => {
+      this.persons.push({ age: member.age, name: member.name, amount: member.amount });
+    });;
   }
 
   calcTotal() {
@@ -302,4 +339,43 @@ export class EditEventPage {
       });
     }
   }
+
+  searchUser() {
+    // this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/ListofUsers', {})
+      .subscribe(res => {
+        this.global.hideLoader();
+        if (res.success == 'true') {
+          this.searchedUser = res.users;
+        }
+      }, err => {
+        this.global.hideLoader();
+        this.global.log('some error in searchUser api', err);
+      });
+  }
+
+  searchingUser(name: string, i: number) {
+    this.global.log('in searching user');
+    this._index = i;
+
+    if (name.length > 0) {
+      this.users = [];
+      this.searchedUser.forEach((user: any) => {
+        if (user.name && user.name.toLowerCase().includes(name.toLowerCase())) {
+          this.users.push(user);
+        }
+      });
+    } else {
+      this.users = [];
+    }
+
+  }
+
+  itemSelected(item) {
+    this.global.log(`in itemSelect`, item);
+    this.persons[this._index].name = item.name;
+    this._index = null;
+    this.users = [];
+  }
+
 }

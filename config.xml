@@ -87,5 +87,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <allow-navigation href="http://172.22.173.145:8100" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

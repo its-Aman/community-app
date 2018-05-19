@@ -46,24 +46,24 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
 
     this.loginForm.controls['mobile'].valueChanges.subscribe(res => {
-      if (res && res.length > 10) {
-        this.loginForm.controls['mobile'].setValue(this.loginForm.controls['mobile'].value.slice(0, 10));
+      if (res && res.length > 11) {
+        this.loginForm.controls['mobile'].setValue(this.loginForm.controls['mobile'].value.slice(0, 11));
       }
-      if (res && res.length == 10) {
+      if (res && res.length == 11) {
         this.global.log('mobile res is', res);
         // this.requestOTP({ mobile: `${res}` });
       }
     });
 
     this.loginForm.controls['otp'].valueChanges.subscribe(res => {
-      if (res && res.length > 6) {
-        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 6));
+      if (res && res.length > 4) {
+        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 4));
       }
     });
 
     this.signUpForm.controls['mobile'].valueChanges.subscribe(res => {
-      if (res && res.length > 10) {
-        this.signUpForm.controls['mobile'].setValue(this.signUpForm.controls['mobile'].value.slice(0, 10));
+      if (res && res.length > 11) {
+        this.signUpForm.controls['mobile'].setValue(this.signUpForm.controls['mobile'].value.slice(0, 11));
       }
     });
 
@@ -186,12 +186,12 @@ export class LoginPage {
 
   initForm() {
     this.loginForm = this.fb.group({
-      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      otp: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
+      mobile: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      otp: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
     });
 
     this.signUpForm = this.fb.group({
-      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      mobile: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       pin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
     })
   }
@@ -201,7 +201,7 @@ export class LoginPage {
     // this.navCtrl.setRoot('ChangePinPage', { fromLogin: true });
     if (!this.resending.value) {
 
-      if (this.loginForm.controls['mobile'].value && this.loginForm.controls['mobile'].value.length == 10) {
+      if (this.loginForm.controls['mobile'].value && this.loginForm.controls['mobile'].value.length == 11) {
         if (this.resending.time == 50) {
           if (this.resendText == 'Send OTP') {
             this.resendText = 'Re-send OTP';
