@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, TextInput, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ThemeProvider } from '../../providers/theme/theme';
@@ -42,6 +42,7 @@ export class EventRegistrationPage {
     public global: GlobalProvider,
     public keyboard: Keyboard,
     public theme: ThemeProvider,
+    public alrtCtrl: AlertController,
   ) {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
@@ -112,8 +113,8 @@ export class EventRegistrationPage {
     console.log('ionViewDidLoad EventRegistrationPage', this.event);
 
     this.userForm.controls['mobile'].valueChanges.subscribe(res => {
-      if (res && res.length > 10) {
-        this.userForm.controls['mobile'].setValue(this.userForm.controls['mobile'].value.slice(0, 10));
+      if (res && res.length > 11) {
+        this.userForm.controls['mobile'].setValue(this.userForm.controls['mobile'].value.slice(0, 11));
       }
     });
 
@@ -285,6 +286,32 @@ export class EventRegistrationPage {
     }
   }
 
+  showConfirmation() {
+    let alert = this.alrtCtrl.create({
+      title: 'Confirmation',
+      subTitle: `Thank You for registering to ${this.previousPageData.event.event_name}
+                  <br>
+                  Please Pay via bank transfer to
+                  The Rajasthan Association UK 
+                  Sort Code: 309871, 
+                  Account Number: 85947060 
+                  Lloyds Bank
+
+                  With the reference number <#>
+                `,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            alert.dismiss();
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   registerEvent(data: any) {
     this.global.showLoader();
     this.global.postRequest(`${this.global.base_path}Login/EventRegistration`, data)
@@ -294,7 +321,8 @@ export class EventRegistrationPage {
           this.global.log(`response of register event`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
-            this.navCtrl.pop();
+            //TODO: show POP-UP
+            this.showConfirmation();
           } else {
             this.global.showToast(`${res.error}`);
             if (res.error == "User Already Registered with this event.") {

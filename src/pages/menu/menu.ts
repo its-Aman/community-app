@@ -46,7 +46,7 @@ export class MenuPage {
 
   setting() {
     this.global.log('setting');
-    this.navCtrl.push('ChangePinPage');
+    this.navCtrl.push('ChangePsinPage');
   }
 
   privacyPolicy() {
@@ -56,6 +56,7 @@ export class MenuPage {
 
   logout() {
     this.global.log('logout');
+    localStorage.clear();
     this.navCtrl.setRoot('LoginPage', { signInData: true });
   }
 

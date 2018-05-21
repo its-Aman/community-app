@@ -149,7 +149,13 @@ export class LoginPage {
             this.global.showToast(`${res.message}`);
             this.loginRes = res;
             localStorage.setItem('user', JSON.stringify(res));
-            this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+            if (res.name && res.name.length > 0) {
+              setTimeout(() => {
+                this.navCtrl.setRoot('MenuPage', { data: null });
+              }, 1000);
+            } else {
+              this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+            }
           } else {
             this.global.showToast(`${res.error}`);
           }

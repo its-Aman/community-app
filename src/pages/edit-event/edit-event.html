@@ -162,7 +162,7 @@
           </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="performance && event?.evententrydetail?.entry_for != 0">
+      <ion-row *ngIf="performance && +event?.evententrydetail?.entry_for != 0">
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color" [ngStyle]="theme?.heading()">Performance Name: </div>
           <!-- <div class="event-detail-data"> -->

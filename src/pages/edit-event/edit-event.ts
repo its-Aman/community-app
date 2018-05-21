@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, TextInput, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ThemeProvider } from '../../providers/theme/theme';
@@ -39,6 +39,7 @@ export class EditEventPage {
     public global: GlobalProvider,
     public keyboard: Keyboard,
     public theme: ThemeProvider,
+    public alrtCtrl: AlertController,
   ) {
     this.previousPageData = this.navParams.get('data');
     this.initForm();
@@ -54,8 +55,8 @@ export class EditEventPage {
     console.log('ionViewDidLoad EditEventPage', this.previousPageData);
 
     this.userForm.controls['mobile'].valueChanges.subscribe(res => {
-      if (res && res.length > 10) {
-        this.userForm.controls['mobile'].setValue(this.userForm.controls['mobile'].value.slice(0, 10));
+      if (res && res.length > 11) {
+        this.userForm.controls['mobile'].setValue(this.userForm.controls['mobile'].value.slice(0, 11));
       }
     });
 
@@ -79,7 +80,7 @@ export class EditEventPage {
   initForm() {
     this.userForm = this.fb.group({
       name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
-      mobile: [JSON.parse(localStorage.getItem('user')).mobileno, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      mobile: [JSON.parse(localStorage.getItem('user')).mobileno, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       noOfMembers: [1, [Validators.required]]
     });
   }
@@ -165,6 +166,46 @@ export class EditEventPage {
 
   cancel() {
     this.global.log(`cancel's method`);
+
+    let alert = this.alrtCtrl.create({
+      title: 'Cancel this Event ?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.cancelEvent();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  cancelEvent() {
+    let data = {
+      event_id: this.event.id,
+      user_id: JSON.parse(localStorage.getItem('user')).id
+    }
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/CancleEventEntry', data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          if (res.success == 'true') {
+            this.global.showToast(`${res.message}`);
+            this.navCtrl.popToRoot();
+          } else {
+            this.global.log(`some error in else's cancel `, res);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`some error in cancel `, err);
+        }
+      )
   }
 
   change(ip, col) {
@@ -208,16 +249,31 @@ export class EditEventPage {
   }
 
   removeItem(i: number) {
-    if (this.persons.length > 0) {
-      this.persons.splice(i, 1);
-      this.calcTotal();
-    }
+    let alert = this.alrtCtrl.create({
+      title: 'Are you sure you want to delete this member ?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            if (this.persons.length > 0) {
+              this.persons.splice(i, 1);
+              this.calcTotal();
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   checkAge(i) {
     this.global.log(String(this.persons[i].age));
 
-    if (String(this.persons[i].age).length >= 2) {
+    if (String(this.persons[i].age).length >= 1) {
       this.global.log(`checkAge`, this.persons[i]);
       this.getAmountAccToAge(this.persons[i].age, i);
     }
