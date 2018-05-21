@@ -56,8 +56,8 @@ export class LoginPage {
     });
 
     this.loginForm.controls['otp'].valueChanges.subscribe(res => {
-      if (res && res.length > 4) {
-        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 4));
+      if (res && res.length > 10) {
+        this.loginForm.controls['otp'].setValue(this.loginForm.controls['otp'].value.slice(0, 10));
       }
     });
 
@@ -193,7 +193,7 @@ export class LoginPage {
   initForm() {
     this.loginForm = this.fb.group({
       mobile: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      otp: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+      otp: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(10)]]
     });
 
     this.signUpForm = this.fb.group({
