@@ -161,7 +161,13 @@ page-edit-event {
   .status-image {
     display: flex;
     .failImage {
-      background-image: url('../assets/icon/status-icon.png');
+      background-image: url('../assets/icon/status-icon-fail.png');
+      height: 20px;
+      width: 20px;
+      margin: auto;
+    }
+    .successImage {
+      background-image: url('../assets/icon/status-icon-success.png');
       height: 20px;
       width: 20px;
       margin: auto;

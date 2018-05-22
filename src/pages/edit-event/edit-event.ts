@@ -362,7 +362,7 @@ export class EditEventPage {
   setData(data: any) {
     this.userForm.controls['name'].setValue(data.name);
     this.userForm.controls['mobile'].setValue(data.mobile_no);
-    this.userForm.controls['noOfMembers'].setValue(data.no_of_members.length > data.members.length ? data.members.length : data.members.length);
+    this.userForm.controls['noOfMembers'].setValue(data.members.length);
 
     if (data.entry_for == 1) {
       this.volunteer = true;
@@ -394,6 +394,8 @@ export class EditEventPage {
         this.total += +data.amount;
       });
     }
+
+    this.userForm.controls['noOfMembers'].setValue(this.persons.length);
   }
 
   searchUser() {

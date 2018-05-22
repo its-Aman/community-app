@@ -31,6 +31,10 @@ export class GlobalProvider {
     console.log('Hello GlobalProvider Provider');
     this.base_path = 'http://winstech.in/community/web_panel/app/';
     this.image_base_path = 'http://winstech.in/community/uploads/event/';
+    // http://rajasthanassociationuk.com/web_service
+    
+    // this.base_path = 'http://winstech.in/community/web_panel/app/';
+    // this.image_base_path = 'http://winstech.in/community/uploads/event/';
   }
 
   sanatizeImage(image: string): any {
