@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ToastController, LoadingController, Loading, App, Events, Platform } from 'ionic-angular';
+import { ToastController, LoadingController, Loading, Events, Platform } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
 const httpOptions = {
@@ -24,7 +24,6 @@ export class GlobalProvider {
     public http: HttpClient,
     public loadingController: LoadingController,
     public toastCtrl: ToastController,
-    private app: App,
     public events: Events,
     public platform: Platform,
     private sanitizer: DomSanitizer,
@@ -55,10 +54,10 @@ export class GlobalProvider {
       try {
         this.loader.dismiss()
           .then(res => {
-            this.loader = null;
+            // this.loader = null;
           })
-          .catch(res => {
-            console.log("exception in loader hide");
+          .catch(err => {
+            console.log("exception in loader hide", err);
             setTimeout(v => { this.hideLoader(); }, 100)
           });
       }

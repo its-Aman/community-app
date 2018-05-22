@@ -14,7 +14,7 @@ export class ChangePinPage {
   changePinForm: FormGroup;
   isFormInvalid: boolean = false;
   otpResponseValue: any = JSON.parse(localStorage.getItem('otp-res-value'));
-  fromLogin: string;
+  fromLogin: boolean;
   @ViewChild(Content) content: Content;
 
   constructor(
@@ -24,8 +24,10 @@ export class ChangePinPage {
     public global: GlobalProvider,
     public keyboard: Keyboard,
   ) {
-    this.initForm();
     this.fromLogin = this.navParams.get('fromLogin');
+    // this.fromLogin = true;
+    this.global.log(`this from login value is`, this.fromLogin);
+    this.initForm();
   }
 
   initForm() {
@@ -60,11 +62,15 @@ export class ChangePinPage {
       }
     });
 
-    this.changePinForm.controls['conformPin'].valueChanges.subscribe(res => {
-      if (res && res.length > 6) {
-        this.changePinForm.controls['conformPin'].setValue(this.changePinForm.controls['conformPin'].value.slice(0, 6));
-      }
-    });
+    if (!this.fromLogin) {
+
+      this.changePinForm.controls['conformPin'].valueChanges.subscribe(res => {
+        if (res && res.length > 6) {
+          this.changePinForm.controls['conformPin'].setValue(this.changePinForm.controls['conformPin'].value.slice(0, 6));
+        }
+      });
+
+    }
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
@@ -84,6 +90,7 @@ export class ChangePinPage {
   }
 
   changePassword() {
+    this.global.log(`in changePassword and the form is`, this.changePinForm);
     if (this.changePinForm.valid) {
       if (this.fromLogin) {
         if (this.changePinForm.controls['oldPin'].value == this.changePinForm.controls['newPin'].value) {

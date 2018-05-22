@@ -12,6 +12,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class LoginPage {
 
+  enterButton: boolean = false;
   loginRes: any;
   OtpVerify: any;
   resending: any = { time: 50, value: false };
@@ -208,6 +209,7 @@ export class LoginPage {
     if (!this.resending.value) {
 
       if (this.loginForm.controls['mobile'].value && this.loginForm.controls['mobile'].value.length == 11) {
+        this.enterButton = true;
         if (this.resending.time == 50) {
           if (this.resendText == 'Send OTP') {
             this.resendText = 'Re-send OTP';

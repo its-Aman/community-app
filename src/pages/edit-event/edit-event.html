@@ -135,7 +135,8 @@
 
       </div>
 
-      <ion-row class="row-radio" *ngIf="+event?.evententrydetail?.entry_for != 0">
+      <ion-row class="row-radio">
+        <!--  *ngIf="+event?.evententrydetail?.entry_for != 0" -->
         <ion-col col-12 class="col-text">
           <div [ngStyle]="theme?.heading()">Are You Interested in ?</div>
         </ion-col>
@@ -148,13 +149,15 @@
             </ion-select>
           </ion-item>
         </ion-col> -->
-        <ion-col *ngIf="+event?.evententrydetail?.entry_for == 2 || +event?.evententrydetail?.entry_for == 1">
+        <ion-col>
+          <!-- *ngIf="+event?.evententrydetail?.entry_for == 2 || +event?.evententrydetail?.entry_for == 1" -->
             <ion-item>
               <ion-label [ngStyle]="theme?.data()">VOLUNTEER</ion-label>
               <ion-checkbox [(ngModel)]="volunteer" style="margin: 8px;"></ion-checkbox>
             </ion-item>
           </ion-col>
-          <ion-col *ngIf="+event?.evententrydetail?.entry_for == 3 || +event?.evententrydetail?.entry_for == 1">
+          <ion-col>
+            <!-- *ngIf="+event?.evententrydetail?.entry_for == 3 || +event?.evententrydetail?.entry_for == 1" -->
             <ion-item>
               <ion-label [ngStyle]="theme?.data()">PERFORMANCE</ion-label>
               <ion-checkbox [(ngModel)]="performance" style="margin: 8px;"></ion-checkbox>
@@ -162,7 +165,8 @@
           </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="performance && +event?.evententrydetail?.entry_for != 0">
+      <ion-row>
+        <!-- *ngIf="performance && +event?.evententrydetail?.entry_for != 0" -->
         <ion-col col-12 class="event-detail">
           <div class="event-detail-color" [ngStyle]="theme?.heading()">Performance Name: </div>
           <!-- <div class="event-detail-data"> -->

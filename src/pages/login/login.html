@@ -73,14 +73,15 @@
 
     <ion-row>
       <ion-col col-12>
-        <button ion-button round block (click)="login()">Enter</button>
+        <button *ngIf="enterButton || signInData" ion-button round block (click)="login()">Enter</button>
+        <button *ngIf="!enterButton && !signInData" ion-button round block (click)="resendOTP()">Send OTP</button>
       </ion-col>
       <ion-col col-6 text-left>
         <div class="sign-in" (click)="signIn()">
           {{signInData ? 'Sign Up' : 'Sign In'}}
         </div>
       </ion-col>
-      <ion-col col-6 text-right *ngIf="!signInData">
+      <ion-col col-6 text-right *ngIf="!signInData && enterButton">
         <div class="resend" (click)="resendOTP()">
           {{resending?.value ? resending?.time + ' seconds remaining' : resendText}}
         </div>

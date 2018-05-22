@@ -67,7 +67,8 @@
         </ion-col>
         <ion-col col-12 text-right text-nowrap class="bdr-btm">
           <ion-item>
-            <ion-input [ngStyle]="theme?.data()" [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email" (focusout)="removePadding()"></ion-input>
+            <ion-input [ngStyle]="theme?.data()" [disabled]="isDisabled" formControlName="email" type="email" placeholder="Type Email"
+              (focusout)="removePadding()"></ion-input>
           </ion-item>
           <p class="error" text-left>
             <span *ngIf="profileForm?.controls['email']?.hasError('required') && (profileForm?.controls['email']?.dirty || isFormInvalid)">Email is Required.</span>
@@ -85,10 +86,26 @@
         </ion-col>
         <ion-col col-12 text-right class="bdr-btm">
           <ion-item>
-            <ion-textarea [ngStyle]="theme?.data()" class="address-textarea" rows="1" #ip (input)="change()" [disabled]="isDisabled" formControlName="address" type="text" placeholder="Type Address"
-              (focusout)="removePadding()"></ion-textarea>
+            <ion-textarea [ngStyle]="theme?.data()" class="address-textarea" rows="1" #ip (input)="change()" [disabled]="isDisabled"
+              formControlName="address" type="text" placeholder="Type Address" (focusout)="removePadding()"></ion-textarea>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['address']?.hasError('required') && (profileForm?.controls['address']?.dirty || isFormInvalid)">Address is Required</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="row-common">
+        <ion-col col-1 text-center>
+          <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+        </ion-col>
+        <ion-col col-10 text-left class="align-center">
+          <div class="address" [ngStyle]="theme?.heading()">City :</div>
+        </ion-col>
+        <ion-col col-12 text-right class="bdr-btm">
+          <ion-item>
+            <ion-input [ngStyle]="theme?.data()" [disabled]="isDisabled" formControlName="city_of_origin" type="text" placeholder="Type City"
+              (focusout)="removePadding()"></ion-input>
+          </ion-item>
+          <p class="error" text-left *ngIf="profileForm?.controls['city_of_origin']?.hasError('required') && (profileForm?.controls['city_of_origin']?.dirty || isFormInvalid)">City is Required</p>
         </ion-col>
       </ion-row>
 
@@ -105,7 +122,7 @@
               <ion-option value="3" [ngStyle]="theme?.data()">Phone</ion-option>
             </ion-select>
           </ion-item>
-          <p class="error" text-left *ngIf="profileForm?.controls['modeOfCommunication']?.hasError('required') && (profileForm?.controls['modeOfCommunication']?.dirty || isFormInvalid)">Mode Of communication is Required</p>
+          <!-- <p class="error" text-left *ngIf="profileForm?.controls['modeOfCommunication']?.hasError('required') && (profileForm?.controls['modeOfCommunication']?.dirty || isFormInvalid)">Mode Of communication is Required</p> -->
         </ion-col>
       </ion-row>
 

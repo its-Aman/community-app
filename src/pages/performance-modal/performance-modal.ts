@@ -29,8 +29,8 @@ export class PerformanceModalPage {
     } else {
       this.person = {
         performanceName: '',
-        noOfParticipants: '09',
-        specialNeed: 'Extra',
+        noOfParticipants: '',
+        specialNeed: '',
       }
     }
     this.getPerformanceList();

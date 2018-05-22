@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController, Loading } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -13,6 +13,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class ProfilePage {
 
+  loader: Loading;
   noData: boolean;
   userProfile: any = {};
   modeOfCommunication: string[];
@@ -29,9 +30,9 @@ export class ProfilePage {
     public fb: FormBuilder,
     public keyboard: Keyboard,
     public theme: ThemeProvider,
+    public loadingController: LoadingController,
   ) {
     this.initForm();
-    this.getProfileData();
   }
 
   initForm() {
@@ -39,15 +40,24 @@ export class ProfilePage {
       name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
       email: [' ', [Validators.required, Validators.email]],
       address: [' ', [Validators.required]],
-      modeOfCommunication: [['1'], [Validators.required]],
+      modeOfCommunication: [['1']],
       professionalService: ['1', [Validators.required]],
+      city_of_origin: [null, [Validators.required]],
     });
 
     this.userProfile["mobile_no"] = JSON.parse(localStorage.getItem('user')).mobileno;
   }
 
   ionViewDidLoad() {
+
+    this.loader = this.loader = this.loadingController.create({
+      content: 'Loading..',
+      dismissOnPageChange: true
+    });
+
     console.log('ionViewDidLoad ProfilePage');
+
+    this.getProfileData();
     this.isDisabled = false;
     this.change();
 
@@ -87,12 +97,12 @@ export class ProfilePage {
   }
 
   getProfileData() {
-    this.global.showLoader();
+    this.loader.present();
     this.global.postRequest(this.global.base_path + 'Login/Profile', { login_user_id: JSON.parse(localStorage.getItem('user')).id })
       .subscribe(
         res => {
           this.global.log(`getProfileData's user data is `, res)
-          this.global.hideLoader();
+          this.loader.dismiss();
           if (res.success == 'true') {
             this.noData = false;
             this.userProfile = res.userprofile;
@@ -103,7 +113,7 @@ export class ProfilePage {
           }
         }, err => {
           this.noData = true;
-          this.global.hideLoader();
+          this.loader.dismiss();
           this.global.log(`some error in getting user data`);
         });
   }
@@ -114,6 +124,7 @@ export class ProfilePage {
     this.profileForm.controls['address'].setValue(this.userProfile.address);
     this.profileForm.controls['modeOfCommunication'].setValue(this.userProfile.mode_of_communication);
     this.profileForm.controls['professionalService'].setValue(this.userProfile.professional_service_id);
+    this.profileForm.controls['city_of_origin'].setValue(this.userProfile.city_of_origin);
   }
 
   change() {
@@ -176,12 +187,12 @@ export class ProfilePage {
 
   getUpdatedProfile() {
     let data = {
-      Login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
       name: this.profileForm.controls['name'].value,
       email: this.profileForm.controls['email'].value,
       address: this.profileForm.controls['address'].value,
       mode_of_communication: this.profileForm.controls['modeOfCommunication'].value,
-      city: "1",
+      city: this.profileForm.controls['city_of_origin'].value,
       state: "1",
       country: "1",
       pincode: "301001",

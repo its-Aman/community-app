@@ -187,7 +187,7 @@ export class EditEventPage {
 
   cancelEvent() {
     let data = {
-      event_id: this.event.id,
+      event_id: this.previousPageData.event.id,
       user_id: JSON.parse(localStorage.getItem('user')).id
     }
     this.global.showLoader();
@@ -197,7 +197,7 @@ export class EditEventPage {
           this.global.hideLoader();
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
-            this.navCtrl.popToRoot();
+            this.navCtrl.pop();
           } else {
             this.global.log(`some error in else's cancel `, res);
           }
