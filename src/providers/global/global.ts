@@ -34,16 +34,21 @@ export class GlobalProvider {
     this.tiny_basePath_testing = `http://winstech.in/community/`;
     this.tiny_basePath_live = `http://winstech.in/live_rauk/`;
 
+    //test
     // this.base_path = `${this.tiny_basePath_testing}app/`;
     // this.image_base_path = `${this.tiny_basePath_testing}/`;
-    // http://rajasthanassociationuk.com/web_service
 
-    this.base_path = `${this.tiny_basePath_live}web_panel/app/`; //live
-    this.image_base_path = `${this.tiny_basePath_live}uploads/`; //live
+    //live
+    this.base_path = `${this.tiny_basePath_live}web_panel/app/`;
+    this.image_base_path = `${this.tiny_basePath_live}uploads/`;
   }
 
-  sanatizeImage(image: string): any {
-    return this.sanitizer.bypassSecurityTrustStyle(`url(${this.image_base_path + image})`);
+  sanatizeImage(isEvent: boolean = false, image: string): any {
+    if (isEvent) {
+      return this.sanitizer.bypassSecurityTrustStyle(`url(${this.image_base_path + 'event/' + image})`);
+    } else {
+      return this.sanitizer.bypassSecurityTrustStyle(`url(${this.image_base_path + image})`);
+    }
   }
 
   log(message?: any, ...optionalParams: any[]): void {

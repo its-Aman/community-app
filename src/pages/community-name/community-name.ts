@@ -86,7 +86,7 @@ export class CommunityNamePage {
                 this.loadMap({ latitude: parseFloat(this.eventData.event.geo_lat), longitude: parseFloat(this.eventData.event.geo_long) })
               }, 1000);
             }
-            this.eventData.event.event_image = this.global.sanatizeImage(this.eventData.event.event_image);
+            this.eventData.event.event_image = this.global.sanatizeImage(true, this.eventData.event.event_image);
           }
         }, err => {
           this.global.hideLoader();
