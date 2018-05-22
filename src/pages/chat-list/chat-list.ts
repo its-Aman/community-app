@@ -20,7 +20,7 @@ export class ChatListPage {
   ) {
     // this.fillList();
   }
-  
+
   ionViewDidLoad() {
     this.getChatListData();
     console.log('ionViewDidLoad ChatListPage');
@@ -94,8 +94,7 @@ export class ChatListPage {
             if (this.chatList.length > 0) {
               this.noData = false;
               this.chatList.forEach(element => {
-                // element.image = this.global.sanatizeImage(`http://winstech.in/community/uploads/user/${element.image}`);
-                element.image = `http://winstech.in/community/uploads/user/${element.image}`;
+                element.image = `${this.global.image_base_path}user/${element.image}`;
               });
             } else {
               this.noData = true;

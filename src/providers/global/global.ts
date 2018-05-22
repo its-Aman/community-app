@@ -19,6 +19,8 @@ export class GlobalProvider {
   loader: Loading;
   base_path: string;
   image_base_path: string;
+  tiny_basePath_testing: String;
+  tiny_basePath_live: String;
 
   constructor(
     public http: HttpClient,
@@ -29,12 +31,15 @@ export class GlobalProvider {
     private sanitizer: DomSanitizer,
   ) {
     console.log('Hello GlobalProvider Provider');
-    this.base_path = 'http://winstech.in/community/web_panel/app/';
-    this.image_base_path = 'http://winstech.in/community/uploads/event/';
+    this.tiny_basePath_testing = `http://winstech.in/community/`;
+    this.tiny_basePath_live = `http://winstech.in/live_rauk/`;
+
+    // this.base_path = `${this.tiny_basePath_testing}app/`;
+    // this.image_base_path = `${this.tiny_basePath_testing}/`;
     // http://rajasthanassociationuk.com/web_service
-    
-    // this.base_path = 'http://winstech.in/community/web_panel/app/';
-    // this.image_base_path = 'http://winstech.in/community/uploads/event/';
+
+    this.base_path = `${this.tiny_basePath_live}web_panel/app/`; //live
+    this.image_base_path = `${this.tiny_basePath_live}uploads/`; //live
   }
 
   sanatizeImage(image: string): any {

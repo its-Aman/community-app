@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col col-12 class="images">
         <div class="backgroundImage image blur"></div>
-        <div [style.backgroundImage]="'url(http://winstech.in/community/uploads/cummunitylogo/' + contactData?.logo_name + ')'" class="profileImage image"></div>
+        <div [style.backgroundImage]="'url('+global?.image_base_path+'cummunitylogo/' + contactData?.logo_name + ')'" class="profileImage image"></div>
         <div class="get-in">GET IN TOUCH</div>
       </ion-col>
     </ion-row>
