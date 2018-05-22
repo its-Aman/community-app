@@ -38,7 +38,7 @@ export class EventPage {
             this.noData = false;
             this.eventDummydata = res.event;
             this.eventDummydata.forEach((res, i) => {
-              this.eventDummydata[i].event_image = this.global.sanatizeImage(`${this.eventDummydata[i].event_image}`);
+              this.eventDummydata[i].event_image = this.global.sanatizeImage(true, `${this.eventDummydata[i].event_image}`);
             });
           } else {
             this.noData = true;
