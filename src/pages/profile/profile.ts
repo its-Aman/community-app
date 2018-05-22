@@ -125,6 +125,8 @@ export class ProfilePage {
     this.profileForm.controls['modeOfCommunication'].setValue(this.userProfile.mode_of_communication);
     this.profileForm.controls['professionalService'].setValue(this.userProfile.professional_service_id);
     this.profileForm.controls['city_of_origin'].setValue(this.userProfile.city_of_origin);
+
+    localStorage.setItem('profile-user', JSON.stringify(this.userProfile));
   }
 
   change() {

@@ -98,7 +98,7 @@
           <ion-icon ios="md-lock" md="md-lock"></ion-icon>
         </ion-col>
         <ion-col col-10 text-left class="align-center">
-          <div class="address" [ngStyle]="theme?.heading()">City :</div>
+          <div class="address" [ngStyle]="theme?.heading()">City of origin :</div>
         </ion-col>
         <ion-col col-12 text-right class="bdr-btm">
           <ion-item>
@@ -143,7 +143,6 @@
             </ion-select>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['professionalService']?.hasError('required') && (profileForm?.controls['professionalService']?.dirty || isFormInvalid)">Professional Service is Required</p>
-
         </ion-col>
       </ion-row>
 

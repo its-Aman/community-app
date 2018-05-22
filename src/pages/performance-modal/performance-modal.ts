@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, TextInput, AlertController, ViewController } from 'ionic-angular';
 import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()
@@ -10,6 +10,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class PerformanceModalPage {
 
+  @ViewChild(Content) content: Content;  
   performanceList: any[];
   person: any = {
     performanceName: '',
@@ -120,4 +121,15 @@ export class PerformanceModalPage {
           this.global.log(`error of getPerformanceList`, err);
         });
   }
+
+  removePadding() {
+    this.global.log(`in removePadding`);
+
+    let contentNative: HTMLElement = this.content.getNativeElement();
+    let foo: any = contentNative.getElementsByClassName('scroll-content');
+
+    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    foo[0].style.paddingBottom = '0px';
+  }
+
 }

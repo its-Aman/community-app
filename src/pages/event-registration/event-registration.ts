@@ -137,8 +137,8 @@ export class EventRegistrationPage {
 
   initForm() {
     this.userForm = this.fb.group({
-      name: [JSON.parse(localStorage.getItem('user')).name, [Validators.required]],
-      mobile: [JSON.parse(localStorage.getItem('user')).mobileno, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      name: [(JSON.parse(localStorage.getItem('user')).name || JSON.parse(localStorage.getItem('profile-user')).name), [Validators.required]],
+      mobile: [(JSON.parse(localStorage.getItem('user')).mobileno || JSON.parse(localStorage.getItem('profile-user')).mobile_no), [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       noOfMembers: [1, [Validators.required]]
     });
   }
@@ -280,7 +280,8 @@ export class EventRegistrationPage {
 
   checkAge(i, ev) {
     this.global.log(ev.target.value);
-    if (ev.target.value && ev.target.value.length >= 2) {
+
+    if (ev.target.value && ev.target.value.length >= 0) {
       this.global.log(`checkAge`, ev.target.value);
       this.getAmountAccToAge(+ev.target.value, i);
     }

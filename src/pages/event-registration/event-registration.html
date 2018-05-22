@@ -80,7 +80,7 @@
         <ion-row class="row-header">
           <ion-col col-4>NAME</ion-col>
           <ion-col col-2>AGE</ion-col>
-          <ion-col col-6 text-center>TICKET AMOUNT</ion-col>
+          <ion-col col-6 text-center>TICKET AMOUNT ({{theme?.defaultTheme?.currency}})</ion-col>
         </ion-row>
 
         <ion-row style="height: auto" *ngIf="users && users?.length > 0">
@@ -119,7 +119,7 @@
 
         <ion-row class="total-row">
           <ion-col col-6>TOTAL</ion-col>
-          <ion-col col-6 text-center>{{total}}/-</ion-col>
+          <ion-col col-6 text-center>{{theme?.defaultTheme?.currency}} {{total}}/-</ion-col>
         </ion-row>
 
       </div>
