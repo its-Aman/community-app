@@ -132,6 +132,7 @@ export class EditEventPage {
     //   if (this.persons.length > 0) {
     //     if (this.person.noOfParticipants > 0) {
     let data = {
+      event_entry_id: this.previousPageData.event_entry_id,
       event_id: this.previousPageData.event.id,
       login_user_id: JSON.parse(localStorage.getItem('user')).id,
       name: this.userForm.controls['name'].value,
