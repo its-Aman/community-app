@@ -32,7 +32,7 @@
       <ion-row>
         <ion-col col-12>
           <div class="heading" text-capitalized [ngStyle]="theme?.heading()">{{eventData?.event?.event_name}}</div>
-          <div class="description" [ngStyle]="theme?.data()">{{eventData?.event?.description}}</div>
+          <div class="description" [ngStyle]="theme?.data()" [innerHTML]="eventData?.event?.description"></div>
         </ion-col>
         <!-- <ion-col col-3 text-center class="col-price">
           <div class="star image"></div>
@@ -64,7 +64,7 @@
             <span class="chair image"></span>
             <span class="calender" [ngStyle]="theme?.heading()">Left</span>
           </div>
-          <div class="left-count" [ngStyle]="theme?.data()">{{eventData?.event?.max_attendees}}</div>
+          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.totalseats - +eventData?.totalregistration}}</div>
         </ion-col>
       </ion-row>
 

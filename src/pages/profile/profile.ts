@@ -197,8 +197,9 @@ export class ProfilePage {
       email: this.profileForm.controls['email'].value,
       address: this.profileForm.controls['address'].value,
       mode_of_communication: this.profileForm.controls['modeOfCommunication'].value,
-      city: this.profileForm.controls['city_of_origin'].value,
+      city_of_origin: this.profileForm.controls['city_of_origin'].value,
       state: "1",
+      city: "1",
       country: "1",
       pincode: "301001",
       professional_service_id: this.profileForm.controls['professionalService'].value

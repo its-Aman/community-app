@@ -187,7 +187,7 @@ export class EditEventPage {
 
   cancelEvent() {
     let data = {
-      event_id: this.previousPageData.event.id,
+      event_id: this.previousPageData.event_entry_id,
       user_id: JSON.parse(localStorage.getItem('user')).id
     }
     this.global.showLoader();
@@ -200,6 +200,7 @@ export class EditEventPage {
             this.navCtrl.pop();
           } else {
             this.global.log(`some error in else's cancel `, res);
+            this.global.log(res.error);
           }
         }, err => {
           this.global.hideLoader();
@@ -341,7 +342,7 @@ export class EditEventPage {
     if (showLoader) {
       this.global.showLoader();
     }
-    this.global.postRequest(`${this.global.base_path}Login/GetEditEventDetail`, { event_id: this.previousPageData.event.id, login_user_id: JSON.parse(localStorage.getItem('user')).id })
+    this.global.postRequest(`${this.global.base_path}Login/GetEditEventDetail`, { event_id: this.previousPageData.event_entry_id, login_user_id: JSON.parse(localStorage.getItem('user')).id })
       .subscribe(
         res => {
           this.global.hideLoader();
