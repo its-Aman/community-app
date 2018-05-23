@@ -105,7 +105,7 @@
             <ion-input [ngStyle]="theme?.data()" [disabled]="isDisabled" formControlName="city_of_origin" type="text" placeholder="Type City"
               (focusout)="removePadding()"></ion-input>
           </ion-item>
-          <p class="error" text-left *ngIf="profileForm?.controls['city_of_origin']?.hasError('required') && (profileForm?.controls['city_of_origin']?.dirty || isFormInvalid)">City is Required</p>
+          <!-- <p class="error" text-left *ngIf="profileForm?.controls['city_of_origin']?.hasError('required') && (profileForm?.controls['city_of_origin']?.dirty || isFormInvalid)">City is Required</p> -->
         </ion-col>
       </ion-row>
 

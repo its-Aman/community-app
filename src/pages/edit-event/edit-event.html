@@ -31,7 +31,7 @@
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" [ngStyle]="theme?.data()">{{previousPageData?.event?.description}}</div>
+        <div class="description" [ngStyle]="theme?.data()" [innerHTML]="previousPageData.event?.description"></div>
       </ion-col>
     </ion-row>
 

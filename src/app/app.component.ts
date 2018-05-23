@@ -185,13 +185,16 @@ export class MyApp {
       background-image: url('${this.theme.defaultTheme.login_image}') !important;
     } 
     page-login .scroll-content {
-     background-image: url('${this.theme.defaultTheme.login_image}') !important;
+      background-image: url('${this.theme.defaultTheme.login_image}') !important;
     }
     page-profile .images .backgroundImage{
       background-image: url('${this.theme.defaultTheme.profile_image}') !important;
     }
     page-contact-us .images .backgroundImage{
       background-image: url('${this.theme.defaultTheme.spalsh_image}') !important;
+    }
+    page-login .statement .terms{
+      color:  ${this.theme.defaultTheme.theme_colour} !important;
     }
     `;
 
