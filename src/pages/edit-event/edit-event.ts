@@ -364,7 +364,7 @@ export class EditEventPage {
     this.userForm.controls['mobile'].setValue(data.mobile_no);
     this.userForm.controls['noOfMembers'].setValue(data.members.length);
 
-    if (data.entry_for == 1) {
+    if (data.entry_for == 3) {
       this.volunteer = true;
       this.performance = true;
     } else if (data.entry_for == 2) {

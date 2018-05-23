@@ -298,7 +298,7 @@ export class EventRegistrationPage {
                   Account Number: 85947060 
                   Lloyds Bank
 
-                  With the reference number <#${this.previousPageData.event.id}>
+                  With the reference number <#${this.event.event_entry_id}>
                 `,
       buttons: [
         {

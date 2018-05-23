@@ -42,7 +42,7 @@ export class ProfilePage {
       address: [' ', [Validators.required]],
       modeOfCommunication: [['1']],
       professionalService: ['1', [Validators.required]],
-      city_of_origin: [null, [Validators.required]],
+      city_of_origin: [null],
     });
 
     this.userProfile["mobile_no"] = JSON.parse(localStorage.getItem('user')).mobileno;
@@ -166,10 +166,12 @@ export class ProfilePage {
     let foo = this.navParams.get('data');
 
     let data = this.getUpdatedProfile();
-    this.global.showLoader();
+    // this.global.showLoader();
+    this.loader.present();
     this.global.postRequest(this.global.base_path + 'Login/EditProfile', data)
       .subscribe(res => {
-        this.global.hideLoader();
+        // this.global.hideLoader();
+        this.loader.dismiss();
         if (res.success == 'true') {
           this.userProfile = res.user;
           this.setFormData();
@@ -181,7 +183,8 @@ export class ProfilePage {
           this.global.showToast(`${res.error}`);
         }
       }, err => {
-        this.global.hideLoader();
+        this.loader.dismiss();
+        // this.global.hideLoader();
         this.global.showToast(`Some error in updating profile`);
       });
 

@@ -10,7 +10,9 @@ import { GlobalProvider } from '../../providers/global/global';
 export class MenuPage {
 
   rootMenuPage: string = 'TabsPage';
+  userDetails: any;
   @ViewChild(Menu) menu: Menu;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -18,6 +20,14 @@ export class MenuPage {
     public app: App,
     private events: Events
   ) {
+    this.userDetails = JSON.parse(localStorage.getItem('user'));
+    //TODO: fix basepath it 
+    if (this.userDetails.image) {
+      this.userDetails.user_image  = this.global.sanatizeImage(false, this.global.image_base_path + 'user/' + this.userDetails.user_image  );
+    } else {
+      this.userDetails.user_image  = `../assets/icon/sidebar-profile-photo.png`;
+    }
+
   }
 
   ionViewDidLoad() {
