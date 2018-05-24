@@ -129,6 +129,8 @@ export class ProfilePage {
     this.profileForm.controls['professionalService'].setValue(this.userProfile.professional_service_id);
     this.profileForm.controls['city_of_origin'].setValue(this.userProfile.city_of_origin);
 
+    this.userProfile["mobile_no"] = JSON.parse(localStorage.getItem('user')).mobileno;
+    
     localStorage.setItem('profile-user', JSON.stringify(this.userProfile));
   }
 

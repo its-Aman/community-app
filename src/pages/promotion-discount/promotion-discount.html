@@ -13,14 +13,14 @@
 
 <ion-content no-padding>
   <ion-grid class="grid-promo" *ngIf="!noData">
-    <div *ngFor='let promotionAndDiscount of promotionAndDiscountData?.NEW; let i=index'>
+    <div *ngFor='let promotionAndDiscount of promotionAndDiscountData?.New; let i=index'>
 
       <ion-row class="row-promo" (click)="openCat(i)">
         <ion-col col-12>
-          <div class="category" [class.active]="cat[i]">NEW</div>
+          <div class="category" [class.active]="promotionAndDiscount?.show">NEW</div>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="cat[i]" class="row-coupon" (click)="openDetails(i)">
+      <ion-row *ngIf="promotionAndDiscount?.show" class="row-coupon" (click)="openDetails(i)">
         <ion-col col-6 class="border-bottom border-right">
           <div class="header">Coupon Code</div>
         </ion-col>
@@ -33,7 +33,7 @@
           <div>
             <b [ngStyle]="theme?.heading()">Address : </b>
           </div>
-          <div [ngStyle]="theme?.data()">{{adpromotionAndDiscount?.adress}}</div>
+          <div [ngStyle]="theme?.data()" style="text-transform: capitalize;">{{promotionAndDiscount?.address}}</div>
         </ion-col>
         <ion-col col-6 class="col-time" text-right>
           <div text-left>
