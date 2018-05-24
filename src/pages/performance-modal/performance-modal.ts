@@ -10,7 +10,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class PerformanceModalPage {
 
-  @ViewChild(Content) content: Content;  
+  @ViewChild(Content) content: Content;
   performanceList: any[];
   person: any = {
     performanceName: '',
@@ -103,6 +103,26 @@ export class PerformanceModalPage {
       })
   }
 
+  getPerformanceDetail() {
+    // this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/GetPerformanceDetail`, { event_entry_id: this.navParams.get('event_entry_id'), user_id: JSON.parse(localStorage.getItem('user')).id })
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`response of getPerformanceDetail`, res);
+          if (res.success == 'true') {
+            this.person.performanceName = res.performance_name;
+            this.person.noOfParticipants = res.no_of_participants;
+            this.person.specialNeed = res.special_needs;
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`error of getPerformanceList`, err);
+        });
+  }
+
   getPerformanceList() {
     this.global.showLoader();
     this.global.postRequest(`${this.global.base_path}Login/PerformanceList`, { event_id: this.navParams.get('id') })
@@ -113,6 +133,11 @@ export class PerformanceModalPage {
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList = res.performance;
             this.person.performanceName = this.performanceList[0].id;
+            if (this.navParams.get('event_entry_id')) {
+              this.getPerformanceDetail();
+            } else {
+              this.global.hideLoader();
+            }
           } else {
             this.global.showToast(`${res.error}`);
           }

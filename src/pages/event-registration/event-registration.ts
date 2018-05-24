@@ -399,7 +399,7 @@ export class EventRegistrationPage {
   }
 
   searchingUser(name: string, i: number) {
-    this.global.log('in searching user');
+    this.global.log('in searching user', name);
     this._index = i;
 
     if (name.length > 0) {
