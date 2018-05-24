@@ -188,7 +188,8 @@ export class EditEventPage {
 
   cancelEvent() {
     let data = {
-      event_id: this.previousPageData.event_entry_id,
+      event_entry_id: this.previousPageData.event_entry_id,
+      event_id: this.previousPageData.event.id,
       user_id: JSON.parse(localStorage.getItem('user')).id
     }
     this.global.showLoader();

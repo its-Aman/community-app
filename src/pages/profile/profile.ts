@@ -13,6 +13,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class ProfilePage {
 
+  professionalList: any;
   loader: Loading;
   noData: boolean;
   userProfile: any = {};
@@ -33,6 +34,7 @@ export class ProfilePage {
     public loadingController: LoadingController,
   ) {
     this.initForm();
+    this.getProfessionalList();
   }
 
   initForm() {
@@ -208,5 +210,21 @@ export class ProfilePage {
     this.global.log(`data to be updated in profile api is`, data);
 
     return data;
+  }
+
+  getProfessionalList() {
+    this.global.postRequest(this.global.base_path + 'Login/ProfessionList', {})
+      .subscribe(
+        res => {
+          this.global.log(`getPRofessional data`, res);
+          if (res.success == 'true') {
+            this.professionalList = res.Profession;
+          } else {
+            this.global.log(`getPRofessional error`, res);
+            this.global.showToast(res.error);
+          }
+        }, err => {
+          this.global.log(`getPRofessional error`, err);
+        });
   }
 }

@@ -137,9 +137,9 @@
           <!-- <div>Plumber</div> -->
           <ion-item>
             <ion-select class="select-form" [disabled]="isDisabled" formControlName="professionalService">
-              <ion-option value="1" [ngStyle]="theme?.data()">Plumber</ion-option>
-              <ion-option value="2" [ngStyle]="theme?.data()">Driver</ion-option>
-              <ion-option value="3" [ngStyle]="theme?.data()">Mechanic</ion-option>
+              <ion-option [value]="profession?.id" [ngStyle]="theme?.data()" *ngFor="let profession of professionalList; let i=index">{{profession?.value}}</ion-option>
+              <!-- <ion-option value="2" [ngStyle]="theme?.data()">Driver</ion-option> -->
+              <!-- <ion-option value="3" [ngStyle]="theme?.data()">Mechanic</ion-option> -->
             </ion-select>
           </ion-item>
           <p class="error" text-left *ngIf="profileForm?.controls['professionalService']?.hasError('required') && (profileForm?.controls['professionalService']?.dirty || isFormInvalid)">Professional Service is Required</p>
