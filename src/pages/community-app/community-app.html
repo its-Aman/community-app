@@ -9,22 +9,22 @@
 
 <ion-content no-padding>
   <ion-grid class="grid-profession" *ngIf="!noData">
-    <ion-row class="row-profession" *ngFor="let people of peoples; let i = index">
-      <ion-col col-12 (click)="openPeopleDetails(i)" [class.active]="people?.show">
-        <div class="profession" [class.active]="people?.show" [ngStyle]="theme?.heading()">{{people?.name}}</div>
+    <ion-row class="row-profession" *ngFor="let vendors of vendorList; let i = index">
+      <ion-col col-12 (click)="openPeopleDetails(i)" [class.active]="vendors?.show">
+        <div class="profession" [class.active]="vendors?.show" [ngStyle]="theme?.heading()">{{vendors?.profession}}</div>
       </ion-col>
 
-      <div *ngIf="people?.show" class="background-color">
+      <div *ngIf="vendors?.show" class="background-color">
         <div class="details">
           <ion-row class="row-header">
             <ion-col col-6>NAME</ion-col>
             <ion-col col-6 text-center>PHONE NO.</ion-col>
           </ion-row>
 
-          <ion-row (click)='openDetails(i)' *ngFor="let vendor of vendorList; let i = index;">
-            <ion-col col-6 [ngStyle]="theme?.data()"> {{vendor?.contact_person}} </ion-col>
+          <ion-row (click)='openDetails(people)' *ngFor="let people of vendors?.vendors; let _i = index;">
+            <ion-col col-6 [ngStyle]="theme?.data()"> {{people?.contact_person}} </ion-col>
             <!-- <ion-col col-2>$30</ion-col> -->
-            <ion-col col-6 text-center [ngStyle]="theme?.data()"> {{vendor?.mobile_no}} </ion-col>
+            <ion-col col-6 text-center [ngStyle]="theme?.data()"> {{people?.mobile_no}} </ion-col>
           </ion-row>
         </div>
       </div>

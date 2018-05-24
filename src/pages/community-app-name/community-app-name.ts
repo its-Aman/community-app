@@ -10,6 +10,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
   templateUrl: 'community-app-name.html',
 })
 export class CommunityAppNamePage {
+  professionalList: any;
   search: any;
   searchType: any = 'P';
   @ViewChild(Content) content: Content;
@@ -20,8 +21,9 @@ export class CommunityAppNamePage {
     public global: GlobalProvider,
     public event: Events,
     public keyboard: Keyboard,
-    public theme: ThemeProvider,    
+    public theme: ThemeProvider,
   ) {
+    this.getProfessionalList();
   }
 
   ionViewDidLoad() {
@@ -52,7 +54,7 @@ export class CommunityAppNamePage {
     this.global.log(`in makeCall's method`);
     document.location.href = 'tel:+91123456789';
   }
-  
+
   makeMail() {
     this.global.log(`in makeMail's method`);
     document.location.href = `mailto:user@example.com?subject=You're%20Awesome&body=Already%20told%20you`;
@@ -75,5 +77,22 @@ export class CommunityAppNamePage {
 
     this.global.log(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
+  }
+
+  getProfessionalList() {
+    this.global.postRequest(this.global.base_path + 'Login/ProfessionList', {})
+      .subscribe(
+        res => {
+          this.global.log(`getPRofessional data`, res);
+          if (res.success == 'true') {
+            this.professionalList = res.Profession;
+            this.searchType = this.professionalList[0].id;
+          } else {
+            this.global.log(`getPRofessional error`, res);
+            this.global.showToast(res.error);
+          }
+        }, err => {
+          this.global.log(`getPRofessional error`, err);
+        });
   }
 }
