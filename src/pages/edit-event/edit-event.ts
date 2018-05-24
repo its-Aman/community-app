@@ -276,6 +276,10 @@ export class EditEventPage {
   checkAge(i) {
     this.global.log(String(this.persons[i].age));
 
+    if (String(this.persons[i].age).length > 3) {
+      this.persons[i].age = String(this.persons[i].age).slice(0, 3);
+    }
+
     if (String(this.persons[i].age).length >= 0) {
       this.global.log(`checkAge`, this.persons[i]);
       this.getAmountAccToAge(this.persons[i].age, i);
