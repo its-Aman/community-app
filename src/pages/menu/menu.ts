@@ -20,12 +20,26 @@ export class MenuPage {
     public app: App,
     private events: Events
   ) {
+    this.events.subscribe('user-updated', data => {
+      this.userDetails = data;
+      if (this.userDetails.image) {
+        this.userDetails.user_image = this.global.sanatizeImage(false, this.global.image_base_path + 'user/' + this.userDetails.user_image);
+      } else {
+        this.userDetails.user_image = `../assets/icon/sidebar-profile-photo.png`;
+      }
+
+    });
+  }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter MenuPage');
+
     this.userDetails = JSON.parse(localStorage.getItem('user'));
     //TODO: fix basepath it 
     if (this.userDetails.image) {
-      this.userDetails.user_image  = this.global.sanatizeImage(false, this.global.image_base_path + 'user/' + this.userDetails.user_image  );
+      this.userDetails.user_image = this.global.sanatizeImage(false, this.global.image_base_path + 'user/' + this.userDetails.user_image);
     } else {
-      this.userDetails.user_image  = `../assets/icon/sidebar-profile-photo.png`;
+      this.userDetails.user_image = `../assets/icon/sidebar-profile-photo.png`;
     }
 
   }

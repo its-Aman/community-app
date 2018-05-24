@@ -287,7 +287,7 @@ export class EventRegistrationPage {
     }
   }
 
-  showConfirmation() {
+  showConfirmation(id: any) {
     let alert = this.alrtCtrl.create({
       title: 'Confirmation',
       subTitle: `Thank You for registering to ${this.previousPageData.event.event_name}
@@ -298,7 +298,7 @@ export class EventRegistrationPage {
                   Account Number: 85947060 
                   Lloyds Bank
 
-                  With the reference number #${this.previousPageData.event_entry_id}
+                  With the reference number #${id}
                 `,
       buttons: [
         {
@@ -323,7 +323,7 @@ export class EventRegistrationPage {
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             //TODO: show POP-UP
-            this.showConfirmation();
+            this.showConfirmation(res.id);
           } else {
             this.global.showToast(`${res.error}`);
             if (res.error == "User Already Registered with this event.") {

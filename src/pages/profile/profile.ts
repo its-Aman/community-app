@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController, Loading, Events } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -32,6 +32,7 @@ export class ProfilePage {
     public keyboard: Keyboard,
     public theme: ThemeProvider,
     public loadingController: LoadingController,
+    private events: Events,
   ) {
     this.initForm();
     this.getProfessionalList();
@@ -167,7 +168,7 @@ export class ProfilePage {
   updateProfileData() {
     let foo = this.navParams.get('data');
 
-    let data = this.getUpdatedProfile();
+    let data = this.getUpdatedProfileData();
     // this.global.showLoader();
     this.loader.present();
     this.global.postRequest(this.global.base_path + 'Login/EditProfile', data)
@@ -177,6 +178,7 @@ export class ProfilePage {
         if (res.success == 'true') {
           this.userProfile = res.user;
           this.setFormData();
+          this.updateLocalStorage();
           this.global.showToast(`Successfully updated the profile`);
           if (foo && foo.fromLogin) {
             this.navCtrl.setRoot('MenuPage', { data: null });
@@ -192,7 +194,7 @@ export class ProfilePage {
 
   }
 
-  getUpdatedProfile() {
+  getUpdatedProfileData() {
     let data = {
       login_user_id: JSON.parse(localStorage.getItem('user')).id,
       name: this.profileForm.controls['name'].value,
@@ -207,9 +209,18 @@ export class ProfilePage {
       professional_service_id: this.profileForm.controls['professionalService'].value
     }
 
+
     this.global.log(`data to be updated in profile api is`, data);
 
     return data;
+  }
+
+  updateLocalStorage() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    user.name = this.profileForm.controls['name'].value;
+    localStorage.setItem('user', JSON.stringify(user));
+
+    this.events.publish('user-updated', user);
   }
 
   getProfessionalList() {

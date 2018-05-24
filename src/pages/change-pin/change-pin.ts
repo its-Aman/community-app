@@ -13,7 +13,7 @@ export class ChangePinPage {
 
   changePinForm: FormGroup;
   isFormInvalid: boolean = false;
-  otpResponseValue: any = JSON.parse(localStorage.getItem('otp-res-value'));
+  otpResponseValue: any = JSON.parse(localStorage.getItem('user'));
   fromLogin: boolean;
   @ViewChild(Content) content: Content;
 

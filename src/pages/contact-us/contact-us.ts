@@ -1,7 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 import { ThemeProvider } from '../../providers/theme/theme';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser';
 
@@ -24,7 +23,6 @@ export class ContactUsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
-    private geolocation: Geolocation,
     private theme: ThemeProvider,
     private iab: InAppBrowser
   ) {
@@ -33,7 +31,6 @@ export class ContactUsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactUsPage');
-    this.getCoordinates();
   }
 
   getData() {
@@ -44,6 +41,9 @@ export class ContactUsPage {
         if (res.success == 'true') {
           this.noData = false;
           this.contactData = res;
+          if (res.geo_lat) {
+            this.loadMap({ latitude: +res.geo_lat, longitude: +res.geo_long });
+          }
         } else {
           this.noData = true;
           this.global.showToast(`No data found`);
@@ -69,18 +69,6 @@ export class ContactUsPage {
     let _iab: InAppBrowserObject = this.iab.create(this.contactData.website, '_system');
 
     _iab.show();
-  }
-
-  getCoordinates() {
-    this.geolocation.getCurrentPosition().then(res => {
-      this.global.log('geolocation res', res);
-      this.loadMap(res.coords);
-    }).catch(err => {
-      this.global.log('some error in geolocation', err);
-      if (err.code == 1) {
-        this.global.showToast(err.message);
-      }
-    });
   }
 
   loadMap(coords: any) {
