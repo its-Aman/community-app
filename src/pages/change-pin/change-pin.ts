@@ -13,7 +13,7 @@ export class ChangePinPage {
 
   changePinForm: FormGroup;
   isFormInvalid: boolean = false;
-  otpResponseValue: any = JSON.parse(localStorage.getItem('user'));
+  otpResponseValue: any;
   fromLogin: boolean;
   @ViewChild(Content) content: Content;
 
@@ -25,8 +25,14 @@ export class ChangePinPage {
     public keyboard: Keyboard,
   ) {
     this.fromLogin = this.navParams.get('fromLogin');
-    // this.fromLogin = true;
-    this.global.log(`this from login value is`, this.fromLogin);
+
+    if (this.fromLogin) {
+      this.otpResponseValue = JSON.parse(localStorage.getItem('otp-res-value'));
+    } else {
+      this.otpResponseValue = JSON.parse(localStorage.getItem('user'));
+    }
+
+    this.global.log(`this from login value is`, this.fromLogin, this.otpResponseValue);
     this.initForm();
   }
 

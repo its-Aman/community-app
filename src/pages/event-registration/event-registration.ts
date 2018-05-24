@@ -279,7 +279,11 @@ export class EventRegistrationPage {
   }
 
   checkAge(i, ev) {
-    this.global.log(ev.target.value);
+    this.global.log(ev.target.value, String(this.persons[i].age));
+
+    if (String(this.persons[i].age).length > 3) {
+      this.persons[i].age = String(this.persons[i].age).slice(0, 3);
+    }
 
     if (ev.target.value && ev.target.value.length >= 0) {
       this.global.log(`checkAge`, ev.target.value);
