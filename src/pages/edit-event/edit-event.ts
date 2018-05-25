@@ -276,8 +276,15 @@ export class EditEventPage {
   checkAge(i) {
     this.global.log(String(this.persons[i].age));
 
+    if (String(this.persons[i].age).length >= 1 && this.persons[i].age == 0) {
+      this.persons[i].age = '';
+      this.global.showToast(`Age can't be zero`);
+      return;
+    }
+
     if (String(this.persons[i].age).length > 3) {
       this.persons[i].age = String(this.persons[i].age).slice(0, 3);
+      return;
     }
 
     if (String(this.persons[i].age).length >= 0) {
@@ -327,21 +334,25 @@ export class EditEventPage {
 
   getAmountAccToAge(age: number, i) {
     // this.global.showLoader();
-    this.global.postRequest(`${this.global.base_path}Login/GetAgeAmount`, { event_id: this.previousPageData.event.id, age: age })
-      .subscribe(
-        res => {
-          // this.global.hideLoader();
-          this.global.log(`response of getAmountAccToAge`, res);
-          if (res.success == 'true') {
-            this.persons[i].amount = res.amount;
-            this.calcTotal();
-          } else {
-            this.global.showToast(`${res.error}`);
-          }
-        }, err => {
-          // this.global.hideLoader();
-          this.global.log(`error of getAmountAccToAge`, err);
-        });
+    if (+this.previousPageData.event.price_type == 0) {
+      this.persons[i].amount = this.previousPageData.event.standard_price;
+    } else {
+      this.global.postRequest(`${this.global.base_path}Login/GetAgeAmount`, { event_id: this.previousPageData.event.id, age: age })
+        .subscribe(
+          res => {
+            // this.global.hideLoader();
+            this.global.log(`response of getAmountAccToAge`, res);
+            if (res.success == 'true') {
+              this.persons[i].amount = res.amount;
+              this.calcTotal();
+            } else {
+              this.global.showToast(`${res.error}`);
+            }
+          }, err => {
+            // this.global.hideLoader();
+            this.global.log(`error of getAmountAccToAge`, err);
+          });
+    }
   }
 
   getEditEventDetail(showLoader: boolean) {

@@ -75,7 +75,8 @@ export class ContactUsPage {
     let mapOptions = {
       center: { lat: coords.latitude, lng: coords.longitude },
       zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
