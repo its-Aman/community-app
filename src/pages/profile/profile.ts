@@ -44,6 +44,17 @@ export class ProfilePage {
   ) {
     this.initForm();
     this.getProfessionalList();
+
+    this.events.subscribe('user-updated-menu', (data) => {
+      this.global.log(`in user-updated-menu`, data);
+
+      if (data.user_image) {
+        this.global.log(`in if`);
+        this.user_image = this.global.image_base_path + 'user/' + data.user_image;
+        // this.user_image = this.global.sanatizeImage(false, 'user/' + data.user_image);
+      }
+    });
+
   }
 
   initForm() {
@@ -340,11 +351,13 @@ export class ProfilePage {
           this.global.log(`saveprofile data`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
-            this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
+            this.user_image = this.global.image_base_path + 'user/' + res.Image;
+            // this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
             let user = JSON.parse(localStorage.getItem('user'));
-            user.user_image = res.image;
+            user.user_image = res.Image;
             localStorage.setItem('user', JSON.stringify(user));
 
+            this.events.publish('user-updated', user);
           } else {
             this.global.showToast(`${res.error}`);
           }

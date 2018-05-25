@@ -28,10 +28,14 @@ export class MenuPage {
     private diagnostic: Diagnostic,
   ) {
     this.events.subscribe('user-updated', data => {
+      this.global.log(`in user-updated event`, data);
       this.userDetails = data;
       if (this.userDetails.user_image) {
-        this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
+        this.global.log(`in if`);
+        this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
+        // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
       } else {
+        this.global.log(`in else`);
         this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
     });
@@ -43,7 +47,8 @@ export class MenuPage {
     this.userDetails = JSON.parse(localStorage.getItem('user'));
     //TODO: fix basepath it 
     if (this.userDetails.user_image) {
-      this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
+      this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
+      // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
     } else {
       this.user_image = `../assets/icon/sidebar-profile-photo.png`;
     }
@@ -52,6 +57,17 @@ export class MenuPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MenuPage');
+
+    this.events.subscribe('user-updated', data => {
+      this.global.log(`in user-updated event`, data);
+      this.userDetails = data;
+      if (this.userDetails.user_image) {
+        this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
+        // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
+      } else {
+        this.user_image = `../assets/icon/sidebar-profile-photo.png`;
+      }
+    });
   }
 
   vendorList() {
@@ -183,11 +199,12 @@ export class MenuPage {
           this.global.log(`saveprofile data`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
-            this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
+            this.user_image = this.global.image_base_path + 'user/' + res.Image;
+            // this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
             let user = JSON.parse(localStorage.getItem('user'));
-            user.user_image = res.image;
+            user.user_image = res.Image;
             localStorage.setItem('user', JSON.stringify(user));
-
+            this.events.publish('user-updated-menu', user);
           } else {
             this.global.showToast(`${res.error}`);
           }
