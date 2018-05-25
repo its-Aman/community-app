@@ -150,7 +150,8 @@ export class ProfilePage {
 
     if (this.userProfile.user_image) {
       this.global.log('asdfasdfasdfa' + this.userProfile.user_image);
-      this.user_image = this.global.sanatizeImage(false, 'user/' + this.userProfile.user_image);
+      // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userProfile.user_image);
+      this.user_image = this.global.image_base_path + 'user/' + this.userProfile.user_image;
     } else {
       this.user_image = `'../assets/icon/thumnail-image.png'`
     }

@@ -91,7 +91,7 @@
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-qrscanner" spec="^2.6.0" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.7" />
-    <engine name="android" spec="7.0.0" />
     <allow-navigation href="http://172.28.49.209:8100" />
     <allow-navigation href="http://192.168.0.104:8100" />
+    <engine name="android" spec="7.0.0" />
 </widget>
