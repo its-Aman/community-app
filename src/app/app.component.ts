@@ -89,6 +89,7 @@ export class MyApp {
     this.theme.defaultTheme.heading_font_colour = '#' + this.theme.defaultTheme.heading_font_colour;
     this.theme.defaultTheme.special_data_font_colour = '#' + this.theme.defaultTheme.special_data_font_colour;
     this.theme.defaultTheme.theme_colour = '#' + this.theme.defaultTheme.theme_colour;
+    this.theme.defaultTheme.tnc_colour = '#' + this.theme.defaultTheme.tnc_colour;
 
   }
 
@@ -194,7 +195,7 @@ export class MyApp {
       background-image: url('${this.theme.defaultTheme.spalsh_image}') !important;
     }
     page-login .statement .terms{
-      color:  ${this.theme.defaultTheme.theme_colour} !important;
+      color:  ${this.theme.defaultTheme.tnc_colour} !important;
     }
     `;
 

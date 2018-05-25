@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, LoadingController, Loading, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, LoadingController, Loading, Events, AlertController } from 'ionic-angular';
 import { GlobalProvider } from '../../providers/global/global';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ThemeProvider } from '../../providers/theme/theme';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 
 @IonicPage()
@@ -13,6 +15,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class ProfilePage {
 
+  base64Image: string;
   professionalList: any;
   loader: Loading;
   noData: boolean;
@@ -21,6 +24,8 @@ export class ProfilePage {
   profileForm: FormGroup;
   isDisabled: boolean = true;
   isFormInvalid: boolean = false;
+  user_image: any;
+
   @ViewChild('ip') ip: any;
   @ViewChild(Content) content: Content;
 
@@ -33,9 +38,23 @@ export class ProfilePage {
     public theme: ThemeProvider,
     public loadingController: LoadingController,
     private events: Events,
+    private alrtCtrl: AlertController,
+    private camera: Camera,
+    private diagnostic: Diagnostic,
   ) {
     this.initForm();
     this.getProfessionalList();
+
+    this.events.subscribe('user-updated-menu', (data) => {
+      this.global.log(`in user-updated-menu`, data);
+
+      if (data.user_image) {
+        this.global.log(`in if`);
+        this.user_image = this.global.image_base_path + 'user/' + data.user_image;
+        // this.user_image = this.global.sanatizeImage(false, 'user/' + data.user_image);
+      }
+    });
+
   }
 
   initForm() {
@@ -129,8 +148,15 @@ export class ProfilePage {
     this.profileForm.controls['professionalService'].setValue(this.userProfile.professional_service_id);
     this.profileForm.controls['city_of_origin'].setValue(this.userProfile.city_of_origin);
 
+    if (this.userProfile.user_image) {
+      this.global.log('asdfasdfasdfa' + this.userProfile.user_image);
+      // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userProfile.user_image);
+      this.user_image = this.global.image_base_path + 'user/' + this.userProfile.user_image;
+    } else {
+      this.user_image = `'../assets/icon/thumnail-image.png'`
+    }
     this.userProfile["mobile_no"] = JSON.parse(localStorage.getItem('user')).mobileno;
-    
+
     localStorage.setItem('profile-user', JSON.stringify(this.userProfile));
   }
 
@@ -170,7 +196,7 @@ export class ProfilePage {
   updateProfileData() {
     let foo = this.navParams.get('data');
 
-    let data = this.getUpdatedProfileData();
+    let data = this.getUpdatedProfileDataToUpload();
     // this.global.showLoader();
     this.loader.present();
     this.global.postRequest(this.global.base_path + 'Login/EditProfile', data)
@@ -196,7 +222,7 @@ export class ProfilePage {
 
   }
 
-  getUpdatedProfileData() {
+  getUpdatedProfileDataToUpload() {
     let data = {
       login_user_id: JSON.parse(localStorage.getItem('user')).id,
       name: this.profileForm.controls['name'].value,
@@ -204,6 +230,7 @@ export class ProfilePage {
       address: this.profileForm.controls['address'].value,
       mode_of_communication: this.profileForm.controls['modeOfCommunication'].value,
       city_of_origin: this.profileForm.controls['city_of_origin'].value,
+      // user_image: this.base64Image,
       state: "1",
       city: "1",
       country: "1",
@@ -220,6 +247,8 @@ export class ProfilePage {
   updateLocalStorage() {
     let user = JSON.parse(localStorage.getItem('user'));
     user.name = this.profileForm.controls['name'].value;
+    user.user_image = this.userProfile.user_image;
+
     localStorage.setItem('user', JSON.stringify(user));
 
     this.events.publish('user-updated', user);
@@ -239,5 +268,104 @@ export class ProfilePage {
         }, err => {
           this.global.log(`getPRofessional error`, err);
         });
+  }
+
+  choosePhoto() {
+    let alert = this.alrtCtrl.create({
+      title: `Profile Picture`,
+      buttons: [
+        {
+          text: "Gallery",
+          handler: () => {
+            this.global.log(`Gallery choosed`);
+            this.handleCameraPermission(this.camera.PictureSourceType.PHOTOLIBRARY || this.camera.PictureSourceType.SAVEDPHOTOALBUM);
+          }
+        },
+        {
+          text: "Camera",
+          handler: () => {
+            this.global.log(`Camera choosed`);
+            this.handleCameraPermission(this.camera.PictureSourceType.CAMERA);
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+
+  takePhoto(type: number) {
+    const options: CameraOptions = {
+      quality: 40,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: type,
+      correctOrientation: true,
+      saveToPhotoAlbum: true,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.user_image = this.base64Image;
+      this.global.log(`got the image`, this.base64Image);
+      this.saveProfileImage(this.base64Image);
+    }, (err) => {
+      // Handle error
+      this.global.log(`Some error in taking picture`, err);
+    });
+  }
+
+  handleCameraPermission(type: number) {
+    this.diagnostic.isCameraAuthorized().then(res => {
+      this.global.log(`Got the isCameraAuthorized res `, res);
+      if (res) {
+        this.takePhoto(type);
+      } else {
+        this.diagnostic.requestCameraAuthorization().then(res => {
+          this.global.log(`Got the requestCameraAuthorization res `, res);
+          if (res) {
+            this.takePhoto(type);
+          } else {
+            this.global.log(`App needs Camera Permission.`);
+          }
+        }).catch(err => {
+          this.global.log(`Got the requestCameraAuthorization error `, err);
+        });
+      }
+    }).catch(err => {
+      this.global.log(`Got the isCameraAuthorized error`, err);
+    });
+  }
+
+  saveProfileImage(image: string) {
+    let data = {
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      user_image: image,
+    };
+
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/SaveImage', data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`saveprofile data`, res);
+          if (res.success == 'true') {
+            this.global.showToast(`${res.message}`);
+            this.user_image = this.global.image_base_path + 'user/' + res.Image;
+            // this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
+            let user = JSON.parse(localStorage.getItem('user'));
+            user.user_image = res.Image;
+            localStorage.setItem('user', JSON.stringify(user));
+
+            this.events.publish('user-updated', user);
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`Some error in save profile image`);
+        }
+      )
   }
 }

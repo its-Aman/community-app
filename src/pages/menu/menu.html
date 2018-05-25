@@ -3,7 +3,7 @@
     <ion-grid class="menu-header-grid" text-left>
       <ion-row class="menu-header-row">
         <ion-col col-12 class="menu-header-col">
-          <div class="profile image" [style.backgroundImage]="'url(' + userDetails?.image + ')'"></div>
+          <div class="profile image" [style.backgroundImage]="'url(' + user_image + ')'" (click)="choosePhoto()"></div>
           <h4>{{userDetails?.name}}</h4>
           <p (click)="editProfile()">Edit profile</p>
         </ion-col>
@@ -45,9 +45,10 @@
       </ion-item>
     </ion-list>
 
+    <!-- <ion-grid no-padding> -->
     <ion-grid no-padding *ngIf="+userDetails?.user_type == 1">
       <ion-row class="qr-row">
-        <ion-col no-padding col-12 text-center>
+        <ion-col no-padding col-12 text-center (click)="scanQRCode()">
           <div class="qrImage image"></div>
           <div class="text-qr">Tap to Verify Event Entry</div>
         </ion-col>

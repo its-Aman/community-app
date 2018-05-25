@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!-- <ion-title>scan-qr-code</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding #content>
+  <div class="container">
+    <ion-grid text-center>
+      <ion-row (click)="submit(1)">
+        <ion-col class="scan-area top-left" col-2></ion-col>
+      </ion-row>
+      <ion-row (click)="submit(0)">
+        <ion-col class="scan-area bottom-right" col-2></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer text-center *ngIf="scanResult">
+  {{scanResult}}
+</ion-footer>

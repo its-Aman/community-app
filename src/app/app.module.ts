@@ -17,6 +17,9 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 import { HttpClientModule } from '@angular/common/http';
 import { ThemeProvider } from '../providers/theme/theme';
 import { GlobalProvider } from './../providers/global/global';
+import { Camera } from '@ionic-native/camera';
+import { QRScanner } from '@ionic-native/qr-scanner';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { GlobalProvider } from './../providers/global/global';
     StatusBar,
     Keyboard,
     InAppBrowser,
+    Camera,
+    QRScanner,
+    Diagnostic,
   ]
 })
 export class AppModule { }
