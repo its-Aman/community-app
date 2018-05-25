@@ -3,7 +3,7 @@
     <ion-grid class="menu-header-grid" text-left>
       <ion-row class="menu-header-row">
         <ion-col col-12 class="menu-header-col">
-          <div class="profile image" [style.backgroundImage]="'url(' + userDetails?.user_image + ')'" (click)="choosePhoto()"></div>
+          <div class="profile image" [style.backgroundImage]="'url(' + user_image + ')'" (click)="choosePhoto()"></div>
           <h4>{{userDetails?.name}}</h4>
           <p (click)="editProfile()">Edit profile</p>
         </ion-col>

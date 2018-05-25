@@ -13,6 +13,8 @@ export class MenuPage {
 
   rootMenuPage: string = 'TabsPage';
   userDetails: any;
+  user_image: any;
+
   @ViewChild(Menu) menu: Menu;
 
   constructor(
@@ -27,10 +29,11 @@ export class MenuPage {
   ) {
     this.events.subscribe('user-updated', data => {
       this.userDetails = data;
-      if (!this.userDetails.user_image) {
-        this.userDetails.user_image = `../assets/icon/sidebar-profile-photo.png`;
+      if (this.userDetails.user_image) {
+        this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
+      } else {
+        this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
-
     });
   }
 
@@ -40,9 +43,9 @@ export class MenuPage {
     this.userDetails = JSON.parse(localStorage.getItem('user'));
     //TODO: fix basepath it 
     if (this.userDetails.user_image) {
-      this.userDetails.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
+      this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
     } else {
-      this.userDetails.user_image = `../assets/icon/sidebar-profile-photo.png`;
+      this.user_image = `../assets/icon/sidebar-profile-photo.png`;
     }
 
   }
@@ -136,6 +139,8 @@ export class MenuPage {
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.global.log(`got the image`, base64Image);
+      this.user_image = base64Image;
+      this.saveProfileImage(base64Image);
     }, (err) => {
       // Handle error
       this.global.log(`Some error in taking picture`, err);
@@ -163,4 +168,34 @@ export class MenuPage {
       this.global.log(`Got the isCameraAuthorized error`, err);
     });
   }
+
+  saveProfileImage(image: string) {
+    let data = {
+      login_user_id: JSON.parse(localStorage.getItem('user')).id,
+      user_image: image,
+    };
+
+    this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/SaveImage', data)
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`saveprofile data`, res);
+          if (res.success == 'true') {
+            this.global.showToast(`${res.message}`);
+            this.user_image = this.global.sanatizeImage(false, 'user/' + res.Image);
+            let user = JSON.parse(localStorage.getItem('user'));
+            user.user_image = res.image;
+            localStorage.setItem('user', JSON.stringify(user));
+
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`Some error in save profile image`);
+        }
+      )
+  }
+
 }
