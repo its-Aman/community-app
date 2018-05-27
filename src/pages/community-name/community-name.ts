@@ -146,9 +146,11 @@ export class CommunityNamePage {
 
   registration() {
     this.global.log('in registration()');
-    this.navCtrl.push('EventRegistrationPage', {
-      data: this.eventData
-    });
+    if (this.eventData.availableseats > 0) { 
+      this.navCtrl.push('EventRegistrationPage', {
+        data: this.eventData
+      });
+    }
   }
 
   performance() {

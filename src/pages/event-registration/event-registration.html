@@ -64,8 +64,8 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color" [ngStyle]="theme?.heading()">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
-            <number-slider class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
-              (increased)="numberValue($event, true)"></number-slider>
+            <number-slider class="num-sli" [max]="+previousPageData?.availableseats" [seed]="userForm?.controls['noOfMembers'].value"
+              (decreased)="numberValue($event, false)" (increased)="numberValue($event, true)"></number-slider>
             <!-- <ion-item>
                 <ion-range formControlName="noOfMembers"></ion-range>
               </ion-item>

@@ -24,7 +24,7 @@
       </ion-col> -->
 
       <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">Edit Registration(#{{eventData?.event_entry_id}})</div>
-      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">Registration</div>
+      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">{{eventData?.availableseats > 0 ? 'Registration' : 'Ticket Sold'}}</div>
       <div class="col-filter" (click)="performance()" *ngIf="+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1">Performance</div>
     </ion-row>
 
@@ -64,7 +64,7 @@
             <span class="chair image"></span>
             <span class="calender" [ngStyle]="theme?.heading()">Left</span>
           </div>
-          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.totalseats - +eventData?.totalregistration}}</div>
+          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.availableseats}}</div>
         </ion-col>
       </ion-row>
 

@@ -295,6 +295,8 @@ export class EventRegistrationPage {
     if (ev.target.value && ev.target.value.length >= 0) {
       this.global.log(`checkAge`, ev.target.value);
       this.getAmountAccToAge(+ev.target.value, i);
+    } else {
+      this.global.showToast(`No Record Found`);
     }
   }
 
@@ -378,6 +380,9 @@ export class EventRegistrationPage {
             // this.global.hideLoader();
             this.global.log(`response of getAmountAccToAge`, res);
             if (res.success == 'true') {
+              if (+res.amount == 0) {
+                this.global.showToast(`No Record Found`);
+              }
               this.persons[i].amount = res.amount;
               this.calcTotal();
             } else {

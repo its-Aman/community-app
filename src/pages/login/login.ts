@@ -155,7 +155,9 @@ export class LoginPage {
                 this.navCtrl.setRoot('MenuPage', { data: null });
               }, 1000);
             } else {
-              this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+              setTimeout(() => {
+                this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+              }, 1000);
             }
           } else {
             this.global.showToast(`${res.error}`);

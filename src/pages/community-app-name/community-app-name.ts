@@ -10,7 +10,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
   templateUrl: 'community-app-name.html',
 })
 export class CommunityAppNamePage {
-  professionalList: any;
+  userList: any;
   search: any;
   searchType: any = 'P';
   @ViewChild(Content) content: Content;
@@ -23,7 +23,7 @@ export class CommunityAppNamePage {
     public keyboard: Keyboard,
     public theme: ThemeProvider,
   ) {
-    this.getProfessionalList();
+    // this.getProfessionalList();
   }
 
   ionViewDidLoad() {
@@ -79,20 +79,24 @@ export class CommunityAppNamePage {
     foo[0].style.paddingBottom = '0px';
   }
 
-  getProfessionalList() {
-    this.global.postRequest(this.global.base_path + 'Login/ProfessionList', {})
+  getSearchResult(query: any) {
+    this.global.postRequest(this.global.base_path + '', {})
       .subscribe(
         res => {
-          this.global.log(`getPRofessional data`, res);
+          this.global.log(`getSearchResult data`, res);
           if (res.success == 'true') {
-            this.professionalList = res.Profession;
-            this.searchType = this.professionalList[0].id;
+            this.userList = res;
           } else {
-            this.global.log(`getPRofessional error`, res);
+            this.global.log(`getSearchResult error`, res);
             this.global.showToast(res.error);
           }
         }, err => {
-          this.global.log(`getPRofessional error`, err);
+          this.global.log(`getSearchResult error`, err);
         });
+  }
+
+  valueChange(ev) {
+    this.global.log(`in valueChange`, ev);
+    this.getSearchResult(ev);
   }
 }
