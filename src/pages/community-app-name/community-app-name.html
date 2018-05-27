@@ -17,11 +17,11 @@
         <!-- <div class="search">Search By</div> -->
         <ion-item class="search">
           <ion-label *ngIf="!searchType" [ngStyle]="theme?.heading()">Search By</ion-label>
-          <ion-select class="select-form" [(ngModel)]="searchType">
-            <ion-option [value]="profession?.id" [ngStyle]="theme?.data()" *ngFor="let profession of professionalList; let i=index">{{profession?.value}}</ion-option>
-            <!-- <ion-option value="P" [ngStyle]="theme?.data()">By Profession</ion-option>
+          <ion-select class="select-form" [(ngModel)]="searchType" (ionChange)="valueChange($event)" >
+            <!-- <ion-option [value]="profession?.id" [ngStyle]="theme?.data()" *ngFor="let profession of professionalList; let i=index">{{profession?.value}}</ion-option> -->
+            <ion-option value="P" [ngStyle]="theme?.data()">By Profession</ion-option>
+            <ion-option value="C" [ngStyle]="theme?.data()">By City</ion-option>
             <ion-option value="A" [ngStyle]="theme?.data()">By Alphabetical</ion-option>
-            <ion-option value="C" [ngStyle]="theme?.data()">By City</ion-option> -->
           </ion-select>
         </ion-item>
         <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->

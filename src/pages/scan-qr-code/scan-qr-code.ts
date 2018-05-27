@@ -153,7 +153,7 @@ export class ScanQrCodePage {
             this.global.showToast(`${res.message}`);
             setTimeout(() => {
               this.navCtrl.popToRoot();
-            }, 500);
+            }, 1000);
           } else {
             this.global.showToast(`${res.error}`);
           }
