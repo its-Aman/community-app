@@ -29,6 +29,7 @@ export class EditEventPage {
     specialNeed: '',
   };
   previousPageData: any;
+  showDescription: boolean = false;
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
 
@@ -454,4 +455,8 @@ export class EditEventPage {
     this.users = [];
   }
 
+  openScanner() {
+    this.global.log(`in openScanner`);
+    this.navCtrl.push('ScanQrCodePage', { data: null });    
+  }
 }

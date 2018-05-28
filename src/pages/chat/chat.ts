@@ -73,14 +73,20 @@ export class ChatPage {
 
     this.inputText = this.inputText.trim();
     if (this.inputText.length > 0) {
-      this.dummyChat.push({
+      let pushData = {
         from_user_id: JSON.parse(localStorage.getItem('user')).id,
         image: 'assets/icon/sidebar-profile-photo.png',
         message: this.inputText,
-        entry_date_time: new Date()
-      });
-      this.inputText = '';
-      this.scrollToBottom();
+        entry_date_time: new Date(),
+      };
+
+      let postData = {
+        to_user_id: this.chatListData.other_user_id,
+        login_user_id: JSON.parse(localStorage.getItem('user')).id,
+        message: this.inputText,
+      }
+
+      this.sendMessage(postData, pushData);
     }
   }
 
@@ -114,6 +120,27 @@ export class ChatPage {
           this.global.hideLoader();
           this.global.log(`getChatData's error is`, err);
         }
-      )
+      );
+  }
+
+  sendMessage(postData, pushData) {
+    this.global.postRequest(`${this.global.base_path}Login/SendMessage`, postData)
+      .subscribe(
+        res => {
+          this.global.log(`getChatData's response is`, res);
+
+          if (res.success == 'true') {
+            pushData['id'] = res.id;
+            this.chatData.push(pushData);
+            this.inputText = '';
+            this.scrollToBottom();
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.noData = true;
+          this.global.log(`getChatData's error is`, err);
+        }
+      );
   }
 }

@@ -17,56 +17,37 @@
         <!-- <div class="search">Search By</div> -->
         <ion-item class="search">
           <ion-label *ngIf="!searchType" [ngStyle]="theme?.heading()">Search By</ion-label>
-          <ion-select class="select-form" [(ngModel)]="searchType" (ionChange)="valueChange($event)" >
+          <ion-select class="select-form" [(ngModel)]="searchType" (ionChange)="valueChange($event)">
             <!-- <ion-option [value]="profession?.id" [ngStyle]="theme?.data()" *ngFor="let profession of professionalList; let i=index">{{profession?.value}}</ion-option> -->
-            <ion-option value="P" [ngStyle]="theme?.data()">By Profession</ion-option>
-            <ion-option value="C" [ngStyle]="theme?.data()">By City</ion-option>
-            <ion-option value="A" [ngStyle]="theme?.data()">By Alphabetical</ion-option>
+            <ion-option value="Profession" [ngStyle]="theme?.data()">By Profession</ion-option>
+            <ion-option value="City" [ngStyle]="theme?.data()">By City</ion-option>
+            <ion-option value="Alphabetic" [ngStyle]="theme?.data()">By Alphabetical</ion-option>
           </ion-select>
         </ion-item>
-        <!-- <ion-input placeholder="Search By" clearInput [(ngModel)]="searchBy"></ion-input>         -->
       </ion-col>
       <ion-col col-12>
-        <!-- <div class="profession">Plumber</div> -->
         <ion-item>
-          <ion-input class="bdr-btm" placeholder="Search" clearInput [(ngModel)]="search" (focusout)="removePadding()"></ion-input>
+          <ion-input class="bdr-btm" placeholder="Search" clearInput [formControl]="search" (focusout)="removePadding()"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col col-12 class="col-person">
-        <ion-list class="list-person">
-          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
-            <h4>
-              <b [ngStyle]="theme?.heading()">A</b>
-            </h4>
-            <p [ngStyle]="theme?.data()">Aman (Service)</p>
-            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
-            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
-            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
-          </ion-item>
-
-          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
-            <h4>
-              <b [ngStyle]="theme?.heading()">R</b>
-            </h4>
-            <p [ngStyle]="theme?.data()">Rakesh (Service)</p>
-            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
-            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
-            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
-          </ion-item>
-
-          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails()">
-            <h4>
-              <b [ngStyle]="theme?.heading()">P</b>
-            </h4>
-            <p [ngStyle]="theme?.data()">Poonam (HR)</p>
-            <ion-icon name="ios-call" item-end (click)="makeCall()"></ion-icon>
-            <ion-icon name="ios-mail" item-end (click)="makeMail()"></ion-icon>
-            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat()"></ion-icon>
+      <ion-col col-12 class="col-person" *ngIf="!noData">
+        <ion-list class="list-person" *ngFor="let _data of userList?.data">
+          <ion-list-header [ngStyle]="theme?.heading()">
+            {{_data?.key}}
+          </ion-list-header>
+          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails(person)" *ngFor="let person of _data?.value">
+            <p [ngStyle]="theme?.data()">{{person?.name || 'Aman Kuamr'}}</p>
+            <ion-icon name="ios-call" item-end (click)="makeCall(person)"></ion-icon>
+            <ion-icon name="ios-mail" item-end (click)="makeMail(person)"></ion-icon>
+            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat(person)"></ion-icon>
           </ion-item>
         </ion-list>
+      </ion-col>
+      <ion-col col-12 no-padding *ngIf="noData" text-center>
+        <div class="no-data">No Data Found</div>
       </ion-col>
     </ion-row>
   </ion-grid>

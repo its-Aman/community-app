@@ -16,6 +16,7 @@ export class CommunityNamePage {
   eventData: any;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  showDescription: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -94,14 +95,6 @@ export class CommunityNamePage {
         });
   }
 
-  openPlace() {
-    this.global.log('in openPlace');
-  }
-
-  openCalendar() {
-    this.global.log('in openCalendar');
-  }
-
   loadMap(coords: any) {
     let mapOptions = {
       center: { lat: coords.latitude, lng: coords.longitude },
@@ -146,7 +139,7 @@ export class CommunityNamePage {
 
   registration() {
     this.global.log('in registration()');
-    if (this.eventData.availableseats > 0) { 
+    if (this.eventData.availableseats > 0) {
       this.navCtrl.push('EventRegistrationPage', {
         data: this.eventData
       });
@@ -162,5 +155,10 @@ export class CommunityNamePage {
         this.personData = data;
       }
     });
+  }
+
+  openScanner() {
+    this.global.log(`in openScanner`);
+    this.navCtrl.push('ScanQrCodePage', { data: null });    
   }
 }
