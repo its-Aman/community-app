@@ -32,6 +32,8 @@ export class EventRegistrationPage {
   volunteer = false;
   performance = false;
 
+  showDescription: boolean = false;
+  
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
 

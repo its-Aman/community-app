@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ThemeProvider } from '../../providers/theme/theme';
+import { FormControl } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -10,9 +11,10 @@ import { ThemeProvider } from '../../providers/theme/theme';
   templateUrl: 'community-app-name.html',
 })
 export class CommunityAppNamePage {
+  noData: boolean;
   userList: any;
-  search: any;
-  searchType: any = 'P';
+  search: FormControl = new FormControl();
+  searchType: any = 'Profession';
   @ViewChild(Content) content: Content;
 
   constructor(
@@ -23,7 +25,32 @@ export class CommunityAppNamePage {
     public keyboard: Keyboard,
     public theme: ThemeProvider,
   ) {
-    // this.getProfessionalList();
+    this.getSearchResultByDropdown(true);
+
+    this.search.valueChanges.
+      debounceTime(300).subscribe(
+        res => {
+          this.global.log(`in value change and the value is `, res);
+          if (res && res.length) {
+
+            this.global.postRequest(this.global.base_path + 'Login/SerachTextBox', { searchby: this.searchType, Searchtext: res })
+              .subscribe(
+                res => {
+                  this.global.log(`getSearchResult data`, res);
+                  if (res.success == 'true') {
+                    this.userList = res;
+                    this.noData = false;
+                  } else {
+                    this.noData = true;
+                    this.global.log(`getSearchResult error`, res);
+                    this.global.showToast(res.error);
+                  }
+                }, err => {
+                  this.noData = true;
+                  this.global.log(`getSearchResult error`, err);
+                });
+          }
+        });
   }
 
   ionViewDidLoad() {
@@ -46,22 +73,22 @@ export class CommunityAppNamePage {
       });
   }
 
-  personDetails() {
-    this.global.log(`in personDetails's method`);
+  personDetails(person: any) {
+    this.global.log(`in personDetails's method`, person);
   }
 
-  makeCall() {
-    this.global.log(`in makeCall's method`);
+  makeCall(person: any) {
+    this.global.log(`in makeCall's method`, person);
     document.location.href = 'tel:+91123456789';
   }
 
-  makeMail() {
-    this.global.log(`in makeMail's method`);
+  makeMail(person: any) {
+    this.global.log(`in makeMail's method`, person);
     document.location.href = `mailto:user@example.com?subject=You're%20Awesome&body=Already%20told%20you`;
   }
 
-  makeChat() {
-    this.global.log(`in makeChat's method`);
+  makeChat(person: any) {
+    this.global.log(`in makeChat's method`, person);
     this.openChatPage();
   }
 
@@ -79,24 +106,30 @@ export class CommunityAppNamePage {
     foo[0].style.paddingBottom = '0px';
   }
 
-  getSearchResult(query: any) {
-    this.global.postRequest(this.global.base_path + '', {})
+  getSearchResultByDropdown(isFirst: boolean) {
+    isFirst ? null : this.global.showLoader();
+    this.global.postRequest(this.global.base_path + 'Login/SerachByUsers', { searchby: this.searchType })
       .subscribe(
         res => {
+          isFirst ? null : this.global.hideLoader();
           this.global.log(`getSearchResult data`, res);
           if (res.success == 'true') {
             this.userList = res;
+            this.noData = false;
           } else {
+            this.noData = true;
             this.global.log(`getSearchResult error`, res);
             this.global.showToast(res.error);
           }
         }, err => {
+          this.noData = true;
+          isFirst ? null : this.global.hideLoader();
           this.global.log(`getSearchResult error`, err);
         });
   }
 
   valueChange(ev) {
     this.global.log(`in valueChange`, ev);
-    this.getSearchResult(ev);
+    this.getSearchResultByDropdown(false);
   }
 }

@@ -20,6 +20,7 @@ import { GlobalProvider } from './../providers/global/global';
 import { Camera } from '@ionic-native/camera';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
       mode: 'md'
     }),
     SuperTabsModule.forRoot(),
+    ReactiveFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -2,6 +2,12 @@
 
   <ion-navbar>
     <ion-title>Edit Event</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openScanner()">
+        <ion-icon ios="md-qr-scanner" md="md-qr-scanner"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -31,7 +37,7 @@
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" [ngStyle]="theme?.data()" [innerHTML]="previousPageData.event?.description"></div>
+        <div class="description" (click)="showDescription = !showDescription" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
       </ion-col>
     </ion-row>
 

@@ -31,7 +31,8 @@
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" [ngStyle]="theme?.data()" [innerHTML]="previousPageData.event?.description"></div>
+        <div class="description" (click)="showDescription = !showDescription" [ngStyle]="theme?.data()" 
+        [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
       </ion-col>
     </ion-row>
 
