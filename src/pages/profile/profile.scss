@@ -1,115 +1,121 @@
 page-profile {
-
-    .align-center{
-        align-self: center;
+  .align-center {
+    align-self: center;
+  }
+  img.create {
+    height: 20px;
+    margin: 5px;
+  }
+  .row {
+    ion-icon {
+      color: #02A1E2;
     }
-    img.create{
-        height: 20px;
-        margin: 5px;
+  }
+  .images {
+    position: relative;
+    padding: 0;
+    .pencil {
+      position: absolute;
+      top: 67%;
+      right: 37%;
+      font-size: 2em;
     }
-    .row{
-        ion-icon{
-            color: #02A1E2;
-        }
+    .backgroundImage {
+      background-image: url('../assets/icon/profile-bg.png');
+      width: 100%;
+      height: 187px;
     }
-    .images{
-        position: relative;
-        padding: 0;
-        .backgroundImage{
-            background-image: url('../assets/icon/profile-bg.png');
-            width: 100%;
-            height: 187px;
-        }
-        .profileImage{
-            // background-image: url('../assets/icon/thumnail-image.png');
-            width: 125px;
-            height: 125px;
-            border-radius: 64px;
-            border: 3px solid white;
-            position: absolute;
-            top: calc(50% - 62px);
-            left: calc(50% - 62px);
-        }
+    .profileImage {
+      // background-image: url('../assets/icon/thumnail-image.png');
+      width: 125px;
+      height: 125px;
+      border-radius: 64px;
+      border: 3px solid white;
+      position: absolute;
+      top: calc(50% - 62px);
+      left: calc(50% - 62px);
     }
-    .row-mode-of-communication{
-        margin: 10px 0;
-
-        .item-md{
-            padding-left: 0px;
-        }
-        .item-md.item-block .item-inner{
-            padding-right: 0px;
-            border-bottom: none;
-        }
+  }
+  .row-mode-of-communication {
+    margin: 10px 0;
+    .item-md {
+      padding-left: 0px;
     }
-    .grid-image{
-        padding: 0; 
+    .item-md.item-block .item-inner {
+      padding-right: 0px;
+      border-bottom: none;
     }
-    .row-mobile{
-        .mobile{
-            color: #777777;
-        }
-        // font-size: 16px;
-        margin: 10px 0;
-        padding: 5px;
+  }
+  .grid-image {
+    padding: 0;
+  }
+  .row-mobile {
+    .mobile {
+      color: #777777;
+    } // font-size: 16px;
+    margin: 10px 0;
+    padding: 5px;
+  }
+  .row-common {
+    // font-size: 16px;
+    .email {
+      color: #777777;
     }
-    .row-common{
-        // font-size: 16px;
-        .email{
-            color: #777777;
-        }
-        .address{
-            color: #777777;
-        }       
-        .mode-comm{
-            color: #777777;
-        }       
-        margin: 10px 0;
-        padding: 5px;
-        [col-1]{
-            justify-content: center;
-            display: flex;
-            align-items: center;
-        }
-        [col-5]{
-            display: flex;
-            align-items: center;
-        }
+    .address {
+      color: #777777;
     }
-    .submitButton{
-        background-color: #02A1E2
+    .mode-comm {
+      color: #777777;
     }
-    .mode-of-comm{
-        .item-md{
-            padding-left: 0px;
-        }
+    margin: 10px 0;
+    padding: 5px;
+    [col-1] {
+      justify-content: center;
+      display: flex;
+      align-items: center;
     }
-    .select-form{
-        max-width: 100%;
+    [col-5] {
+      display: flex;
+      align-items: center;
     }
-    .text-input-md{
-        text-align: right;
-        margin-bottom: 0px;
+  }
+  .submitButton {
+    background-color: #02A1E2
+  }
+  .mode-of-comm {
+    .item-md {
+      padding-left: 0px;
     }
-    ion-input, ion-textarea{
-        // border-bottom: 1px solid lightgray;
-    }
-    .address-textarea{
-        height: 50px;
-    }
-    .item-md{
-        padding-left: 0;
-    }
-    .item-md.item-block .item-inner{
-        padding-right: 0;
-        border-bottom: none;
-    }
-    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
-        border-bottom-color: white;
-        box-shadow: none;        
-    }
-    .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
-        border-bottom-color: white;
-        box-shadow: none;
-    }
+  }
+  .select-form {
+    max-width: 100%;
+  }
+  .text-input-md {
+    text-align: right;
+    margin-bottom: 0px;
+  }
+  ion-input,
+  ion-textarea {
+    // border-bottom: 1px solid lightgray;
+  }
+  .address-textarea {
+    height: 50px;
+  }
+  .item-md {
+    padding-left: 0;
+  }
+  .item-md.item-block .item-inner {
+    padding-right: 0;
+    border-bottom: none;
+  }
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+  .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: white;
+    box-shadow: none;
+  }
+  .item-md.item-input.item-input-has-focus .item-inner,
+  .item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: white;
+    box-shadow: none;
+  }
 }

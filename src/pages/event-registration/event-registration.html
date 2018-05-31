@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row class="event">
       <ion-col col-5>
-        <div class="event-image image" [style.backgroundImage]="event?.event?.event_image"></div>
+        <div class="event-image image" [style.backgroundImage]="previousPageData?.event?.event_image"></div>
       </ion-col>
       <ion-col col-7 text-left>
         <div class="heading" text-nowrap [ngStyle]="theme?.special()">{{previousPageData?.event?.event_name}}</div>
@@ -31,8 +31,8 @@
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" (click)="showDescription = !showDescription" [ngStyle]="theme?.data()" 
-        [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
+        <div class="description" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
+        <div class="show-more" (click)="showDescription = !showDescription">Show {{showDescription ? 'Less' : 'More'}}</div>
       </ion-col>
     </ion-row>
 

@@ -81,6 +81,11 @@
           {{signInData ? 'Sign Up' : 'Sign In'}}
         </div>
       </ion-col>
+      <ion-col col-6 text-right *ngIf="signInData && !enterButton">
+        <div class="forgot-pin" (click)="forgotPin()">
+          Forgot Pin
+        </div>
+      </ion-col>
       <ion-col col-6 text-right *ngIf="!signInData && enterButton">
         <div class="resend" (click)="resendOTP()">
           {{resending?.value ? resending?.time + ' seconds remaining' : resendText}}

@@ -1,4 +1,12 @@
 page-edit-event {
+  .confirmed{
+    margin: auto;
+  }
+  .show-more{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
   .num-sli {
     width: 125px;
   }
@@ -155,6 +163,7 @@ page-edit-event {
       margin: 5px 0;
       text-align: justify;
       line-height: 1.2;
+      position: relative;
     }
     .calender {
       color: #02A1E2;
@@ -186,6 +195,7 @@ page-edit-event {
     }
   }
   .cancel-button {
+    display: flex;
     .button-md {
       background-color: #A1A1A1;
       font-size: 12px;

@@ -3,11 +3,11 @@
   <ion-navbar>
     <ion-title>Edit Event</ion-title>
 
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-only (click)="openScanner()">
         <ion-icon ios="md-qr-scanner" md="md-qr-scanner"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,7 @@
   <ion-grid>
     <ion-row class="event">
       <ion-col col-5>
-        <div class="event-image image"></div>
+        <div class="event-image image" [style.backgroundImage]="+event?.evententrydetail?.payment_status == 0 ? previousPageData?.event?.event_image : +event?.evententrydetail?.qrcode_image"></div>
       </ion-col>
       <ion-col col-7 text-left>
         <div class="heading" text-nowrap [ngStyle]="theme?.special()">{{previousPageData?.event?.event_name}}</div>
@@ -37,7 +37,8 @@
         </div>
       </ion-col>
       <ion-col col-12>
-        <div class="description" (click)="showDescription = !showDescription" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
+        <div class="description" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? previousPageData.event?.description : previousPageData.event?.description?.slice(0, 200) + '...'"></div>
+        <div class="show-more" (click)="showDescription = !showDescription">Show {{showDescription ? 'Less' : 'More'}}</div>
       </ion-col>
     </ion-row>
 
@@ -49,7 +50,8 @@
         <div class="image" [class.successImage]="+event?.evententrydetail?.payment_status == 1" [class.failImage]="+event?.evententrydetail?.payment_status == 0"></div>
       </ion-col>
       <ion-col col-5 class="cancel-button">
-        <button ion-button full (click)="cancel()">Cancel Event</button>
+        <button ion-button full (click)="cancel()" *ngIf="+event?.evententrydetail?.payment_status == 0">Cancel Event</button>
+        <div *ngIf="+event?.evententrydetail?.payment_status == 1" class="confirmed">Confirmed</div>
       </ion-col>
     </ion-row>
 
