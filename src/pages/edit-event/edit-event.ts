@@ -403,7 +403,10 @@ export class EditEventPage {
     this.persons = [];
     data.members.forEach(member => {
       this.persons.push({ age: member.age, name: member.name, amount: member.amount });
-    });;
+    });
+    if (+this.event.evententrydetail.payment_status == 1) {
+      this.event.qrcode_image = `${this.global.image_base_path}barcode/${this.event.qrcode_image}`;
+    }
   }
 
   calcTotal() {
@@ -457,6 +460,6 @@ export class EditEventPage {
 
   openScanner() {
     this.global.log(`in openScanner`);
-    this.navCtrl.push('ScanQrCodePage', { data: null });    
+    this.navCtrl.push('ScanQrCodePage', { data: null });
   }
 }

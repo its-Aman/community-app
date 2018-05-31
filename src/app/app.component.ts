@@ -123,12 +123,18 @@ export class MyApp {
     page-menu .menu-header-grid{
       background:  ${this.theme.defaultTheme.theme_colour} !important;
     }
-    page-community-name .row-filter{
+    page-community-name .col-filter .button-md{
       background:  ${this.theme.defaultTheme.theme_colour} !important;
+    }
+    .show-more{
+      color:  ${this.theme.defaultTheme.theme_colour} !important;
     }
     page-event-registration .submit .button-md{
       background-color: ${this.theme.defaultTheme.theme_colour} !important;
     }
+      page-edit-event .cancel-button .confirmed{
+        color: ${this.theme.defaultTheme.special_data_font_colour} !important;
+      }
     page-edit-event .submit .button-md{
       background-color: ${this.theme.defaultTheme.theme_colour} !important;
     }
@@ -156,6 +162,9 @@ export class MyApp {
     page-profile .submitButton{
       background:  ${this.theme.defaultTheme.theme_colour} !important;
     }
+    page-profile .images .pencil{
+      color:  ${this.theme.defaultTheme.theme_colour} !important;
+    }
     .checkbox-md .checkbox-checked{
       border-color:  ${this.theme.defaultTheme.theme_colour} !important;
       background-color:  ${this.theme.defaultTheme.theme_colour} !important;
@@ -180,12 +189,15 @@ export class MyApp {
       background-color:  ${this.theme.defaultTheme.theme_colour} !important;
     }
     page-menu .menu-header-col p{
-      color: white;
+      color: white !important;
     }   
     page-change-pin .scroll-content{
       background-image: url('${this.theme.defaultTheme.login_image}') !important;
     } 
     page-login .scroll-content {
+      background-image: url('${this.theme.defaultTheme.login_image}') !important;
+    }
+    page-forgot-pin .scroll-content {
       background-image: url('${this.theme.defaultTheme.login_image}') !important;
     }
     page-profile .images .backgroundImage{

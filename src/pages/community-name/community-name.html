@@ -3,11 +3,11 @@
   <ion-navbar>
     <ion-title text-capitalize>{{eventData?.event?.event_name}}</ion-title>
 
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-only (click)="openScanner()">
         <ion-icon ios="md-qr-scanner" md="md-qr-scanner"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -29,16 +29,29 @@
         <div class="filter">Voluntary</div>
       </ion-col> -->
 
-      <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">Edit Registration(#{{eventData?.event_entry_id}})</div>
-      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">{{eventData?.availableseats > 0 ? 'Registration' : 'Ticket Sold'}}</div>
-      <div class="col-filter" (click)="performance()" *ngIf="+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1">Performance</div>
+      <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">
+        <button ion-button>
+          Edit Registration(#{{eventData?.event_entry_id}})
+        </button>
+      </div>
+      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">
+        <button ion-button>
+          {{eventData?.availableseats > 0 ? 'Registration' : 'Ticket Sold'}}
+        </button>
+      </div>
+      <div class="col-filter" (click)="performance()" *ngIf="+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1">
+        <button ion-button>
+          Performance
+        </button>
+      </div>
     </ion-row>
 
     <div class="details">
       <ion-row>
         <ion-col col-12>
           <div class="heading" text-capitalized [ngStyle]="theme?.heading()">{{eventData?.event?.event_name}}</div>
-          <div class="description" (click)="showDescription = !showDescription" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? eventData?.event?.description : eventData?.event?.description?.slice(0, 200) + '...'"></div>
+          <div class="description" [ngStyle]="theme?.data()" [innerHTML]="showDescription ? eventData?.event?.description : eventData?.event?.description?.slice(0, 200) + '...'"></div>
+          <div class="show-more" (click)="showDescription = !showDescription">Show {{showDescription ? 'Less' : 'More'}}</div>
         </ion-col>
         <!-- <ion-col col-3 text-center class="col-price">
           <div class="star image"></div>

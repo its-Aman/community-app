@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Forgot Pin</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+
+  <ion-grid>
+    <ion-row text-center class="row-logo">
+      <ion-col col-12 class="logo-parent">
+        <div class="logo image"></div>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="forgotPinForm">
+      <ion-row>
+        <ion-col no-padding text-center class="sign-up-text">
+          <div>Forgot Password</div>
+        </ion-col>
+        <ion-col col-12>
+          <ion-item>
+            <ion-input placeholder="Mobile No" formControlName="mobile" type="tel" (focusout)="removePadding()" (keyup.enter)="sendOTP()"></ion-input>
+          </ion-item>
+          <p class="error" *ngIf="forgotPinForm?.controls['mobile']?.hasError('required') && (forgotPinForm?.controls['mobile']?.dirty || isFormInvalid)">Mobile number is Required</p>
+          <p class="error" *ngIf="forgotPinForm?.controls['mobile']?.hasError('minlength') && (forgotPinForm?.controls['mobile']?.dirty || isFormInvalid)">Min 11 digit is Required</p>
+          <p class="error" *ngIf="forgotPinForm?.controls['mobile']?.hasError('maxlength') && (forgotPinForm?.controls['mobile']?.dirty || isFormInvalid)">Max 11 digit is Required</p>
+        </ion-col>
+
+        <!-- <ion-col col-12>
+          <ion-item>
+            <ion-input placeholder="OTP" formControlName="otp" type="tel" (focusout)="removePadding()" (keyup.enter)="sendOTP()"></ion-input>
+          </ion-item>
+          <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('required') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">OTP is Required</p>
+          <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('minlength') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
+          <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('maxlength') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
+        </ion-col> -->
+
+      </ion-row>
+    </form>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button round block (click)="sendOTP()">Send</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

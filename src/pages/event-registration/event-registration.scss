@@ -1,4 +1,9 @@
 page-event-registration {
+  .show-more{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
   .num-sli {
     width: 125px;
   }
@@ -156,6 +161,7 @@ page-event-registration {
       margin: 5px 0;
       text-align: justify;
       line-height: 1.2;
+      position: relative;
     }
     .calender {
       color: #02A1E2;

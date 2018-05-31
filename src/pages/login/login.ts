@@ -265,5 +265,9 @@ export class LoginPage {
     this.global.log(`in privacyPolicy`);
     this.navCtrl.push('PrivacyPolicyPage');
   }
-
+  
+  forgotPin() {
+    this.global.log(`in forgotPin`);
+    this.navCtrl.push('ForgotPinPage');
+  }
 }

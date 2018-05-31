@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="10007" id="com.community.app" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="10008" id="com.community.app" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Rajasthan Association UK</name>
     <description>An awesome Rajasthan Association UK app.</description>
     <author email="kumaraman7046@gmail.com" href="https://www.linkedin.com/in/aman-kumar-30306011a/">Aman Kumar</author>
