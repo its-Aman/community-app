@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content no-padding #content>
+<ion-content no-padding #content *ngIf="!scanResult">
   <div class="container">
     <ion-grid text-center>
       <ion-row (click)="submit(1)">
@@ -23,6 +23,52 @@
   </div>
 </ion-content>
 
+<ion-content no-padding *ngIf="scanResult">
+  <ion-grid *ngIf="!noData">
+    <ion-row>
+      <ion-col col-12 text-center>
+        <p class="result-id">Confirmed attendance for reference no #{{result?.Entrydetail?.id}}</p>
+        <p class="result-detail">Registration details</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="heading">
+      <ion-col col-6 text-center>
+        <div>Name</div>
+      </ion-col>
+      <ion-col col-6 text-center>
+        <div>Age</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let _result of result?.Membersdetail">
+      <ion-col col-6 text-center>
+        <div>{{_result?.name}}</div>
+      </ion-col>
+      <ion-col col-6 text-center>
+        <div>{{_result?.age}}</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="total-tickets">
+      <ion-col text-center col-12>Total Tickets #{{result?.Membersdetail?.length}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="noData">
+    <ion-col col-12 no-padding text-center>
+      <div class="no-data">No Data Found</div>
+    </ion-col>
+  </ion-grid>
+</ion-content>
+
 <ion-footer text-center *ngIf="scanResult">
-  {{scanResult}}
+  <button ion-button (click)="close()" class="submitButton" full *ngIf="!noData">
+    Close
+  </button>
+
+  <button ion-button (click)="ionViewDidEnter()" class="submitButton" full *ngIf="noData">
+    Retry
+  </button>
+
 </ion-footer>

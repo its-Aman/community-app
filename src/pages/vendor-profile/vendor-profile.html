@@ -88,7 +88,7 @@
         <div class="email" [ngStyle]="theme?.heading()">Price:</div>
       </ion-col>
       <ion-col col-6 text-right>
-        <div class="amount" [ngStyle]="theme?.heading()">${{vendorDetail?.price_for_service}}</div>
+        <div class="amount" [ngStyle]="theme?.heading()">{{theme?.defaultTheme?.currency + ' ' + vendorDetail?.price_for_service}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

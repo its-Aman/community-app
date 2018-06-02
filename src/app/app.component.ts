@@ -132,6 +132,12 @@ export class MyApp {
     page-event-registration .submit .button-md{
       background-color: ${this.theme.defaultTheme.theme_colour} !important;
     }
+    page-scan-qr-code .heading{
+      background-color: ${this.theme.defaultTheme.theme_colour} !important;
+    }
+    page-scan-qr-code .submitButton{
+      background-color: ${this.theme.defaultTheme.theme_colour} !important;
+    }
       page-edit-event .cancel-button .confirmed{
         color: ${this.theme.defaultTheme.special_data_font_colour} !important;
       }

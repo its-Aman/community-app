@@ -33,7 +33,7 @@ export class CommunityAppNamePage {
           this.global.log(`in value change and the value is `, res);
           if (res && res.length) {
 
-            this.global.postRequest(this.global.base_path + 'Login/SerachTextBox', { searchby: this.searchType, Searchtext: res })
+            this.global.postRequest(this.global.base_path + 'Login/SerachTextBox', { searchby: this.searchType, searchtext: res })
               .subscribe(
                 res => {
                   this.global.log(`getSearchResult data`, res);
@@ -49,6 +49,8 @@ export class CommunityAppNamePage {
                   this.noData = true;
                   this.global.log(`getSearchResult error`, err);
                 });
+          } else {
+            this.getSearchResultByDropdown(true);
           }
         });
   }

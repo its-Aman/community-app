@@ -22,11 +22,11 @@
       </ion-row>
       <ion-row *ngIf="promotionAndDiscount?.show" class="row-coupon" (click)="openDetails(i)">
         <ion-col col-6 class="border-bottom border-right">
-          <div class="header">Coupon Code</div>
+          <div class="header">{{promotionAndDiscount?.coupon_code}}</div>
         </ion-col>
         <ion-col col-6 class="border-bottom" text-right>
           <div>
-            <span class="header">Discount %</span>
+            <span class="header">{{promotionAndDiscount?.discount_rate}}%</span>
           </div>
         </ion-col>
         <ion-col col-6 class="col-address" text-left>

@@ -26,7 +26,7 @@
           <div class="name" [ngStyle]="theme?.heading()">Discount Rate:</div>
         </ion-col>
         <ion-col col-6 text-right text-nowrap>
-          <div class="amount" [style.font-size]="theme?.defaultTheme?.data_font_size">${{couponDetail?.discount_rate}}</div>
+          <div class="amount" [style.font-size]="theme?.defaultTheme?.data_font_size">{{theme?.defaultTheme?.currency + ' ' + couponDetail?.discount_rate}}</div>
         </ion-col>
       </ion-row>
 
