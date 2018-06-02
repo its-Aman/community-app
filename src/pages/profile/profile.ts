@@ -368,4 +368,9 @@ export class ProfilePage {
         }
       )
   }
+
+  filterEmoji(control: string) {
+    this.global.log(`in filterEmoji with data`, control, this.profileForm.controls[control].value);
+    this.profileForm.controls[control].setValue(this.profileForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
+  }
 }

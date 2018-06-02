@@ -31,7 +31,7 @@
 
       <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id">
         <button ion-button>
-          Edit Registration(#{{eventData?.event_entry_id}})
+          {{+eventData?.payment_status == 0 ? 'Edit' : 'View'}} Registration(#{{eventData?.event_entry_id}})
         </button>
       </div>
       <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">

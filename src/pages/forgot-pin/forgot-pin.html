@@ -19,7 +19,7 @@
     <form [formGroup]="forgotPinForm">
       <ion-row>
         <ion-col no-padding text-center class="sign-up-text">
-          <div>Forgot Password</div>
+          <div>Forgot Pin</div>
         </ion-col>
         <ion-col col-12>
           <ion-item>
@@ -30,21 +30,27 @@
           <p class="error" *ngIf="forgotPinForm?.controls['mobile']?.hasError('maxlength') && (forgotPinForm?.controls['mobile']?.dirty || isFormInvalid)">Max 11 digit is Required</p>
         </ion-col>
 
-        <!-- <ion-col col-12>
+        <ion-col col-12>
           <ion-item>
             <ion-input placeholder="OTP" formControlName="otp" type="tel" (focusout)="removePadding()" (keyup.enter)="sendOTP()"></ion-input>
           </ion-item>
           <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('required') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">OTP is Required</p>
           <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('minlength') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">Min 4 digit is Required</p>
           <p class="error" *ngIf="forgotPinForm?.controls['otp']?.hasError('maxlength') && (forgotPinForm?.controls['otp']?.dirty || isFormInvalid)">Max 10 digit is Required</p>
-        </ion-col> -->
+        </ion-col>
 
       </ion-row>
     </form>
 
     <ion-row>
       <ion-col col-12>
-        <button ion-button round block (click)="sendOTP()">Send</button>
+        <button ion-button round block (click)="sendOTP()" *ngIf="enterButton">Enter</button>
+        <button ion-button round block (click)="resendOTP()" *ngIf="!enterButton">Send OTP</button>
+      </ion-col>
+      <ion-col col-6 text-right offset-6 *ngIf="enterButton">
+        <div class="resend" (click)="resendOTP()">
+          {{resending?.value ? resending?.time + ' seconds remaining' : resendText}}
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
