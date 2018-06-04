@@ -52,4 +52,14 @@ export class VendorProfilePage {
   changeProfilePicture() {
     this.global.log('changeProfilePicture clicked');
   }
+
+  makeCall() {
+    this.global.log(`in makeCall's method`, this.vendorDetail);
+    document.location.href = 'tel:+' + this.vendorDetail.mobile_no;
+  }
+
+  makeMail() {
+    this.global.log(`in makeMail's method`, this.vendorDetail);
+    document.location.href = `mailto:${this.vendorDetail.email}?subject=You're%20Awesome&body=Already%20told%20you`;
+  }
 }

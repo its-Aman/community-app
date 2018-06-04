@@ -16,7 +16,8 @@ export class PerformanceModalPage {
     performanceName: '',
     noOfParticipants: '',
     specialNeed: '',
-  }
+  };
+  max_attendees: number;
 
   constructor(
     public navCtrl: NavController,
@@ -25,6 +26,8 @@ export class PerformanceModalPage {
     public global: GlobalProvider,
     public theme: ThemeProvider,
   ) {
+    this.max_attendees = this.navParams.get('max_attendees');
+
     if (this.navParams.get('data')) {
       this.person = this.navParams.get('data');
     } else {
@@ -38,7 +41,7 @@ export class PerformanceModalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PerformanceModalPage');
+    console.log('ionViewDidLoad PerformanceModalPage', this.person);
   }
 
   change(ip, col) {
@@ -132,7 +135,7 @@ export class PerformanceModalPage {
           this.global.log(`response of getPerformanceList`, res);
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList = res.performance;
-            this.person.performanceName = this.performanceList[0].id;
+            // this.person.performanceName = this.performanceList[0].id;
             if (this.navParams.get('event_entry_id')) {
               this.getPerformanceDetail();
             } else {

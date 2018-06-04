@@ -36,10 +36,11 @@
       </div>
       <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">
         <button ion-button>
-          {{eventData?.availableseats > 0 ? 'Registration' : 'Ticket Sold'}}
+          <!-- +eventData?.availableseats > 0 &&  -->
+          {{(+eventData?.event?.max_attendees == 0) ? 'Registration' : 'Ticket Sold'}}
         </button>
       </div>
-      <div class="col-filter" (click)="performance()" *ngIf="+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1">
+      <div class="col-filter" (click)="performance()" *ngIf="(+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1) && +eventData?.event?.max_attendees != 0">
         <button ion-button>
           Performance
         </button>
@@ -83,10 +84,9 @@
             <span class="chair image"></span>
             <span class="calender" [ngStyle]="theme?.heading()">Left</span>
           </div>
-          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.availableseats}}</div>
+          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.event?.max_attendees == 0 ? 'Unlimited Seats' : +eventData?.availableseats}}</div>
         </ion-col>
       </ion-row>
-
 
       <ion-row>
         <ion-col col-12>

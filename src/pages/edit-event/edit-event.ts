@@ -21,7 +21,7 @@ export class EditEventPage {
   volunteer: boolean = false;
   userForm: FormGroup;
   isFormInvalid: boolean = false;
-  persons: any[] = [{ name: null, age: null, amount: null }];
+  persons: any[] = [{ name: null, age: '', amount: '' }];
   performanceList: any[] = [];
   person: any = {
     performanceName: '',
@@ -88,14 +88,18 @@ export class EditEventPage {
 
   numberValue(range, isIncreased: boolean) {
     this.global.log('range is', range);
-    if (range) {
-      this.userForm.controls['noOfMembers'].setValue(range);
-      if (isIncreased) {
-        this.persons.push({ name: null, age: null, amount: null });
-      } else if (this.persons.length > 0) {
-        this.persons.pop();
+    if (+this.event.evententrydetail.payment_status == 0) {
+      if (range) {
+        this.userForm.controls['noOfMembers'].setValue(range);
+        if (isIncreased) {
+          this.persons.push({ name: null, age: null, amount: null });
+        } else if (this.persons.length > 0) {
+          this.persons.pop();
+        }
+        this.calcTotal();
       }
-      this.calcTotal();
+    } else {
+      this.global.log('in else range is', this.persons.length);
     }
   }
 
@@ -275,10 +279,13 @@ export class EditEventPage {
   }
 
   checkAge(i) {
+    this.removePadding();
     this.global.log(String(this.persons[i].age));
 
+    this.persons[i].age = this.persons[i].age.split(/ /)[0].replace(/[^\d]/g, '');
+
     if (String(this.persons[i].age).length >= 1 && this.persons[i].age == 0) {
-      this.persons[i].age = '';
+      this.persons[i].age = ' ';
       this.global.showToast(`Age can't be zero`);
       return;
     }

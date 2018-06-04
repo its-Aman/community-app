@@ -34,7 +34,7 @@
         <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
       </ion-col>
       <ion-col col-12 class="event-detail">
-        <number-slider [seed]="person.noOfParticipants" (getValue)="person.noOfParticipants = $event"></number-slider>
+        <number-slider [max]="max_attendees" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
       </ion-col>
 
       <ion-col col-12 class="event-detail" #col>
