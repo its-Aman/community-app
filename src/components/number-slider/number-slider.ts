@@ -13,6 +13,7 @@ export class NumberSliderComponent {
   @Input('seed') number: number = 0;
   @Input('max') max: number = 100;
   @Input('min') min: number = 1;
+  @Input('mock') mock: boolean = false;
 
   @Output('increased') increased: EventEmitter<number> = new EventEmitter<number>();
   @Output('decreased') decreased: EventEmitter<number> = new EventEmitter<number>();
@@ -26,21 +27,27 @@ export class NumberSliderComponent {
 
   decrease() {
     this.global.log('in decrease()', this.number);
-    if (this.number > this.min) {
-      this.number--;
-      this.emitValueDecreased();
-    } else {
-      this.number = this.min;
+
+    if (!this.mock) {
+      if (this.number > this.min) {
+        this.number--;
+        this.emitValueDecreased();
+      } else {
+        this.number = this.min;
+      }
     }
   }
 
   increase() {
     this.global.log('in increase()', this.number);
-    if (this.number < this.max) {
-      this.number++;
-      this.emitValueIncreased();
-    } else {
-      this.number = this.max;
+
+    if (!this.mock) {
+      if (this.number < this.max) {
+        this.number++;
+        this.emitValueIncreased();
+      } else {
+        this.number = this.max;
+      }
     }
   }
 

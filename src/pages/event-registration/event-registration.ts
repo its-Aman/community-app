@@ -21,7 +21,7 @@ export class EventRegistrationPage {
   eventPerson: string[] = [];
   userForm: FormGroup;
   isFormInvalid: boolean = false;
-  persons: any[] = [{ name: null, age: null, amount: null }];
+  persons: any[] = [];
   performanceList: any[] = [];
   person: any = {
     performanceName: '',
@@ -33,7 +33,7 @@ export class EventRegistrationPage {
   performance = false;
 
   showDescription: boolean = false;
-  
+
   @ViewChild(Content) content: Content;
   @ViewChild('extra') extra: TextInput;
 
@@ -48,6 +48,10 @@ export class EventRegistrationPage {
   ) {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
+
+    this.persons.push(
+      { name: JSON.parse(localStorage.getItem('user')).name, age: null, amount: null }
+    );
 
     this.global.log(`previousPageData in event-reg is`, this.previousPageData);
 
@@ -283,6 +287,8 @@ export class EventRegistrationPage {
   checkAge(i, ev) {
     this.global.log(ev.target.value, String(this.persons[i].age));
 
+    this.persons[i].age = this.persons[i].age.split(/ /)[0].replace(/[^\d]/g, '');
+
     if (String(this.persons[i].age).length >= 1 && this.persons[i].age == 0) {
       this.persons[i].age = '';
       this.global.showToast(`Age can't be zero`);
@@ -443,4 +449,15 @@ export class EventRegistrationPage {
     this._index = null;
     this.users = [];
   }
+
+  filterEmoji(control: string, event: any) {
+    this.global.log(`in filterEmoji with data`, control, this.userForm.controls[control].value, event);
+
+    if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 8 || event.keyCode == 32) && (control == 'city_of_origin' || control == 'name')) {
+      this.userForm.controls[control].setValue(this.userForm.controls[control].value.slice(0, -1));
+    } else {
+      this.userForm.controls[control].setValue(this.userForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
+    }
+  }
+
 }

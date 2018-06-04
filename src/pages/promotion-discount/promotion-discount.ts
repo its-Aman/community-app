@@ -53,6 +53,9 @@ export class PromotionDiscountPage {
             this.promotionAndDiscountData.New.forEach(e => {
               e["show"] = false;
             });
+            if (this.promotionAndDiscountData.New.length == 1) {
+              this.promotionAndDiscountData.New[0].show = true;
+            }
           } else {
             this.global.showToast(`${res.error}`);
             this.noData = true;

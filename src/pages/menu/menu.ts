@@ -68,6 +68,12 @@ export class MenuPage {
         this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
     });
+
+    this.menu.ionOpen.subscribe(res => {
+      this.global.log(`in ionOpen`, res, localStorage.getItem('user'));
+      this.userDetails = JSON.parse(localStorage.getItem('user'));
+      this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
+    });
   }
 
   vendorList() {

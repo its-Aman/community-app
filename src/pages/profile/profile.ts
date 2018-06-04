@@ -369,8 +369,14 @@ export class ProfilePage {
       )
   }
 
-  filterEmoji(control: string) {
-    this.global.log(`in filterEmoji with data`, control, this.profileForm.controls[control].value);
-    this.profileForm.controls[control].setValue(this.profileForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
+  filterEmoji(control: string, event: any) {
+    this.global.log(`in filterEmoji with data`, control, this.profileForm.controls[control].value, event);
+
+    if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 8 || event.keyCode == 32) && (control == 'city_of_origin' || control == 'name')) {
+      this.profileForm.controls[control].setValue(this.profileForm.controls[control].value.slice(0, -1));
+    } else {
+      this.profileForm.controls[control].setValue(this.profileForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
+    }
   }
+
 }

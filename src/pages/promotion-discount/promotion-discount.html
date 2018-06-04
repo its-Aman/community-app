@@ -26,7 +26,9 @@
         </ion-col>
         <ion-col col-6 class="border-bottom" text-right>
           <div>
-            <span class="header">{{promotionAndDiscount?.discount_rate}}%</span>
+            <span class="header">{{+promotionAndDiscount?.discount_type == 0 ? 'Fixed Price: ' + promotionAndDiscount?.discount + theme?.defaultTheme?.currency
+              : promotionAndDiscount?.discount_rate + '%'}}
+            </span>
           </div>
         </ion-col>
         <ion-col col-6 class="col-address" text-left>
@@ -36,15 +38,19 @@
           <div [ngStyle]="theme?.data()" style="text-transform: capitalize;">{{promotionAndDiscount?.address}}</div>
         </ion-col>
         <ion-col col-6 class="col-time" text-right>
-          <div text-left>
+          <div text-left *ngIf="+promotionAndDiscount?.time_type == 0">
             <b [ngStyle]="theme?.heading()">From:</b>
             <span class="date" [style.font-size]="theme?.data_font_size">{{promotionAndDiscount?.from_date}}</span>
           </div>
-          <div text-left>
+          <div text-left *ngIf="+promotionAndDiscount?.time_type == 0">
             <b [ngStyle]="theme?.heading()">To:</b>
             <span class="date" [style.font-size]="theme?.data_font_size">{{promotionAndDiscount?.to_date}}</span>
           </div>
-          <div class="usage" [ngStyle]="theme?.heading()">
+          <div text-left *ngIf="+promotionAndDiscount?.time_type == 1">
+            <b [ngStyle]="theme?.heading()">Time: </b>
+            <span class="date" [style.font-size]="theme?.data_font_size">Unlimited</span>
+          </div>
+          <div class="usage" [ngStyle]="theme?.heading()" *ngIf="+promotionAndDiscount?.time_type == 2">
             No. of Usage:
             <span [ngStyle]="theme?.data()">{{promotionAndDiscount?.no_of_usages}}</span>
           </div>

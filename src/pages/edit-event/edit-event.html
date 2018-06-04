@@ -85,7 +85,7 @@
             <div class="person-detail-color" [ngStyle]="theme?.heading()">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
             <number-slider class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
-              (increased)="numberValue($event, true)"></number-slider>
+              (increased)="numberValue($event, true)" [mock]="+event?.evententrydetail?.payment_status == 1"></number-slider>
             <!-- <ion-item>
               <ion-range formControlName="noOfMembers"></ion-range>
             </ion-item>
@@ -121,8 +121,7 @@
           </ion-col>
           <ion-col col-2>
             <ion-item>
-              <ion-input [ngStyle]="theme?.data()" [(ngModel)]='person.age' type="tel" placeholder="Age" (focusout)="removePadding()" (keyup)="checkAge(i)"
-                [disabled]="+event?.evententrydetail?.payment_status == 1"></ion-input>
+              <ion-input [ngStyle]="theme?.data()" [(ngModel)]='person.age' type="tel" placeholder="Age" (focusout)="checkAge(i)" [disabled]="+event?.evententrydetail?.payment_status == 1"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col col-5 text-center class="amount">
@@ -192,7 +191,8 @@
           <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
-          <number-slider class="num-sli" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
+          <number-slider class="num-sli" [max]="previousPageData?.event?.max_attendees" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event"
+            (increased)="person.noOfParticipants = $event"></number-slider>
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>
