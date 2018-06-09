@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Edit Event</ion-title>
+    <ion-title>{{+event?.evententrydetail?.payment_status == 1 ? 'View' : 'Edit'}} Event</ion-title>
 
     <!-- <ion-buttons end>
       <button ion-button icon-only (click)="openScanner()">
@@ -191,8 +191,7 @@
           <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
-          <number-slider class="num-sli" [max]="previousPageData?.event?.max_attendees" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event"
-            (increased)="person.noOfParticipants = $event"></number-slider>
+          <number-slider class="num-sli" [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>

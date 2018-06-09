@@ -413,7 +413,8 @@ export class EditEventPage {
       this.persons.push({ age: member.age, name: member.name, amount: member.amount });
     });
     if (+this.event.evententrydetail.payment_status == 1) {
-      this.event.qrcode_image = `${this.global.image_base_path}barcode/${this.event.qrcode_image}`;
+      this.event.evententrydetail.qrcode_image = `${this.global.image_base_path}barcode/${this.event.evententrydetail.qrcode_image}`;
+      this.global.log(`in qrimage`, this.event.qrcode_image)
     }
   }
 
