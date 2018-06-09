@@ -26,7 +26,7 @@ export class NumberSliderComponent {
   }
 
   decrease() {
-    this.global.log('in decrease()', this.number);
+    this.global.log('in decrease()', this.number, this.mock);
 
     if (!this.mock) {
       if (this.number > this.min) {
@@ -39,7 +39,7 @@ export class NumberSliderComponent {
   }
 
   increase() {
-    this.global.log('in increase()', this.number);
+    this.global.log('in increase()', this.number, this.mock);
 
     if (!this.mock) {
       if (this.number < this.max) {

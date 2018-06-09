@@ -41,8 +41,8 @@ export class PromotionDetailsPage {
           if (res.success == 'true') {
             this.noData = false;
             this.couponDetail = res.Promotiondetail;
-            if (this.couponDetail.geo_lat && this.couponDetail.geo_long) {
-              this.loadMap({ latitude: this.couponDetail.geo_lat, longitude: this.couponDetail.geo_long });
+            if (this.couponDetail.geo_lat) {
+              this.loadMap({ latitude: +this.couponDetail.geo_lat, longitude: +this.couponDetail.geo_long });
             }
           } else {
             this.global.showToast(`${res.error}`);
