@@ -37,7 +37,7 @@
       <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">
         <button ion-button>
           <!-- +eventData?.availableseats > 0 &&  -->
-          {{(+eventData?.event?.max_attendees == 0) ? 'Registration' : 'Ticket Sold'}}
+          {{(+eventData?.event?.max_attendees == 0) ? 'Registration' : (+eventData?.availableseats > 0 ? 'Registration' : 'Register')}}
         </button>
       </div>
       <div class="col-filter" (click)="performance()" *ngIf="(+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1) && +eventData?.event?.max_attendees != 0">

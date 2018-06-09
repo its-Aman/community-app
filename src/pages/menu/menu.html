@@ -46,7 +46,7 @@
     </ion-list>
 
     <!-- <ion-grid no-padding> -->
-    <ion-grid no-padding *ngIf="+userDetails?.user_type == 1">
+    <ion-grid no-padding *ngIf="+userDetails?.user_type == 1 || +userDetails?.user_type == 2">
       <ion-row class="qr-row">
         <ion-col no-padding col-12 text-center (click)="scanQRCode()">
           <div class="qrImage image"></div>

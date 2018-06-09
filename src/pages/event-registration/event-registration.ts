@@ -381,6 +381,7 @@ export class EventRegistrationPage {
     // this.global.showLoader();
     if (+this.previousPageData.event.price_type == 0) {
       this.persons[i].amount = this.previousPageData.event.standard_price;
+      this.calcTotal();
     } else {
       this.global.postRequest(`${this.global.base_path}Login/GetAgeAmount`, { event_id: this.event.event.id, age: age })
         .subscribe(
@@ -426,9 +427,18 @@ export class EventRegistrationPage {
       });
   }
 
-  searchingUser(name: string, i: number) {
+  searchingUser(name: string, i: number, event: any) {
     this.global.log('in searching user', name);
     this._index = i;
+
+    let reg = new RegExp(/^[a-zA-Z ]*$/);
+
+    if (!(reg.test(this.persons[i].name))) {
+      this.persons[i].name = this.persons[i].name.slice(0, -1);
+      this.persons[i].name = this.persons[i].name.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '');
+    } else {
+      this.persons[i].name = this.persons[i].name.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '');
+    }
 
     if (name.length > 0) {
       this.users = [];

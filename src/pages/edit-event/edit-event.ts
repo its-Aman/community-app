@@ -344,6 +344,7 @@ export class EditEventPage {
     // this.global.showLoader();
     if (+this.previousPageData.event.price_type == 0) {
       this.persons[i].amount = this.previousPageData.event.standard_price;
+      this.calcTotal();
     } else {
       this.global.postRequest(`${this.global.base_path}Login/GetAgeAmount`, { event_id: this.previousPageData.event.id, age: age })
         .subscribe(

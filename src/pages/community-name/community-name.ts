@@ -139,11 +139,11 @@ export class CommunityNamePage {
 
   registration() {
     this.global.log('in registration()');
-    if (this.eventData.availableseats > 0) {
+    // if (this.eventData.availableseats > 0) {
       this.navCtrl.push('EventRegistrationPage', {
         data: this.eventData
       });
-    }
+    // }
   }
 
   performance() {

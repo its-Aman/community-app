@@ -171,6 +171,7 @@ export class ScanQrCodePage {
           if (res.success == 'true' && res.Membersdetail.length > 0) {
             this.noData = false;
             this.result = res;
+            this.result.Entrydetail.qrcode_image = `${this.global.image_base_path}barcode/${this.result.Entrydetail.qrcode_image}`;
             this.global.showToast(`${res.message}`);
 
             // setTimeout(() => {
