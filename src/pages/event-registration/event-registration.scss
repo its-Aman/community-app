@@ -2,7 +2,7 @@ page-event-registration {
   .show-more{
     position: absolute;
     right: 10px;
-    bottom: 10px;
+    bottom: 5px;
   }
   .num-sli {
     width: 125px;
@@ -132,7 +132,7 @@ page-event-registration {
     align-self: center;
   }
   .event {
-    margin: 0 0 20px 0;
+    // margin: 0 0 20px 0;
     .event-image {
       // background-image: url('../assets/icon/thumnail-image.png');
       height: 80px;
@@ -158,7 +158,7 @@ page-event-registration {
       }
     }
     .description {
-      margin: 5px 0;
+      margin: 20px 5px;
       text-align: justify;
       line-height: 1.2;
       position: relative;

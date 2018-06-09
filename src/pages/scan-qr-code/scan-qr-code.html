@@ -25,6 +25,11 @@
 
 <ion-content no-padding *ngIf="scanResult">
   <ion-grid *ngIf="!noData">
+    <ion-row *ngIf="result?.Entrydetail?.qrcode_image">
+      <ion-col col-12 text-center>
+        <div class="image qr-image" [style.backgroundImage]="'url(' + result?.Entrydetail?.qrcode_image + ')'"></div>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col col-12 text-center>
         <p class="result-id">Confirmed attendance for reference no #{{result?.Entrydetail?.id}}</p>
@@ -33,25 +38,25 @@
     </ion-row>
 
     <ion-row class="heading">
-      <ion-col col-6 text-center>
+      <ion-col col-6 text-left>
         <div>Name</div>
       </ion-col>
-      <ion-col col-6 text-center>
+      <ion-col col-6 text-left>
         <div>Age</div>
       </ion-col>
     </ion-row>
 
     <ion-row *ngFor="let _result of result?.Membersdetail">
-      <ion-col col-6 text-center>
+      <ion-col col-6 text-right>
         <div>{{_result?.name}}</div>
       </ion-col>
-      <ion-col col-6 text-center>
+      <ion-col col-6 text-right>
         <div>{{_result?.age}}</div>
       </ion-col>
     </ion-row>
 
     <ion-row class="total-tickets">
-      <ion-col text-center col-12>Total Tickets #{{result?.Membersdetail?.length}}</ion-col>
+      <ion-col text-left col-12>Total Tickets #{{result?.Membersdetail?.length}}</ion-col>
     </ion-row>
   </ion-grid>
 
@@ -67,8 +72,8 @@
     Close
   </button>
 
-  <button ion-button (click)="ionViewDidEnter()" class="submitButton" full *ngIf="noData">
+  <!-- <button ion-button (click)="ionViewDidEnter()" class="submitButton" full *ngIf="noData">
     Retry
-  </button>
+  </button> -->
 
 </ion-footer>

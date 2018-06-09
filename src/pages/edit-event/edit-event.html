@@ -17,7 +17,7 @@
   <ion-grid>
     <ion-row class="event">
       <ion-col col-5>
-        <div class="event-image image" [style.backgroundImage]="+event?.evententrydetail?.event_entry_confirmed == 0 ? previousPageData?.event?.event_image : +event?.evententrydetail?.qrcode_image"></div>
+        <div class="event-image image" [style.backgroundImage]="+event?.evententrydetail?.event_entry_confirmed == 0 ? previousPageData?.event?.event_image : 'url(' + event?.evententrydetail?.qrcode_image + ')'"></div>
       </ion-col>
       <ion-col col-7 text-left>
         <div class="heading" text-nowrap [ngStyle]="theme?.special()">{{previousPageData?.event?.event_name}}</div>
@@ -51,7 +51,7 @@
       </ion-col>
       <ion-col col-5 class="cancel-button">
         <button ion-button full (click)="cancel()" *ngIf="+event?.evententrydetail?.payment_status == 0">Cancel Event</button>
-        <div *ngIf="+event?.evententrydetail?.payment_status == 1" class="confirmed">Confirmed</div>
+        <div *ngIf="+event?.evententrydetail?.payment_status == 1" class="confirmed">{{+event?.evententrydetail?.is_event_attended == 1 ? 'Checked-In' : 'Confirmed'}}</div>
       </ion-col>
     </ion-row>
 

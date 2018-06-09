@@ -45,9 +45,9 @@ export class CommunityAppPage {
             this.vendorList.forEach(v => {
               v['show'] = false;
             });
-            if (this.vendorList.length == 1) {
-              this.vendorList[0].show = true;
-            }
+            // if (this.vendorList.length == 1) {
+            //   this.vendorList[0].show = true;
+            // }
             this.noData = false;
           } else {
             this.noData = true;

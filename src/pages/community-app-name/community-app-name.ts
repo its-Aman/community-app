@@ -86,16 +86,17 @@ export class CommunityAppNamePage {
 
   makeMail(person: any) {
     this.global.log(`in makeMail's method`, person);
-    document.location.href = `mailto:${person.email}?subject=You're%20Awesome&body=Already%20told%20you`;
+    document.location.href = `mailto:${person.email}?subject=You're%20Awesome&body=Dear%20${person.name}%20`;
   }
 
   makeChat(person: any) {
     this.global.log(`in makeChat's method`, person);
-    this.openChatPage();
+    this.openChatPage(person);
   }
 
-  openChatPage() {
-    this.event.publish('select-page', 'chat');
+  openChatPage(person: any) {
+    // this.event.publish('select-page', 'chat');
+    this.navCtrl.push('ChatPage', { data: person });
   }
 
   removePadding() {
@@ -132,6 +133,7 @@ export class CommunityAppNamePage {
 
   valueChange(ev) {
     this.global.log(`in valueChange`, ev);
+    this.search.setValue('');
     this.getSearchResultByDropdown(false);
   }
 }

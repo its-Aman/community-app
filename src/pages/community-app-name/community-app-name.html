@@ -40,9 +40,9 @@
           </ion-list-header>
           <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails(person)" *ngFor="let person of _data?.value">
             <p [ngStyle]="theme?.data()">{{person?.name || 'DEFAULT USER'}}</p>
-            <ion-icon name="ios-call" item-end (click)="makeCall(person)" *ngIf="person?.mode_of_communication?.includes(0) || person?.mode_of_communication?.includes(3)"></ion-icon>
-            <ion-icon name="ios-mail" item-end (click)="makeMail(person)" *ngIf="person?.mode_of_communication?.includes(0) || person?.mode_of_communication?.includes(1)"></ion-icon>
-            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat(person)" *ngIf="person?.mode_of_communication?.includes(0) || person?.mode_of_communication?.includes(2)"></ion-icon>
+            <ion-icon name="ios-call" item-end (click)="makeCall(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('3')"></ion-icon>
+            <ion-icon name="ios-mail" item-end (click)="makeMail(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('1')"></ion-icon>
+            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('2')"></ion-icon>
           </ion-item>
         </ion-list>
       </ion-col>

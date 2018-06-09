@@ -97,7 +97,7 @@
         <ion-row *ngFor="let person of persons; let i = index;" class="table bdr-btm">
           <ion-col col-4>
             <ion-item>
-              <ion-input (keyup)="searchingUser(person.name, i)" [ngStyle]="theme?.data()" [(ngModel)]='person.name' type="text" placeholder="Name"
+              <ion-input (keyup)="searchingUser(person.name, i, $event)" [ngStyle]="theme?.data()" [(ngModel)]='person.name' type="text" placeholder="Name"
                 (focusout)="removePadding()"></ion-input>
             </ion-item>
           </ion-col>
