@@ -140,7 +140,7 @@ export class ForgotPinPage {
   sendOTP() {
     this.global.log(`in sendOTP`)
     if (this.forgotPinForm.valid) {
-      this.global.log('form is valid');
+      this.global.log('form is valid', this.forgotPinForm);
       let data = this.forgotPinForm.value;
       data.mobile = `${data.mobile}`;
       this.verifyOTP(data);
@@ -151,7 +151,7 @@ export class ForgotPinPage {
 
   verifyOTP(data: any) {
     this.global.showLoader();
-    this.global.postRequest(`${this.global.base_path}Login/OtpVerify`, data)
+    this.global.postRequest(`${this.global.base_path}Login/ForgetPass`, data)
       .subscribe(
         res => {
           this.global.hideLoader();
@@ -159,7 +159,7 @@ export class ForgotPinPage {
           if (res.success == 'true') {
             this.global.showToast(`${res.message}, Set new pin now.`);
             this.OtpVerify = res;
-            localStorage.setItem('otp-res-value', JSON.stringify(res));
+            // localStorage.setItem('otp-res-value', JSON.stringify(res));
             setTimeout(() => {
               // this.signInData = true;
               // this.signUpForm.controls['mobile'].setValue(data.mobile);

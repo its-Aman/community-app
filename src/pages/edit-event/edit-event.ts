@@ -330,7 +330,7 @@ export class EditEventPage {
           this.global.log(`response of getPerformanceList`, res);
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList.push(...res.performance);
-            this.person.performanceName = res.performance[0].id;
+            this.person.performanceName = +res.performance[0].id;
           } else {
             this.global.log(`${res.error}`);
           }
@@ -405,8 +405,8 @@ export class EditEventPage {
       this.performance = false;
     }
 
-    this.person.performanceName = data.event_performance_id;
-    this.person.noOfParticipants = data.no_of_participants;
+    this.person.performanceName = +data.event_performance_id;
+    this.person.noOfParticipants = +data.no_of_participants;
     this.person.specialNeed = data.special_needs;
     this.persons = [];
     data.members.forEach(member => {
