@@ -209,7 +209,7 @@
       </ion-row>
       <ion-row *ngIf="+event?.evententrydetail?.payment_status == 0">
         <ion-col col-12 class="submit">
-          <button ion-button full (click)="submit()">SUBMIT</button>
+          <button ion-button full (click)="submit(true)">SUBMIT</button>
         </ion-col>
       </ion-row>
     </div>

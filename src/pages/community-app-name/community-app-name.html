@@ -34,16 +34,18 @@
 
     <ion-row>
       <ion-col col-12 class="col-person" *ngIf="!noData">
-        <ion-list class="list-person" *ngFor="let _data of userList?.data">
-          <ion-list-header [ngStyle]="theme?.heading()">
+        <ion-list class="list-person" *ngFor="let _data of userList?.data; let i=index">
+          <ion-list-header [ngStyle]="theme?.heading()" (click)="openPeopleDetails(i)" [class.highlight]="_data?.show">
             {{_data?.key}}
           </ion-list-header>
-          <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails(person)" *ngFor="let person of _data?.value">
-            <p [ngStyle]="theme?.data()">{{person?.name || 'DEFAULT USER'}}</p>
-            <ion-icon name="ios-call" item-end (click)="makeCall(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('3')"></ion-icon>
-            <ion-icon name="ios-mail" item-end (click)="makeMail(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('1')"></ion-icon>
-            <ion-icon name="ios-chatbubbles" item-end (click)="makeChat(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('2')"></ion-icon>
-          </ion-item>
+          <span *ngIf="_data?.show">
+            <ion-item text-uppercase class="item-person bdr-btm" (click)="personDetails(person)" *ngFor="let person of _data?.value">
+              <p [ngStyle]="theme?.data()">{{person?.name || 'DEFAULT USER'}}</p>
+              <ion-icon name="ios-call" item-end (click)="makeCall(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('3')"></ion-icon>
+              <ion-icon name="ios-mail" item-end (click)="makeMail(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('1')"></ion-icon>
+              <ion-icon name="ios-chatbubbles" item-end (click)="makeChat(person)" *ngIf="person?.mode_of_communication?.includes('0') || person?.mode_of_communication?.includes('2')"></ion-icon>
+            </ion-item>
+          </span>
         </ion-list>
       </ion-col>
       <ion-col col-12 no-padding *ngIf="noData" text-center>

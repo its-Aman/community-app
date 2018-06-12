@@ -114,7 +114,7 @@ export class PerformanceModalPage {
           this.global.hideLoader();
           this.global.log(`response of getPerformanceDetail`, res);
           if (res.success == 'true') {
-            this.person.performanceName = +res.performancedetail[0].performance_name;
+            this.person.performanceName = +res.performancedetail[0].performance_id;
             this.person.noOfParticipants = +res.performancedetail[0].no_of_participants;
             this.person.specialNeed = res.performancedetail[0].special_needs;
           } else {

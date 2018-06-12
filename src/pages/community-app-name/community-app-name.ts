@@ -118,6 +118,9 @@ export class CommunityAppNamePage {
           this.global.log(`getSearchResult data`, res);
           if (res.success == 'true') {
             this.userList = res;
+            this.userList.data.forEach((val, i) => {
+              this.userList.data[i]['show'] = false;
+            });
             this.noData = false;
           } else {
             this.noData = true;
@@ -136,4 +139,15 @@ export class CommunityAppNamePage {
     this.search.setValue('');
     this.getSearchResultByDropdown(false);
   }
+
+  openPeopleDetails(_i: number) {
+    this.userList.data.forEach((user, i) => {
+      if (i == _i) {
+        this.userList.data[i].show = !this.userList.data[i].show;
+      } else {
+        this.userList.data[i].show = false;
+      }
+    });
+  }
+
 }

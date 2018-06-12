@@ -130,7 +130,7 @@ export class EditEventPage {
     return _ret + '';
   }
 
-  submit() {
+  submit(isPop: boolean) {
     this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
     // if (this.userForm.valid) {
@@ -145,13 +145,13 @@ export class EditEventPage {
       no_of_members: this.userForm.controls['noOfMembers'].value + '',
       entry_for: this.calculateEventPerson(),
       event_performance_id: this.performance ? this.person.performanceName : null,
-      no_of_participants: this.performance ? this.person.noOfParticipants : null,
+      no_of_participants: this.performance ? this.person.noOfParticipants + '' : null,
       special_needs: this.performance ? this.person.specialNeed : null,
       members: this.persons,
     }
 
     this.global.log(`data to be posting is `, data);
-    this.editEvent(data);
+    this.editEvent(data, isPop);
 
     //     } else {
     //       this.global.showToast(`Number of participants can't be zero`);
@@ -268,7 +268,7 @@ export class EditEventPage {
           text: 'Yes',
           handler: () => {
             if (this.persons.length > 0) {
-              this.persons.splice(i, 1);
+              this.persons.splice(i, 1)[0].name ? this.submit(false) : null;
               this.calcTotal();
             }
           }
@@ -301,7 +301,7 @@ export class EditEventPage {
     }
   }
 
-  editEvent(data: any) {
+  editEvent(data: any, isPop: boolean) {
     this.global.showLoader();
     this.global.postRequest(`${this.global.base_path}Login/EditEvent`, data)
       .subscribe(
@@ -310,13 +310,15 @@ export class EditEventPage {
           this.global.log(`response of register event`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
-            this.navCtrl.pop();
+            if (isPop) {
+              this.navCtrl.pop();
+            }
           } else {
             this.global.showToast(`${res.error}`);
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of register event`, err);
+          this.global.log(`error of edit event`, err);
         });
   }
 

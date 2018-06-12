@@ -12,6 +12,7 @@ import { ThemeProvider } from '../../providers/theme/theme';
 })
 export class EventRegistrationPage {
 
+  performanceDetails: any;
   _index: number;
   users: any[];
   searchedUser: any[];
@@ -54,12 +55,16 @@ export class EventRegistrationPage {
     );
 
     this.global.log(`previousPageData in event-reg is`, this.previousPageData);
-
     this.initForm();
+
     if (+this.previousPageData.event.entry_for == 1 || +this.previousPageData.event.entry_for == 3) {
       this.getPerformanceList();
     } else {
       this.searchUser();
+    }
+
+    if (+this.previousPageData.event.entry_for != 0) {
+      this.getPerformanceDetails();
     }
 
     // this.searchedUser = [
@@ -463,11 +468,43 @@ export class EventRegistrationPage {
   filterEmoji(control: string, event: any) {
     this.global.log(`in filterEmoji with data`, control, this.userForm.controls[control].value, event);
 
-    if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 8 || event.keyCode == 32) && (control == 'city_of_origin' || control == 'name')) {
+    let reg = new RegExp(/^[a-zA-Z ]*$/);
+
+    // if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode == 8 || event.keyCode == 32) && (control == 'city_of_origin' || control == 'name')) {
+
+    if (!(reg.test(this.userForm.controls[control].value))) {
       this.userForm.controls[control].setValue(this.userForm.controls[control].value.slice(0, -1));
+      this.userForm.controls[control].setValue(this.userForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
     } else {
       this.userForm.controls[control].setValue(this.userForm.controls[control].value.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, ''));
     }
+  }
+
+  getPerformanceDetails() {
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('user')).id,
+      event_id: this.event.event.id
+    }
+
+    this.global.postRequest(this.global.base_path + 'Login/GetPerticularPerformanceofUser', data)
+      .subscribe(
+        res => {
+          this.global.log(`getPerformanceDetails response is`, res);
+          if (res.success == 'true') {
+            this.performance = true;
+            this.performanceDetails = res.performancedetail;
+            this.person.performanceName = this.performanceDetails.performance_id;
+            this.person.noOfParticipants = this.performanceDetails.no_of_participants;
+            this.person.specialNeed = this.performanceDetails.special_needs;
+
+          } else {
+            this.global.log(`some error in getPerformanceDetails`, res);
+            this.global.showToast(res.error);
+          }
+        }, err => {
+          this.global.log(`some error in getPerformanceDetails `, err);
+        }
+      )
   }
 
 }

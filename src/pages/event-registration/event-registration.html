@@ -47,7 +47,7 @@
             <!-- <div class="person-detail-data" text-nowrap> Aman Kumar</div> -->
             <ion-item>
               <ion-input [disabled]="true" [ngStyle]="theme?.data()" placeholder="Name" formControlName="name" type="text" (focusout)="removePadding()"
-                (keyup)="filterEmoji('city_of_origin', $event)"></ion-input>
+                (keyup)="filterEmoji('name', $event)"></ion-input>
             </ion-item>
           </ion-col>
           <p class="error" *ngIf="userForm?.controls['name']?.hasError('required') && (userForm?.controls['name']?.dirty || isFormInvalid)">Name is Required</p>
