@@ -35,12 +35,12 @@ export class GlobalProvider {
     this.tiny_basePath_live = `http://winstech.in/live_rauk/`;
 
     //test
-    this.base_path = `${this.tiny_basePath_testing}web_panel/app/`;
-    this.image_base_path = `${this.tiny_basePath_testing}uploads/`;
+    // this.base_path = `${this.tiny_basePath_testing}web_panel/app/`;
+    // this.image_base_path = `${this.tiny_basePath_testing}uploads/`;
 
     //live
-    // this.base_path = `${this.tiny_basePath_live}web_panel/app/`;
-    // this.image_base_path = `${this.tiny_basePath_live}uploads/`;
+    this.base_path = `${this.tiny_basePath_live}web_panel/app/`;
+    this.image_base_path = `${this.tiny_basePath_live}uploads/`;
   }
 
   sanatizeImage(isEvent: boolean = false, image: string): any {

@@ -79,12 +79,12 @@
           </ion-col>
         </ion-col>
 
-      <ion-col col-3 text-center class="col-chair" *ngIf="+eventData?.event?.max_attendees == 0">
+      <ion-col col-3 text-center class="col-chair" *ngIf="+eventData?.event?.max_attendees != 0">
           <div class="div-chair">
             <span class="chair image"></span>
             <span class="calender" [ngStyle]="theme?.heading()">Left</span>
           </div>
-          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.event?.max_attendees == 0 ? 'Unlimited' : +eventData?.availableseats}}</div>
+          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.event?.max_attendees == 0 ? 'Unlimited' : +eventData?.availableseats <= 0 ? '0' : +eventData?.availableseats}}</div>
         </ion-col>
       </ion-row>
 
