@@ -1,5 +1,6 @@
+import { ThemeProvider } from './../../providers/theme/theme';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Platform } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { GlobalProvider } from '../../providers/global/global';
@@ -22,6 +23,8 @@ export class ScanQrCodePage {
     private qrScanner: QRScanner,
     private global: GlobalProvider,
     private diagnostic: Diagnostic,
+    private theme: ThemeProvider,
+    private plt: Platform,
   ) {
   }
 
@@ -60,25 +63,31 @@ export class ScanQrCodePage {
 
   ionViewDidEnter() {
     this.global.log('ionViewDidEnter ScanQrCodePage', this.content.getNativeElement());
-    this.diagnostic.isCameraAuthorized().then(res => {
-      this.global.log(`Got the isCameraAuthorized res `, res);
-      if (res) {
-        this.finalScan();
-      } else {
-        this.diagnostic.requestCameraAuthorization().then(res => {
-          this.global.log(`Got the requestCameraAuthorization res `, res);
-          if (res) {
-            this.finalScan();
-          } else {
-            this.global.log(`App needs Camera Permission.`);
-          }
-        }).catch(err => {
-          this.global.log(`Got the requestCameraAuthorization error `, err);
-        });
-      }
-    }).catch(err => {
-      this.global.log(`Got the isCameraAuthorized error`, err);
-    });
+
+    if (this.plt.is('android')) {
+
+      this.diagnostic.isCameraAuthorized().then(res => {
+        this.global.log(`Got the isCameraAuthorized res `, res);
+        if (res) {
+          this.finalScan();
+        } else {
+          this.diagnostic.requestCameraAuthorization().then(res => {
+            this.global.log(`Got the requestCameraAuthorization res `, res);
+            if (res) {
+              this.finalScan();
+            } else {
+              this.global.log(`App needs Camera Permission.`);
+            }
+          }).catch(err => {
+            this.global.log(`Got the requestCameraAuthorization error `, err);
+          });
+        }
+      }).catch(err => {
+        this.global.log(`Got the isCameraAuthorized error`, err);
+      });
+    } else {
+      this.finalScan();
+    }
   }
 
   finalScan() {
@@ -204,4 +213,16 @@ export class ScanQrCodePage {
   close() {
     this.navCtrl.popToRoot();
   }
+
+  ionViewDidLeave() {
+    this.qrScanner.destroy()
+      .then(res => this.global.log(`ionViewDidLeave's destroy success `, res))
+      .catch(err => this.global.log(`ionViewDidLeave's destroy error `, err));
+
+    this.qrScanner.hide()
+      .then(res => this.global.log(`ionViewDidLeave's hide success `, res))
+      .catch(err => this.global.log(`ionViewDidLeave's hide error `, err));
+
+  }
+
 }

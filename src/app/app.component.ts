@@ -218,6 +218,9 @@ export class MyApp {
     page-community-app-name .highlight{
       color:  ${this.theme.defaultTheme.theme_colour} !important;
     }
+    page-menu .menu-header-grid{
+      background-color:  ${this.theme.defaultTheme.theme_colour} !important;
+    }
     `;
 
     let head: any = document.head || document.getElementsByTagName('head')[0], style: any = document.createElement('style');
