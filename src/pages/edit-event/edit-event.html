@@ -44,9 +44,9 @@
 
     <ion-row>
       <ion-col col-6 class="col-status">
-        <div class="status" [ngStyle]="theme?.heading()" *ngIf="+event?.evententrydetail?.payment_status == 1">Payment Received</div>
-        <div class="status" [ngStyle]="theme?.heading()" *ngIf="+event?.evententrydetail?.payment_status == 0">Payment Status</div>
-        <div class="status" [ngStyle]="theme?.heading()" *ngIf="+event?.evententrydetail?.is_waiting == 1">Waiting</div>
+        <div class="status" [ngStyle]="theme?.heading()" *ngIf="!(+previousPageData?.event?.max_attendees != 0 && +previousPageData?.availableseats >= 0) && (+event?.evententrydetail?.payment_status == 1)">Payment Received</div>
+        <div class="status" [ngStyle]="theme?.heading()" *ngIf="!(+previousPageData?.event?.max_attendees != 0 && +previousPageData?.availableseats >= 0) && (+event?.evententrydetail?.payment_status == 0)">Payment Status</div>
+        <div class="status" [ngStyle]="theme?.heading()" *ngIf="(+previousPageData?.event?.max_attendees != 0 && +previousPageData?.availableseats >= 0)">Waiting</div>
       </ion-col>
       <ion-col col-1 class="status-image">
         <div class="image" [class.successImage]="+event?.evententrydetail?.payment_status == 1" [class.failImage]="+event?.evententrydetail?.payment_status == 0"></div>
@@ -86,8 +86,9 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color" [ngStyle]="theme?.heading()">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
-            <number-slider [max]="userForm?.controls['noOfMembers'].value > +previousPageData?.event?.max_attendees ? userForm?.controls['noOfMembers'].value : +previousPageData?.event?.max_attendees" class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
-              (increased)="numberValue($event, true)" [mock]="+event?.evententrydetail?.payment_status == 1"></number-slider>
+            <number-slider [max]="userForm?.controls['noOfMembers'].value > +previousPageData?.event?.max_attendees ? userForm?.controls['noOfMembers'].value : +previousPageData?.event?.max_attendees"
+              class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)" (increased)="numberValue($event, true)"
+              [mock]="+event?.evententrydetail?.payment_status == 1"></number-slider>
             <!-- <ion-item>
               <ion-range formControlName="noOfMembers"></ion-range>
             </ion-item>
