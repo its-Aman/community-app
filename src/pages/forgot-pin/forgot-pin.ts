@@ -102,7 +102,8 @@ export class ForgotPinPage {
 
   requestOTP(data: any, isResend: boolean = false) {
     this.global.showLoader();
-    this.global.postRequest(`${this.global.base_path}Login/RegisterRequestOtp`, data)
+    // this.global.postRequest(`${this.global.base_path}Login/RegisterRequestOtp`, data)
+    this.global.postRequest(`${this.global.base_path}Login/ForgetPass`, data)
       .subscribe(
         res => {
           this.global.hideLoader();

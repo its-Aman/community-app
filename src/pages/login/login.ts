@@ -153,7 +153,13 @@ export class LoginPage {
             if (res.name && res.name.length > 0) {
               setTimeout(() => {
                 this.navCtrl.setRoot('MenuPage', { data: null });
-              }, 1000);
+                if (+res.totalevents > 0) {
+                  setTimeout(() => {
+                    this.global.log(`firing event setEventPage`);
+                    this.events.publish('setEventPage');
+                  }, 500);
+                }
+              }, 500);
             } else {
               setTimeout(() => {
                 this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
@@ -265,7 +271,7 @@ export class LoginPage {
     this.global.log(`in privacyPolicy`);
     this.navCtrl.push('PrivacyPolicyPage');
   }
-  
+
   forgotPin() {
     this.global.log(`in forgotPin`);
     this.navCtrl.push('ForgotPinPage');

@@ -22,12 +22,19 @@ export class TabsPage {
     public navParams: NavParams,
     public event: Events,
     public global: GlobalProvider,
+    public events: Events,
   ) {
     this.listenForTabsChange();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TabsPage');
+
+    this.events.subscribe('setEventPage', () => {
+      // this.superTabs.selectedTabIndex = +JSON.parse(localStorage.getItem('user')).totalevents > 0 ? 1 : 0;
+      this.superTabs.slideTo(1);
+      this.global.log(`in subscribe event setEventPage`, this.superTabs.selectedTabIndex);
+    });
   }
 
   listenForTabsChange() {
