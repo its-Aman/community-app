@@ -61,7 +61,7 @@ export class ContactUsPage {
 
   openMail() {
     this.global.log(`in openMail`);
-    document.location.href = `mailto:${this.contactData.email}?subject=You're%20Awesome&body=Already%20told%20you`;
+    document.location.href = `mailto:${this.contactData.email}?subject=Dear%20Community%20Member%20`;
   }
 
   openBrowser() {

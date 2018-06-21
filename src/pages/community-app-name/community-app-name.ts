@@ -81,12 +81,12 @@ export class CommunityAppNamePage {
 
   makeCall(person: any) {
     this.global.log(`in makeCall's method`, person);
-    document.location.href = 'tel:+' + person.mobile_no;
+    document.location.href = 'tel:' + person.mobile_no;
   }
 
   makeMail(person: any) {
     this.global.log(`in makeMail's method`, person);
-    document.location.href = `mailto:${person.email}?subject=You're%20Awesome&body=Dear%20${person.name}%20`;
+    document.location.href = `mailto:${person.email}?subject=Dear%20Community%20Member%20${person.name}%20`;
   }
 
   makeChat(person: any) {
