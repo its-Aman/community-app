@@ -29,15 +29,16 @@
         <div class="filter">Voluntary</div>
       </ion-col> -->
 
-      <div class="col-filter" (click)="edit()" *ngIf="eventData?.event_entry_id && +eventData?.availableseats <= 0">
+      <div class="col-filter" (click)="edit()" *ngIf="+eventData?.event_entry_id && +eventData?.availableseats <= 0">
         <button ion-button>
           {{+eventData?.payment_status == 0 ? 'Edit' : 'View'}} Registration(#{{eventData?.event_entry_id}})
         </button>
       </div>
-      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">
+      <div class="col-filter" (click)="registration()" *ngIf="!(+eventData?.event_entry_id)">
         <button ion-button>
           <!-- +eventData?.availableseats > 0 &&  -->
-          {{+eventData?.availableseats > 0 ? 'Registration' : (+eventData?.event?.max_attendees == 0 ? 'Registration' : 'Register your Interest')}}
+          {{+eventData?.availableseats > 0 ? 'Registration' : (+eventData?.event?.max_attendees == 0 ? 'Registration' : 'Register your
+          Interest')}}
         </button>
       </div>
       <div class="col-filter" (click)="performance()" *ngIf="(+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1) && +eventData?.event?.max_attendees != 0">
@@ -79,12 +80,12 @@
           </ion-col>
         </ion-col>
 
-      <ion-col col-3 text-center class="col-chair" *ngIf="+eventData?.event?.max_attendees != 0">
+        <ion-col col-3 text-center class="col-chair" *ngIf="+eventData?.event?.max_attendees != 0">
           <div class="div-chair">
             <span class="chair image"></span>
             <span class="calender" [ngStyle]="theme?.heading()">Left</span>
           </div>
-          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.event?.max_attendees == 0 ? 'Unlimited' : +eventData?.availableseats <= 0 ? '0' : +eventData?.availableseats}}</div>
+          <div class="left-count" [ngStyle]="theme?.data()">{{+eventData?.event?.max_attendees == 0 ? 'Unlimited' : +eventData?.availableseats}} </div>
         </ion-col>
       </ion-row>
 

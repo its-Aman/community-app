@@ -60,6 +60,7 @@ export class VendorProfilePage {
 
   makeMail() {
     this.global.log(`in makeMail's method`, this.vendorDetail);
-    document.location.href = `mailto:${this.vendorDetail.email}?subject=You're%20Awesome&body=Already%20told%20you`;
+    document.location.href = `mailto:${this.vendorDetail.email}?subject=Dear%20Community%20Member%20`;
+
   }
 }
