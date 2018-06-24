@@ -157,7 +157,7 @@ export class LoginPage {
                   setTimeout(() => {
                     this.global.log(`firing event setEventPage`);
                     this.events.publish('setEventPage');
-                  }, 500);
+                  }, 1000);
                 }
               }, 500);
             } else {
