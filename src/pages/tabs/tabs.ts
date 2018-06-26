@@ -34,7 +34,13 @@ export class TabsPage {
       // this.superTabs.selectedTabIndex = +JSON.parse(localStorage.getItem('user')).totalevents > 0 ? 1 : 0;
       this.superTabs.slideTo(1);
       this.global.log(`in subscribe event setEventPage`, this.superTabs.selectedTabIndex);
+
+      setTimeout(() => {
+        this.global.hideLoader();
+      }, 2000);
     });
+
+    this.checkLiveEvent();
   }
 
   listenForTabsChange() {
@@ -51,5 +57,26 @@ export class TabsPage {
         this.superTabs.slideTo(3);
       }
     });
+  }
+
+  checkLiveEvent() {
+    // this.global.showLoader();
+    this.global.postRequest(`${this.global.base_path}Login/GetActiveEventsCount`, {})
+      .subscribe(
+        res => {
+          this.global.hideLoader();
+          this.global.log(`OtpVerify response`, res);
+          if (res.success == 'true' && +res.totalevents > 0) {
+            this.superTabs.slideTo(1);
+            setTimeout(() => {
+              this.global.hideLoader();
+            }, 3000);
+          } else {
+            this.global.showToast(`${res.error}`);
+          }
+        }, err => {
+          this.global.hideLoader();
+          this.global.log(`OtpVerify error`, err);
+        });
   }
 }
