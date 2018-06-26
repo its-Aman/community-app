@@ -92,7 +92,7 @@ export class ForgotPinPage {
           if (this.resendText == 'Send OTP') {
             this.resendText = 'Re-send OTP';
           }
-          this.requestOTP({ mobile: `${this.forgotPinForm.controls['mobile'].value}` }, true);
+          this.requestOTP({ mobile: `${this.forgotPinForm.controls['mobile'].value}`}, true);
         }
       } else {
         this.global.showToast(`Mobile number not correct`);
@@ -152,7 +152,7 @@ export class ForgotPinPage {
 
   verifyOTP(data: any) {
     this.global.showLoader();
-    this.global.postRequest(`${this.global.base_path}Login/ForgetPass`, data)
+    this.global.postRequest(`${this.global.base_path}Login/ForgotPinOtpVerify`, data)
       .subscribe(
         res => {
           this.global.hideLoader();
