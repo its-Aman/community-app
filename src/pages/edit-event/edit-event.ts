@@ -473,4 +473,12 @@ export class EditEventPage {
     this.global.log(`in openScanner`);
     this.navCtrl.push('ScanQrCodePage', { data: null });
   }
+
+  ageValidation(event: any, i: number) {
+    this.global.log(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
+    if (event.target.value.toString().length > 3) {
+      this.persons[i].age = this.persons[i].age.toString().slice(0, 3);
+    }
+  }
+
 }

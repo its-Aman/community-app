@@ -140,9 +140,10 @@ export class CommunityNamePage {
   registration() {
     this.global.log('in registration()');
     // if (this.eventData.availableseats > 0) {
-      this.navCtrl.push('EventRegistrationPage', {
-        data: this.eventData
-      });
+    this.navCtrl.push('EventRegistrationPage', {
+      data: this.eventData,
+      performance: this.personData
+    });
     // }
   }
 
@@ -151,9 +152,9 @@ export class CommunityNamePage {
     performance.present();
     performance.onDidDismiss(data => {
       this.global.log(`modal data`, data);
-      if (data) {
-        this.personData = data;
-      }
+      // if (data.specialNeed || data.performanceName || data.noOfParticipants) {
+      this.personData = data;
+      // }
     });
   }
 

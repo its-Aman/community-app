@@ -30,47 +30,47 @@ export class ScanQrCodePage {
 
   ionViewDidLoad() {
     this.global.log('ionViewDidLoad ScanQrCodePage');
-    this.result =
-      {
-        Entrydetail:
-          {
-            "id": "61",
-            "event_id": "29",
-            "user_id": "30",
-            "name": "Admin1234",
-            "mobile_no": "99500071170",
-            "no_of_members": "1",
-            "entry_for": "0",
-            "total_amount": "5000.00",
-            "payment_status": "1",
-            "performance_confirmed": "0",
-            "event_entry_confirmed": "0",
-            "is_cancel": "0",
-            "entry_date": "2018-05-22",
-            "qrcode_image": "152715411461.png",
-            "is_event_attended": "1",
-          },
-        Membersdetail: [
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-          { name: 'Prashant', amount: 26 },
-        ]
-      }
-    this.noData = false;
-    this.scanResult = true;
-    this.result.Entrydetail.qrcode_image = `${this.global.image_base_path}barcode/${this.result.Entrydetail.qrcode_image}`;
+    // this.result =
+    //   {
+    //     Entrydetail:
+    //       {
+    //         "id": "61",
+    //         "event_id": "29",
+    //         "user_id": "30",
+    //         "name": "Admin1234",
+    //         "mobile_no": "99500071170",
+    //         "no_of_members": "1",
+    //         "entry_for": "0",
+    //         "total_amount": "5000.00",
+    //         "payment_status": "1",
+    //         "performance_confirmed": "0",
+    //         "event_entry_confirmed": "0",
+    //         "is_cancel": "0",
+    //         "entry_date": "2018-05-22",
+    //         "qrcode_image": "152715411461.png",
+    //         "is_event_attended": "1",
+    //       },
+    //     Membersdetail: [
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //       { name: 'Prashant', amount: 26 },
+    //     ]
+    //   }
+    // this.noData = false;
+    // this.scanResult = true;
+    // this.result.Entrydetail.qrcode_image = `${this.global.image_base_path}barcode/${this.result.Entrydetail.qrcode_image}`;
   }
 
   ionViewDidEnter() {
@@ -78,25 +78,25 @@ export class ScanQrCodePage {
 
     if (this.plt.is('android')) {
 
-      // this.diagnostic.isCameraAuthorized().then(res => {
-      //   this.global.log(`Got the isCameraAuthorized res `, res);
-      //   if (res) {
-      //     this.finalScan();
-      //   } else {
-      //     this.diagnostic.requestCameraAuthorization().then(res => {
-      //       this.global.log(`Got the requestCameraAuthorization res `, res);
-      //       if (res) {
-      //         this.finalScan();
-      //       } else {
-      //         this.global.log(`App needs Camera Permission.`);
-      //       }
-      //     }).catch(err => {
-      //       this.global.log(`Got the requestCameraAuthorization error `, err);
-      //     });
-      //   }
-      // }).catch(err => {
-      //   this.global.log(`Got the isCameraAuthorized error`, err);
-      // });
+      this.diagnostic.isCameraAuthorized().then(res => {
+        this.global.log(`Got the isCameraAuthorized res `, res);
+        if (res) {
+          this.finalScan();
+        } else {
+          this.diagnostic.requestCameraAuthorization().then(res => {
+            this.global.log(`Got the requestCameraAuthorization res `, res);
+            if (res) {
+              this.finalScan();
+            } else {
+              this.global.log(`App needs Camera Permission.`);
+            }
+          }).catch(err => {
+            this.global.log(`Got the requestCameraAuthorization error `, err);
+          });
+        }
+      }).catch(err => {
+        this.global.log(`Got the isCameraAuthorized error`, err);
+      });
     } else {
       this.finalScan();
     }

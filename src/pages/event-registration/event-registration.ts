@@ -49,12 +49,13 @@ export class EventRegistrationPage {
   ) {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
+    this.person = this.navParams.get('performance');
 
     this.persons.push(
       { name: JSON.parse(localStorage.getItem('user')).name, age: null, amount: null }
     );
 
-    this.global.log(`previousPageData in event-reg is`, this.previousPageData);
+    this.global.log(`previousPageData in event-reg is`, this.previousPageData, this.navParams, this.person);
     this.initForm();
 
     if (+this.previousPageData.event.entry_for == 1 || +this.previousPageData.event.entry_for == 3) {
@@ -210,6 +211,7 @@ export class EventRegistrationPage {
       no_of_participants: this.performance ? this.person.noOfParticipants : null,
       special_needs: this.performance ? this.person.specialNeed : null,
       members: this.persons,
+      is_waiting: +this.previousPageData.availableseats > 0 ? 0 : 1
       // event_entry_id: this.event.event_entry_id,
     }
 
@@ -493,8 +495,8 @@ export class EventRegistrationPage {
           if (res.success == 'true') {
             this.performance = true;
             this.performanceDetails = res.performancedetail;
-            this.person.performanceName = this.performanceDetails.performance_id;
-            this.person.noOfParticipants = this.performanceDetails.no_of_participants;
+            this.person.performanceName = +this.performanceDetails.event_performance_id;
+            this.person.noOfParticipants = +this.performanceDetails.no_of_participants;
             this.person.specialNeed = this.performanceDetails.special_needs;
 
           } else {
@@ -505,6 +507,13 @@ export class EventRegistrationPage {
           this.global.log(`some error in getPerformanceDetails `, err);
         }
       )
+  }
+
+  ageValidation(event: any, i: number) {
+    this.global.log(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
+    if (event.target.value.toString().length > 3) {
+      this.persons[i].age = this.persons[i].age.toString().slice(0, 3);
+    }
   }
 
 }

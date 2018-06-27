@@ -66,8 +66,8 @@
           <ion-col col-12 class="person-detail">
             <div class="person-detail-color" [ngStyle]="theme?.heading()">No. Of Members: </div>
             <!-- <div class="person-detail-data"> 16</div> -->
-            <number-slider  [max]="userForm?.controls['noOfMembers'].value > +previousPageData?.event?.max_attendees ? userForm?.controls['noOfMembers'].value : +previousPageData?.event?.max_attendees" class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)"
-              (increased)="numberValue($event, true)"></number-slider>
+            <number-slider [max]="userForm?.controls['noOfMembers'].value > +previousPageData?.event?.max_attendees ? userForm?.controls['noOfMembers'].value : +previousPageData?.event?.max_attendees"
+              class="num-sli" [seed]="userForm?.controls['noOfMembers'].value" (decreased)="numberValue($event, false)" (increased)="numberValue($event, true)"></number-slider>
             <!-- <ion-item>
                 <ion-range formControlName="noOfMembers"></ion-range>
               </ion-item>
@@ -103,7 +103,8 @@
           </ion-col>
           <ion-col col-2>
             <ion-item>
-              <ion-input [ngStyle]="theme?.data()" [(ngModel)]='person.age' type="number" pattern="[0-9]*" placeholder="Age" (focusout)="checkAge(i, $event)"></ion-input>
+              <ion-input (keyup)="ageValidation($event, i)" [ngStyle]="theme?.data()" [(ngModel)]='person.age' type="number" pattern="[0-9]*"
+                placeholder="Age" (focusout)="checkAge(i, $event)"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col col-6 text-center class="amount">
@@ -166,7 +167,8 @@
           <div class="event-detail-color" [ngStyle]="theme?.heading()">No. of Participants: </div>
         </ion-col>
         <ion-col col-12 class="event-detail">
-          <number-slider [seed]="person.noOfParticipants" (decreased)="person.noOfParticipants = $event" (increased)="person.noOfParticipants = $event"></number-slider>
+          <number-slider [seed]="person.noOfParticipants ? person.noOfParticipants : 0" (decreased)="person.noOfParticipants = $event"
+            (increased)="person.noOfParticipants = $event"></number-slider>
         </ion-col>
 
         <ion-col col-12 class="event-detail" #col>

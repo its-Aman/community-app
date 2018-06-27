@@ -100,7 +100,12 @@ export class ChangePinPage {
     if (this.changePinForm.valid) {
       if (this.fromLogin) {
         if (this.changePinForm.controls['oldPin'].value == this.changePinForm.controls['newPin'].value) {
-          this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value });
+          this.setPasscode(
+            {
+              user_id: localStorage.getItem('user_id'),
+              pin: this.changePinForm.controls['newPin'].value
+            }
+          );
         } else {
           this.global.showToast(`PIN does not match`);
         }
