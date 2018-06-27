@@ -95,6 +95,7 @@ export class PerformanceModalPage {
         this.global.hideLoader();
         this.global.log(`savePerformance's data`, res);
         if (res.success == 'true') {
+          this.person.performanceName = +this.person.performanceName;
           this.viewCtrl.dismiss(this.person);
         } else {
           this.global.showToast(`${res.error}`);

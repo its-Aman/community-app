@@ -92,7 +92,7 @@ export class ForgotPinPage {
           if (this.resendText == 'Send OTP') {
             this.resendText = 'Re-send OTP';
           }
-          this.requestOTP({ mobile: `${this.forgotPinForm.controls['mobile'].value}`}, true);
+          this.requestOTP({ mobile: `${this.forgotPinForm.controls['mobile'].value}` }, true);
         }
       } else {
         this.global.showToast(`Mobile number not correct`);
@@ -109,6 +109,7 @@ export class ForgotPinPage {
           this.global.hideLoader();
           this.global.log(`res is `, res);
           if (res.success == 'true') {
+            localStorage.setItem('user_id', res.user_id);
             this.global.showToast(`${res.message}`);
             if (isResend) {
               this.resending.value = true;
@@ -142,9 +143,7 @@ export class ForgotPinPage {
     this.global.log(`in sendOTP`)
     if (this.forgotPinForm.valid) {
       this.global.log('form is valid', this.forgotPinForm);
-      let data = this.forgotPinForm.value;
-      data.mobile = `${data.mobile}`;
-      this.verifyOTP(data);
+      this.verifyOTP(this.forgotPinForm.value);
     } else {
       this.isFormInvalid = true;
     }
