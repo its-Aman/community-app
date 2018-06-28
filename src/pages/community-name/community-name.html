@@ -29,7 +29,7 @@
         <div class="filter">Voluntary</div>
       </ion-col> -->
 
-      <div class="col-filter" (click)="edit()" *ngIf="+eventData?.event_entry_id && +eventData?.availableseats >= 0">
+      <div class="col-filter" (click)="edit()" *ngIf="+eventData?.event_entry_id">
         <button ion-button>
           {{+eventData?.payment_status == 0 ? 'Edit' : 'View'}} Registration(#{{eventData?.event_entry_id}})
         </button>
