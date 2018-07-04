@@ -39,7 +39,11 @@ export class CommunityAppNamePage {
                   this.global.log(`getSearchResult data`, res);
                   if (res.success == 'true') {
                     this.userList = res;
-                    this.noData = false;
+                    if (this.userList.data && this.userList.data.length > 0) {
+                      this.noData = false;
+                    } else {
+                      this.noData = true;
+                    }
                   } else {
                     this.noData = true;
                     this.global.log(`getSearchResult error`, res);
@@ -118,10 +122,14 @@ export class CommunityAppNamePage {
           this.global.log(`getSearchResult data`, res);
           if (res.success == 'true') {
             this.userList = res;
-            this.userList.data.forEach((val, i) => {
-              this.userList.data[i]['show'] = false;
-            });
-            this.noData = false;
+            if (this.userList.data && this.userList.data.length > 0) {
+              this.noData = false;
+              this.userList.data.forEach((val, i) => {
+                this.userList.data[i]['show'] = false;
+              });
+            } else {
+              this.noData = true;
+            }
           } else {
             this.noData = true;
             this.global.log(`getSearchResult error`, res);

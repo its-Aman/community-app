@@ -39,6 +39,10 @@ export class MenuPage {
         this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
     });
+
+    this.events.subscribe(`setEventPage`, data => {
+      this.global.hideLoader();
+    })
   }
 
   ionViewDidEnter() {
@@ -108,8 +112,10 @@ export class MenuPage {
 
   logout() {
     this.global.log('logout');
+    let uuid = localStorage.getItem('uuid');
     localStorage.clear();
     this.navCtrl.setRoot('LoginPage', { signInData: true });
+    localStorage.setItem('uuid', uuid);
   }
 
   editProfile() {

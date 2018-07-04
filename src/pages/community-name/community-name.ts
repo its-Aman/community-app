@@ -138,7 +138,7 @@ export class CommunityNamePage {
   }
 
   registration() {
-    this.global.log('in registration()');
+    this.global.log('in registration');
     // if (this.eventData.availableseats > 0) {
     this.navCtrl.push('EventRegistrationPage', {
       data: this.eventData,
@@ -148,7 +148,17 @@ export class CommunityNamePage {
   }
 
   performance() {
-    let performance = this.modal.create('PerformanceModalPage', { data: this.personData, id: this.eventData.event.id, event_entry_id: this.eventData.event_entry_id, max_attendees: +this.eventData.event.max_attendees }, { cssClass: 'performance' });
+    let performance = this.modal.create(
+      'PerformanceModalPage',
+      {
+        data: this.personData,
+        id: this.eventData.event.id,
+        event_entry_id: this.eventData.event_entry_id,
+        // max_attendees: +this.eventData.event.max_attendees,
+        max_attendees: +this.eventData.availableseats,
+      },
+      { cssClass: 'performance' }
+    );
     performance.present();
     performance.onDidDismiss(data => {
       this.global.log(`modal data`, data);
