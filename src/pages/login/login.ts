@@ -237,7 +237,9 @@ export class LoginPage {
       if (this.signUpForm.valid) {
         this.global.log('form is valid');
         // this.setPasscode({ user_id: this.OtpVerify.id, pin: this.signUpForm.controls['pin'].value });
-        this.login_api(this.signUpForm.value);
+        let data = this.signUpForm.value;
+        data["uuid"] = localStorage.getItem('uuid');
+        this.login_api(data);
       } else {
         this.isFormInvalid = true;
       }

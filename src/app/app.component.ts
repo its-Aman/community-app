@@ -4,6 +4,7 @@ import { Platform, NavController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ThemeProvider } from '../providers/theme/theme';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,6 +21,7 @@ export class MyApp {
     public global: GlobalProvider,
     public theme: ThemeProvider,
     public events: Events,
+    private uniqueDeviceID: UniqueDeviceID,
   ) {
     this.setRootPage();
     this.getTheme();
@@ -31,6 +33,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       statusBar.overlaysWebView(false);
+      this.getuniqueId();
     });
   }
 
@@ -232,6 +235,18 @@ export class MyApp {
     }
 
     head.appendChild(style);
+  }
+
+  getuniqueId() {
+    this.uniqueDeviceID.get()
+      .then((uuid: any) => {
+        this.global.log(`uuid is`, uuid);
+        localStorage.setItem('uuid', uuid);
+      })
+      .catch((error: any) => {
+        this.global.log(`error is`, error);
+
+      });
   }
 }
 

@@ -315,6 +315,23 @@ export class EventRegistrationPage {
     }
   }
 
+  showWaiting(res) {
+    let alert = this.alrtCtrl.create({
+      title: 'Waiting',
+      subTitle: ` Your request has been submitted. Thank you for your interest.`,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            alert.dismiss();
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   showConfirmation(id: any) {
     let alert = this.alrtCtrl.create({
       title: 'Confirmation',
@@ -351,7 +368,11 @@ export class EventRegistrationPage {
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             //TODO: show POP-UP
-            this.showConfirmation(res.id);
+            if (+this.previousPageData.availableseats > 0) {
+              this.showConfirmation(res.id);
+            } else {
+              this.showWaiting(res);
+            }
           } else {
             this.global.showToast(`${res.error}`);
             if (res.error == "User Already Registered with this event.") {

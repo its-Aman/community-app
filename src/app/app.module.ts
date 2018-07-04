@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { MyApp } from './app.component';
 
@@ -54,6 +55,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     Camera,
     QRScanner,
     Diagnostic,
+    UniqueDeviceID,
   ]
 })
 export class AppModule { }
