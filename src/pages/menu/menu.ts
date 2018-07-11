@@ -39,10 +39,6 @@ export class MenuPage {
         this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
     });
-
-    this.events.subscribe(`setEventPage`, data => {
-      this.global.hideLoader();
-    })
   }
 
   ionViewDidEnter() {

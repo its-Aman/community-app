@@ -154,10 +154,8 @@ export class LoginPage {
               setTimeout(() => {
                 this.navCtrl.setRoot('MenuPage', { data: null });
                 if (+res.totalevents > 0) {
-                  setTimeout(() => {
                     this.global.log(`firing event setEventPage`);
                     this.events.publish('setEventPage');
-                  }, 1000);
                 }
               }, 500);
             } else {

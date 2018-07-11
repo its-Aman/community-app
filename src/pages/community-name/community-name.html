@@ -34,11 +34,10 @@
           {{+eventData?.payment_status == 0 ? 'Edit' : 'View'}} Registration(#{{eventData?.event_entry_id}})
         </button>
       </div>
-      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id">
-        <button ion-button>
-          <!-- +eventData?.availableseats > 0 &&  -->
-          {{+eventData?.availableseats > 0 ? 'Registration' : 'Register your Interest'}}
-        </button>
+
+      <div class="col-filter" (click)="registration()" *ngIf="!eventData?.event_entry_id ">
+        <button ion-button *ngIf="+eventData?.event?.max_attendees == 0"> Registration </button>
+        <button ion-button *ngIf="+eventData?.event?.max_attendees != 0">{{+eventData?.availableseats > 0 ? 'Registration' : 'Register your Interest'}}</button>
       </div>
       <div class="col-filter" (click)="performance()" *ngIf="(+eventData?.event?.entry_for == 3 || +eventData?.event?.entry_for == 1) && +eventData?.event?.max_attendees != 0">
         <button ion-button>
