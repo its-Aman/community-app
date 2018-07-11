@@ -34,10 +34,7 @@ export class TabsPage {
       // this.superTabs.selectedTabIndex = +JSON.parse(localStorage.getItem('user')).totalevents > 0 ? 1 : 0;
       this.superTabs.slideTo(1);
       this.global.log(`in subscribe event setEventPage`, this.superTabs.selectedTabIndex);
-
-      setTimeout(() => {
-        this.global.hideLoader();
-      }, 2000);
+      this.global.hideLoader();
     });
 
     this.checkLiveEvent();

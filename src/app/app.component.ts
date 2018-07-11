@@ -25,7 +25,7 @@ export class MyApp {
   ) {
     this.setRootPage();
     this.getTheme();
-    // this.addDtyleToIndexHTML();
+    // this.addStyleToIndexHTML();
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -57,7 +57,7 @@ export class MyApp {
           if (res.success == 'true') {
             this.theme.defaultTheme = res.theme;
             this.fixImages();
-            this.addDtyleToIndexHTML();
+            this.addStyleToIndexHTML();
             this.global.log(`theme is `, this.theme.defaultTheme);
           } else {
             this.global.log(`res if false in theme api data`, res);
@@ -96,8 +96,8 @@ export class MyApp {
 
   }
 
-  addDtyleToIndexHTML() {
-    this.global.log(`in addDtyleToIndexHTML`);
+  addStyleToIndexHTML() {
+    this.global.log(`in addStyleToIndexHTML`);
     let css = `
 
     //for fonts
@@ -245,7 +245,6 @@ export class MyApp {
       })
       .catch((error: any) => {
         this.global.log(`error is`, error);
-
       });
   }
 }

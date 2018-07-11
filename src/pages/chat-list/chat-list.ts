@@ -19,10 +19,10 @@ export class ChatListPage {
     public global: GlobalProvider,
   ) {
     // this.fillList();
+    this.getChatListData();
   }
 
   ionViewDidLoad() {
-    this.getChatListData();
     console.log('ionViewDidLoad ChatListPage');
   }
 

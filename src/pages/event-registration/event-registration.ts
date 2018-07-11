@@ -49,7 +49,11 @@ export class EventRegistrationPage {
   ) {
     this.event = this.navParams.get('data');
     this.previousPageData = this.navParams.get('data');
-    this.person = this.navParams.get('performance');
+    this.person = this.navParams.get('performance') || {
+      performanceName: '',
+      noOfParticipants: '0',
+      specialNeed: '',
+    };
 
     this.persons.push(
       { name: JSON.parse(localStorage.getItem('user')).name, age: null, amount: null }
@@ -211,7 +215,7 @@ export class EventRegistrationPage {
       no_of_participants: this.performance ? this.person.noOfParticipants : null,
       special_needs: this.performance ? this.person.specialNeed : null,
       members: this.persons,
-      is_waiting: +this.previousPageData.availableseats > 0 ? 0 : 1
+      is_waiting: +this.previousPageData.event.max_attendees == 0 ? 0 : (+this.previousPageData.availableseats > 0 ? 0 : 1)
       // event_entry_id: this.event.event_entry_id,
     }
 
@@ -394,7 +398,7 @@ export class EventRegistrationPage {
           this.global.log(`response of getPerformanceList`, res);
           this.searchUser();
           if (res.success == 'true' && res.performance.length > 0) {
-            this.performanceList.push(...res.performance);
+            this.performanceList = res.performance;
             this.person.performanceName = res.performance[0].id;
           } else {
             this.global.log(`${res.error}`);
