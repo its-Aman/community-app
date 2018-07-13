@@ -68,9 +68,9 @@ export class EventRegistrationPage {
       this.searchUser();
     }
 
-    if (+this.previousPageData.event.entry_for != 0) {
-      this.getPerformanceDetails();
-    }
+    // if (+this.previousPageData.event.entry_for != 0) {
+    //   this.getPerformanceDetails();
+    // }
 
     // this.searchedUser = [
     //   {
@@ -319,7 +319,7 @@ export class EventRegistrationPage {
     }
   }
 
-  showWaiting(res) {
+  showWaiting() {
     let alert = this.alrtCtrl.create({
       title: 'Waiting',
       subTitle: ` Your request has been submitted. Thank you for your interest.`,
@@ -375,7 +375,7 @@ export class EventRegistrationPage {
             if (+this.previousPageData.availableseats > 0) {
               this.showConfirmation(res.id);
             } else {
-              this.showWaiting(res);
+              this.showWaiting();
             }
           } else {
             this.global.showToast(`${res.error}`);
