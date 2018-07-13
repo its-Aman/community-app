@@ -50,6 +50,10 @@ export class EditEventPage {
       this.getEditEventDetail(true);
     }
     this.searchUser();
+
+    if (+this.previousPageData.event.entry_for != 0) {
+      this.getPerformanceDetails();
+    }
   }
 
   ionViewDidLoad() {
@@ -479,6 +483,33 @@ export class EditEventPage {
     if (event.target.value.toString().length > 3) {
       this.persons[i].age = this.persons[i].age.toString().slice(0, 3);
     }
+  }
+
+  getPerformanceDetails() {
+    let data = {
+      user_id: JSON.parse(localStorage.getItem('user')).id,
+      event_id: this.event.event.id
+    }
+
+    this.global.postRequest(this.global.base_path + 'Login/GetPerticularPerformanceofUser', data)
+      .subscribe(
+        res => {
+          this.global.log(`getPerformanceDetails response is`, res);
+          if (res.success == 'true') {
+            this.performance = true;
+            // this.performanceDetails = res.performancedetail;
+            this.person.performanceName = +res.performanceDetails.event_performance_id;
+            this.person.noOfParticipants = +res.performanceDetails.no_of_participants;
+            this.person.specialNeed = res.performanceDetails.special_needs;
+
+          } else {
+            this.global.log(`some error in getPerformanceDetails`, res);
+            this.global.showToast(res.error);
+          }
+        }, err => {
+          this.global.log(`some error in getPerformanceDetails `, err);
+        }
+      )
   }
 
 }
