@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -17,9 +17,20 @@ export class ChatListPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public global: GlobalProvider,
+    public events: Events,
   ) {
     // this.fillList();
-    this.getChatListData();
+    this.events.subscribe('select-page', data => {
+      setTimeout(() => {
+        this.getChatListData(false);
+        if (!localStorage.getItem('chatPage')) {
+          data["id"] = data.from_sender_id;
+          this.navCtrl.push('ChatPage', { data: data });
+        }
+      }, 250);
+    });
+
+    this.getChatListData(true);
   }
 
   ionViewDidLoad() {
@@ -74,27 +85,32 @@ export class ChatListPage {
   }
 
   openChatDetails(person, i) {
-    this.navCtrl.push('ChatPage', { data: this.chatList[i] });
+    this.navCtrl.push('ChatPage', { data: this.chatList[i], fromChatList: true });
   }
 
   edit() {
-    this.global.log(`in edit()`);
+    this.global.cLog(`in edit()`);
   }
 
-  getChatListData() {
-    this.global.showLoader();
+  getChatListData(showLoader: boolean) {
+    showLoader ? this.global.showLoader() : null;
     this.global.postRequest(`${this.global.base_path}Login/Chatlist`, { login_user_id: JSON.parse(localStorage.getItem('user')).id })
       .subscribe(
         res => {
-          this.global.hideLoader();
-          this.global.log(`getChatListData's response is`, res);
+          showLoader ? this.global.hideLoader() : null;
+          this.global.cLog(`getChatListData's response is`, res);
 
           if (res.success == 'true') {
             this.chatList = res.chatlist;
             if (this.chatList.length > 0) {
               this.noData = false;
               this.chatList.forEach(element => {
-                element.image = `${this.global.image_base_path}user/${element.image}`;
+                if (element.image) {
+                  element.image = `${this.global.image_base_path}user/${element.image}`;
+                } else {
+                  element.image = this.global.defaultImage;
+                }
+                element["user_image"] = element.image;
               });
             } else {
               this.noData = true;
@@ -103,8 +119,8 @@ export class ChatListPage {
             this.noData = true;
           }
         }, err => {
-          this.global.hideLoader();
-          this.global.log(`getChatListData's error is`, err);
+          showLoader ? this.global.hideLoader() : null;
+          this.global.cLog(`getChatListData's error is`, err);
         }
       )
   }

@@ -33,7 +33,12 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       statusBar.overlaysWebView(false);
-      this.getuniqueId();
+
+      if (this.platform.platforms().indexOf("mobileweb") < 0) {
+        this.global.cLog(`Getting native Functionality for uuid and fcm token.`);
+        this.getuniqueId();
+        this.global.getFcmToken();
+      }
     });
   }
 
@@ -41,7 +46,7 @@ export class MyApp {
     if (localStorage.getItem('user')) {
       this.rootPage = 'MenuPage';
     } else {
-      this.global.log(`in setting page`);
+      this.global.cLog(`in setting page`);
       setTimeout(() => {
         this.events.publish('set-login', true);
       }, 500);
@@ -53,17 +58,17 @@ export class MyApp {
     this.global.postRequest(`${this.global.base_path}Login/Theme`, {})
       .subscribe(
         res => {
-          this.global.log(`in theme api and the response is`, res);
+          this.global.cLog(`in theme api and the response is`, res);
           if (res.success == 'true') {
             this.theme.defaultTheme = res.theme;
             this.fixImages();
             this.addStyleToIndexHTML();
-            this.global.log(`theme is `, this.theme.defaultTheme);
+            this.global.cLog(`theme is `, this.theme.defaultTheme);
           } else {
-            this.global.log(`res if false in theme api data`, res);
+            this.global.cLog(`res if false in theme api data`, res);
           }
         }, err => {
-          this.global.log(`some error in theme api data`, err);
+          this.global.cLog(`some error in theme api data`, err);
         });
   }
 
@@ -97,7 +102,7 @@ export class MyApp {
   }
 
   addStyleToIndexHTML() {
-    this.global.log(`in addStyleToIndexHTML`);
+    this.global.cLog(`in addStyleToIndexHTML`);
     let css = `
 
     //for fonts
@@ -240,11 +245,11 @@ export class MyApp {
   getuniqueId() {
     this.uniqueDeviceID.get()
       .then((uuid: any) => {
-        this.global.log(`uuid is`, uuid);
+        this.global.cLog(`uuid is`, uuid);
         localStorage.setItem('uuid', uuid);
       })
       .catch((error: any) => {
-        this.global.log(`error is`, error);
+        this.global.cLog(`error is`, error);
       });
   }
 }

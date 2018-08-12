@@ -30,13 +30,13 @@ export class CommunityAppNamePage {
     this.search.valueChanges.
       debounceTime(300).subscribe(
         res => {
-          this.global.log(`in value change and the value is `, res);
+          this.global.cLog(`in value change and the value is `, res);
           if (res && res.length) {
 
             this.global.postRequest(this.global.base_path + 'Login/SerachTextBox', { searchby: this.searchType, searchtext: res })
               .subscribe(
                 res => {
-                  this.global.log(`getSearchResult data`, res);
+                  this.global.cLog(`getSearchResult data`, res);
                   if (res.success == 'true') {
                     this.userList = res;
                     if (this.userList.data && this.userList.data.length > 0) {
@@ -46,12 +46,12 @@ export class CommunityAppNamePage {
                     }
                   } else {
                     this.noData = true;
-                    this.global.log(`getSearchResult error`, res);
+                    this.global.cLog(`getSearchResult error`, res);
                     this.global.showToast(res.error);
                   }
                 }, err => {
                   this.noData = true;
-                  this.global.log(`getSearchResult error`, err);
+                  this.global.cLog(`getSearchResult error`, err);
                 });
           } else {
             this.getSearchResultByDropdown(true);
@@ -64,7 +64,7 @@ export class CommunityAppNamePage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -72,7 +72,7 @@ export class CommunityAppNamePage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -80,36 +80,35 @@ export class CommunityAppNamePage {
   }
 
   personDetails(person: any) {
-    this.global.log(`in personDetails's method`, person);
+    this.global.cLog(`in personDetails's method`, person);
   }
 
   makeCall(person: any) {
-    this.global.log(`in makeCall's method`, person);
+    this.global.cLog(`in makeCall's method`, person);
     document.location.href = 'tel:' + person.mobile_no;
   }
 
   makeMail(person: any) {
-    this.global.log(`in makeMail's method`, person);
+    this.global.cLog(`in makeMail's method`, person);
     document.location.href = `mailto:${person.email}?subject=Dear%20Community%20Member%20${person.name}%20`;
   }
 
   makeChat(person: any) {
-    this.global.log(`in makeChat's method`, person);
+    this.global.cLog(`in makeChat's method`, person);
     this.openChatPage(person);
   }
 
   openChatPage(person: any) {
-    // this.event.publish('select-page', 'chat');
     this.navCtrl.push('ChatPage', { data: person });
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -119,7 +118,7 @@ export class CommunityAppNamePage {
       .subscribe(
         res => {
           isFirst ? null : this.global.hideLoader();
-          this.global.log(`getSearchResult data`, res);
+          this.global.cLog(`getSearchResult data`, res);
           if (res.success == 'true') {
             this.userList = res;
             if (this.userList.data && this.userList.data.length > 0) {
@@ -132,18 +131,18 @@ export class CommunityAppNamePage {
             }
           } else {
             this.noData = true;
-            this.global.log(`getSearchResult error`, res);
+            this.global.cLog(`getSearchResult error`, res);
             this.global.showToast(res.error);
           }
         }, err => {
           this.noData = true;
           isFirst ? null : this.global.hideLoader();
-          this.global.log(`getSearchResult error`, err);
+          this.global.cLog(`getSearchResult error`, err);
         });
   }
 
   valueChange(ev) {
-    this.global.log(`in valueChange`, ev);
+    this.global.cLog(`in valueChange`, ev);
     this.search.setValue('');
     this.getSearchResultByDropdown(false);
   }

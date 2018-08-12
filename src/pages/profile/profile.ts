@@ -46,10 +46,10 @@ export class ProfilePage {
     this.getProfessionalList();
 
     this.events.subscribe('user-updated-menu', (data) => {
-      this.global.log(`in user-updated-menu`, data);
+      this.global.cLog(`in user-updated-menu`, data);
 
       if (data.user_image) {
-        this.global.log(`in if`);
+        this.global.cLog(`in if`);
         this.user_image = this.global.image_base_path + 'user/' + data.user_image;
         // this.user_image = this.global.sanatizeImage(false, 'user/' + data.user_image);
       }
@@ -85,7 +85,7 @@ export class ProfilePage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -93,7 +93,7 @@ export class ProfilePage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -101,19 +101,19 @@ export class ProfilePage {
   }
 
   edit() {
-    this.global.log('edit clicked');
+    this.global.cLog('edit clicked');
     this.isDisabled = !this.isDisabled;
   }
 
   submit() {
-    this.global.log('submit clicked', this.profileForm);
+    this.global.cLog('submit clicked', this.profileForm);
 
     if (this.profileForm.valid) {
       this.isFormInvalid = false;
-      this.global.log('form is valid');
+      this.global.cLog('form is valid');
       this.updateProfileData();
     } else {
-      this.global.log('form is invalid');
+      this.global.cLog('form is invalid');
       this.isFormInvalid = true;
     }
   }
@@ -123,7 +123,7 @@ export class ProfilePage {
     this.global.postRequest(this.global.base_path + 'Login/Profile', { login_user_id: JSON.parse(localStorage.getItem('user')).id })
       .subscribe(
         res => {
-          this.global.log(`getProfileData's user data is `, res)
+          this.global.cLog(`getProfileData's user data is `, res)
           this.loader.dismiss();
           if (res.success == 'true') {
             this.noData = false;
@@ -131,12 +131,12 @@ export class ProfilePage {
             this.setFormData();
           } else {
             this.noData = true;
-            this.global.log(`${res.error}`);
+            this.global.cLog(`${res.error}`);
           }
         }, err => {
           this.noData = true;
           this.loader.dismiss();
-          this.global.log(`some error in getting user data`);
+          this.global.cLog(`some error in getting user data`);
         });
   }
 
@@ -149,7 +149,7 @@ export class ProfilePage {
     this.profileForm.controls['city_of_origin'].setValue(this.userProfile.city_of_origin);
 
     if (this.userProfile.user_image) {
-      this.global.log('asdfasdfasdfa' + this.userProfile.user_image);
+      this.global.cLog('asdfasdfasdfa' + this.userProfile.user_image);
       // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userProfile.user_image);
       this.user_image = this.global.image_base_path + 'user/' + this.userProfile.user_image;
     } else {
@@ -161,7 +161,7 @@ export class ProfilePage {
   }
 
   change() {
-    this.global.log('this.ip is ', this.ip);
+    this.global.cLog('this.ip is ', this.ip);
     let element = this.ip._elementRef.nativeElement;
 
     let textarea: HTMLElement = element.getElementsByTagName('textarea')[0];
@@ -184,12 +184,12 @@ export class ProfilePage {
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -239,7 +239,7 @@ export class ProfilePage {
     }
 
 
-    this.global.log(`data to be updated in profile api is`, data);
+    this.global.cLog(`data to be updated in profile api is`, data);
 
     return data;
   }
@@ -258,15 +258,15 @@ export class ProfilePage {
     this.global.postRequest(this.global.base_path + 'Login/ProfessionList', {})
       .subscribe(
         res => {
-          this.global.log(`getPRofessional data`, res);
+          this.global.cLog(`getPRofessional data`, res);
           if (res.success == 'true') {
             this.professionalList = res.Profession;
           } else {
-            this.global.log(`getPRofessional error`, res);
+            this.global.cLog(`getPRofessional error`, res);
             this.global.showToast(res.error);
           }
         }, err => {
-          this.global.log(`getPRofessional error`, err);
+          this.global.cLog(`getPRofessional error`, err);
         });
   }
 
@@ -277,14 +277,14 @@ export class ProfilePage {
         {
           text: "Gallery",
           handler: () => {
-            this.global.log(`Gallery choosed`);
+            this.global.cLog(`Gallery choosed`);
             this.handleCameraPermission(this.camera.PictureSourceType.PHOTOLIBRARY || this.camera.PictureSourceType.SAVEDPHOTOALBUM);
           }
         },
         {
           text: "Camera",
           handler: () => {
-            this.global.log(`Camera choosed`);
+            this.global.cLog(`Camera choosed`);
             this.handleCameraPermission(this.camera.PictureSourceType.CAMERA);
           }
         }
@@ -308,33 +308,33 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
       this.user_image = this.base64Image;
-      this.global.log(`got the image`, this.base64Image);
+      this.global.cLog(`got the image`, this.base64Image);
       this.saveProfileImage(this.base64Image);
     }, (err) => {
       // Handle error
-      this.global.log(`Some error in taking picture`, err);
+      this.global.cLog(`Some error in taking picture`, err);
     });
   }
 
   handleCameraPermission(type: number) {
     this.diagnostic.isCameraAuthorized().then(res => {
-      this.global.log(`Got the isCameraAuthorized res `, res);
+      this.global.cLog(`Got the isCameraAuthorized res `, res);
       if (res) {
         this.takePhoto(type);
       } else {
         this.diagnostic.requestCameraAuthorization().then(res => {
-          this.global.log(`Got the requestCameraAuthorization res `, res);
+          this.global.cLog(`Got the requestCameraAuthorization res `, res);
           if (res) {
             this.takePhoto(type);
           } else {
-            this.global.log(`App needs Camera Permission.`);
+            this.global.cLog(`App needs Camera Permission.`);
           }
         }).catch(err => {
-          this.global.log(`Got the requestCameraAuthorization error `, err);
+          this.global.cLog(`Got the requestCameraAuthorization error `, err);
         });
       }
     }).catch(err => {
-      this.global.log(`Got the isCameraAuthorized error`, err);
+      this.global.cLog(`Got the isCameraAuthorized error`, err);
     });
   }
 
@@ -349,7 +349,7 @@ export class ProfilePage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`saveprofile data`, res);
+          this.global.cLog(`saveprofile data`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             this.user_image = this.global.image_base_path + 'user/' + res.Image;
@@ -364,13 +364,13 @@ export class ProfilePage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`Some error in save profile image`);
+          this.global.cLog(`Some error in save profile image`);
         }
       )
   }
 
   filterEmoji(control: string, event: any) {
-    this.global.log(`in filterEmoji with data`, control, this.profileForm.controls[control].value, event);
+    this.global.cLog(`in filterEmoji with data`, control, this.profileForm.controls[control].value, event);
 
     let reg = new RegExp(/^[a-zA-Z ]*$/);
     

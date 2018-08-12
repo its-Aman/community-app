@@ -59,7 +59,7 @@ export class EventRegistrationPage {
       { name: JSON.parse(localStorage.getItem('user')).name, age: null, amount: null }
     );
 
-    this.global.log(`previousPageData in event-reg is`, this.previousPageData, this.navParams, this.person);
+    this.global.cLog(`previousPageData in event-reg is`, this.previousPageData, this.navParams, this.person);
     this.initForm();
 
     if (+this.previousPageData.event.entry_for == 1 || +this.previousPageData.event.entry_for == 3) {
@@ -136,7 +136,7 @@ export class EventRegistrationPage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -144,7 +144,7 @@ export class EventRegistrationPage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -160,7 +160,7 @@ export class EventRegistrationPage {
   }
 
   numberValue(range, isIncreased: boolean) {
-    this.global.log('range is', range);
+    this.global.cLog('range is', range);
     if (range) {
       this.userForm.controls['noOfMembers'].setValue(range);
       if (isIncreased) {
@@ -173,7 +173,7 @@ export class EventRegistrationPage {
   }
 
   eventPersonChange(ev: any) {
-    this.global.log(`eventPersonChange's event is ${ev}`);
+    this.global.cLog(`eventPersonChange's event is ${ev}`);
   }
 
   calculateEventPerson() {
@@ -194,12 +194,12 @@ export class EventRegistrationPage {
           _ret = +this.eventPerson[0];
         }
     */
-    this.global.log(`in calculateEventPerson and returning`, _ret);
+    this.global.cLog(`in calculateEventPerson and returning`, _ret);
     return _ret + '';
   }
 
   submit() {
-    this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
+    this.global.cLog(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
     // if (this.userForm.valid) {
     // if (this.persons.length > 0 && this.validatePersons()) {
@@ -219,7 +219,7 @@ export class EventRegistrationPage {
       // event_entry_id: this.event.event_entry_id,
     }
 
-    this.global.log(`data to be posting is `, data);
+    this.global.cLog(`data to be posting is `, data);
     this.registerEvent(data);
 
     //     } else if (this.performance) {
@@ -236,7 +236,7 @@ export class EventRegistrationPage {
 
   validatePersons() {
     this.persons.forEach(p => {
-      this.global.log(`validata person`, p);
+      this.global.cLog(`validata person`, p);
       if (!p.name || !p.age || !p.amount) {
         return false;
       } else {
@@ -246,11 +246,11 @@ export class EventRegistrationPage {
   }
 
   openCalendar() {
-    this.global.log(`openCalendar's method`);
+    this.global.cLog(`openCalendar's method`);
   }
 
   change(ip, col) {
-    this.global.log('this.ip is ', ip, col);
+    this.global.cLog('this.ip is ', ip, col);
     if (ip) {
 
       let element = ip._elementRef.nativeElement;
@@ -280,12 +280,12 @@ export class EventRegistrationPage {
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -296,7 +296,7 @@ export class EventRegistrationPage {
   }
 
   checkAge(i, ev) {
-    this.global.log(ev.target.value, String(this.persons[i].age));
+    this.global.cLog(ev.target.value, String(this.persons[i].age));
 
     this.persons[i].age = this.persons[i].age.split(/ /)[0].replace(/[^\d]/g, '');
 
@@ -312,7 +312,7 @@ export class EventRegistrationPage {
     }
 
     if (ev.target.value && ev.target.value.length >= 0) {
-      this.global.log(`checkAge`, ev.target.value);
+      this.global.cLog(`checkAge`, ev.target.value);
       this.getAmountAccToAge(+ev.target.value, i);
     } else {
       this.global.showToast(`No Record Found`);
@@ -368,7 +368,7 @@ export class EventRegistrationPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`response of register event`, res);
+          this.global.cLog(`response of register event`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             //TODO: show POP-UP
@@ -385,7 +385,7 @@ export class EventRegistrationPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of register event`, err);
+          this.global.cLog(`error of register event`, err);
         });
   }
 
@@ -395,17 +395,17 @@ export class EventRegistrationPage {
       .subscribe(
         res => {
           // this.global.hideLoader();
-          this.global.log(`response of getPerformanceList`, res);
+          this.global.cLog(`response of getPerformanceList`, res);
           this.searchUser();
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList = res.performance;
             this.person.performanceName = res.performance[0].id;
           } else {
-            this.global.log(`${res.error}`);
+            this.global.cLog(`${res.error}`);
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of getPerformanceList`, err);
+          this.global.cLog(`error of getPerformanceList`, err);
         });
   }
 
@@ -419,7 +419,7 @@ export class EventRegistrationPage {
         .subscribe(
           res => {
             // this.global.hideLoader();
-            this.global.log(`response of getAmountAccToAge`, res);
+            this.global.cLog(`response of getAmountAccToAge`, res);
             if (res.success == 'true') {
               if (+res.amount == 0) {
                 this.global.showToast(`No Record Found`);
@@ -431,7 +431,7 @@ export class EventRegistrationPage {
             }
           }, err => {
             // this.global.hideLoader();
-            this.global.log(`error of getAmountAccToAge`, err);
+            this.global.cLog(`error of getAmountAccToAge`, err);
           });
     }
   }
@@ -455,12 +455,12 @@ export class EventRegistrationPage {
         }
       }, err => {
         this.global.hideLoader();
-        this.global.log('some error in searchUser api', err);
+        this.global.cLog('some error in searchUser api', err);
       });
   }
 
   searchingUser(name: string, i: number, event: any) {
-    this.global.log('in searching user', name);
+    this.global.cLog('in searching user', name);
     this._index = i;
 
     let reg = new RegExp(/^[a-zA-Z ]*$/);
@@ -486,14 +486,14 @@ export class EventRegistrationPage {
   }
 
   itemSelected(item) {
-    this.global.log(`in itemSelect`, item);
+    this.global.cLog(`in itemSelect`, item);
     this.persons[this._index].name = item.name;
     this._index = null;
     this.users = [];
   }
 
   filterEmoji(control: string, event: any) {
-    this.global.log(`in filterEmoji with data`, control, this.userForm.controls[control].value, event);
+    this.global.cLog(`in filterEmoji with data`, control, this.userForm.controls[control].value, event);
 
     let reg = new RegExp(/^[a-zA-Z ]*$/);
 
@@ -516,7 +516,7 @@ export class EventRegistrationPage {
     this.global.postRequest(this.global.base_path + 'Login/GetPerticularPerformanceofUser', data)
       .subscribe(
         res => {
-          this.global.log(`getPerformanceDetails response is`, res);
+          this.global.cLog(`getPerformanceDetails response is`, res);
           if (res.success == 'true') {
             this.performance = true;
             this.performanceDetails = res.performancedetail;
@@ -525,17 +525,17 @@ export class EventRegistrationPage {
             this.person.specialNeed = this.performanceDetails.special_needs;
 
           } else {
-            this.global.log(`some error in getPerformanceDetails`, res);
+            this.global.cLog(`some error in getPerformanceDetails`, res);
             this.global.showToast(res.error);
           }
         }, err => {
-          this.global.log(`some error in getPerformanceDetails `, err);
+          this.global.cLog(`some error in getPerformanceDetails `, err);
         }
       )
   }
 
   ageValidation(event: any, i: number) {
-    this.global.log(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
+    this.global.cLog(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
     if (event.target.value.toString().length > 3) {
       this.persons[i].age = this.persons[i].age.toString().slice(0, 3);
     }

@@ -33,7 +33,7 @@ export class CommunityAppPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`getdata response`, res);
+          this.global.cLog(`getdata response`, res);
           if (res.success == 'true') {
             // this.peoples = [
             //   { name: 'Plumber', show: false },
@@ -59,7 +59,7 @@ export class CommunityAppPage {
   }
 
   openDetails(people: any) {
-    this.global.log(`in open details`, people)
+    this.global.cLog(`in open details`, people)
     this.navCtrl.push('VendorProfilePage', { data: people });
   }
 

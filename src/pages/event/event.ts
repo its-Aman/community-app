@@ -32,7 +32,7 @@ export class EventPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`event list response`, res);
+          this.global.cLog(`event list response`, res);
           if (res.success == 'true') {
             // this.global.showToast(`${res.message}`);
             this.noData = false;
@@ -46,13 +46,13 @@ export class EventPage {
           }
         }, err => {
           this.noData = true;
-          this.global.log(`event list error`, err);
+          this.global.cLog(`event list error`, err);
           this.global.hideLoader();
         });
   }
 
   openEvent(i: number) {
-    this.global.log('in openEvent() with data ', this.eventDummydata[i]);
+    this.global.cLog('in openEvent() with data ', this.eventDummydata[i]);
     this.navCtrl.push('CommunityNamePage', { data: this.eventDummydata[i] });
   }
 }

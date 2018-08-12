@@ -33,7 +33,7 @@ export class TabsPage {
     this.events.subscribe('setEventPage', () => {
       // this.superTabs.selectedTabIndex = +JSON.parse(localStorage.getItem('user')).totalevents > 0 ? 1 : 0;
       this.superTabs.slideTo(1);
-      this.global.log(`in subscribe event setEventPage`, this.superTabs.selectedTabIndex);
+      this.global.cLog(`in subscribe event setEventPage`, this.superTabs.selectedTabIndex);
       this.global.hideLoader();
     });
 
@@ -42,14 +42,12 @@ export class TabsPage {
 
   listenForTabsChange() {
     this.event.subscribe('select-page', (page) => {
-      this.global.log("in listenForTabsChange()'s select-page", page);
-      if (page == 'chat') {
+      this.global.cLog("in listenForTabsChange()'s select-page", page);
         this.superTabs.slideTo(2);
-      }
     });
 
     this.event.subscribe('select-edit-profile', (page) => {
-      this.global.log("in listenForTabsChange()'s select-edit-profile", page);
+      this.global.cLog("in listenForTabsChange()'s select-edit-profile", page);
       if (page == 'profile') {
         this.superTabs.slideTo(3);
       }
@@ -62,7 +60,7 @@ export class TabsPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify response`, res);
+          this.global.cLog(`OtpVerify response`, res);
           if (res.success == 'true' && +res.totalevents > 0) {
             this.superTabs.slideTo(1);
             setTimeout(() => {
@@ -73,7 +71,7 @@ export class TabsPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify error`, err);
+          this.global.cLog(`OtpVerify error`, err);
         });
   }
 }

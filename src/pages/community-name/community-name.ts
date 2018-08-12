@@ -78,7 +78,7 @@ export class CommunityNamePage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`geteventdetail res`, res);
+          this.global.cLog(`geteventdetail res`, res);
           if (res.success == 'true') {
             this.eventData = res;
 
@@ -91,7 +91,7 @@ export class CommunityNamePage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`geteventdetail err`, err);
+          this.global.cLog(`geteventdetail err`, err);
         });
   }
 
@@ -105,7 +105,7 @@ export class CommunityNamePage {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    this.global.log('map reference is ', this.map, coords);
+    this.global.cLog('map reference is ', this.map, coords);
 
     setTimeout(() => {
       this.addMarker();
@@ -131,14 +131,14 @@ export class CommunityNamePage {
   }
 
   edit() {
-    this.global.log('in edit()');
+    this.global.cLog('in edit()');
     this.navCtrl.push('EditEventPage', {
       data: this.eventData
     });
   }
 
   registration() {
-    this.global.log('in registration');
+    this.global.cLog('in registration');
     // if (this.eventData.availableseats > 0) {
     this.navCtrl.push('EventRegistrationPage', {
       data: this.eventData,
@@ -161,7 +161,7 @@ export class CommunityNamePage {
     );
     performance.present();
     performance.onDidDismiss(data => {
-      this.global.log(`modal data`, data);
+      this.global.cLog(`modal data`, data);
       // if (data.specialNeed || data.performanceName || data.noOfParticipants) {
       this.personData = data;
       // }
@@ -169,7 +169,7 @@ export class CommunityNamePage {
   }
 
   openScanner() {
-    this.global.log(`in openScanner`);
+    this.global.cLog(`in openScanner`);
     this.navCtrl.push('ScanQrCodePage', { data: null });
   }
 }

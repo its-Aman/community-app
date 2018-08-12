@@ -32,7 +32,7 @@ export class ChangePinPage {
       this.otpResponseValue = JSON.parse(localStorage.getItem('user'));
     }
 
-    this.global.log(`this from login value is`, this.fromLogin, this.otpResponseValue);
+    this.global.cLog(`this from login value is`, this.fromLogin, this.otpResponseValue);
     this.initForm();
   }
 
@@ -80,7 +80,7 @@ export class ChangePinPage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -88,7 +88,7 @@ export class ChangePinPage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -96,7 +96,7 @@ export class ChangePinPage {
   }
 
   changePassword() {
-    this.global.log(`in changePassword and the form is`, this.changePinForm);
+    this.global.cLog(`in changePassword and the form is`, this.changePinForm);
     if (this.changePinForm.valid) {
       if (this.fromLogin) {
         if (this.changePinForm.controls['oldPin'].value == this.changePinForm.controls['newPin'].value) {
@@ -111,7 +111,7 @@ export class ChangePinPage {
         }
       } else {
         if (this.changePinForm.controls['conformPin'].value == this.changePinForm.controls['newPin'].value) {
-          this.global.log('form is valid');
+          this.global.cLog('form is valid');
           // this.navCtrl.setRoot('LoginPage', { signInData: true });
           this.setPasscode({ user_id: this.otpResponseValue.id, pin: this.changePinForm.controls['newPin'].value })
         } else {
@@ -129,7 +129,7 @@ export class ChangePinPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`SetPasscode res`, res);
+          this.global.cLog(`SetPasscode res`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}, Please Login now`);
             this.navCtrl.setRoot('LoginPage', { signInData: true });
@@ -138,15 +138,15 @@ export class ChangePinPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`SetPasscode err`, err);
+          this.global.cLog(`SetPasscode err`, err);
         });
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
