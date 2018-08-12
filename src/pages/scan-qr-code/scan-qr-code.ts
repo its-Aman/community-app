@@ -1,4 +1,3 @@
-import { ThemeProvider } from './../../providers/theme/theme';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, Platform } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
@@ -23,7 +22,6 @@ export class ScanQrCodePage {
     private qrScanner: QRScanner,
     private global: GlobalProvider,
     private diagnostic: Diagnostic,
-    private theme: ThemeProvider,
     private plt: Platform,
   ) {
   }
