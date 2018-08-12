@@ -67,7 +67,7 @@ export class EditEventPage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -75,7 +75,7 @@ export class EditEventPage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -91,7 +91,7 @@ export class EditEventPage {
   }
 
   numberValue(range, isIncreased: boolean) {
-    this.global.log('range is', range);
+    this.global.cLog('range is', range);
     if (+this.event.evententrydetail.payment_status == 0) {
       if (range) {
         this.userForm.controls['noOfMembers'].setValue(range);
@@ -103,12 +103,12 @@ export class EditEventPage {
         this.calcTotal();
       }
     } else {
-      this.global.log('in else range is', this.persons.length);
+      this.global.cLog('in else range is', this.persons.length);
     }
   }
 
   eventPersonChange(ev: any) {
-    this.global.log(`eventPersonChange's event is ${ev}`);
+    this.global.cLog(`eventPersonChange's event is ${ev}`);
   }
 
   calculateEventPerson() {
@@ -130,12 +130,12 @@ export class EditEventPage {
     //   _ret = +this.performance[0];
     // }
 
-    this.global.log(`in calculateEventPerson and returning`, _ret);
+    this.global.cLog(`in calculateEventPerson and returning`, _ret);
     return _ret + '';
   }
 
   submit(isPop: boolean) {
-    this.global.log(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
+    this.global.cLog(`submit's method`, this.person, this.userForm, this.calculateEventPerson());
 
     // if (this.userForm.valid) {
     //   if (this.persons.length > 0) {
@@ -154,7 +154,7 @@ export class EditEventPage {
       members: this.persons,
     }
 
-    this.global.log(`data to be posting is `, data);
+    this.global.cLog(`data to be posting is `, data);
     this.editEvent(data, isPop);
 
     //     } else {
@@ -171,11 +171,11 @@ export class EditEventPage {
 
 
   openCalendar() {
-    this.global.log(`openCalendar's method`);
+    this.global.cLog(`openCalendar's method`);
   }
 
   cancel() {
-    this.global.log(`cancel's method`);
+    this.global.cLog(`cancel's method`);
 
     let alert = this.alrtCtrl.create({
       title: 'Cancel this Event ?',
@@ -210,18 +210,18 @@ export class EditEventPage {
             this.global.showToast(`${res.message}`);
             this.navCtrl.pop();
           } else {
-            this.global.log(`some error in else's cancel `, res);
-            this.global.log(res.error);
+            this.global.cLog(`some error in else's cancel `, res);
+            this.global.cLog(res.error);
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`some error in cancel `, err);
+          this.global.cLog(`some error in cancel `, err);
         }
       )
   }
 
   change(ip, col) {
-    this.global.log('this.ip is ', ip, col);
+    this.global.cLog('this.ip is ', ip, col);
     if (ip) {
 
       let element = ip._elementRef.nativeElement;
@@ -251,12 +251,12 @@ export class EditEventPage {
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -284,7 +284,7 @@ export class EditEventPage {
 
   checkAge(i) {
     this.removePadding();
-    this.global.log(String(this.persons[i].age));
+    this.global.cLog(String(this.persons[i].age));
 
     this.persons[i].age = this.persons[i].age.split(/ /)[0].replace(/[^\d]/g, '');
 
@@ -300,7 +300,7 @@ export class EditEventPage {
     }
 
     if (String(this.persons[i].age).length >= 0) {
-      this.global.log(`checkAge`, this.persons[i]);
+      this.global.cLog(`checkAge`, this.persons[i]);
       this.getAmountAccToAge(this.persons[i].age, i);
     }
   }
@@ -311,7 +311,7 @@ export class EditEventPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`response of register event`, res);
+          this.global.cLog(`response of register event`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             if (isPop) {
@@ -322,7 +322,7 @@ export class EditEventPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of edit event`, err);
+          this.global.cLog(`error of edit event`, err);
         });
   }
 
@@ -333,16 +333,16 @@ export class EditEventPage {
         res => {
           // this.global.hideLoader();
           this.getEditEventDetail(false);
-          this.global.log(`response of getPerformanceList`, res);
+          this.global.cLog(`response of getPerformanceList`, res);
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList.push(...res.performance);
             this.person.performanceName = +res.performance[0].id;
           } else {
-            this.global.log(`${res.error}`);
+            this.global.cLog(`${res.error}`);
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of getPerformanceList`, err);
+          this.global.cLog(`error of getPerformanceList`, err);
         });
   }
 
@@ -356,7 +356,7 @@ export class EditEventPage {
         .subscribe(
           res => {
             // this.global.hideLoader();
-            this.global.log(`response of getAmountAccToAge`, res);
+            this.global.cLog(`response of getAmountAccToAge`, res);
             if (res.success == 'true') {
               this.persons[i].amount = res.amount;
               this.calcTotal();
@@ -365,7 +365,7 @@ export class EditEventPage {
             }
           }, err => {
             // this.global.hideLoader();
-            this.global.log(`error of getAmountAccToAge`, err);
+            this.global.cLog(`error of getAmountAccToAge`, err);
           });
     }
   }
@@ -378,7 +378,7 @@ export class EditEventPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`response of getEditEventDetail`, res);
+          this.global.cLog(`response of getEditEventDetail`, res);
           if (res.success == 'true') {
             this.event = res;
             this.setData(res.evententrydetail);
@@ -388,7 +388,7 @@ export class EditEventPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of getAmountAccToAge`, err);
+          this.global.cLog(`error of getAmountAccToAge`, err);
         });
   }
 
@@ -420,7 +420,7 @@ export class EditEventPage {
     });
     if (+this.event.evententrydetail.payment_status == 1) {
       this.event.evententrydetail.qrcode_image = `${this.global.image_base_path}barcode/${this.event.evententrydetail.qrcode_image}`;
-      this.global.log(`in qrimage`, this.event.qrcode_image)
+      this.global.cLog(`in qrimage`, this.event.qrcode_image)
     }
   }
 
@@ -445,12 +445,12 @@ export class EditEventPage {
         }
       }, err => {
         this.global.hideLoader();
-        this.global.log('some error in searchUser api', err);
+        this.global.cLog('some error in searchUser api', err);
       });
   }
 
   searchingUser(name: string, i: number) {
-    this.global.log('in searching user');
+    this.global.cLog('in searching user');
     this._index = i;
 
     if (name.length > 0) {
@@ -467,19 +467,19 @@ export class EditEventPage {
   }
 
   itemSelected(item) {
-    this.global.log(`in itemSelect`, item);
+    this.global.cLog(`in itemSelect`, item);
     this.persons[this._index].name = item.name;
     this._index = null;
     this.users = [];
   }
 
   openScanner() {
-    this.global.log(`in openScanner`);
+    this.global.cLog(`in openScanner`);
     this.navCtrl.push('ScanQrCodePage', { data: null });
   }
 
   ageValidation(event: any, i: number) {
-    this.global.log(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
+    this.global.cLog(`in (keyup)="ageValidation()" `, event, event.target.value, event.target.value.toString().length);
     if (event.target.value.toString().length > 3) {
       this.persons[i].age = this.persons[i].age.toString().slice(0, 3);
     }
@@ -494,7 +494,7 @@ export class EditEventPage {
     this.global.postRequest(this.global.base_path + 'Login/GetPerticularPerformanceofUser', data)
       .subscribe(
         res => {
-          this.global.log(`getPerformanceDetails response is`, res);
+          this.global.cLog(`getPerformanceDetails response is`, res);
           if (res.success == 'true') {
             this.performance = true;
             // this.performanceDetails = res.performancedetail;
@@ -503,11 +503,11 @@ export class EditEventPage {
             this.person.specialNeed = res.performanceDetails.special_needs;
 
           } else {
-            this.global.log(`some error in getPerformanceDetails`, res);
+            this.global.cLog(`some error in getPerformanceDetails`, res);
             this.global.showToast(res.error);
           }
         }, err => {
-          this.global.log(`some error in getPerformanceDetails `, err);
+          this.global.cLog(`some error in getPerformanceDetails `, err);
         }
       )
   }

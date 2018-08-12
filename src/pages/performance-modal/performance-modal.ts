@@ -93,7 +93,7 @@ export class PerformanceModalPage {
     }).subscribe(
       res => {
         this.global.hideLoader();
-        this.global.log(`savePerformance's data`, res);
+        this.global.cLog(`savePerformance's data`, res);
         if (res.success == 'true') {
           this.person.performanceName = +this.person.performanceName;
           this.viewCtrl.dismiss(this.person);
@@ -102,7 +102,7 @@ export class PerformanceModalPage {
         }
       }, err => {
         this.global.hideLoader();
-        this.global.log(`savePerformance's data`, err);
+        this.global.cLog(`savePerformance's data`, err);
         this.global.showToast(`some error in submitting data`);
       })
   }
@@ -113,7 +113,7 @@ export class PerformanceModalPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`response of getPerformanceDetail`, res);
+          this.global.cLog(`response of getPerformanceDetail`, res);
           if (res.success == 'true') {
             this.person.performanceName = +res.performancedetail[0].performance_id;
             this.person.noOfParticipants = +res.performancedetail[0].no_of_participants;
@@ -123,7 +123,7 @@ export class PerformanceModalPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of getPerformanceList`, err);
+          this.global.cLog(`error of getPerformanceList`, err);
         });
   }
 
@@ -133,7 +133,7 @@ export class PerformanceModalPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`response of getPerformanceList`, res);
+          this.global.cLog(`response of getPerformanceList`, res);
           if (res.success == 'true' && res.performance.length > 0) {
             this.performanceList = res.performance;
             // this.person.performanceName = this.performanceList[0].id;
@@ -147,17 +147,17 @@ export class PerformanceModalPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`error of getPerformanceList`, err);
+          this.global.cLog(`error of getPerformanceList`, err);
         });
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 

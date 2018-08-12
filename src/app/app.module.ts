@@ -22,6 +22,7 @@ import { Camera } from '@ionic-native/camera';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     QRScanner,
     Diagnostic,
     UniqueDeviceID,
+    FCM
   ]
 })
 export class AppModule { }

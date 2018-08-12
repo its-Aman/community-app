@@ -36,9 +36,9 @@ export class LoginPage {
   ) {
     this.initForm();
     this.signInData = this.navParams.get('signInData');
-    this.global.log(this.signInData);
+    this.global.cLog(this.signInData);
     this.events.subscribe('set-login', d => {
-      this.global.log(`d is`, d)
+      this.global.cLog(`d is`, d)
       this.signInData = d;
     });
   }
@@ -51,7 +51,7 @@ export class LoginPage {
         this.loginForm.controls['mobile'].setValue(this.loginForm.controls['mobile'].value.slice(0, 11));
       }
       if (res && res.length == 11) {
-        this.global.log('mobile res is', res);
+        this.global.cLog('mobile res is', res);
         // this.requestOTP({ mobile: `${res}` });
       }
     });
@@ -76,7 +76,7 @@ export class LoginPage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -84,7 +84,7 @@ export class LoginPage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -92,12 +92,12 @@ export class LoginPage {
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -107,13 +107,13 @@ export class LoginPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`res is `, res);
+          this.global.cLog(`res is `, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             if (isResend) {
               this.resending.value = true;
               let interval = setInterval(() => {
-                this.global.log(`in setInterval`, this.resending);
+                this.global.cLog(`in setInterval`, this.resending);
                 this.resending.time--;
                 if (this.resending.time < 0) {
                   this.resending.value = false;
@@ -133,19 +133,20 @@ export class LoginPage {
         },
         err => {
           this.global.hideLoader();
-          this.global.log(`err is `, err);
+          this.global.cLog(`err is `, err);
         }
       );
   }
 
   login_api(data: any) {
     // this.navCtrl.setRoot('ProfilePage', { data: { fromLogin: true } });
+    data["fcm_token"] = localStorage.getItem('fcm_token');
     this.global.showLoader();
     this.global.postRequest(`${this.global.base_path}Login/Login`, data)
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`login response`, res);
+          this.global.cLog(`login response`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             this.loginRes = res;
@@ -154,8 +155,8 @@ export class LoginPage {
               setTimeout(() => {
                 this.navCtrl.setRoot('MenuPage', { data: null });
                 if (+res.totalevents > 0) {
-                    this.global.log(`firing event setEventPage`);
-                    this.events.publish('setEventPage');
+                  this.global.cLog(`firing event setEventPage`);
+                  this.events.publish('setEventPage');
                 }
               }, 500);
             } else {
@@ -168,7 +169,7 @@ export class LoginPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`login error`, err);
+          this.global.cLog(`login error`, err);
         });
   }
 
@@ -178,7 +179,7 @@ export class LoginPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify response`, res);
+          this.global.cLog(`OtpVerify response`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}, Set new pin now.`);
             this.OtpVerify = res;
@@ -193,7 +194,7 @@ export class LoginPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify error`, err);
+          this.global.cLog(`OtpVerify error`, err);
         });
   }
 
@@ -210,7 +211,7 @@ export class LoginPage {
   }
 
   resendOTP() {
-    this.global.log('Resend OTP');
+    this.global.cLog('Resend OTP');
     // this.navCtrl.setRoot('ChangePinPage', { fromLogin: true });
     if (!this.resending.value) {
 
@@ -229,11 +230,11 @@ export class LoginPage {
   }
 
   login() {
-    this.global.log('Logging in', this.loginForm, this.signInData);
+    this.global.cLog('Logging in', this.loginForm, this.signInData);
 
     if (this.signInData) {
       if (this.signUpForm.valid) {
-        this.global.log('form is valid');
+        this.global.cLog('form is valid');
         // this.setPasscode({ user_id: this.OtpVerify.id, pin: this.signUpForm.controls['pin'].value });
         let data = this.signUpForm.value;
         data["uuid"] = localStorage.getItem('uuid');
@@ -243,7 +244,7 @@ export class LoginPage {
       }
     } else {
       if (this.loginForm.valid) {
-        this.global.log('form is valid');
+        this.global.cLog('form is valid');
         let data = this.loginForm.value;
         data.mobile = `${data.mobile}`;
         this.verifyOTP(data);
@@ -254,7 +255,7 @@ export class LoginPage {
   }
 
   signIn() {
-    this.global.log(`In signin`);
+    this.global.cLog(`In signin`);
     if (!this.signInData) {
       this.navCtrl.setRoot('LoginPage', { signInData: true });
     } else {
@@ -263,17 +264,17 @@ export class LoginPage {
   }
 
   termsAndCondition() {
-    this.global.log(`in termsAndCondition`);
+    this.global.cLog(`in termsAndCondition`);
     this.navCtrl.push('TermsAndConditionPage');
   }
 
   privacyPolicy() {
-    this.global.log(`in privacyPolicy`);
+    this.global.cLog(`in privacyPolicy`);
     this.navCtrl.push('PrivacyPolicyPage');
   }
 
   forgotPin() {
-    this.global.log(`in forgotPin`);
+    this.global.cLog(`in forgotPin`);
     this.navCtrl.push('ForgotPinPage');
   }
 }

@@ -26,7 +26,7 @@ export class PromotionDiscountPage {
   }
 
   openDetails(i: number) {
-    this.global.log('openDetails');
+    this.global.cLog('openDetails');
     this.navCtrl.push('PromotionDetailsPage', { data: this.promotionAndDiscountData.New[i] });
   }
 
@@ -45,7 +45,7 @@ export class PromotionDiscountPage {
     this.global.postRequest(this.global.base_path + 'Login/PromtionDiscount', {})
       .subscribe(
         res => {
-          this.global.log(`getPromotionAndDiscountData's res`, res);
+          this.global.cLog(`getPromotionAndDiscountData's res`, res);
           this.global.hideLoader();
           if (res.success == 'true') {
             this.noData = false;

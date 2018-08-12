@@ -49,7 +49,7 @@ export class ForgotPinPage {
 
     this.keyboard.onKeyboardHide().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -57,7 +57,7 @@ export class ForgotPinPage {
 
     this.keyboard.onKeyboardShow().subscribe(
       res => {
-        this.global.log(`in onKeyboardHide`, res);
+        this.global.cLog(`in onKeyboardHide`, res);
         this.removePadding();
       }, err => {
         this.removePadding();
@@ -65,12 +65,12 @@ export class ForgotPinPage {
   }
 
   removePadding() {
-    this.global.log(`in removePadding`);
+    this.global.cLog(`in removePadding`);
 
     let contentNative: HTMLElement = this.content.getNativeElement();
     let foo: any = contentNative.getElementsByClassName('scroll-content');
 
-    this.global.log(`'in keyboard hide res`, contentNative, foo);
+    this.global.cLog(`'in keyboard hide res`, contentNative, foo);
     foo[0].style.paddingBottom = '0px';
   }
 
@@ -82,7 +82,7 @@ export class ForgotPinPage {
   }
 
   resendOTP() {
-    this.global.log('Resend OTP');
+    this.global.cLog('Resend OTP');
     // this.navCtrl.setRoot('ChangePinPage', { fromLogin: true });
     if (!this.resending.value) {
 
@@ -107,14 +107,14 @@ export class ForgotPinPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`res is `, res);
+          this.global.cLog(`res is `, res);
           if (res.success == 'true') {
             localStorage.setItem('user_id', res.user_id);
             this.global.showToast(`${res.message}`);
             if (isResend) {
               this.resending.value = true;
               let interval = setInterval(() => {
-                this.global.log(`in setInterval`, this.resending);
+                this.global.cLog(`in setInterval`, this.resending);
                 this.resending.time--;
                 if (this.resending.time < 0) {
                   this.resending.value = false;
@@ -134,15 +134,15 @@ export class ForgotPinPage {
         },
         err => {
           this.global.hideLoader();
-          this.global.log(`err is `, err);
+          this.global.cLog(`err is `, err);
         }
       );
   }
 
   sendOTP() {
-    this.global.log(`in sendOTP`)
+    this.global.cLog(`in sendOTP`)
     if (this.forgotPinForm.valid) {
-      this.global.log('form is valid', this.forgotPinForm);
+      this.global.cLog('form is valid', this.forgotPinForm);
       this.verifyOTP(this.forgotPinForm.value);
     } else {
       this.isFormInvalid = true;
@@ -155,7 +155,7 @@ export class ForgotPinPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify response`, res);
+          this.global.cLog(`OtpVerify response`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}, Set new pin now.`);
             this.OtpVerify = res;
@@ -170,7 +170,7 @@ export class ForgotPinPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`OtpVerify error`, err);
+          this.global.cLog(`OtpVerify error`, err);
         });
   }
 }

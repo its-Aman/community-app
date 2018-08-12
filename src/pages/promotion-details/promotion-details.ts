@@ -66,7 +66,7 @@ export class PromotionDetailsPage {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    this.global.log('map reference is ', this.map, coords);
+    this.global.cLog('map reference is ', this.map, coords);
 
     setTimeout(() => {
       this.addMarker();

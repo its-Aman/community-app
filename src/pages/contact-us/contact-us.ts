@@ -37,7 +37,7 @@ export class ContactUsPage {
     this.global.showLoader();
     this.global.postRequest(this.global.base_path + 'Login/ContactUs', {})
       .subscribe(res => {
-        this.global.log(`contact data is `, res);
+        this.global.cLog(`contact data is `, res);
         if (res.success == 'true') {
           this.noData = false;
           this.contactData = res;
@@ -50,22 +50,22 @@ export class ContactUsPage {
         }
       }, err => {
         this.noData = true;
-        this.global.log(`some error in contact us data`, err);
+        this.global.cLog(`some error in contact us data`, err);
       });
   }
 
   openPhone() {
-    this.global.log(`in openPhone`);
+    this.global.cLog(`in openPhone`);
     document.location.href = `tel:${this.contactData.phone_no}`;
   }
 
   openMail() {
-    this.global.log(`in openMail`);
+    this.global.cLog(`in openMail`);
     document.location.href = `mailto:${this.contactData.email}?subject=Dear%20Community%20Member%20`;
   }
 
   openBrowser() {
-    this.global.log(`in openBrowser`, this.contactData.website);
+    this.global.cLog(`in openBrowser`, this.contactData.website);
     let _iab: InAppBrowserObject = this.iab.create(this.contactData.website, '_system');
 
     _iab.show();
@@ -81,7 +81,7 @@ export class ContactUsPage {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    this.global.log('map reference is ', this.map, coords);
+    this.global.cLog('map reference is ', this.map, coords);
 
     setTimeout(() => {
       this.addMarker();

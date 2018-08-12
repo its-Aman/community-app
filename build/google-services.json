@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "941459334136",
+    "firebase_url": "https://rajasthan-association-uk.firebaseio.com",
+    "project_id": "rajasthan-association-uk",
+    "storage_bucket": "rajasthan-association-uk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941459334136:android:64cf42176c8a1bce",
+        "android_client_info": {
+          "package_name": "com.community.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941459334136-m3vhv1nqaagdeislimgu006j8ahfi8jo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.community.app",
+            "certificate_hash": "b1749a19738afd4a52d068b026a9f670f76a60de"
+          }
+        },
+        {
+          "client_id": "941459334136-oig6kqqtenm02jud9drvsgtp8lfu1k26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD83aNj6aJMcUaIG0P1dzMlfMXPsZY9CFg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941459334136-oig6kqqtenm02jud9drvsgtp8lfu1k26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

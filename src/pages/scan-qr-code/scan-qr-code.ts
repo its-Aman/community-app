@@ -29,7 +29,7 @@ export class ScanQrCodePage {
   }
 
   ionViewDidLoad() {
-    this.global.log('ionViewDidLoad ScanQrCodePage');
+    this.global.cLog('ionViewDidLoad ScanQrCodePage');
     // this.result =
     //   {
     //     Entrydetail:
@@ -74,28 +74,28 @@ export class ScanQrCodePage {
   }
 
   ionViewDidEnter() {
-    this.global.log('ionViewDidEnter ScanQrCodePage', this.content.getNativeElement());
+    this.global.cLog('ionViewDidEnter ScanQrCodePage', this.content.getNativeElement());
 
     if (this.plt.is('android')) {
 
       this.diagnostic.isCameraAuthorized().then(res => {
-        this.global.log(`Got the isCameraAuthorized res `, res);
+        this.global.cLog(`Got the isCameraAuthorized res `, res);
         if (res) {
           this.finalScan();
         } else {
           this.diagnostic.requestCameraAuthorization().then(res => {
-            this.global.log(`Got the requestCameraAuthorization res `, res);
+            this.global.cLog(`Got the requestCameraAuthorization res `, res);
             if (res) {
               this.finalScan();
             } else {
-              this.global.log(`App needs Camera Permission.`);
+              this.global.cLog(`App needs Camera Permission.`);
             }
           }).catch(err => {
-            this.global.log(`Got the requestCameraAuthorization error `, err);
+            this.global.cLog(`Got the requestCameraAuthorization error `, err);
           });
         }
       }).catch(err => {
-        this.global.log(`Got the isCameraAuthorized error`, err);
+        this.global.cLog(`Got the isCameraAuthorized error`, err);
       });
     } else {
       this.finalScan();
@@ -104,9 +104,9 @@ export class ScanQrCodePage {
 
   finalScan() {
     this.qrScanner.prepare().then((res: QRScannerStatus) => {
-      this.global.log('prepare status is ', res);
+      this.global.cLog('prepare status is ', res);
       this.scanQR_Code().then(res => {
-        this.global.log('scanQR_Code in finalScan', res);
+        this.global.cLog('scanQR_Code in finalScan', res);
         //API hit
         if (res) {
           this.verifyQRCode(res);
@@ -115,7 +115,7 @@ export class ScanQrCodePage {
         }
       });
     }).catch(err => {
-      this.global.log("some error in prepare", err);
+      this.global.cLog("some error in prepare", err);
       if (err.code == 1) {
         this.global.showToast(`The app needs the camera to scan QR codes`);
       }
@@ -124,23 +124,23 @@ export class ScanQrCodePage {
 
   async scanQR_Code(): Promise<string> {
     try {
-      this.global.log('in scanPatient try');
+      this.global.cLog('in scanPatient try');
       this.scanResult = await this._startScanner();
-      this.global.log('scanResult is ', this.scanResult);
+      this.global.cLog('scanResult is ', this.scanResult);
     }
     catch (err) {
-      this.global.log('in scanPatient catch', err);
+      this.global.cLog('in scanPatient catch', err);
       throw err;
     }
     return this.scanResult;
   }
 
   private _startScanner(): Promise<any> {
-    this.global.log('in _startScanner');
+    this.global.cLog('in _startScanner');
     // Optionally request the permission early
     return this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
-        this.global.log('in _startScanner prepare', status);
+        this.global.cLog('in _startScanner prepare', status);
 
         let nowTimeHours = new Date().getHours();
         if (nowTimeHours > 18 && nowTimeHours < 5) {
@@ -161,7 +161,7 @@ export class ScanQrCodePage {
             const _content = this.content.getNativeElement();
             // start scanning
             let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-              this.global.log('in _startScanner prepare->promise->scan', status);
+              this.global.cLog('in _startScanner prepare->promise->scan', status);
               this.qrScanner.hide(); // hide camera preview
               scanSub.unsubscribe(); // stop scanning
 
@@ -191,7 +191,7 @@ export class ScanQrCodePage {
   }
 
   submit(i: number) {
-    this.global.log(`submit clicked`, i);
+    this.global.cLog(`submit clicked`, i);
   }
 
   verifyQRCode(id: any) {
@@ -200,7 +200,7 @@ export class ScanQrCodePage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`verify qrcode response`, res);
+          this.global.cLog(`verify qrcode response`, res);
           if (res.success == 'true' && res.Membersdetail.length > 0) {
             this.result = res;
             this.noData = false;
@@ -217,7 +217,7 @@ export class ScanQrCodePage {
         }, err => {
           this.noData = true;
           this.global.hideLoader();
-          this.global.log(`Some error in api`, err);
+          this.global.cLog(`Some error in api`, err);
         }
       )
   }
@@ -228,12 +228,12 @@ export class ScanQrCodePage {
 
   ionViewDidLeave() {
     this.qrScanner.destroy()
-      .then(res => this.global.log(`ionViewDidLeave's destroy success `, res))
-      .catch(err => this.global.log(`ionViewDidLeave's destroy error `, err));
+      .then(res => this.global.cLog(`ionViewDidLeave's destroy success `, res))
+      .catch(err => this.global.cLog(`ionViewDidLeave's destroy error `, err));
 
     this.qrScanner.hide()
-      .then(res => this.global.log(`ionViewDidLeave's hide success `, res))
-      .catch(err => this.global.log(`ionViewDidLeave's hide error `, err));
+      .then(res => this.global.cLog(`ionViewDidLeave's hide success `, res))
+      .catch(err => this.global.cLog(`ionViewDidLeave's hide error `, err));
 
   }
 

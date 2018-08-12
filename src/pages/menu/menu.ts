@@ -28,14 +28,14 @@ export class MenuPage {
     private diagnostic: Diagnostic,
   ) {
     this.events.subscribe('user-updated', data => {
-      this.global.log(`in user-updated event`, data);
+      this.global.cLog(`in user-updated event`, data);
       this.userDetails = data;
       if (this.userDetails.user_image) {
-        this.global.log(`in if`);
+        this.global.cLog(`in if`);
         this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
         // this.user_image = this.global.sanatizeImage(false, 'user/' + this.userDetails.user_image);
       } else {
-        this.global.log(`in else`);
+        this.global.cLog(`in else`);
         this.user_image = `../assets/icon/sidebar-profile-photo.png`;
       }
     });
@@ -59,7 +59,7 @@ export class MenuPage {
     console.log('ionViewDidLoad MenuPage');
 
     this.events.subscribe('user-updated', data => {
-      this.global.log(`in user-updated event`, data);
+      this.global.cLog(`in user-updated event`, data);
       this.userDetails = data;
       if (this.userDetails.user_image) {
         this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
@@ -70,52 +70,53 @@ export class MenuPage {
     });
 
     this.menu.ionOpen.subscribe(res => {
-      this.global.log(`in ionOpen`, res, localStorage.getItem('user'));
+      this.global.cLog(`in ionOpen`, res, localStorage.getItem('user'));
       this.userDetails = JSON.parse(localStorage.getItem('user'));
       this.user_image = this.global.image_base_path + 'user/' + this.userDetails.user_image;
     });
   }
 
   vendorList() {
-    this.global.log('vendorList');
+    this.global.cLog('vendorList');
     this.navCtrl.push('CommunityAppPage', { data: null })
   }
 
   promotionDiscount() {
-    this.global.log('promotionDiscount');
+    this.global.cLog('promotionDiscount');
     this.navCtrl.push('PromotionDiscountPage', { data: null })
   }
 
   aboutUs() {
-    this.global.log('aboutUs');
+    this.global.cLog('aboutUs');
     this.navCtrl.push('AboutPage', { data: null });
   }
 
   contactUs() {
-    this.global.log('contactUs');
+    this.global.cLog('contactUs');
     this.navCtrl.push('ContactUsPage', { data: null });
   }
 
   setting() {
-    this.global.log('setting');
+    this.global.cLog('setting');
     this.navCtrl.push('ChangePinPage');
   }
 
   privacyPolicy() {
-    this.global.log('privacyPolicy');
+    this.global.cLog('privacyPolicy');
     this.navCtrl.push('PrivacyPolicyPage', { data: null });
   }
 
   logout() {
-    this.global.log('logout');
+    this.global.cLog('logout');
     let uuid = localStorage.getItem('uuid');
     localStorage.clear();
     this.navCtrl.setRoot('LoginPage', { signInData: true });
     localStorage.setItem('uuid', uuid);
+    this.global.getFcmToken();
   }
 
   editProfile() {
-    this.global.log('editProfile');
+    this.global.cLog('editProfile');
     this.menu.close().then(res => {
       this.events.publish('select-edit-profile', 'profile');
     });
@@ -132,14 +133,14 @@ export class MenuPage {
         {
           text: "Gallery",
           handler: () => {
-            this.global.log(`Gallery choosed`);
+            this.global.cLog(`Gallery choosed`);
             this.handleCameraPermission(this.camera.PictureSourceType.PHOTOLIBRARY || this.camera.PictureSourceType.SAVEDPHOTOALBUM);
           }
         },
         {
           text: "Camera",
           handler: () => {
-            this.global.log(`Camera choosed`);
+            this.global.cLog(`Camera choosed`);
             this.handleCameraPermission(this.camera.PictureSourceType.CAMERA);
           }
         }
@@ -162,34 +163,34 @@ export class MenuPage {
 
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.global.log(`got the image`, base64Image);
+      this.global.cLog(`got the image`, base64Image);
       this.user_image = base64Image;
       this.saveProfileImage(base64Image);
     }, (err) => {
       // Handle error
-      this.global.log(`Some error in taking picture`, err);
+      this.global.cLog(`Some error in taking picture`, err);
     });
   }
 
   handleCameraPermission(type: number) {
     this.diagnostic.isCameraAuthorized().then(res => {
-      this.global.log(`Got the isCameraAuthorized res `, res);
+      this.global.cLog(`Got the isCameraAuthorized res `, res);
       if (res) {
         this.takePhoto(type);
       } else {
         this.diagnostic.requestCameraAuthorization().then(res => {
-          this.global.log(`Got the requestCameraAuthorization res `, res);
+          this.global.cLog(`Got the requestCameraAuthorization res `, res);
           if (res) {
             this.takePhoto(type);
           } else {
-            this.global.log(`App needs Camera Permission.`);
+            this.global.cLog(`App needs Camera Permission.`);
           }
         }).catch(err => {
-          this.global.log(`Got the requestCameraAuthorization error `, err);
+          this.global.cLog(`Got the requestCameraAuthorization error `, err);
         });
       }
     }).catch(err => {
-      this.global.log(`Got the isCameraAuthorized error`, err);
+      this.global.cLog(`Got the isCameraAuthorized error`, err);
     });
   }
 
@@ -204,7 +205,7 @@ export class MenuPage {
       .subscribe(
         res => {
           this.global.hideLoader();
-          this.global.log(`saveprofile data`, res);
+          this.global.cLog(`saveprofile data`, res);
           if (res.success == 'true') {
             this.global.showToast(`${res.message}`);
             this.user_image = this.global.image_base_path + 'user/' + res.Image;
@@ -218,7 +219,7 @@ export class MenuPage {
           }
         }, err => {
           this.global.hideLoader();
-          this.global.log(`Some error in save profile image`);
+          this.global.cLog(`Some error in save profile image`);
         }
       )
   }

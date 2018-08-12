@@ -29,7 +29,7 @@ export class AboutPage {
     this.global.showLoader();
     this.global.postRequest(this.global.base_path + 'Login/Aboutus', {})
       .subscribe(res => {
-        this.global.log(`contact data is `, res);
+        this.global.cLog(`contact data is `, res);
         if (res.success == 'true') {
           this.noData = false;
           this.pTag.nativeElement.innerHTML = res.aboutus;
@@ -39,7 +39,7 @@ export class AboutPage {
         }
       }, err => {
         this.noData = true;
-        this.global.log(`some error in contact data is `, err);
+        this.global.cLog(`some error in contact data is `, err);
       });
   }
 

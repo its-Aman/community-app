@@ -50,16 +50,16 @@ export class VendorProfilePage {
   }
 
   changeProfilePicture() {
-    this.global.log('changeProfilePicture clicked');
+    this.global.cLog('changeProfilePicture clicked');
   }
 
   makeCall() {
-    this.global.log(`in makeCall's method`, this.vendorDetail);
+    this.global.cLog(`in makeCall's method`, this.vendorDetail);
     document.location.href = 'tel:+' + this.vendorDetail.mobile_no;
   }
 
   makeMail() {
-    this.global.log(`in makeMail's method`, this.vendorDetail);
+    this.global.cLog(`in makeMail's method`, this.vendorDetail);
     document.location.href = `mailto:${this.vendorDetail.email}?subject=Dear%20Community%20Member%20`;
 
   }

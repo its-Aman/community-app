@@ -1,6 +1,6 @@
 page-chat {
   .chat-grid {
-    padding: 20px;
+    padding: 20px 10px;
     .div-message-container {
       .row-chat-time {
         .col-time {
@@ -56,7 +56,7 @@ page-chat {
         .col-image-isMe {
           display: flex;
           justify-content: center;
-          align-items: center;
+          // align-items: center;
           .div-image-isMe {
             height: 50px;
             width: 50px;

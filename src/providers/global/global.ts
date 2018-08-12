@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, Loading, Events, Platform } from 'ionic-angular';
@@ -21,6 +22,7 @@ export class GlobalProvider {
   image_base_path: string;
   tiny_basePath_testing: String;
   tiny_basePath_live: String;
+  defaultImage: string = `assets/icon/sidebar-profile-photo.png`;
 
   constructor(
     public http: HttpClient,
@@ -29,6 +31,7 @@ export class GlobalProvider {
     public events: Events,
     public platform: Platform,
     private sanitizer: DomSanitizer,
+    private fcm: FCM
   ) {
     console.log('Hello GlobalProvider Provider');
     this.tiny_basePath_testing = `http://winstech.in/community/`;
@@ -51,7 +54,7 @@ export class GlobalProvider {
     }
   }
 
-  log(message?: any, ...optionalParams: any[]): void {
+  cLog(message?: any, ...optionalParams: any[]): void {
     console.log(message, ...optionalParams);
   }
 
@@ -94,5 +97,41 @@ export class GlobalProvider {
 
   postRequest(url: string, data: any) {
     return this.http.post<any>(url, data, httpOptions);
+  }
+
+  getFcmToken() {
+    this.fcm.getToken().then(token => {
+      this.cLog(`got FCM push token `, token);
+      localStorage.setItem('fcm_token', token);
+    });
+
+
+    this.fcm.onNotification().subscribe(data => {
+      if (data.wasTapped) {
+        this.cLog("Received in background", data);
+        this.events.publish('select-page', data);
+      } else {
+        this.cLog("Received in foreground", data);
+        if (localStorage.getItem('chatPage')) {
+          let foo = {
+            entry_date_time: new Date().toISOString(),
+            from_user_id: data.from_sender_id,
+            message: data.body,
+            to_user_id: data.to_sender_id,
+            user_image: data.user_image ? data.user_image : null,
+            id: data.message_id
+          }
+          this.cLog(`firing chatPageData event with data`, data, foo);
+          this.events.publish('chatPageData', foo);
+        } else {
+          this.events.publish('select-page', data);
+        }
+      };
+    });
+
+    this.fcm.onTokenRefresh().subscribe(token => {
+      this.cLog(`got refereshed FCM push token `, token);
+      localStorage.setItem('fcm_token', token);
+    });
   }
 }
