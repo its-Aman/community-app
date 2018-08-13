@@ -1,6 +1,6 @@
 import { GlobalProvider } from './../../providers/global/global';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, TextInput, AlertController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ViewController } from 'ionic-angular';
 import { ThemeProvider } from '../../providers/theme/theme';
 
 @IonicPage()

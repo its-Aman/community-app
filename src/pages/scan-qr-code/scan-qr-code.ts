@@ -23,8 +23,8 @@ export class ScanQrCodePage {
     private qrScanner: QRScanner,
     private global: GlobalProvider,
     private diagnostic: Diagnostic,
-    private theme: ThemeProvider,
     private plt: Platform,
+    private theme: ThemeProvider
   ) {
   }
 
